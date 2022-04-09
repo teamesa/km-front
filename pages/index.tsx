@@ -1,7 +1,13 @@
 import type { NextPage } from 'next';
 
+import List from './list';
+
 const Home: NextPage = () => {
-  return <div>Home</div>;
+  return (
+    <>
+      <List />
+    </>
+  );
 };
 
 export default Home;
