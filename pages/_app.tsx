@@ -1,14 +1,19 @@
 import type { AppProps } from 'next/app';
+import { RecoilRoot } from 'recoil';
 
-import GlobalStyles from '../styles/GlobalStyles';
-import '../styles/index.css';
+import Container from 'components/Organisms/common/Container';
+import GlobalStyles from 'styles/GlobalStyles';
+
+import 'styles/index.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <div>
+    <RecoilRoot>
       <GlobalStyles />
-      <Component {...pageProps} />
-    </div>
+      <Container>
+        <Component {...pageProps} />
+      </Container>
+    </RecoilRoot>
   );
 }
 
