@@ -47,7 +47,7 @@ export default function BottomTabNavigator({
       <>
         <Box
           zIndex={Z_INDEX.SKY}
-          backgroundColor="white"
+          backgroundColor="#f8f8f8"
           bottom="0px"
           width="100%"
           position="fixed"

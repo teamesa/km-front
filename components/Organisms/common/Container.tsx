@@ -1,4 +1,8 @@
-import Home from 'assert/home/home';
+import NavHome from 'assert/commom/bottomTabNavigator/NavHome';
+import NavList from 'assert/commom/bottomTabNavigator/NavList';
+import NavMap from 'assert/commom/bottomTabNavigator/NavMap';
+import NavMyPage from 'assert/commom/bottomTabNavigator/NavMyPage';
+import NavWish from 'assert/commom/bottomTabNavigator/NavWish';
 import { Box } from 'components/Atoms';
 import BottomTabNavigator from 'components/Organisms/common/BottomTabNavigator';
 import HeaderBar from 'components/Organisms/common/HeaderBar';
@@ -11,14 +15,29 @@ export default function Container({ children }: { children: React.ReactNode }) {
       <BottomTabNavigator
         data={[
           {
-            selectedIcon: <Home fill="#ceff00" />,
-            icon: <Home />,
+            selectedIcon: <NavMap fill="#ceff00" />,
+            icon: <NavMap />,
+            path: ['/map'],
+          },
+          {
+            selectedIcon: <NavList fill="#ceff00" />,
+            icon: <NavList />,
             path: ['/list'],
           },
           {
-            selectedIcon: <Home fill="#ceff00" />,
-            icon: <Home />,
+            selectedIcon: <NavHome fill="#ceff00" />,
+            icon: <NavHome />,
             path: ['/'],
+          },
+          {
+            selectedIcon: <NavWish fill="#ceff00" />,
+            icon: <NavWish />,
+            path: ['/wish'],
+          },
+          {
+            selectedIcon: <NavMyPage fill="#ceff00" />,
+            icon: <NavMyPage />,
+            path: ['/mypage'],
           },
         ]}
       />

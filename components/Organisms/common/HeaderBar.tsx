@@ -4,6 +4,9 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 
+import ArrowLeft from 'assert/commom/header/ArrowLeft';
+import HeaderHome from 'assert/commom/header/HeaderHome';
+import Search from 'assert/commom/header/Search';
 import { Box, FlexBox } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
 import { headerState } from 'states/common';
@@ -12,17 +15,17 @@ import useRefUtils from 'utils/hooks/useRefUtils';
 const headerLeftIcon = {
   disabled: <></>,
   logo: <>logo</>,
-  default: <>ArrowLeft</>,
+  default: <ArrowLeft />,
 };
 
 const headerRightIcon = {
   disabled: <></>,
-  search: <>search</>,
+  search: <Search />,
 };
 
 const headerEndIcon = {
   disabled: <></>,
-  home: <>home</>,
+  home: <HeaderHome />,
 };
 
 function HeaderBar() {
@@ -51,7 +54,7 @@ function HeaderBar() {
         ref={ref}
         role="menubar"
         position="fixed"
-        padding="14px 0"
+        padding="14px 15px"
         top="0px"
         width="100%"
         height="45px"
@@ -86,7 +89,7 @@ function HeaderBar() {
             flex={1}
             aria-label="오른쪽 버튼"
             role="button"
-            width="80px"
+            width="30px"
             paddingRight="15px"
             justifyContent="flex-end"
             height="100%"
@@ -100,8 +103,8 @@ function HeaderBar() {
               flex={1}
               aria-label="끝 버튼"
               role="button"
-              width="80px"
-              paddingLeft="7px"
+              width="30px"
+              paddingLeft="5px"
               justifyContent="flex-end"
               height="100%"
               alignItems="center"
