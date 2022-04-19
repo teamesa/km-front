@@ -3,7 +3,7 @@ import Item from 'components/Organisms/List/Item';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function List() {
-  useInitHeader({ headerRight: 'search' });
+  useInitHeader({ headerLeft: 'default' });
 
   return (
     <Layout>

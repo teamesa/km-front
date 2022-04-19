@@ -21,7 +21,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "assert/commom/NavMyPage.tsx"
+    "asserts/commom/NavMyPage.tsx"
   ],
   "exclude": ["node_modules"]
 }

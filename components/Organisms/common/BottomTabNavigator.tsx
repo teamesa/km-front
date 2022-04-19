@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 
 import { Box, FlexBox } from 'components/Atoms';
@@ -53,12 +52,7 @@ export default function BottomTabNavigator({
           position="fixed"
           ref={ref}
         >
-          <FlexBox
-            aria-label="하단 탭"
-            role="tablist"
-            boxShadow="0 -7px 10px 0 rgba(0, 0, 0, 0.08);"
-            height="90px"
-          >
+          <FlexBox boxShadow="0 -7px 10px 0 rgba(0, 0, 0, 0.08);" height="90px">
             {data.map((item, index) => (
               <BottomTabItem data={item} key={index} />
             ))}

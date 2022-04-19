@@ -4,8 +4,8 @@ import NavMap from 'assert/commom/bottomTabNavigator/NavMap';
 import NavMyPage from 'assert/commom/bottomTabNavigator/NavMyPage';
 import NavWish from 'assert/commom/bottomTabNavigator/NavWish';
 import { Box } from 'components/Atoms';
-import BottomTabNavigator from 'components/Organisms/common/BottomTabNavigator';
-import HeaderBar from 'components/Organisms/common/HeaderBar';
+import BottomTabNavigator from 'components/Organisms/Common/BottomTabNavigator';
+import HeaderBar from 'components/Organisms/Common/HeaderBar';
 
 export default function Container({ children }: { children: React.ReactNode }) {
   return (

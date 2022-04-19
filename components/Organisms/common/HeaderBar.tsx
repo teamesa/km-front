@@ -13,14 +13,14 @@ import { headerState } from 'states/common';
 import useRefUtils from 'utils/hooks/useRefUtils';
 
 const headerLeftIcon = {
-  disabled: <></>,
-  logo: <>logo</>,
   default: <ArrowLeft />,
+  logo: <>logo</>,
+  disabled: <></>,
 };
 
 const headerRightIcon = {
-  disabled: <></>,
   search: <Search />,
+  disabled: <></>,
 };
 
 const headerEndIcon = {
@@ -67,7 +67,6 @@ function HeaderBar() {
           aria-label="왼쪽 버튼"
           role="button"
           width="80px"
-          paddingLeft="15px"
           justifyContent="flex-start"
           height="100%"
           alignItems="center"
@@ -91,6 +90,7 @@ function HeaderBar() {
             role="button"
             width="30px"
             paddingRight="15px"
+            marginTop="5px"
             justifyContent="flex-end"
             height="100%"
             alignItems="center"
@@ -105,6 +105,7 @@ function HeaderBar() {
               role="button"
               width="30px"
               paddingLeft="5px"
+              marginTop="5px"
               justifyContent="flex-end"
               height="100%"
               alignItems="center"
