@@ -1,4 +1,4 @@
-import Home from 'assert/home/home';
+import Home from 'assets/home/home';
 import { Box } from 'components/Atoms';
 import BottomTabNavigator from 'components/Organisms/common/BottomTabNavigator';
 import HeaderBar from 'components/Organisms/common/HeaderBar';
