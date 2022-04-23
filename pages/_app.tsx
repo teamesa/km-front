@@ -1,7 +1,7 @@
 import type { AppProps } from 'next/app';
 import { RecoilRoot } from 'recoil';
 
-import Container from 'components/Organisms/common/Container';
+import Container from 'components/Organisms/Common/Container';
 import GlobalStyles from 'styles/GlobalStyles';
 
 import 'styles/index.css';

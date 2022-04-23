@@ -4,25 +4,28 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 
+import ArrowLeft from 'assets/commom/header/ArrowLeft';
+import HeaderHome from 'assets/commom/header/HeaderHome';
+import Search from 'assets/commom/header/Search';
 import { Box, FlexBox } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
 import { headerState } from 'states/common';
 import useRefUtils from 'utils/hooks/useRefUtils';
 
 const headerLeftIcon = {
-  disabled: <></>,
+  default: <ArrowLeft />,
   logo: <>logo</>,
-  default: <>ArrowLeft</>,
+  disabled: <></>,
 };
 
 const headerRightIcon = {
+  search: <Search />,
   disabled: <></>,
-  search: <>search</>,
 };
 
 const headerEndIcon = {
   disabled: <></>,
-  home: <>home</>,
+  home: <HeaderHome />,
 };
 
 function HeaderBar() {
@@ -51,7 +54,7 @@ function HeaderBar() {
         ref={ref}
         role="menubar"
         position="fixed"
-        padding="14px 0"
+        padding="14px 15px"
         top="0px"
         width="100%"
         height="45px"
@@ -64,7 +67,6 @@ function HeaderBar() {
           aria-label="왼쪽 버튼"
           role="button"
           width="80px"
-          paddingLeft="15px"
           justifyContent="flex-start"
           height="100%"
           alignItems="center"
@@ -86,8 +88,9 @@ function HeaderBar() {
             flex={1}
             aria-label="오른쪽 버튼"
             role="button"
-            width="80px"
+            width="30px"
             paddingRight="15px"
+            marginTop="5px"
             justifyContent="flex-end"
             height="100%"
             alignItems="center"
@@ -100,8 +103,9 @@ function HeaderBar() {
               flex={1}
               aria-label="끝 버튼"
               role="button"
-              width="80px"
-              paddingLeft="7px"
+              width="30px"
+              paddingLeft="5px"
+              marginTop="5px"
               justifyContent="flex-end"
               height="100%"
               alignItems="center"

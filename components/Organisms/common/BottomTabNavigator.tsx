@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 
 import { Box, FlexBox } from 'components/Atoms';
@@ -40,25 +39,20 @@ export default function BottomTabNavigator({
   const isShow = data.some((item) => {
     return item.path?.some((path) => router.pathname === path);
   });
-  const { ref, height } = useRefUtils();
+  const { ref } = useRefUtils();
 
   if (isShow)
     return (
       <>
         <Box
           zIndex={Z_INDEX.SKY}
-          backgroundColor="white"
+          backgroundColor="#f8f8f8"
           bottom="0px"
           width="100%"
           position="fixed"
           ref={ref}
         >
-          <FlexBox
-            aria-label="하단 탭"
-            role="tablist"
-            boxShadow="0 -7px 10px 0 rgba(0, 0, 0, 0.08);"
-            height="90px"
-          >
+          <FlexBox boxShadow="0 -7px 10px 0 rgba(0, 0, 0, 0.08);" height="90px">
             {data.map((item, index) => (
               <BottomTabItem data={item} key={index} />
             ))}
