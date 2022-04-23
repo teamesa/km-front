@@ -162,3 +162,11 @@ input:focus,
 textarea:focus {
   outline: none;
 }
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
+  cursor: pointer;
+}
