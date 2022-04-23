@@ -18,7 +18,7 @@ import {
   background,
 } from 'styled-system';
 
-const Span = styled.p<
+const P = styled.p<
   | SpaceProps
   | LayoutProps
   | ColorProps
@@ -38,4 +38,4 @@ const Span = styled.p<
   ${background}
 `;
 
-export default Span;
+export default P;
