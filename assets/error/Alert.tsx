@@ -1,9 +1,9 @@
-export default function Alert() {
+export default function Alert({ width = '50', height = '50' }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="50"
-      height="50"
+      width={width}
+      height={height}
       viewBox="0 0 50 50"
     >
       <g data-name="*alert_50*50">
