@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import ArrowDown from 'assets/list/ArrowDown';
 import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
 import ListFilter from 'components/Molecules/ListFilter';
+import theme from 'styles/theme';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const Home: NextPage = () => {
@@ -19,10 +20,13 @@ const Home: NextPage = () => {
       </FlexBox>
       <Layout>
         <Box margin="14px 0 10px">
-          <Tag backgroundColor="#000" color="#ceff00">
+          <Tag
+            backgroundColor={theme.colors.black}
+            color={theme.colors.neonYellow}
+          >
             전시회
           </Tag>
-          <Tag backgroundColor="#eee" color="#000">
+          <Tag backgroundColor="#eee" color={theme.colors.black}>
             D-63
           </Tag>
         </Box>
