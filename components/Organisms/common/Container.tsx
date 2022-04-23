@@ -1,8 +1,8 @@
-import NavHome from 'assert/commom/bottomTabNavigator/NavHome';
-import NavList from 'assert/commom/bottomTabNavigator/NavList';
-import NavMap from 'assert/commom/bottomTabNavigator/NavMap';
-import NavMyPage from 'assert/commom/bottomTabNavigator/NavMyPage';
-import NavWish from 'assert/commom/bottomTabNavigator/NavWish';
+import NavHome from 'assets/commom/bottomTabNavigator/NavHome';
+import NavList from 'assets/commom/bottomTabNavigator/NavList';
+import NavMap from 'assets/commom/bottomTabNavigator/NavMap';
+import NavMyPage from 'assets/commom/bottomTabNavigator/NavMyPage';
+import NavWish from 'assets/commom/bottomTabNavigator/NavWish';
 import { Box } from 'components/Atoms';
 import BottomTabNavigator from 'components/Organisms/Common/BottomTabNavigator';
 import HeaderBar from 'components/Organisms/Common/HeaderBar';

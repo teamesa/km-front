@@ -39,7 +39,7 @@ export default function BottomTabNavigator({
   const isShow = data.some((item) => {
     return item.path?.some((path) => router.pathname === path);
   });
-  const { ref, height } = useRefUtils();
+  const { ref } = useRefUtils();
 
   if (isShow)
     return (
