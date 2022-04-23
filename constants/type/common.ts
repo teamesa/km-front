@@ -12,10 +12,3 @@ export interface HeaderBarProps {
   /** header 끝 버튼의 액션을 설정합니다. (기본 : 없음)*/
   headerEndAction?: () => void;
 }
-
-export interface ModalProps {
-  /** 전달할 값 */
-  payload?: any;
-  /** 종료 여부  */
-  isOff?: boolean;
-}
