@@ -1,6 +1,5 @@
 import NavHome from 'assets/commom/bottomTabNavigator/NavHome';
 import NavList from 'assets/commom/bottomTabNavigator/NavList';
-import NavMap from 'assets/commom/bottomTabNavigator/NavMap';
 import NavMyPage from 'assets/commom/bottomTabNavigator/NavMyPage';
 import NavWish from 'assets/commom/bottomTabNavigator/NavWish';
 import { Box } from 'components/Atoms';
@@ -15,28 +14,28 @@ export default function Container({ children }: { children: React.ReactNode }) {
       <BottomTabNavigator
         data={[
           {
-            selectedIcon: <NavMap fill="#ceff00" />,
-            icon: <NavMap />,
-            path: ['/map'],
-          },
-          {
-            selectedIcon: <NavList fill="#ceff00" />,
-            icon: <NavList />,
-            path: ['/list'],
-          },
-          {
-            selectedIcon: <NavHome fill="#ceff00" />,
+            selectedIcon: <NavHome fill="#000" />,
             icon: <NavHome />,
+            pathName: 'HOME',
             path: ['/'],
           },
           {
-            selectedIcon: <NavWish fill="#ceff00" />,
+            selectedIcon: <NavList fill="#000" />,
+            icon: <NavList />,
+            pathName: 'LIST',
+            path: ['/list'],
+          },
+
+          {
+            selectedIcon: <NavWish fill="#000" />,
             icon: <NavWish />,
+            pathName: 'PICK',
             path: ['/wish'],
           },
           {
-            selectedIcon: <NavMyPage fill="#ceff00" />,
+            selectedIcon: <NavMyPage fill="#000" />,
             icon: <NavMyPage />,
+            pathName: 'MY',
             path: ['/mypage'],
           },
         ]}

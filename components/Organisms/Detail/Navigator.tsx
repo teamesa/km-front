@@ -1,3 +1,4 @@
+import NavWish from 'assert/commom/bottomTabNavigator/NavWish';
 import Heart from 'assert/detail/Heart';
 import Share from 'assert/detail/Share';
 import { Box, Button, FlexBox } from 'components/Atoms';
@@ -16,7 +17,7 @@ export default function Navigator() {
       <FlexBox height="60px" alignItems="center" justifyContent="space-between">
         <FlexBox>
           <Button marginTop="5px">
-            <Heart />
+            <NavWish fill="#fff" />
           </Button>
           <Box
             fontSize="10px"
