@@ -40,7 +40,7 @@ module.exports = {
       },
     ],
   },
-  ignorePatterns: ['*.config.js'],
+  ignorePatterns: ['*.config.js', 'server.js'],
   settings: {
     react: {
       version: 'detect',
