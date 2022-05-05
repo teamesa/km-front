@@ -4,8 +4,8 @@ import NavMap from 'assets/commom/bottomTabNavigator/NavMap';
 import NavMyPage from 'assets/commom/bottomTabNavigator/NavMyPage';
 import NavWish from 'assets/commom/bottomTabNavigator/NavWish';
 import { Box } from 'components/Atoms';
-import BottomTabNavigator from 'components/Organisms/Common/BottomTabNavigator';
-import HeaderBar from 'components/Organisms/Common/HeaderBar';
+import BottomTabNavigator from 'components/Organisms/Commons/BottomTabNavigator';
+import HeaderBar from 'components/Organisms/Commons/HeaderBar';
 
 export default function Container({ children }: { children: React.ReactNode }) {
   return (
