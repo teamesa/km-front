@@ -5,6 +5,7 @@ import NavWish from 'assets/commom/bottomTabNavigator/NavWish';
 import { Box } from 'components/Atoms';
 import BottomTabNavigator from 'components/Organisms/Common/BottomTabNavigator';
 import HeaderBar from 'components/Organisms/Common/HeaderBar';
+import theme from 'styles/theme';
 
 export default function Container({ children }: { children: React.ReactNode }) {
   return (
@@ -14,26 +15,26 @@ export default function Container({ children }: { children: React.ReactNode }) {
       <BottomTabNavigator
         data={[
           {
-            selectedIcon: <NavHome fill="#000" />,
+            selectedIcon: <NavHome fill={theme.colors.black} />,
             icon: <NavHome />,
             pathName: 'HOME',
             path: ['/'],
           },
           {
-            selectedIcon: <NavList fill="#000" />,
+            selectedIcon: <NavList fill={theme.colors.black} />,
             icon: <NavList />,
             pathName: 'LIST',
             path: ['/list'],
           },
 
           {
-            selectedIcon: <NavWish fill="#000" />,
+            selectedIcon: <NavWish fill={theme.colors.black} />,
             icon: <NavWish />,
             pathName: 'PICK',
             path: ['/wish'],
           },
           {
-            selectedIcon: <NavMyPage fill="#000" />,
+            selectedIcon: <NavMyPage fill={theme.colors.black} />,
             icon: <NavMyPage />,
             pathName: 'MY',
             path: ['/mypage'],

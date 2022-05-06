@@ -10,6 +10,7 @@ const tagType = {
   },
   bord: {
     color: `${theme.colors.black}`,
+    background: `${theme.colors.white}`,
   },
   primary: {
     color: `${theme.colors.lime}`,
