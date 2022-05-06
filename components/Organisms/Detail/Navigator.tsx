@@ -1,6 +1,5 @@
-import NavWish from 'assert/commom/bottomTabNavigator/NavWish';
-import Heart from 'assert/detail/Heart';
-import Share from 'assert/detail/Share';
+import NavWish from 'assets/commom/bottomTabNavigator/NavWish';
+import Share from 'assets/detail/Share';
 import { Box, Button, FlexBox } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
 
@@ -17,7 +16,7 @@ export default function Navigator() {
       <FlexBox height="60px" alignItems="center" justifyContent="space-between">
         <FlexBox>
           <Button marginTop="5px">
-            <NavWish fill="#fff" />
+            <NavWish stroke="#fff" />
           </Button>
           <Box
             fontSize="10px"

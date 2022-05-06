@@ -17,11 +17,6 @@
     "baseUrl": ".",
     "jsxImportSource": "@emotion/react"
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "asserts/commom/NavMyPage.tsx"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
