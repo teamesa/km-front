@@ -30,8 +30,12 @@ const Home: NextPage = () => {
       />
       <Layout>
         <Box margin="14px 0 10px">
-          <Tag type="primary">전시회</Tag>
-          <Tag type="secondary">D-63</Tag>
+          <Tag color={theme.colors.lime} background={theme.colors.black}>
+            전시회
+          </Tag>
+          <Tag color={theme.colors.black} background={theme.colors.lightGray}>
+            D-63
+          </Tag>
         </Box>
       </Layout>
     </>

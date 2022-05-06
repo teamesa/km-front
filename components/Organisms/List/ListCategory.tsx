@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import { FlexBox, Box, Tag } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
+import theme from 'styles/theme';
 
 export default function ListCategory({
   data,
@@ -25,7 +26,9 @@ export default function ListCategory({
       {data.map(({ label, value }, index) => (
         <Tag
           key={index}
-          type={filter === value ? 'bord' : 'default'}
+          color={
+            filter === value ? `${theme.colors.black}` : `${theme.colors.gray}`
+          }
           marginRight="15px"
           onClick={() => {
             router.push({
