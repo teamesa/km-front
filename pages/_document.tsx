@@ -8,7 +8,6 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <div id="modal-root" role="dialog" aria-label="외부 모달" />
       </body>
     </Html>
   );

@@ -11,7 +11,7 @@ export default function Description() {
       bottom="0px"
       overflow="hidden"
       padding="25px 15px 60px"
-      background={theme.colors.lime}
+      background={theme.colors.white}
       borderRadius="24px 24px 0 0"
       minHeight="300px"
     >
