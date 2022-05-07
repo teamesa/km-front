@@ -5,6 +5,7 @@ import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
 import ListFilter from 'components/Molecules/ListFilter';
 import ListCategory from 'components/Organisms/List/ListCategory';
 import theme from 'styles/theme';
+import { useUserProps } from 'utils/authentication/useUser';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const Home: NextPage = () => {
@@ -42,4 +43,5 @@ const Home: NextPage = () => {
   );
 };
 
+export const getServerSideProps = useUserProps;
 export default Home;

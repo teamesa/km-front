@@ -1,4 +1,4 @@
-import NavWish from 'assets/commom/bottomTabNavigator/NavWish';
+import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import Share from 'assets/detail/Share';
 import { Box, Button, FlexBox } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
