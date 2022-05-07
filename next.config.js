@@ -2,7 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['kilometer-image.s3.ap-northeast-2.amazonaws.com'],
+    domains: [
+      'kilometer-image.s3.ap-northeast-2.amazonaws.com',
+      'ssl.pstatic.net',
+    ],
   },
 };
 
