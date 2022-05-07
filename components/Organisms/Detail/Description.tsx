@@ -1,10 +1,8 @@
-import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
+import { Box, Tag } from 'components/Atoms';
 import DescriptionInfo from 'components/Molecules/DescriptionInfo';
 import theme from 'styles/theme';
-import { useModal } from 'utils/hooks/useModal';
 
 export default function Description() {
-  const { onModal } = useModal();
   return (
     <Box
       position="relative"
