@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 
-import ArrowLeft from 'assets/commom/header/ArrowLeft';
-import HeaderHome from 'assets/commom/header/HeaderHome';
-import Search from 'assets/commom/header/Search';
+import ArrowLeft from 'assets/common/header/ArrowLeft';
+import HeaderHome from 'assets/common/header/HeaderHome';
+import Search from 'assets/common/header/Search';
 import { Box, FlexBox } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
 import { headerState } from 'states/common';

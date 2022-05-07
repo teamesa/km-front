@@ -2,8 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['ssl.pstatic.net'],
+    domains: [
+      'kilometer-image.s3.ap-northeast-2.amazonaws.com',
+      'ssl.pstatic.net',
+    ],
   },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
