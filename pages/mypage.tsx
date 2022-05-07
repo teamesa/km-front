@@ -3,10 +3,12 @@ import Image from 'next/image';
 
 import { Box } from 'components/Atoms';
 import { useUserProps, UserProps } from 'utils/authentication/useUser';
+import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 // 임시 페이지 입니다.
 
 const MyPage: NextPage<UserProps> = ({ user }) => {
+  useInitHeader({ headerLeft: 'disabled' });
   return (
     <Box>
       <div>{user.name}</div>

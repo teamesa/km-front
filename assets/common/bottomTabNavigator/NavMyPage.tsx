@@ -1,7 +1,7 @@
 export default function NavMyPage({
   width = '30',
   height = '30',
-  fill = '#000',
+  fill = 'none',
 }) {
   return (
     <svg
@@ -16,19 +16,19 @@ export default function NavMyPage({
           data-name="패스 1486"
           d="M13.388 4.9A4.4 4.4 0 1 1 8.985.5a4.4 4.4 0 0 1 4.403 4.4z"
           transform="translate(6.014 3.801)"
-          stroke={fill}
+          stroke="#000"
           strokeMiterlimit="10"
           strokeWidth="1.2px"
-          fill="none"
+          fill={fill}
         />
         <path
           data-name="패스 1487"
           d="M.5 17.922A10.361 10.361 0 0 1 11.065 7.78 10.361 10.361 0 0 1 21.63 17.922"
           transform="translate(3.935 7.899)"
-          stroke={fill}
+          stroke="#000"
           strokeMiterlimit="10"
           strokeWidth="1.2px"
-          fill="none"
+          fill={fill}
         />
       </g>
     </svg>

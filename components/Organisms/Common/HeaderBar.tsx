@@ -81,7 +81,7 @@ function HeaderBar() {
             cursor: pointer;
           `}
         >
-          {headerLeftIcon[header.headerLeft ?? 'default']}
+          {headerLeftIcon[header.headerLeft ?? 'disabled']}
         </Box>
         <FlexBox>
           <Box

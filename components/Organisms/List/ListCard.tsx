@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
-import LsitWish from 'assets/list/ListWish';
 import ListWish from 'assets/list/ListWish';
 import StarRating from 'assets/list/StarRating';
 import { Box, Button, FlexBox, Tag, Span } from 'components/Atoms';
@@ -39,10 +38,7 @@ export default function Item({
       </Box>
       <Box position="relative">
         <Box margin="14px 0px 10px">
-          <Tag
-            backgroundColor={theme.colors.black}
-            color={theme.colors.neonYellow}
-          >
+          <Tag backgroundColor={theme.colors.black} color={theme.colors.lime}>
             {type}
           </Tag>
           {day ? (

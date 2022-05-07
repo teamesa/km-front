@@ -6,7 +6,7 @@ import Item from 'components/Organisms/List/ListSection';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function List() {
-  useInitHeader({ headerRight: 'search' });
+  useInitHeader({ headerLeft: 'disabled' });
 
   return (
     <>

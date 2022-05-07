@@ -2,7 +2,10 @@ const theme = {
   colors: {
     white: '#FFF',
     black: '#000',
-    neonYellow: '#ceff00',
+    lime: '#ceff00',
+    orange: '#FF6200',
+    gray: '#999999',
+    lightGray: '#eeeeee',
   },
 };
 

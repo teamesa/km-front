@@ -7,7 +7,8 @@ import useRefUtils from 'utils/hooks/useRefUtils';
 interface BottomTabItemProps {
   icon: JSX.Element;
   selectedIcon: JSX.Element;
-  path?: string[];
+  pathName: string;
+  path: string[];
 }
 
 function BottomTabItem({ data }: { data: BottomTabItemProps }) {
@@ -23,9 +24,8 @@ function BottomTabItem({ data }: { data: BottomTabItemProps }) {
       justifyContent="center"
       onClick={() => router.push(data.path?.[0] ?? '')}
     >
-      <Box width="30px" height="30px" marginBottom="6px">
-        {isSelected ? data.selectedIcon : data.icon}
-      </Box>
+      <Box marginBottom="2px">{isSelected ? data.selectedIcon : data.icon}</Box>
+      <Box fontSize="9px">{data.pathName}</Box>
     </FlexBox>
   );
 }
@@ -52,7 +52,11 @@ export default function BottomTabNavigator({
           position="fixed"
           ref={ref}
         >
-          <FlexBox boxShadow="0 -7px 10px 0 rgba(0, 0, 0, 0.08);" height="90px">
+          <FlexBox
+            boxShadow="0 -7px 10px 0 rgba(0, 0, 0, 0.08);"
+            height="60px"
+            padding="8px 0"
+          >
             {data.map((item, index) => (
               <BottomTabItem data={item} key={index} />
             ))}
