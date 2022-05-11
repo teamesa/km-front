@@ -1,5 +1,5 @@
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
-import { Box, FlexBox, Tag } from 'components/Atoms';
+import { Box, Button, FlexBox, Tag } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import theme from 'styles/theme';
 
@@ -34,18 +34,23 @@ export default function Archive({ data }: ArchiveProps) {
                 </Box>
               </FlexBox>
             </Box>
-            <Box paddingLeft="85px">
+            <Box paddingLeft="85px" marginTop="13px">
               <Tag
                 color={theme.colors.lime}
                 background={theme.colors.black}
                 boxShadow="0 0 8px 0 rgba(0, 0, 0, 0.08)"
               >
-                <NavWish fill={theme.colors.lime} width="11px" height="11px" />
+                <NavWish fill={theme.colors.lime} width="12px" height="12px" />
                 25
               </Tag>
             </Box>
           </FlexBox>
-          <Box fontSize="13px" lineHeight="1.54" textAlign="left">
+          <Box
+            fontSize="13px"
+            lineHeight="1.54"
+            textAlign="left"
+            marginTop="20px"
+          >
             {item.description}
           </Box>
           <Box
