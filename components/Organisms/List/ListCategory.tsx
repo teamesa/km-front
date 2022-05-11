@@ -27,7 +27,9 @@ export default function ListCategory({
         <Tag
           key={index}
           color={
-            filter === value ? `${theme.colors.black}` : `${theme.colors.gray}`
+            filter === value
+              ? `${theme.colors.black}`
+              : `${theme.colors.gray99}`
           }
           marginRight="15px"
           onClick={() => {

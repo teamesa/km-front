@@ -1,21 +1,18 @@
+import { css } from '@emotion/react';
+
+import { data as Tdata } from './data';
+
 import { Box, Tag } from 'components/Atoms';
 import DescriptionInfo from 'components/Molecules/DescriptionInfo';
+import TopTabView from 'components/Molecules/TopTabView';
+import BottomSheetHeader from 'components/Organisms/Detail/Description/BottomSheetHeader';
 import theme from 'styles/theme';
 
 export default function Description() {
   return (
-    <Box
-      position="relative"
-      height="1000vw"
-      maxHeight="calc(100vh - 45px)"
-      bottom="0px"
-      overflow="hidden"
-      padding="25px 15px 60px"
-      background={theme.colors.white}
-      borderRadius="24px 24px 0 0"
-      minHeight="300px"
-    >
-      <Box overflow="scroll">
+    <Box>
+      <BottomSheetHeader />
+      <Box backgroundColor={theme.colors.white} padding="0 15px 60px">
         <Tag border="1px solid #000">전시회</Tag>
         <Box marginTop="19px">요시코 사진전:따뜻한 휴일의 기록</Box>
         <Box marginTop="30px" marginBottom="40px">
@@ -34,6 +31,12 @@ export default function Description() {
           />
         </Box>
       </Box>
+      <TopTabView
+        data={Tdata.map((item) => ({
+          title: item.title,
+          contents: item.contents,
+        }))}
+      />
     </Box>
   );
 }

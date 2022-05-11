@@ -34,7 +34,7 @@ const Home: NextPage = () => {
           <Tag color={theme.colors.lime} background={theme.colors.black}>
             전시회
           </Tag>
-          <Tag color={theme.colors.black} background={theme.colors.lightGray}>
+          <Tag color={theme.colors.black} background={theme.colors.grayEE}>
             D-63
           </Tag>
         </Box>
