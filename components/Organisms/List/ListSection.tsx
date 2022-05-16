@@ -1,7 +1,6 @@
-import { Box } from 'components/Atoms';
 import ListCard from 'components/Organisms/List/ListCard';
 
-export default function Item() {
+export default function ListSection() {
   const data = [
     {
       image:

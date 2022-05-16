@@ -2,7 +2,7 @@ import { Button, FlexBox } from 'components/Atoms';
 
 interface ListFilterProps {
   title: string;
-  icon: React.ReactNode;
+  icon: JSX.Element;
 }
 
 export default function ListFilter({ title, icon }: ListFilterProps) {

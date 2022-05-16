@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
+import { Suspense } from 'react';
 import { RecoilRoot } from 'recoil';
 
 import Container from 'components/Organisms/Common/Container';
@@ -12,9 +13,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       <RecoilRoot>
         <GlobalStyles />
-        <Container>
-          <Component {...pageProps} />
-        </Container>
+        <Suspense fallback={<div>Loading</div>}>
+          <Container>
+            <Component {...pageProps} />
+          </Container>
+        </Suspense>
       </RecoilRoot>
     </ThemeProvider>
   );
