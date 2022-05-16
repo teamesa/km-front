@@ -31,8 +31,8 @@ export default function Item({
         <Image
           src={image}
           alt="image"
-          width="100"
-          height="100"
+          width="375"
+          height="250"
           layout="responsive"
         />
       </Box>
