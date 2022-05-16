@@ -11,7 +11,7 @@ import {
 import { Span } from 'components/Atoms';
 
 interface TagProps {
-  children?: React.ReactNode;
+  children?: JSX.Element;
 }
 
 const Tag = styled(Span)<BackgroundProps | ColorProps | BorderProps | TagProps>`

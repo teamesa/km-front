@@ -1,4 +1,5 @@
 import DetailState from './detail';
+import ResponseState from './response';
 import TestSate from './test';
 
-export { TestSate, DetailState };
+export { TestSate, DetailState, ResponseState };

@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { ReactNode, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 
 import { Box } from 'components/Atoms';
@@ -12,7 +12,7 @@ interface TopTabViewProps {
     /** 탭 상단 제목 */
     title: string;
     /** 내용에 들어가는 children (JSX) */
-    children?: ReactNode;
+    children?: JSX.Element | JSX.Element[];
     contents: any;
   }[];
 }
