@@ -5,6 +5,10 @@ export interface UserProps {
   user: User;
 }
 
+export interface URLProps {
+  backUrl: string;
+}
+
 export interface User {
   name: string;
   email: string;
@@ -13,7 +17,9 @@ export interface User {
   birthdate: number;
 }
 
-export const useUserProps: GetServerSideProps<UserProps> = async (context) => {
+export const useUserProps: GetServerSideProps<UserProps | URLProps> = async (
+  context,
+) => {
   const { cookies } = context.req;
   const { kilometer_session } = cookies;
 
@@ -41,5 +47,5 @@ export const useUserProps: GetServerSideProps<UserProps> = async (context) => {
     }
   }
 
-  return { props: { user } };
+  return { props: { user, backUrl: process.env.BACK_URL } };
 };

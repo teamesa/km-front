@@ -2,7 +2,7 @@ import ArrowDown from 'assets/list/ArrowDown';
 import Filter from 'assets/list/Filter';
 import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
 import ListFilter from 'components/Molecules/ListFilter';
-import Item from 'components/Organisms/List/ListSection';
+import ListSection from 'components/Organisms/List/ListSection';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function List() {
@@ -19,7 +19,7 @@ export default function List() {
         </Box>
       </FlexBox>
       <Layout marginBottom="120px">
-        <Item />
+        <ListSection />
       </Layout>
     </>
   );

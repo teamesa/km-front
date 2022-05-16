@@ -1,3 +1,5 @@
-import { testSate } from './test';
+import DetailState from './detail';
+import ResponseState from './response';
+import TestSate from './test';
 
-export { testSate };
+export { TestSate, DetailState, ResponseState };
