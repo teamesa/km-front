@@ -1,14 +1,15 @@
 import { css } from '@emotion/react';
-
-import { data as Tdata } from './data';
+import { useRecoilValue } from 'recoil';
 
 import { Box, Tag } from 'components/Atoms';
 import DescriptionInfo from 'components/Molecules/DescriptionInfo';
 import TopTabView from 'components/Molecules/TopTabView';
 import BottomSheetHeader from 'components/Organisms/Detail/Description/BottomSheetHeader';
+import { DetailState } from 'states';
 import theme from 'styles/theme';
 
 export default function Description() {
+  const data = useRecoilValue(DetailState);
   return (
     <Box>
       <BottomSheetHeader />
@@ -30,13 +31,13 @@ export default function Description() {
             description={['화 (14:00~16:00)', '화 (14:00~16:00)']}
           />
         </Box>
+        <TopTabView
+          data={data.map((item) => ({
+            title: item.title,
+            contents: item.contents,
+          }))}
+        />
       </Box>
-      <TopTabView
-        data={Tdata.map((item) => ({
-          title: item.title,
-          contents: item.contents,
-        }))}
-      />
     </Box>
   );
 }

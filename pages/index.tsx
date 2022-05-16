@@ -1,15 +1,19 @@
 import type { NextPage } from 'next';
+import { Suspense } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import ArrowDown from 'assets/list/ArrowDown';
 import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
 import ListFilter from 'components/Molecules/ListFilter';
 import ListCategory from 'components/Organisms/List/ListCategory';
+import { TestSate } from 'states';
 import theme from 'styles/theme';
 import { useUserProps } from 'utils/authentication/useUser';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const Home: NextPage = () => {
   useInitHeader({ headerLeft: 'logo', headerEnd: 'home' });
+  const data = useRecoilValue(TestSate);
   return (
     <>
       <FlexBox>
@@ -38,6 +42,9 @@ const Home: NextPage = () => {
             D-63
           </Tag>
         </Box>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Box>상태값 가져오기{data}</Box>
+        </Suspense>
       </Layout>
     </>
   );
