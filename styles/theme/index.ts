@@ -4,8 +4,10 @@ const theme = {
     black: '#000',
     lime: '#ceff00',
     orange: '#FF6200',
-    gray: '#999999',
-    lightGray: '#eeeeee',
+    gray99: '#999999',
+    grayEE: '#eeeeee',
+    grayDD: '#dddddd',
+    grayF8: '#f8f8f8',
   },
 };
 

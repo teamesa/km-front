@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import NavHome from 'assets/common/bottomTabNavigator/NavHome';
 import NavList from 'assets/common/bottomTabNavigator/NavList';
 import NavMyPage from 'assets/common/bottomTabNavigator/NavMyPage';
@@ -7,7 +9,7 @@ import BottomTabNavigator from 'components/Organisms/Common/BottomTabNavigator';
 import HeaderBar from 'components/Organisms/Common/HeaderBar';
 import theme from 'styles/theme';
 
-export default function Container({ children }: { children: React.ReactNode }) {
+export default function Container({ children }: { children: ReactNode }) {
   return (
     <>
       <HeaderBar />
