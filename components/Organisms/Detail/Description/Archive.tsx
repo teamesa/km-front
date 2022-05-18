@@ -11,6 +11,9 @@ interface ArchiveProps {
   }[];
 }
 export default function Archive({ data }: ArchiveProps) {
+  if (data.length === 0) {
+    return <Box> 아카이브 없다</Box>;
+  }
   return (
     <Box color={theme.colors.black} fontSize="14px" padding="0 15px">
       {data.map((item, index) => (

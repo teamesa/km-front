@@ -24,7 +24,7 @@ export default function TopTabView({ data }: TopTabViewProps) {
 
   useEffect(() => {
     if (ref.current?.offsetHeight) {
-      setHeaderSize(ref.current.offsetHeight + 45);
+      setHeaderSize(ref.current.offsetHeight + 100);
     }
   }, [ref]);
 
@@ -77,12 +77,13 @@ export default function TopTabView({ data }: TopTabViewProps) {
           width: '100%',
         }}
       >
-        <div style={Object.assign({})}>
-          <Introduce data={data[0].contents} />
-        </div>
-        <div style={Object.assign({})}>
-          <Archive data={data[1].contents} />
-        </div>
+        {data.map((item) =>
+          item.title === '아카이브' ? (
+            <Archive data={item.contents ?? ''} />
+          ) : (
+            <Introduce data={item.contents ?? ''} />
+          ),
+        )}
       </SwipeableViews>
     </>
   );
