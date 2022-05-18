@@ -1,5 +1,5 @@
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
-import { Box, Button, FlexBox, Tag } from 'components/Atoms';
+import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import theme from 'styles/theme';
 
@@ -15,14 +15,15 @@ export default function Archive({ data }: ArchiveProps) {
     <Box color={theme.colors.black} fontSize="14px" padding="0 15px">
       {data.map((item, index) => (
         <Box key={index} paddingTop="24px">
-          <FlexBox>
+          <FlexBox alignItems="center">
             <Box
-              width="50px"
+              // width="50px"
+              flex="0 0 50px"
               height="50px"
               backgroundColor={theme.colors.gray99}
               borderRadius="100%"
             />
-            <Box padding="8px 10px">
+            <Box padding="8px 10px" flex="1 1 100%">
               {item.title}
               <FlexBox alignItems="center">
                 <Box>별다섯개</Box>
@@ -34,13 +35,31 @@ export default function Archive({ data }: ArchiveProps) {
                 </Box>
               </FlexBox>
             </Box>
-            <Box paddingLeft="85px" marginTop="13px">
+            <Box flex="0 0 50px " height="20px">
               <Tag
+                display="inline-block"
+                padding="0px !important"
+                marginRight="0px !important"
+                width="100%"
+                textAlign="center"
+                fontSize="13px !important"
+                lineHeight="20px"
                 color={theme.colors.lime}
                 background={theme.colors.black}
                 boxShadow="0 0 8px 0 rgba(0, 0, 0, 0.08)"
               >
-                <NavWish fill={theme.colors.lime} width="12px" height="12px" />
+                <Span
+                  display="inline-block"
+                  marginRight="3px"
+                  lineHeight="0"
+                  verticalAlign="text-top"
+                >
+                  <NavWish
+                    fill={theme.colors.lime}
+                    width="15px"
+                    height="20px"
+                  />
+                </Span>
                 25
               </Tag>
             </Box>
