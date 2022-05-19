@@ -17,6 +17,8 @@ interface TopTabViewProps {
   }[];
 }
 
+const ANCHOR_SECTION = 45 + 55;
+
 export default function TopTabView({ data }: TopTabViewProps) {
   const [index, setIndex] = useState(0);
   const [headerSize, setHeaderSize] = useState(0);
@@ -24,7 +26,7 @@ export default function TopTabView({ data }: TopTabViewProps) {
 
   useEffect(() => {
     if (ref.current?.offsetHeight) {
-      setHeaderSize(ref.current.offsetHeight + 100);
+      setHeaderSize(ref.current.offsetHeight + ANCHOR_SECTION);
     }
   }, [ref]);
 
