@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
   images: {
@@ -8,10 +9,6 @@ const nextConfig = {
     ],
   },
 
-  // ReactDOMServer does not yet support Suspense 해결
-  experimental: {
-    concurrentFeatures: true,
-  },
   // CORS 해결
   async rewrites() {
     return [

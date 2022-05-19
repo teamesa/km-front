@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       <RecoilRoot>
         <GlobalStyles />
-        <Suspense fallback={<div>Loading</div>}>
+        <Suspense fallback={'Loading...'}>
           <Container>
             <Component {...pageProps} />
           </Container>
