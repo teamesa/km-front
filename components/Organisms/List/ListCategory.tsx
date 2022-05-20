@@ -31,6 +31,7 @@ export default function ListCategory({
               ? `${theme.colors.black}`
               : `${theme.colors.gray99}`
           }
+          fontSize="13px !important"
           marginRight="15px"
           onClick={() => {
             router.push({

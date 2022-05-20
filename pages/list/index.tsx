@@ -1,5 +1,3 @@
-import { style } from 'styled-system';
-
 import ArrowDown from 'assets/list/ArrowDown';
 import Filter from 'assets/list/Filter';
 import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
@@ -26,7 +24,12 @@ export default function List() {
           { label: '뮤직페스티벌', value: 'musicFestival' },
         ]}
       />
-      <FlexBox position="sticky" top="93px" background={theme.colors.white}>
+      <FlexBox
+        position="sticky"
+        top="97px"
+        background={theme.colors.white}
+        zIndex="2"
+      >
         <Box flex={1}>
           <ListFilter title="조회순" icon={<ArrowDown />} />
         </Box>
