@@ -1,7 +1,5 @@
-import { css } from '@emotion/react';
-
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
-import { Box, Span, FlexBox, Tag } from 'components/Atoms';
+import { Box, Button, FlexBox, Tag } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import theme from 'styles/theme';
 
@@ -19,12 +17,12 @@ export default function Archive({ data }: ArchiveProps) {
         <Box key={index} paddingTop="24px">
           <FlexBox>
             <Box
-              flex="0 0 50px"
+              width="50px"
               height="50px"
               backgroundColor={theme.colors.gray99}
               borderRadius="100%"
             />
-            <Box padding="8px 10px" flex="1 1 100%">
+            <Box padding="8px 10px">
               {item.title}
               <FlexBox alignItems="center">
                 <Box>별다섯개</Box>
@@ -36,25 +34,13 @@ export default function Archive({ data }: ArchiveProps) {
                 </Box>
               </FlexBox>
             </Box>
-            <Box marginTop="13px" flex="0 0 auto">
+            <Box paddingLeft="85px" marginTop="13px">
               <Tag
                 color={theme.colors.lime}
                 background={theme.colors.black}
                 boxShadow="0 0 8px 0 rgba(0, 0, 0, 0.08)"
               >
-                <Span
-                  display="inline-block"
-                  fontSize="0"
-                  css={css`
-                    vertical-align: text-top;
-                  `}
-                >
-                  <NavWish
-                    fill={theme.colors.lime}
-                    width="18px"
-                    height="18px"
-                  />
-                </Span>
+                <NavWish fill={theme.colors.lime} width="12px" height="12px" />
                 25
               </Tag>
             </Box>

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
+import SwipeableViews from 'react-swipeable-views';
 
 import { Box } from 'components/Atoms';
 import Archive from 'components/Organisms/Detail/Description/Archive';
@@ -62,6 +63,27 @@ export default function TopTabView({ data }: TopTabViewProps) {
           ))}
         </Box>
       </Box>
+      <SwipeableViews
+        enableMouseEvents
+        index={index}
+        onChangeIndex={(_index) => {
+          setIndex(_index);
+        }}
+        style={{
+          background: `${theme.colors.white}`,
+        }}
+        containerStyle={{
+          height: `calc(100vh - ${headerSize}px`,
+          width: '100%',
+        }}
+      >
+        <div style={Object.assign({})}>
+          <Introduce data={data[0].contents} />
+        </div>
+        <div style={Object.assign({})}>
+          <Archive data={data[1].contents} />
+        </div>
+      </SwipeableViews>
     </>
   );
 }
