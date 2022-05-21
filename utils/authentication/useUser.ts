@@ -47,5 +47,5 @@ export const useUserProps: GetServerSideProps<UserProps | URLProps> = async (
     }
   }
 
-  return { props: { user, backUrl: process.env.BACK_URL } };
+  return { props: { user, backUrl: process.env.NEXT_PUBLIC_BACK_URL } };
 };
