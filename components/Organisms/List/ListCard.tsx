@@ -6,54 +6,52 @@ import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import ListWish from 'assets/list/ListWish';
 import StarRating from 'assets/list/StarRating';
 import { Box, Button, FlexBox, Tag, Span } from 'components/Atoms';
+import type { TGetList } from 'states/list';
 import theme from 'styles/theme';
 
-interface ItemProps {
-  data: {
-    presentationImage: {
-      url: string;
-      backgroundText: string | null;
-      dimColor: string | null;
-      opacity: number;
-      dimTarget: boolean;
-    };
-    typeBadge: {
-      text: string;
-      typeBadge: boolean;
-    };
-    additionalBadgeList: {
-      text: string;
-      typeBadge: boolean;
-    }[];
-    title: string;
-    setHearted: boolean;
-    listItemAdditionalInfo: {
-      heartCount: number | string;
-      grade: number | null;
-      archiveCount: number | null;
-    };
-  }[];
-}
+// interface ItemProps {
+//   data: {
+//     presentationImage: {
+//       url: string;
+//       backgroundText: string | null;
+//       dimColor: string | null;
+//       opacity: number;
+//       dimTarget: boolean;
+//     };
+//     typeBadge: {
+//       text: string;
+//       typeBadge: boolean;
+//     };
+//     additionalBadgeList: {
+//       text: string;
+//       typeBadge: boolean;
+//     }[];
+//     title: string;
+//     setHearted: boolean;
+//     listItemAdditionalInfo: {
+//       heartCount: number | string;
+//       grade: number | null;
+//       archiveCount: number | null;
+//     };
+//   }[];
+// }
 
-export default function Item({ data }: ItemProps) {
-  console.log(data);
+export default function Item({ contents }: any) {
+  console.log(contents);
   const router = useRouter();
-  if (data.length === 0) {
-    return <Box>데이터 없음</Box>;
-  }
   return (
     <>
-      {data.map((item, index) => {
+      {/* {contents.map((item, index) => {
         return (
-          <Box
-            key={index}
-            margin="0px 0px 40px"
-            onClick={() => {
-              router.push('detail/120');
-            }}
-          >
+          <Box key={index} margin="0px 0px 40px">
             {item.presentationImage.dimTarget ? (
-              <Box position="relative" margin="0px -15px">
+              <Box
+                position="relative"
+                margin="0px -15px"
+                onClick={() => {
+                  router.push(item.presentationImage.link);
+                }}
+              >
                 <Box
                   position="absolute"
                   top="0px"
@@ -118,7 +116,7 @@ export default function Item({ data }: ItemProps) {
                 </Tag>
               </Box>
               <Button position="absolute" right="0px" top="0px">
-                {item.setHearted ? (
+                {item.heart.heartClicked ? (
                   <NavWish width="17" height="16" fill={theme.colors.black} />
                 ) : (
                   <NavWish width="17" height="16" />
@@ -170,7 +168,7 @@ export default function Item({ data }: ItemProps) {
             </Box>
           </Box>
         );
-      })}
+      })} */}
     </>
   );
 }

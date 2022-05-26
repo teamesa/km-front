@@ -8,9 +8,20 @@ export default function ListSection() {
 
   return (
     <>
-      {data.map((list, index) => (
-        <ListCard key={index} data={data[index].content} />
-      ))}
+      {/* {data.contents.map((list, index) => (
+        <ListCard
+          key={index}
+          contents={list}
+          responsePagingStatus={{
+            nextPage: 0,
+            currentPage: 0,
+            pageSize: 0,
+            hasNext: false,
+            totalContentsCount: 0,
+            currentContentsCount: 0,
+          }}
+        />
+      ))} */}
     </>
   );
 }
