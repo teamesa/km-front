@@ -1,24 +1,27 @@
-import { AxiosError } from 'axios';
+import { AxiosResponse } from 'axios';
 import { atom, selector } from 'recoil';
 
 import customAxios from 'utils/hooks/customAxios';
+
+interface TGetTest {
+  createdAt: string;
+  id: number;
+  memo: string;
+  service: string;
+}
 
 export default atom({
   key: 'TestSate',
   default: selector({
     key: 'TestSate/default',
     get: async () => {
-      try {
-        const axios = customAxios();
-        const response = await axios('/hello-example');
-        return response.data;
-      } catch (error) {
-        const err = error as AxiosError;
-        if (err.response) {
-          console.log(err.response.status);
-          console.log(err.response.data);
-        }
-      }
+      const axios = customAxios();
+      const { data } = (await axios({
+        url: `/hello-example`,
+        method: 'GET',
+      })) as AxiosResponse<TGetTest>;
+
+      return data;
     },
   }),
 });
