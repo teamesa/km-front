@@ -13,7 +13,7 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        destination: process.env.BACK_URL,
+        destination: process.env.NEXT_PUBLIC_BACK_URL,
         source: process.env.SOURCE_PATH,
       },
     ];

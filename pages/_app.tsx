@@ -3,7 +3,9 @@ import type { AppProps } from 'next/app';
 import { Suspense } from 'react';
 import { RecoilRoot } from 'recoil';
 
+import Portal from 'components/Molecules/Portal';
 import Container from 'components/Organisms/Common/Container';
+import ModalContainer from 'components/Organisms/Common/ModalContainer';
 import GlobalStyles from 'styles/GlobalStyles';
 import 'styles/index.css';
 import theme from 'styles/theme';
@@ -17,6 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Container>
             <Component {...pageProps} />
           </Container>
+          <Portal query="#modal">
+            <ModalContainer />
+          </Portal>
         </Suspense>
       </RecoilRoot>
     </ThemeProvider>

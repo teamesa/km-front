@@ -4,6 +4,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import ArrowDown from 'assets/list/ArrowDown';
 import { Box, Button, FlexBox, Layout, Tag } from 'components/Atoms';
+import Select from 'components/Atoms/Select';
 import ListFilter from 'components/Molecules/ListFilter';
 import ListCategory from 'components/Organisms/List/ListCategory';
 import { ResponseState, TestSate } from 'states';
@@ -36,6 +37,7 @@ const Home: NextPage = () => {
       console.log('error', e.response);
     }
   };
+  const popup_data = [{ name: '등록중' }, { name: '종료 임박순' }];
 
   return (
     <>
@@ -68,6 +70,7 @@ const Home: NextPage = () => {
         <Box>상태값 가져오기</Box>
         <Box>Post로 memo보내기</Box>
         <button onClick={handleTest}>테스트</button>
+        <hr />
       </Layout>
     </>
   );
