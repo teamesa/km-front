@@ -26,9 +26,9 @@ export default function List() {
       />
       <FlexBox
         position="sticky"
-        top="97px"
+        top="98px"
         background={theme.colors.white}
-        zIndex="2"
+        zIndex="3"
       >
         <Box flex={1}>
           <ListFilter title="조회순" icon={<ArrowDown />} />

@@ -9,9 +9,10 @@ export default function ListFilter({ title, icon }: ListFilterProps) {
   return (
     <FlexBox
       padding="0px 20px"
-      lineHeight="40px"
+      lineHeight="38px"
       justifyContent="space-between"
       border="1px solid #dddddd"
+      fontSize="12px"
     >
       {title}
       <Button>{icon}</Button>

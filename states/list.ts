@@ -12,37 +12,46 @@ export type TPostList = {
     totalContentsCount: number;
     currentContentsCount: number;
   };
-  contents: {
-    presentationImage: {
-      url: string;
-      link: string;
-      backgroundText: string;
-      dimColor: string;
-      opacity: number;
-      dimTarget: boolean;
-    };
-    typeBadge: {
-      text: string;
-      typeBadge: boolean;
-    };
-    additionalBadgeList: {
-      text: string;
-      typeBadge: boolean;
-    }[];
-    title: {
-      text: string;
-      link: string;
-    };
-    heart: {
-      heartClicked: boolean;
-      link: string;
-    };
-    listItemAdditionalInfo: {
-      heartCount: number | null;
-      grade: number | null;
-      archiveCount: number | null;
-    };
-  }[];
+  contents: [ListPageContents] | [];
+};
+
+export type ListPageContents = {
+  presentationImage: PresentationImage;
+  typeBadge: PresentationBadge;
+  additionalBadgeList: [PresentationBadge];
+  title: PresentationTitle;
+  heart: PresentationHeart;
+  listItemAdditionalInfo: PresentationlistItemAdditionalInfo;
+};
+
+export type PresentationImage = {
+  url: string;
+  link: string;
+  backgroundText: string;
+  dimColor: string;
+  opacity: number;
+  dimTarget: boolean;
+};
+
+export type PresentationBadge = {
+  text: string;
+  typeBadge: boolean;
+};
+
+export type PresentationTitle = {
+  text: string;
+  link: string;
+};
+
+export type PresentationHeart = {
+  heartClicked: boolean;
+  link: string;
+};
+
+export type PresentationlistItemAdditionalInfo = {
+  heartCount: number | null;
+  grade: number | null;
+  archiveCount: number | null;
 };
 
 export default atom({
@@ -54,7 +63,7 @@ export default atom({
       const { data } = (await axios({
         url: `/api/search`,
         method: 'POST',
-        body: {
+        data: {
           requestPagingStatus: {
             currentContentsCount: 0,
             pageNumber: 0,
