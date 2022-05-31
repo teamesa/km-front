@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
-import SwipeableViews from 'react-swipeable-views';
 
 import { Box } from 'components/Atoms';
 import Archive from 'components/Organisms/Detail/Description/Archive';
 import Introduce from 'components/Organisms/Detail/Description/Introduce';
 import theme from 'styles/theme';
+import SwipeableViews from 'react-swipeable-views';
 
 interface TopTabViewProps {
   data: {

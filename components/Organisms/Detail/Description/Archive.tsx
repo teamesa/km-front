@@ -1,6 +1,5 @@
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
-import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
-import InnerHTML from 'components/Molecules/InnerHTML';
+import { Box, FlexBox, Span, Tag } from 'components/Atoms';
 import theme from 'styles/theme';
 
 interface ArchiveProps {
