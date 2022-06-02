@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
-import { Suspense } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import ArrowDown from 'assets/list/ArrowDown';
-import { Box, Button, FlexBox, Layout, Tag } from 'components/Atoms';
+import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
+import Select from 'components/Atoms/Select';
 import ListFilter from 'components/Molecules/ListFilter';
 import ListCategory from 'components/Organisms/List/ListCategory';
 import { ResponseState, TestSate } from 'states';
@@ -16,7 +16,6 @@ const Home: NextPage = () => {
   useInitHeader({ headerLeft: 'logo', headerEnd: 'home' });
   const data = useRecoilValue(TestSate);
   const setResponseState = useSetRecoilState(ResponseState);
-  console.log('data', data);
 
   /** POST로 보내는 예시 */
   const handleTest = async (e: any) => {
@@ -36,7 +35,18 @@ const Home: NextPage = () => {
       console.log('error', e.response);
     }
   };
-
+  // 정렬레이어 팝업
+  const exampleSelect = [
+    { index: 0, label: 'test1', value: '010' },
+    { index: 1, label: 'test2', value: '010' },
+    { index: 2, label: 'test3', value: '010' },
+  ];
+  //상세필터 레이어
+  const exampleFilter = [
+    { index: 0, label: 'test1', value: '010' },
+    { index: 1, label: 'test2', value: '010' },
+    { index: 2, label: 'test3', value: '010' },
+  ];
   return (
     <>
       <FlexBox>
@@ -68,6 +78,21 @@ const Home: NextPage = () => {
         <Box>상태값 가져오기</Box>
         <Box>Post로 memo보내기</Box>
         <button onClick={handleTest}>테스트</button>
+        <hr />
+        <Select
+          modalType="Select"
+          data={exampleSelect}
+          onChange={(e) => {
+            e.target.value;
+          }}
+        />
+        <Select
+          modalType="Filter"
+          data={exampleFilter}
+          onChange={(e) => {
+            e.target.value;
+          }}
+        />
       </Layout>
     </>
   );
