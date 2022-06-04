@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { FlexBox, Box, Tag } from 'components/Atoms';
-import { Z_INDEX } from 'constants/common';
+import { FlexBox, Tag } from 'components/Atoms';
 import theme from 'styles/theme';
 
 export default function ListCategory({
@@ -18,10 +17,7 @@ export default function ListCategory({
       overflow="auto"
       width="auto"
       role="tablist"
-      position="sticky"
-      top="45px"
       background="white"
-      zIndex={Z_INDEX.SKY}
     >
       {data.map(({ label, value }, index) => (
         <Tag
@@ -31,6 +27,7 @@ export default function ListCategory({
               ? `${theme.colors.black}`
               : `${theme.colors.gray99}`
           }
+          fontSize="13px !important"
           marginRight="15px"
           onClick={() => {
             router.push({
