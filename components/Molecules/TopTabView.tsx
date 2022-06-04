@@ -10,10 +10,10 @@ import theme from 'styles/theme';
 interface TopTabViewProps {
   data: {
     /** 탭 상단 제목 */
-    title: string;
+    title?: string | null;
     /** 내용에 들어가는 children (JSX) */
     children?: JSX.Element | JSX.Element[];
-    contents: any;
+    contents?: any;
   }[];
 }
 

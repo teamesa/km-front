@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
-import { atom, selectorFamily } from 'recoil';
+import { selectorFamily } from 'recoil';
 
-import { data } from 'components/Organisms/Detail/data';
+import { noIntroData } from 'components/Organisms/Detail/data';
 import customAxios from 'utils/hooks/customAxios';
 
 type TGetSummary = {
@@ -32,6 +32,9 @@ export async function getSummary({ itemId }: { itemId: number }) {
 
   return data;
 }
+export async function getArchive({ itemId }: { itemId: number }) {
+  return noIntroData;
+}
 
 export async function getIntroduction({ itemId }: { itemId: number }) {
   const { data } = (await axios({
@@ -42,17 +45,21 @@ export async function getIntroduction({ itemId }: { itemId: number }) {
   return data;
 }
 
-export const tempSummaryState = selectorFamily({
-  key: 'TempDetailState',
+export const DetailState = selectorFamily({
+  key: 'DetailState',
   get: (itemId: number) => async () => {
     const summary = await getSummary({ itemId: itemId });
-    const introduction = await getSummary({ itemId: itemId });
+    const introduction = await getIntroduction({ itemId: itemId });
+    const archive = await getArchive({ itemId: itemId });
 
-    return { summary, introduction };
+    const tabViewData =
+      introduction.summary === null
+        ? [{ ...archive }]
+        : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
+
+    return {
+      summary,
+      tabViewData,
+    };
   },
-});
-
-export default atom({
-  key: 'DetailState',
-  default: data,
 });
