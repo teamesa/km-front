@@ -25,8 +25,8 @@ export default function List() {
         ]}
       />
       <FlexBox
-        position="sticky"
-        top="98px"
+        // position="sticky"
+        // top="98px"
         background={theme.colors.white}
         zIndex="3"
       >
