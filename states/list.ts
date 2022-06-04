@@ -12,10 +12,11 @@ export type TPostList = {
     totalContentsCount: number;
     currentContentsCount: number;
   };
-  contents: [ListPageContents] | [];
+  contents: Array<ListPageContents>;
 };
 
 export type ListPageContents = {
+  id: number;
   presentationImage: PresentationImage;
   typeBadge: PresentationBadge;
   additionalBadgeList: [PresentationBadge];
@@ -46,6 +47,7 @@ export type PresentationTitle = {
 export type PresentationHeart = {
   heartClicked: boolean;
   link: string;
+  id: number;
 };
 
 export type PresentationlistItemAdditionalInfo = {
@@ -67,7 +69,7 @@ export default atom({
           requestPagingStatus: {
             currentContentsCount: 0,
             pageNumber: 0,
-            pageSize: 10,
+            pageSize: 100,
           },
           searchSortType: 'END_DATE_ASC',
         },
