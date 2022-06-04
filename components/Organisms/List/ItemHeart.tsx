@@ -53,11 +53,11 @@ export default function ItemHeart(props: HeartProps) {
 
   return (
     <Button position="absolute" right="0px" top="0px" onClick={setToPick}>
-      {heart.heartClicked ? (
-        <NavWish width="17" height="16" fill={theme.colors.black} />
-      ) : (
-        <NavWish width="17" height="16" />
-      )}
+      <NavWish
+        width="17"
+        height="16"
+        fill={heart.heartClicked ? theme.colors.black : theme.colors.white}
+      />
     </Button>
   );
 }
