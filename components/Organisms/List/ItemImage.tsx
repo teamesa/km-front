@@ -13,7 +13,6 @@ type ImagePorps = {
 export default function ItemImage(props: ImagePorps) {
   const presentationImage = props.presentationImage;
   const router = useRouter();
-  // console.log(JSON.stringify(presentationImage));
   return (
     <>
       <Box
@@ -39,42 +38,30 @@ export default function ItemImage(props: ImagePorps) {
             />
             <Box
               position="absolute"
-              top="50%"
+              top="calc(50% - 16px)"
               left="calc(50% - 30px)"
               color={theme.colors.white}
               fontSize="26px"
+              lineHeight="32px"
               zIndex="2"
-              css={css`
-                transform: transition(-50%, -50%);
-              `}
             >
               {presentationImage.backgroundText}
             </Box>
-            <Image
-              src={
-                !presentationImage.url
-                  ? 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-                  : presentationImage.url
-              }
-              alt="image"
-              width="375"
-              height="250"
-              layout="responsive"
-            />
           </>
         ) : (
-          <Image
-            src={
-              !presentationImage.url
-                ? 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-                : presentationImage.url
-            }
-            alt="image"
-            width="375"
-            height="250"
-            layout="responsive"
-          />
+          ''
         )}
+        <Image
+          src={
+            !presentationImage.url
+              ? 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
+              : presentationImage.url
+          }
+          alt="image"
+          width="375"
+          height="250"
+          layout="responsive"
+        />
       </Box>
     </>
   );
