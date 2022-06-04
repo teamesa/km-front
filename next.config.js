@@ -8,15 +8,6 @@ const nextConfig = {
       'ssl.pstatic.net',
     ],
   },
-  // CORS 해결
-  async rewrites() {
-    return [
-      {
-        destination: process.env.NEXT_PUBLIC_BACK_URL,
-        source: process.env.SOURCE_PATH,
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;
