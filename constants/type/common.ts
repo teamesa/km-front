@@ -9,6 +9,4 @@ export interface HeaderBarProps {
   headerLeftAction?: () => void;
   /** header 오른쪽 버튼의 액션을 설정합니다. (기본 : 없음)*/
   headerRightAction?: () => void;
-  /** header 끝 버튼의 액션을 설정합니다. (기본 : 없음)*/
-  headerEndAction?: () => void;
 }

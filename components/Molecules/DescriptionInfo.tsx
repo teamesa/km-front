@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import { FlexBox, Box, Button } from 'components/Atoms';
@@ -11,18 +12,20 @@ export default function DescriptionInfo({
   title,
   description,
 }: DescriptionInfoProps) {
-  const router = useRouter();
-
-  const handleClick = () => {
-    router.push(description);
-  };
-
   const showDescription = () => {
     if (title === '시간') {
-      return description === '' ? '-' : description;
+      return description === '' || description === undefined
+        ? '-'
+        : description;
     } else if (title === '홈페이지') {
-      return description === undefined ? null : (
-        <Button onClick={handleClick}>홈페이지 이동 {'>'}</Button>
+      return description === '' || description === undefined ? null : (
+        <Button>
+          <Link href={description}>
+            <a target="_blank" rel="noreferrer">
+              홈페이지 이동 {'>'}
+            </a>
+          </Link>
+        </Button>
       );
     }
     return description;
