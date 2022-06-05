@@ -40,7 +40,7 @@ const proxyLogic = async (req, res) => {
     }
   } catch (err) {
     console.log(err.response.data);
-    res.json({});
+    res.status(err.response.status).send({});
   }
 };
 
@@ -60,6 +60,11 @@ app.prepare().then(() => {
     res.redirect(finalRedirected);
   });
 
+  server.get('/api/logout', (req, res) => {
+    res.clearCookie('kilometer_session');
+    res.redirect('/');
+  });
+
   server.get('/api/login/sucess', (req, res) => {
     // TODO: HOST에 따라서 확인해봐야함.
     res.cookie('kilometer_session', req.query.token, {
@@ -68,6 +73,7 @@ app.prepare().then(() => {
     });
     req.res.redirect(req.query.redirect_uri);
   });
+
   server.all('/hello-example', proxyLogic);
   server.all('/api/*', proxyLogic);
 
