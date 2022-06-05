@@ -38,7 +38,7 @@ const MyPage: NextPage<UserProps> = ({ user }) => {
         padding={2}
         textAlign="center"
         marginBottom={2}
-        onClick={() => router.push('/api/login')}
+        onClick={() => router.replace('/api/login')}
       >
         Login
       </Button>
