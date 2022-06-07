@@ -11,7 +11,7 @@ const BOTTM_BUTTONS_SPACE = 210;
 export default function LoginPage() {
   const router = useRouter();
   return (
-    <Box paddingLeft={15} paddingRight={15}>
+    <Box paddingLeft={'15px'} paddingRight={'15px'}>
       <Box
         style={{
           height: `calc(100vh - (${HEADER_SPACE}px + ${APP_BAR_SPACE}px + ${BOTTM_BUTTONS_SPACE}px + var(--platformBottomArea)))`,
@@ -21,7 +21,7 @@ export default function LoginPage() {
           <Box
             paddingTop={'40px'}
             fontFamily={'SpoqaHanSansNeo'}
-            fontSize={22}
+            fontSize={'22px'}
             fontStyle={'normal'}
             letterSpacing={'normal'}
             fontWeight={500}
@@ -33,31 +33,31 @@ export default function LoginPage() {
             <br />
             킬로미터
           </Box>
-          <MyPageImageAsset width={173} height={50} type={'logo'} />
+          <MyPageImageAsset width={'173px'} height={'50px'} type={'logo'} />
         </Box>
       </Box>
       <Box>
         <Box
-          paddingLeft={100}
-          paddingRight={99}
+          paddingLeft={'100px'}
+          paddingRight={'99px'}
           fontFamily={'SpoqaHanSansNeo'}
-          fontSize={15}
+          fontSize={'15px'}
           fontStyle={'normal'}
           letterSpacing={'normal'}
           fontWeight={500}
           lineHeight={1.47}
           textAlign={'center'}
           color={theme.colors.black}
-          marginBottom={20}
+          marginBottom={'20px'}
         >
           SNS 계정으로 간편하게
         </Box>
         <Button onClick={() => router.replace('/api/login')}>
           <MyPageImageAsset
-            height={50}
+            height={'50px'}
             width={'100%'}
             type={'naver'}
-            marginBottom={10}
+            marginBottom={'10px'}
           />
         </Button>
         <Button
@@ -65,7 +65,7 @@ export default function LoginPage() {
             alert('현재 애플은 미지원입니다. 네이버 로그인을 이용해주세요')
           }
         >
-          <MyPageImageAsset width={'100%'} height={50} type={'apple'} />
+          <MyPageImageAsset width={'100%'} height={'50px'} type={'apple'} />
         </Button>
       </Box>
     </Box>

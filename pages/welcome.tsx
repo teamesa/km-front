@@ -15,30 +15,30 @@ export default function Welcome() {
   const router = useRouter();
   useInitHeader({ headerLeft: 'disabled', headerRight: 'disabled' });
   return (
-    <Box paddingLeft={15} paddingRight={15}>
+    <Box paddingLeft={'15px'} paddingRight={'15px'}>
       <Box
         style={{
           height: `calc(100vh - (${HEADER_SPACE}px + ${APP_BAR_SPACE}px + ${LAST_BUTTON}px + var(--platformBottomArea)))`,
         }}
-        paddingTop={45}
+        paddingTop={'45px'}
       >
         <Box
           fontFamily={'SpoqaHanSansNeo'}
-          fontSize={32}
+          fontSize={'32px'}
           fontWeight={500}
           fontStyle={'normal'}
           lineHeight={0.94}
           letterSpacing={'normal'}
           textAlign={'left'}
           color={theme.colors.black}
-          marginBottom={22}
+          marginBottom={'22px'}
         >
           반갑습니다
         </Box>
         <Box>
           <Span
             fontFamily={'SpoqaHanSansNeo'}
-            fontSize={22}
+            fontSize={'22px'}
             fontWeight={500}
             fontStyle={'normal'}
             lineHeight={1.55}
@@ -50,10 +50,10 @@ export default function Welcome() {
             문화생활 플랫폼
           </Span>
           <Box display={'flex'}>
-            <MyPageImageAsset width={103} height={30} type={'logo'} />
+            <MyPageImageAsset width={'103px'} height={'30px'} type={'logo'} />
             <Box
               fontFamily={'SpoqaHanSansNeo'}
-              fontSize={22}
+              fontSize={'22px'}
               fontWeight={500}
               fontStyle={'normal'}
               lineHeight={1.55}
@@ -67,7 +67,7 @@ export default function Welcome() {
           </Box>
           <Box
             fontFamily={'SpoqaHanSansNeo'}
-            fontSize={22}
+            fontSize={'22px'}
             fontWeight={500}
             fontStyle={'normal'}
             lineHeight={1.55}
@@ -85,7 +85,7 @@ export default function Welcome() {
         backgroundColor={theme.colors.lime}
         height={'50px'}
         fontFamily={'SpoqaHanSansNeo'}
-        fontSize={16}
+        fontSize={'16px'}
         fontWeight={500}
         fontStyle={'normal'}
         lineHeight={1.5}

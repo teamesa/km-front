@@ -7,7 +7,7 @@ import { Box } from 'components/Atoms';
 
 interface MyPageImageAssetProps {
   type: 'apple' | 'logo' | 'naver';
-  marginBottom?: number;
+  marginBottom?: number | string;
   width: number | string;
   height: number | string;
 }
