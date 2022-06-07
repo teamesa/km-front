@@ -54,9 +54,10 @@ app.prepare().then(() => {
   server.get('/api/login', (req, res) => {
     const serverUrl = process.env.BACK_URL;
     const frontDomain = process.env.FRONT_URL;
-    const redirectUrl = '/';
+    const redirectUrl = '/mypage';
 
     const finalRedirected = `${serverUrl}/oauth2/authorization/naver?redirect_uri=${frontDomain}/api/login/sucess?redirect_uri=${redirectUrl}`;
+    console.log(finalRedirected);
     res.redirect(finalRedirected);
   });
 
@@ -71,7 +72,7 @@ app.prepare().then(() => {
       maxAge: 1000 * 60 * 60 * 24 * 365,
       httpOnly: true,
     });
-    req.res.redirect(req.query.redirect_uri);
+    res.redirect(req.query.redirect_uri);
   });
 
   server.all('/hello-example', proxyLogic);
