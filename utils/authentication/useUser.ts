@@ -15,6 +15,7 @@ export interface User {
   gender: string;
   imageUrl: string;
   birthdate: number;
+  isLogin: boolean;
 }
 
 export const useUserProps: GetServerSideProps<UserProps | URLProps> = async (
@@ -29,6 +30,7 @@ export const useUserProps: GetServerSideProps<UserProps | URLProps> = async (
     gender: '',
     imageUrl: '',
     birthdate: 0,
+    isLogin: false,
   };
 
   if (kilometer_session) {
@@ -42,6 +44,7 @@ export const useUserProps: GetServerSideProps<UserProps | URLProps> = async (
       user.gender = decodeData.gender;
       user.imageUrl = decodeData.imageUrl;
       user.birthdate = decodeData.birthdate;
+      user.isLogin = true;
     } catch (err) {
       console.log(err);
     }
