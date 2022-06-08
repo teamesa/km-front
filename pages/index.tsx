@@ -11,12 +11,29 @@ import theme from 'styles/theme';
 import { useUserProps } from 'utils/authentication/useUser';
 import customAxios from 'utils/hooks/customAxios';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
+import { useModal } from 'utils/hooks/useModal';
+
+interface MapType {
+  data: kakao.maps.services.PlacesSearchResult;
+  status: kakao.maps.services.Status;
+  _pagination: {
+    totalCount: number;
+    hasNextPage: boolean;
+    hasPrevPage: boolean;
+    current: number;
+    gotoPage: (page: number) => void;
+    gotoFirst(): void;
+    gotoLast(): void;
+    nextPage(): void;
+    prevPage(): void;
+  };
+}
 
 const Home: NextPage = () => {
   useInitHeader({ headerLeft: 'logo', headerEnd: 'home' });
   const data = useRecoilValue(TestSate);
   const setResponseState = useSetRecoilState(ResponseState);
-
+  const { onModal } = useModal();
   /** POST로 보내는 예시 */
   const handleTest = async (e: any) => {
     e.preventDefault();
@@ -93,6 +110,22 @@ const Home: NextPage = () => {
             e.target.value;
           }}
         />
+        <hr />
+        <Box
+          onClick={() =>
+            onModal({
+              type: 'SearchMap',
+              payload: {
+                onChange: (e: MapType['data'][0]) => {
+                  console.log('eeee', e.road_address_name);
+                },
+              },
+            })
+          }
+          background={theme.colors.grayEE}
+        >
+          카카오맵
+        </Box>
       </Layout>
     </>
   );

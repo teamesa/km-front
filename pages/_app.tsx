@@ -1,5 +1,6 @@
 import { ThemeProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
+import Script from 'next/script';
 import { Suspense } from 'react';
 import { RecoilRoot } from 'recoil';
 
@@ -22,6 +23,11 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Portal query="#modal">
             <ModalContainer />
           </Portal>
+
+          <Script
+            strategy="lazyOnload"
+            src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&libraries=services,clusterer`}
+          />
         </Suspense>
       </RecoilRoot>
     </ThemeProvider>
