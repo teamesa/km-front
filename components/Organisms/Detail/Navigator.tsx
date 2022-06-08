@@ -42,8 +42,14 @@ export default function Navigator() {
             marginLeft="20px"
             marginTop="5px"
             onClick={() => {
-              navigator.clipboard.writeText(currentUrl);
-              alert('클립보드에 복사되었습니다.');
+              navigator.clipboard
+                .writeText(currentUrl)
+                .then(() => {
+                  alert('클립보드에 복사되었습니다.');
+                })
+                .catch(() => {
+                  alert('주소복사에 실패했습니다');
+                });
             }}
           >
             <Share />
