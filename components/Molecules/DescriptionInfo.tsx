@@ -13,12 +13,18 @@ export default function DescriptionInfo({
   description,
 }: DescriptionInfoProps) {
   const showDescription = () => {
-    if (title === '시간') {
-      return description === '' || description === undefined
-        ? '-'
-        : description;
+    if (title === '티켓구매') {
+      return description ? (
+        <Button>
+          <Link href={description}>
+            <a target="_blank" rel="noreferrer">
+              티켓 구매하기 {'>'}
+            </a>
+          </Link>
+        </Button>
+      ) : null;
     } else if (title === '홈페이지') {
-      return description === '' || description === undefined ? null : (
+      return description ? (
         <Button>
           <Link href={description}>
             <a target="_blank" rel="noreferrer">
@@ -26,13 +32,16 @@ export default function DescriptionInfo({
             </a>
           </Link>
         </Button>
-      );
+      ) : null;
     }
     return description;
   };
   return (
     <FlexBox marginBottom="20px" fontSize="13px">
-      <Box flex={0.5}>{title === '홈페이지' ? '' : title}</Box>
+      <Box flex={0.5}>
+        {title === '홈페이지' || title === '티켓구매' ? null : title}
+        {/* {title} */}
+      </Box>
       <Box flex={2}>{showDescription()}</Box>
     </FlexBox>
   );

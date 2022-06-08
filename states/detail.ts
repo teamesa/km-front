@@ -15,6 +15,8 @@ type TGetSummary = {
   time: string;
   title: string;
   type: string;
+  thumbnailImageUrl: string;
+  ticketUrl: string;
 };
 
 type TGetIntroduction = {
@@ -29,7 +31,7 @@ export async function getSummary({ itemId }: { itemId: number }) {
     url: `/api/item/info/${itemId}`,
     method: 'GET',
   })) as AxiosResponse<TGetSummary>;
-
+  console.log('data', data);
   return data;
 }
 export async function getArchive({ itemId }: { itemId: number }) {

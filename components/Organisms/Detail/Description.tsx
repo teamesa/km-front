@@ -12,7 +12,7 @@ export default function Description() {
   const router = useRouter();
   const { id } = router.query;
   const { summary, tabViewData } = useRecoilValue(DetailState(Number(id)));
-
+  console.log('summary', summary);
   return (
     <Box>
       <BottomSheetHeader />
@@ -23,8 +23,18 @@ export default function Description() {
           <DescriptionInfo title="기간" description={summary.term} />
           <DescriptionInfo title="장소" description={summary.place} />
           <DescriptionInfo title="입장료" description={summary.feeType} />
-          <DescriptionInfo title="시간" description={summary.time} />
-          <DescriptionInfo title="홈페이지" description={summary.homePageUrl} />
+          {summary.ticketUrl ? (
+            <DescriptionInfo title="티켓구매" description={summary.ticketUrl} />
+          ) : null}
+          {summary.time ? (
+            <DescriptionInfo title="시간" description={summary.time} />
+          ) : null}
+          {summary.homePageUrl ? (
+            <DescriptionInfo
+              title="홈페이지"
+              description={summary.homePageUrl}
+            />
+          ) : null}
         </Box>
         <TopTabView
           data={tabViewData.map((item) => ({

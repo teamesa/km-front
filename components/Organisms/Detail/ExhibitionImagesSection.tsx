@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 
@@ -8,8 +9,34 @@ import theme from 'styles/theme';
 export default function ExhibitionImagesSection() {
   const router = useRouter();
   const { id } = router.query;
-  const data = useRecoilValue(DetailState(Number(id)));
+  const { thumbnailImageUrl } = useRecoilValue(DetailState(Number(id))).summary;
+  const baseUrl =
+    'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg';
 
-  // TODO : GET /api/item/info/{itemId}에 포스터 사진 요청으로 대기중
-  return <Box width="100%" height="300px" background={theme.colors.lime} />;
+  return (
+    <Box
+      width="100%"
+      height="300px"
+      background={`url(${thumbnailImageUrl ?? baseUrl}) no-repeat`}
+      css={css`
+        background-size: 100%;
+        background-position: top;
+        background-attachment: fixed;
+      `}
+    />
+  );
+}
+
+{
+  /* <Image
+        src={
+          !thumbnailImageUrl
+            ? 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
+            : thumbnailImageUrl
+        }
+        alt="image"
+        width="375"
+        height="300px"
+        layout="responsive"
+      /> */
 }

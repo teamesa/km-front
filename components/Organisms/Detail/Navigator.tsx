@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import Share from 'assets/detail/Share';
 import { Box, Button, FlexBox } from 'components/Atoms';
@@ -5,6 +7,14 @@ import { Z_INDEX } from 'constants/common';
 import theme from 'styles/theme';
 
 export default function Navigator() {
+  const [currentUrl, setCurrentUrl] = useState('');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentUrl(window.location.href);
+    }
+  }, []);
+
   return (
     <Box
       zIndex={Z_INDEX.SKY}
@@ -28,7 +38,14 @@ export default function Navigator() {
           >
             241
           </Box>
-          <Button marginLeft="20px" marginTop="5px">
+          <Button
+            marginLeft="20px"
+            marginTop="5px"
+            onClick={() => {
+              navigator.clipboard.writeText(currentUrl);
+              alert('클립보드에 복사되었습니다.');
+            }}
+          >
             <Share />
           </Button>
         </FlexBox>
