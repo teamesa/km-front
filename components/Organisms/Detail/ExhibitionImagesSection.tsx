@@ -4,7 +4,6 @@ import { useRecoilValue } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import { DetailState } from 'states';
-import theme from 'styles/theme';
 
 export default function ExhibitionImagesSection() {
   const router = useRouter();
@@ -25,18 +24,4 @@ export default function ExhibitionImagesSection() {
       `}
     />
   );
-}
-
-{
-  /* <Image
-        src={
-          !thumbnailImageUrl
-            ? 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-            : thumbnailImageUrl
-        }
-        alt="image"
-        width="375"
-        height="300px"
-        layout="responsive"
-      /> */
 }
