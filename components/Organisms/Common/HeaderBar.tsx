@@ -83,13 +83,23 @@ function HeaderBar() {
         >
           {headerLeftIcon[header.headerLeft ?? 'disabled']}
         </Box>
-        <FlexBox>
+        <Box
+          textAlign="center"
+          fontFamily="SpoqaHanSansNeo"
+          fontSize="16px"
+          fontWeight={500}
+          fontStyle="normal"
+          lineHeight={1.5}
+          letterSpacing="normal"
+        >
+          {header.title}
+        </Box>
+        <FlexBox textAlign="end" flex={1}>
           <Box
             flex={1}
             aria-label="오른쪽 버튼"
             role="button"
             width="30px"
-            paddingRight="15px"
             marginTop="5px"
             justifyContent="flex-end"
             height="100%"

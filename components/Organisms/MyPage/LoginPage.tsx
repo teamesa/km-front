@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { MyPageImageAsset } from 'assets/mypage';
 import { Box, Button } from 'components/Atoms';
 import theme from 'styles/theme';
+import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const HEADER_SPACE = 45;
 const APP_BAR_SPACE = 60;
@@ -10,6 +11,7 @@ const BOTTM_BUTTONS_SPACE = 210;
 
 export default function LoginPage() {
   const router = useRouter();
+  useInitHeader({ headerLeft: 'disabled', headerRight: 'disabled' });
   return (
     <Box paddingLeft={'15px'} paddingRight={'15px'}>
       <Box
