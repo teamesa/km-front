@@ -6,9 +6,9 @@ import { Box } from 'components/Atoms';
 import type { PresentationImage } from 'states/list';
 import theme from 'styles/theme';
 
-type ImagePorps = {
+interface ImagePorps {
   presentationImage: PresentationImage;
-};
+}
 
 export default function ItemImage(props: ImagePorps) {
   const presentationImage = props.presentationImage;

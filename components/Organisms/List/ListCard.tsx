@@ -5,9 +5,9 @@ import ItemImage from 'components/Organisms/List/ItemImage';
 import ItemInfo from 'components/Organisms/List/ItemInfo';
 import type { ListPageContents } from 'states/list';
 
-type ItemProps = {
+interface ItemProps {
   content: ListPageContents;
-};
+}
 
 export default function Item(props: ItemProps) {
   const content = props.content;

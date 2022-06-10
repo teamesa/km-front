@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
+import { useRecoilValue, useRecoilState } from 'recoil';
 
 import { FlexBox, Tag } from 'components/Atoms';
+import { FilterState } from 'states';
 import theme from 'styles/theme';
 
 export default function ListCategory({
@@ -10,6 +12,21 @@ export default function ListCategory({
 }) {
   const router = useRouter();
   const { filter = '' } = router.query;
+  const [testData, setTestData] = useRecoilState(FilterState);
+ 
+
+  const test = {
+    filterOptions: {
+      
+      feeTypes: ['FREE'],
+      progressTypes: ['ON'],
+      regionTypes: ['SEOUL'],
+    },
+    queryString: '',
+  };
+
+  setTestData({ ...test ,  filterOptions.exhibitionType: 'EXHIBITION'});
+  console.log('ttt', testData);
 
   return (
     <FlexBox

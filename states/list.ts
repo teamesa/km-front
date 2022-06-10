@@ -1,6 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { atom, selector } from 'recoil';
 
+import { FilterState } from 'states/filter';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TPostList = {
@@ -60,7 +61,7 @@ export default atom({
   key: 'ListState',
   default: selector({
     key: 'ListState/default',
-    get: async () => {
+    get: async ({ get }) => {
       const axios = customAxios();
       const { data } = (await axios({
         url: `/api/search`,
@@ -74,7 +75,7 @@ export default atom({
           searchSortType: 'END_DATE_ASC',
         },
       })) as AxiosResponse<TPostList>;
-
+      // const filterList = get(FilterState);
       return data;
     },
   }),
