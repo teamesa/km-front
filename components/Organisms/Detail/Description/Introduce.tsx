@@ -20,19 +20,29 @@ export default function Introduce({ data }: IntroduceProps) {
       padding="40px 15px"
     >
       {showMore ? (
-        <InnerHTML data={data.summary} />
-      ) : (
-        <Box
-          overflow="hidden"
-          display="-webkit-box"
-          css={css`
-            textoverflow: ellipsis;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-          `}
-        >
-          {' '}
+        <Box>
           <InnerHTML data={data.summary} />
+        </Box>
+      ) : (
+        <Box>
+          <Box
+            overflow="hidden"
+            display="-webkit-box"
+            css={css`
+              text-overflow: ellipsis;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+            `}
+          >
+            <InnerHTML data={data.summary} />
+          </Box>
+          <Button
+            fontSize="13px"
+            color={theme.colors.orange}
+            onClick={() => setShowMore(!showMore)}
+          >
+            more
+          </Button>
         </Box>
       )}
 
