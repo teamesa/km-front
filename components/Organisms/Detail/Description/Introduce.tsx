@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -18,8 +19,24 @@ export default function Introduce({ data }: IntroduceProps) {
       textAlign="left"
       padding="40px 15px"
     >
-      <Box paddingBottom="10px">
-        {showMore ? (
+      {showMore ? (
+        <InnerHTML data={data.summary} />
+      ) : (
+        <Box
+          overflow="hidden"
+          display="-webkit-box"
+          css={css`
+            textoverflow: ellipsis;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          `}
+        >
+          {' '}
+          <InnerHTML data={data.summary} />
+        </Box>
+      )}
+
+      {/* {showMore ? (
           <InnerHTML data={data.summary} />
         ) : (
           <Span>
@@ -35,8 +52,7 @@ export default function Introduce({ data }: IntroduceProps) {
           >
             more
           </Button>
-        )}
-      </Box>
+        )} */}
       {data.photo?.map((item, index) => (
         <Box paddingTop="20px" key={index}>
           <Image

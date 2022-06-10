@@ -14,13 +14,14 @@ export default function ExhibitionImagesSection() {
 
   return (
     <Box
+      position="fixed"
+      top="45px"
       width="100%"
-      height="300px"
+      height="100%"
+      maxHeight="500px"
       background={`url(${thumbnailImageUrl ?? baseUrl}) no-repeat`}
       css={css`
         background-size: 100%;
-        background-position: top;
-        background-attachment: fixed;
       `}
     />
   );

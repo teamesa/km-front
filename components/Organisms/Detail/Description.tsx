@@ -14,7 +14,13 @@ export default function Description() {
   const { summary, tabViewData } = useRecoilValue(DetailState(Number(id)));
   console.log('summary', summary);
   return (
-    <Box>
+    <Box
+      position="relative"
+      top="445px"
+      backgroundColor={theme.colors.white}
+      borderRadius="24px 24px 0px 0px"
+      overflow="hidden"
+    >
       <BottomSheetHeader />
       <Box backgroundColor={theme.colors.white} padding="0 15px 60px">
         <Tag border={`1px solid ${theme.colors.black}`}>{summary.type}</Tag>
