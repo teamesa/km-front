@@ -30,7 +30,7 @@ export default function Introduce({ data }: IntroduceProps) {
             display="-webkit-box"
             css={css`
               text-overflow: ellipsis;
-              -webkit-line-clamp: 3;
+              -webkit-line-clamp: 5;
               -webkit-box-orient: vertical;
             `}
           >
