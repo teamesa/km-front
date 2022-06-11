@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 
 import { Profile } from 'assets/mypage';
 import { Box } from 'components/Atoms';
@@ -9,7 +8,6 @@ import { UserProps } from 'utils/authentication/useUser';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function MyPageHome({ user: { imageUrl, name } }: UserProps) {
-  const router = useRouter();
   useInitHeader({ headerLeft: 'disabled' });
   const data = [
     { title: 'MY 아카이브', contents: [] },
