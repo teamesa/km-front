@@ -25,7 +25,6 @@ export default function UpdateInputAlert({ type }: UpdateInputAlertProps) {
         marginTop="10px"
         fontSize="12px"
         lineHeight={1.67}
-        letterSpacing="normal"
         textAlign="left"
         color={theme.colors.orange}
       >

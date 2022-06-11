@@ -23,7 +23,6 @@ export default function LoginPage() {
           <Box
             paddingTop={'40px'}
             fontSize={'22px'}
-            letterSpacing={'normal'}
             fontWeight={500}
             lineHeight={1.45}
             textAlign={'left'}
@@ -41,7 +40,6 @@ export default function LoginPage() {
           paddingLeft={'100px'}
           paddingRight={'99px'}
           fontSize={'15px'}
-          letterSpacing={'normal'}
           fontWeight={500}
           lineHeight={1.47}
           textAlign={'center'}

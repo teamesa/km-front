@@ -88,7 +88,6 @@ function HeaderBar() {
           fontSize="16px"
           fontWeight={500}
           lineHeight={1.5}
-          letterSpacing="normal"
         >
           {header.title}
         </Box>

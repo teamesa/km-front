@@ -26,7 +26,6 @@ export default function Welcome() {
           fontSize={'32px'}
           fontWeight={500}
           lineHeight={0.94}
-          letterSpacing={'normal'}
           textAlign={'left'}
           color={theme.colors.black}
           marginBottom={'22px'}
@@ -38,7 +37,6 @@ export default function Welcome() {
             fontSize={'22px'}
             fontWeight={500}
             lineHeight={1.55}
-            letterSpacing={'normal'}
             textAlign={'left'}
             color={theme.colors.black}
             display={'box'}
@@ -51,7 +49,6 @@ export default function Welcome() {
               fontSize={'22px'}
               fontWeight={500}
               lineHeight={1.55}
-              letterSpacing={'normal'}
               textAlign={'left'}
               color={theme.colors.black}
               paddingLeft={'4px'}
@@ -63,7 +60,6 @@ export default function Welcome() {
             fontSize={'22px'}
             fontWeight={500}
             lineHeight={1.55}
-            letterSpacing={'normal'}
             textAlign={'left'}
             color={theme.colors.black}
           >
@@ -79,7 +75,6 @@ export default function Welcome() {
         fontSize={'16px'}
         fontWeight={500}
         lineHeight={1.5}
-        letterSpacing={'normal'}
         color={theme.colors.black}
         paddingTop={'15px'}
         paddingBottom={'14px'}

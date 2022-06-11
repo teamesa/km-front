@@ -42,7 +42,6 @@ export default function UpdateButton() {
       fontSize="16px"
       fontWeight={500}
       lineHeight={1.5}
-      letterSpacing="normal"
       textAlign="center"
       onClick={() => validate(userModifyValue, setUserModifyError)}
     >
