@@ -71,7 +71,6 @@ export default function UpdateInputSet({
     <Box marginTop="40px" width="100%">
       <Box
         fontSize="13px"
-        fontStyle="normal"
         letterSpacing="normal"
         fontWeight="normal"
         lineHeight={1.54}

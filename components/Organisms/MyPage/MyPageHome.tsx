@@ -50,7 +50,6 @@ export default function MyPageHome({ user: { imageUrl, name } }: UserProps) {
             paddingTop="24px"
             paddingBottom="23px"
             fontSize="19px"
-            fontStyle={'normal'}
             letterSpacing={'normal'}
             fontWeight={500}
             lineHeight={1.37}

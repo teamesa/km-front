@@ -24,7 +24,6 @@ export default function ConfigurationFragment() {
           marginTop="10px"
           paddingY="15px"
           fontSize="15px"
-          fontStyle="normal"
           letterSpacing="normal"
           fontWeight={500}
           lineHeight={1.47}
@@ -37,7 +36,6 @@ export default function ConfigurationFragment() {
         <Box
           fontSize="15px"
           paddingY="15px"
-          fontStyle="normal"
           letterSpacing="normal"
           fontWeight={500}
           lineHeight={1.47}
@@ -50,7 +48,6 @@ export default function ConfigurationFragment() {
         <Box
           fontSize="13px"
           paddingY="15px"
-          fontStyle="normal"
           letterSpacing="normal"
           fontWeight="normal"
           lineHeight={1.54}

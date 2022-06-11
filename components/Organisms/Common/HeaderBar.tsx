@@ -87,7 +87,6 @@ function HeaderBar() {
           textAlign="center"
           fontSize="16px"
           fontWeight={500}
-          fontStyle="normal"
           lineHeight={1.5}
           letterSpacing="normal"
         >

@@ -25,7 +25,6 @@ export default function Welcome() {
         <Box
           fontSize={'32px'}
           fontWeight={500}
-          fontStyle={'normal'}
           lineHeight={0.94}
           letterSpacing={'normal'}
           textAlign={'left'}
@@ -38,7 +37,6 @@ export default function Welcome() {
           <Span
             fontSize={'22px'}
             fontWeight={500}
-            fontStyle={'normal'}
             lineHeight={1.55}
             letterSpacing={'normal'}
             textAlign={'left'}
@@ -52,7 +50,6 @@ export default function Welcome() {
             <Box
               fontSize={'22px'}
               fontWeight={500}
-              fontStyle={'normal'}
               lineHeight={1.55}
               letterSpacing={'normal'}
               textAlign={'left'}
@@ -65,7 +62,6 @@ export default function Welcome() {
           <Box
             fontSize={'22px'}
             fontWeight={500}
-            fontStyle={'normal'}
             lineHeight={1.55}
             letterSpacing={'normal'}
             textAlign={'left'}
@@ -82,7 +78,6 @@ export default function Welcome() {
         height={'50px'}
         fontSize={'16px'}
         fontWeight={500}
-        fontStyle={'normal'}
         lineHeight={1.5}
         letterSpacing={'normal'}
         color={theme.colors.black}

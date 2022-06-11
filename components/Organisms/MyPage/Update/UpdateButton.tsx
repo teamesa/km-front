@@ -41,7 +41,6 @@ export default function UpdateButton() {
       paddingY="15px"
       fontSize="16px"
       fontWeight={500}
-      fontStyle="normal"
       lineHeight={1.5}
       letterSpacing="normal"
       textAlign="center"

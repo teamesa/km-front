@@ -7,7 +7,6 @@ export const RadioLabel = styled.label`
   font-size: 13px;
   font-weight: normal;
   font-stretch: normal;
-  font-style: normal;
   line-height: 1.54;
   letter-spacing: -0.26px;
   color: #000;
