@@ -49,7 +49,6 @@ export default function MyPageHome({ user: { imageUrl, name } }: UserProps) {
             paddingLeft="30px"
             paddingTop="24px"
             paddingBottom="23px"
-            fontFamily={'SpoqaHanSansNeo'}
             fontSize="19px"
             fontStyle={'normal'}
             letterSpacing={'normal'}

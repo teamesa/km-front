@@ -22,7 +22,6 @@ export default function LoginPage() {
         <Box width={'100%'}>
           <Box
             paddingTop={'40px'}
-            fontFamily={'SpoqaHanSansNeo'}
             fontSize={'22px'}
             fontStyle={'normal'}
             letterSpacing={'normal'}
@@ -42,7 +41,6 @@ export default function LoginPage() {
         <Box
           paddingLeft={'100px'}
           paddingRight={'99px'}
-          fontFamily={'SpoqaHanSansNeo'}
           fontSize={'15px'}
           fontStyle={'normal'}
           letterSpacing={'normal'}

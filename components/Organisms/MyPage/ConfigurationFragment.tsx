@@ -23,7 +23,6 @@ export default function ConfigurationFragment() {
         <Box
           marginTop="10px"
           paddingY="15px"
-          fontFamily="SpoqaHanSansNeo"
           fontSize="15px"
           fontStyle="normal"
           letterSpacing="normal"
@@ -36,7 +35,6 @@ export default function ConfigurationFragment() {
           회원정보 수정
         </Box>
         <Box
-          fontFamily="SpoqaHanSansNeo"
           fontSize="15px"
           paddingY="15px"
           fontStyle="normal"
@@ -50,7 +48,6 @@ export default function ConfigurationFragment() {
           로그아웃
         </Box>
         <Box
-          fontFamily="SpoqaHanSansNeo"
           fontSize="13px"
           paddingY="15px"
           fontStyle="normal"

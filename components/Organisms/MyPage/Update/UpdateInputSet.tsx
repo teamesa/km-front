@@ -70,7 +70,6 @@ export default function UpdateInputSet({
   return (
     <Box marginTop="40px" width="100%">
       <Box
-        fontFamily="SpoqaHanSansNeo"
         fontSize="13px"
         fontStyle="normal"
         letterSpacing="normal"

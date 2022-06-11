@@ -85,7 +85,6 @@ function HeaderBar() {
         </Box>
         <Box
           textAlign="center"
-          fontFamily="SpoqaHanSansNeo"
           fontSize="16px"
           fontWeight={500}
           fontStyle="normal"

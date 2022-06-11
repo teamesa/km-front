@@ -22,7 +22,6 @@ export default function UpdateInputAlert({ type }: UpdateInputAlertProps) {
   } else {
     return (
       <Box
-        fontFamily="SpoqaHanSansNeo"
         marginTop="10px"
         fontSize="12px"
         fontWeight="normal"

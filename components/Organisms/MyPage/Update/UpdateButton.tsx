@@ -39,7 +39,6 @@ export default function UpdateButton() {
       backgroundColor={theme.colors.black}
       color={theme.colors.white}
       paddingY="15px"
-      fontFamily="SpoqaHanSansNeo"
       fontSize="16px"
       fontWeight={500}
       fontStyle="normal"

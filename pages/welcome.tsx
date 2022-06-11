@@ -23,7 +23,6 @@ export default function Welcome() {
         paddingTop={'45px'}
       >
         <Box
-          fontFamily={'SpoqaHanSansNeo'}
           fontSize={'32px'}
           fontWeight={500}
           fontStyle={'normal'}
@@ -37,7 +36,6 @@ export default function Welcome() {
         </Box>
         <Box>
           <Span
-            fontFamily={'SpoqaHanSansNeo'}
             fontSize={'22px'}
             fontWeight={500}
             fontStyle={'normal'}
@@ -52,7 +50,6 @@ export default function Welcome() {
           <Box display={'flex'}>
             <MyPageImageAsset width={'103px'} height={'30px'} type={'logo'} />
             <Box
-              fontFamily={'SpoqaHanSansNeo'}
               fontSize={'22px'}
               fontWeight={500}
               fontStyle={'normal'}
@@ -66,7 +63,6 @@ export default function Welcome() {
             </Box>
           </Box>
           <Box
-            fontFamily={'SpoqaHanSansNeo'}
             fontSize={'22px'}
             fontWeight={500}
             fontStyle={'normal'}
@@ -84,7 +80,6 @@ export default function Welcome() {
         textAlign={'center'}
         backgroundColor={theme.colors.lime}
         height={'50px'}
-        fontFamily={'SpoqaHanSansNeo'}
         fontSize={'16px'}
         fontWeight={500}
         fontStyle={'normal'}
