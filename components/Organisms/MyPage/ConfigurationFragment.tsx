@@ -49,7 +49,6 @@ export default function ConfigurationFragment() {
           fontSize="13px"
           paddingY="15px"
           letterSpacing="normal"
-          fontWeight="normal"
           lineHeight={1.54}
           textAlign={'left'}
           color={theme.colors.gray99}

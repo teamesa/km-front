@@ -24,7 +24,6 @@ export default function UpdateInputAlert({ type }: UpdateInputAlertProps) {
       <Box
         marginTop="10px"
         fontSize="12px"
-        fontWeight="normal"
         lineHeight={1.67}
         letterSpacing="normal"
         textAlign="left"
