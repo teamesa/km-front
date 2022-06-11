@@ -26,7 +26,7 @@ export default function ConfigurationFragment() {
           fontSize="15px"
           fontWeight={500}
           lineHeight={1.47}
-          textAlign={'left'}
+          textAlign="left"
           color={theme.colors.black}
           onClick={() => router.push('/mypage/update')}
         >
@@ -37,7 +37,7 @@ export default function ConfigurationFragment() {
           paddingY="15px"
           fontWeight={500}
           lineHeight={1.47}
-          textAlign={'left'}
+          textAlign="left"
           color={theme.colors.black}
           onClick={() => router.push('/api/logout')}
         >
@@ -47,7 +47,7 @@ export default function ConfigurationFragment() {
           fontSize="13px"
           paddingY="15px"
           lineHeight={1.54}
-          textAlign={'left'}
+          textAlign="left"
           color={theme.colors.gray99}
         >
           <ol>

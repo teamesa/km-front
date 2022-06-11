@@ -72,7 +72,7 @@ export default function UpdateInputSet({
       <Box
         fontSize="13px"
         lineHeight={1.54}
-        textAlign={'left'}
+        textAlign="left"
         color={theme.colors.black}
         marginBottom="10px"
       >

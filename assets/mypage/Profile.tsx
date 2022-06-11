@@ -15,7 +15,7 @@ export const Profile = ({ width = '70', height = '70' }) => {
           transform="translate(15 111)"
           fill="#eee"
         />
-        <g data-name="그룹 1524" opacity={'.2'}>
+        <g data-name="그룹 1524" opacity=".2">
           <path
             data-name="패스 1486"
             d="M17.857 7.136A6.636 6.636 0 1 1 11.219.5a6.638 6.638 0 0 1 6.638 6.636z"

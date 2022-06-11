@@ -15,52 +15,52 @@ export default function Welcome() {
   const router = useRouter();
   useInitHeader({ headerLeft: 'disabled', headerRight: 'disabled' });
   return (
-    <Box paddingLeft={'15px'} paddingRight={'15px'}>
+    <Box paddingLeft="15px" paddingRight="15px">
       <Box
         style={{
           height: `calc(100vh - (${HEADER_SPACE}px + ${APP_BAR_SPACE}px + ${LAST_BUTTON}px + var(--platformBottomArea)))`,
         }}
-        paddingTop={'45px'}
+        paddingTop="45px"
       >
         <Box
-          fontSize={'32px'}
+          fontSize="32px"
           fontWeight={500}
           lineHeight={0.94}
-          textAlign={'left'}
+          textAlign="left"
           color={theme.colors.black}
-          marginBottom={'22px'}
+          marginBottom="22px"
         >
           반갑습니다
         </Box>
         <Box>
           <Span
-            fontSize={'22px'}
+            fontSize="22px"
             fontWeight={500}
             lineHeight={1.55}
-            textAlign={'left'}
+            textAlign="left"
             color={theme.colors.black}
-            display={'box'}
+            display="box"
           >
             문화생활 플랫폼
           </Span>
-          <Box display={'flex'}>
-            <MyPageImageAsset width={'103px'} height={'30px'} type={'logo'} />
+          <Box display="flex">
+            <MyPageImageAsset width="103px" height="30px" type="logo" />
             <Box
-              fontSize={'22px'}
+              fontSize="22px"
               fontWeight={500}
               lineHeight={1.55}
-              textAlign={'left'}
+              textAlign="left"
               color={theme.colors.black}
-              paddingLeft={'4px'}
+              paddingLeft="4px"
             >
               에 오신걸
             </Box>
           </Box>
           <Box
-            fontSize={'22px'}
+            fontSize="22px"
             fontWeight={500}
             lineHeight={1.55}
-            textAlign={'left'}
+            textAlign="left"
             color={theme.colors.black}
           >
             환영합니다
@@ -68,16 +68,16 @@ export default function Welcome() {
         </Box>
       </Box>
       <Button
-        width={'100%'}
-        textAlign={'center'}
+        width="100%"
+        textAlign="center"
         backgroundColor={theme.colors.lime}
-        height={'50px'}
-        fontSize={'16px'}
+        height="50px"
+        fontSize="16px"
         fontWeight={500}
         lineHeight={1.5}
         color={theme.colors.black}
-        paddingTop={'15px'}
-        paddingBottom={'14px'}
+        paddingTop="15px"
+        paddingBottom="14px"
         onClick={() => router.push('/')}
       >
         킬로미터 시작하기

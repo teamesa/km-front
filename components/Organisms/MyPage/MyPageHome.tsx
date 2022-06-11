@@ -52,7 +52,7 @@ export default function MyPageHome({ user: { imageUrl, name } }: UserProps) {
             fontSize="19px"
             fontWeight={500}
             lineHeight={1.37}
-            textAlign={'left'}
+            textAlign="left"
             color={theme.colors.black}
           >
             {name}
