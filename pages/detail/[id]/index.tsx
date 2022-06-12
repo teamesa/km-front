@@ -10,6 +10,7 @@ export default function Detail() {
 
   return (
     <Box backgroundColor={theme.colors.grayEE}>
+      <Box height="5px" />
       <ExhibitionImagesSection />
       <Description />
       <Navigator />
