@@ -116,7 +116,9 @@ function HeaderBar() {
               justifyContent="flex-end"
               height="100%"
               alignItems="center"
-              onClick={header.headerEndAction}
+              onClick={() => {
+                router.push('/');
+              }}
             >
               {headerEndIcon[header.headerEnd]}
             </Box>

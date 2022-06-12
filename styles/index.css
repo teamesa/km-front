@@ -116,6 +116,13 @@ button,
 select,
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-decoration: none;
+}
+
+a:link,
+a:visited,
+a:active {
+  color: black;
 }
 
 button {

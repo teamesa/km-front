@@ -1,4 +1,4 @@
-import DetailState from './detail';
+import { DetailState } from './detail';
 import ListState from './list';
 import ResponseState from './response';
 import TestSate from './test';
