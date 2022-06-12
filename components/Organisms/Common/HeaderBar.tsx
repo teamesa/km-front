@@ -91,12 +91,10 @@ function HeaderBar() {
         >
           {header?.title ?? ''}
         </Box>
-        <FlexBox textAlign="end" flex={1}>
+        <FlexBox textAlign="end" justifyContent="end" flex={1}>
           <Box
-            flex={1}
             aria-label="오른쪽 버튼"
             role="button"
-            width="30px"
             marginTop="5px"
             justifyContent="flex-end"
             height="100%"
@@ -107,10 +105,9 @@ function HeaderBar() {
           </Box>
           {header.headerEnd ? (
             <Box
-              flex={1}
+              marginLeft="15px"
               aria-label="끝 버튼"
               role="button"
-              width="30px"
               paddingLeft="5px"
               marginTop="5px"
               justifyContent="flex-end"

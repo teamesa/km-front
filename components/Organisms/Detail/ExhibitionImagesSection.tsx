@@ -9,13 +9,13 @@ export default function ExhibitionImagesSection() {
   const router = useRouter();
   const { id } = router.query;
   const { contents, state } = useRecoilValueLoadable(DetailState(Number(id)));
-  const { summary } = contents;
-  const { thumbnailImageUrl } = summary;
 
   const baseUrl =
     'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg';
   switch (state) {
     case 'hasValue':
+      const { summary } = contents;
+      const { thumbnailImageUrl } = summary;
       return (
         <Box
           position="fixed"
