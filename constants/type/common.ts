@@ -6,9 +6,8 @@ export interface HeaderBarProps {
   /** header 끝 부분을 설정합니다. (기본 : 없음) */
   headerEnd?: 'disabled' | 'home';
   /** header 왼쪽 버튼의 액션을 설정합니다.(기본 : 뒤로가기) */
+  title?: string;
   headerLeftAction?: () => void;
   /** header 오른쪽 버튼의 액션을 설정합니다. (기본 : 없음)*/
   headerRightAction?: () => void;
-  /** header 끝 버튼의 액션을 설정합니다. (기본 : 없음)*/
-  headerEndAction?: () => void;
 }

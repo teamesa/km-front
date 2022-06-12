@@ -3,6 +3,7 @@ import Image from 'next/image';
 import apple from 'assets/mypage/apple.png';
 import logo from 'assets/mypage/logo.png';
 import naver from 'assets/mypage/naver.png';
+import { Profile } from 'assets/mypage/Profile';
 import { Box } from 'components/Atoms';
 
 interface MyPageImageAssetProps {
@@ -12,12 +13,12 @@ interface MyPageImageAssetProps {
   height: number | string;
 }
 
-export function MyPageImageAsset({
+const MyPageImageAsset = ({
   type,
   marginBottom,
   width,
   height,
-}: MyPageImageAssetProps) {
+}: MyPageImageAssetProps) => {
   return (
     <Box marginBottom={marginBottom ?? 0} width={width} height={height}>
       <Image
@@ -27,4 +28,5 @@ export function MyPageImageAsset({
       ></Image>
     </Box>
   );
-}
+};
+export { MyPageImageAsset, Profile };

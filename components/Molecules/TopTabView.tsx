@@ -5,28 +5,34 @@ import SwipeableViews from 'react-swipeable-views';
 import { Box } from 'components/Atoms';
 import Archive from 'components/Organisms/Detail/Description/Archive';
 import Introduce from 'components/Organisms/Detail/Description/Introduce';
+import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
+import MyArchiveListFragment from 'components/Organisms/MyPage/MyArchiveListFragment';
 import theme from 'styles/theme';
 
 interface TopTabViewProps {
   data: {
     /** 탭 상단 제목 */
-    title: string;
+    title?: string | null;
     /** 내용에 들어가는 children (JSX) */
     children?: JSX.Element | JSX.Element[];
-    contents: any;
+    contents?: any;
   }[];
+  minusHeight?: number;
 }
 
 const ANCHOR_SECTION = 45 + 55;
 
-export default function TopTabView({ data }: TopTabViewProps) {
+export default function TopTabView({
+  data,
+  minusHeight = ANCHOR_SECTION,
+}: TopTabViewProps) {
   const [index, setIndex] = useState(0);
   const [headerSize, setHeaderSize] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (ref.current?.offsetHeight) {
-      setHeaderSize(ref.current.offsetHeight + ANCHOR_SECTION);
+      setHeaderSize(ref.current.offsetHeight + minusHeight);
     }
   }, [ref]);
 
@@ -82,8 +88,14 @@ export default function TopTabView({ data }: TopTabViewProps) {
         {data.map((item) =>
           item.title === '아카이브' ? (
             <Archive data={item.contents ?? ''} />
-          ) : (
+          ) : item.title === '소개' ? (
             <Introduce data={item.contents ?? ''} />
+          ) : item.title === 'MY 아카이브' ? (
+            <MyArchiveListFragment />
+          ) : item.title === '설정' ? (
+            <ConfigurationFragment />
+          ) : (
+            <div></div>
           ),
         )}
       </SwipeableViews>

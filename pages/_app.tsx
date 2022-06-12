@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       <RecoilRoot>
         <GlobalStyles />
-        <Suspense fallback={'Loading...'}>
+        <Suspense fallback="Loading...">
           <Container>
             <Component {...pageProps} />
           </Container>

@@ -52,6 +52,7 @@ app.prepare().then(() => {
   server.use(express.urlencoded({ extended: true }));
 
   server.get('/api/login', (req, res) => {
+    res.clearCookie('kilometer_session');
     const serverUrl = process.env.BACK_URL;
     const frontDomain = process.env.FRONT_URL;
     const redirectUrl = '/mypage';
