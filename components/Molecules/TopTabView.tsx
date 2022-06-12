@@ -79,10 +79,8 @@ export default function TopTabView({
         }}
         style={{
           background: `${theme.colors.white}`,
-        }}
-        containerStyle={{
-          height: `calc(100vh - ${headerSize}px`,
           width: '100%',
+          height: `calc(100vh - ${headerSize}px`,
         }}
       >
         {data.map((item) =>
