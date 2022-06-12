@@ -89,7 +89,7 @@ function HeaderBar() {
           fontWeight={500}
           lineHeight={1.5}
         >
-          {header.title}
+          {header?.title ?? ''}
         </Box>
         <FlexBox textAlign="end" flex={1}>
           <Box
