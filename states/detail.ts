@@ -4,7 +4,7 @@ import { selectorFamily } from 'recoil';
 import { noIntroData } from 'components/Organisms/Detail/data';
 import customAxios from 'utils/hooks/customAxios';
 
-type TGetSummary = {
+export type TGetSummary = {
   feeType: string;
   homePageUrl: string;
   lat: number;
@@ -22,6 +22,11 @@ type TGetSummary = {
 type TGetIntroduction = {
   photo: string[] | [];
   summary: string | null;
+};
+
+type TabViewData = {
+  title?: string | null;
+  contents: any;
 };
 
 const axios = customAxios();
@@ -54,7 +59,7 @@ export const DetailState = selectorFamily({
     const introduction = await getIntroduction({ itemId: itemId });
     const archive = await getArchive({ itemId: itemId });
 
-    const tabViewData =
+    const tabViewData: Array<TabViewData> =
       introduction.summary === null
         ? [{ ...archive }]
         : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
