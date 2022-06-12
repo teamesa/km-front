@@ -110,6 +110,10 @@ export default function UpdateInputSet({
       ) : (
         <Input
           placeholder="입력해주세요"
+          paddingX="15px"
+          paddingY="12px"
+          width="100%"
+          border={`solid 1px ${theme.colors.grayDD}`}
           type={getInputType(type)}
           value={value}
           onChange={(e) =>
