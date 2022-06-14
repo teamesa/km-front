@@ -16,6 +16,7 @@ export interface User {
   imageUrl: string;
   birthdate: number;
   isLogin: boolean;
+  phoneNumber: string;
 }
 
 export const useUserProps: GetServerSideProps<UserProps | URLProps> = async (
@@ -30,6 +31,7 @@ export const useUserProps: GetServerSideProps<UserProps | URLProps> = async (
     gender: '',
     imageUrl: '',
     birthdate: 0,
+    phoneNumber: '',
     isLogin: false,
   };
 
@@ -44,6 +46,7 @@ export const useUserProps: GetServerSideProps<UserProps | URLProps> = async (
       user.gender = decodeData.gender;
       user.imageUrl = decodeData.imageUrl;
       user.birthdate = decodeData.birthdate;
+      user.phoneNumber = decodeData.phoneNumber;
       user.isLogin = true;
     } catch (err) {
       console.log(err);
