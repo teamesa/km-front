@@ -1,8 +1,10 @@
+import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { FlexBox, Tag } from 'components/Atoms';
-import { FilterState } from 'states';
+import { Box, FlexBox, Tag } from 'components/Atoms';
+import { FilterOptions, ListState } from 'states';
+import { getList } from 'states/list';
 import theme from 'styles/theme';
 
 export default function ListCategory({
@@ -11,31 +13,22 @@ export default function ListCategory({
   data: { label: string; value: string }[];
 }) {
   const router = useRouter();
-  const { filter = '' } = router.query;
-  const [testData, setTestData] = useRecoilState(FilterState);
- 
+  const [filterOptions, setFilterOptions] = useRecoilState(FilterOptions);
+  const setListData = useSetRecoilState(ListState);
+  const filter = filterOptions.exhibitionType;
 
-  const test = {
-    filterOptions: {
-      
-      feeTypes: ['FREE'],
-      progressTypes: ['ON'],
-      regionTypes: ['SEOUL'],
-    },
-    queryString: '',
+  const setCategoryList = async (value: string) => {
+    const newFilterOpions = {
+      ...filterOptions,
+      exhibitionType: value,
+    };
+    setFilterOptions(newFilterOpions);
+    const data = await getList(newFilterOpions);
+    setListData(data);
   };
 
-  setTestData({ ...test ,  filterOptions.exhibitionType: 'EXHIBITION'});
-  console.log('ttt', testData);
-
   return (
-    <FlexBox
-      padding="14px 0"
-      overflow="auto"
-      width="auto"
-      role="tablist"
-      background="white"
-    >
+    <>
       {data.map(({ label, value }, index) => (
         <Tag
           key={index}
@@ -45,19 +38,18 @@ export default function ListCategory({
               : `${theme.colors.gray99}`
           }
           fontSize="13px !important"
+          lineHeight="45px !important"
           marginRight="15px"
           onClick={() => {
-            router.push({
-              pathname: router.pathname,
-              query: {
-                filter: value,
-              },
-            });
+            setCategoryList(value);
           }}
+          css={css`
+            cursor: pointer;
+          `}
         >
           {label}
         </Tag>
       ))}
-    </FlexBox>
+    </>
   );
 }

@@ -1,49 +1,23 @@
-import { AxiosResponse } from 'axios';
-import { atom, selector, selectorFamily } from 'recoil';
+import { atom } from 'recoil';
 
-import customAxios from 'utils/hooks/customAxios';
+export type TPostFilter = {
+  filterOptions: filterOptionsInterface;
+  queryString: '';
+};
 
-type TPostCategory = {
+export type filterOptionsInterface = {
   exhibitionType: string;
+  feeTypes: string[] | [];
+  progressTypes: string[] | [];
+  regionTypes: string[] | [];
 };
 
-const axios = customAxios();
-
-export async function postCategory({ exhibitionType }: any) {
-  // const type = props.exhibitionType;
-
-  const { data } = await axios({
-    url: `/api/search`,
-    method: 'POST',
-    data: exhibitionType,
-  });
-
-  console.log('data', data);
-  return data;
-}
-
-const tempData = {
-  // filterOptions: {
-  //   exhibitionType: 'EXHIBITION',
-  //   feeTypes: ['FREE'],
-  //   progressTypes: ['ON'],
-  //   regionTypes: ['SEOUL'],
-  // },
-  queryString: '',
-  requestPagingStatus: {
-    currentContentsCount: 0,
-    pageNumber: 0,
-    pageSize: 10,
-  },
-  searchSortType: 'END_DATE_ASC',
-};
-
-export const FilterState = selector({
+export const FilterOptions = atom<filterOptionsInterface>({
   key: 'FilterState',
-  get: async () => {
-    const category = await postCategory({ exhibitionType: tempData });
-    return {
-      category,
-    };
+  default: {
+    exhibitionType: '',
+    feeTypes: [],
+    progressTypes: [],
+    regionTypes: [],
   },
 });

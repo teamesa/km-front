@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { atom, selector } from 'recoil';
 
-import { FilterState } from 'states/filter';
+import { filterOptionsInterface } from 'states/filter';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TPostList = {
@@ -57,26 +57,34 @@ export type PresentationlistItemAdditionalInfo = {
   archiveCount: number | null;
 };
 
+export const getList = async ({ exhibitionType }: filterOptionsInterface) => {
+  const axios = customAxios();
+  const { data } = (await axios({
+    url: `/api/search`,
+    method: 'POST',
+    data: {
+      exhibitionType: exhibitionType,
+      requestPagingStatus: {
+        currentContentsCount: 0,
+        pageNumber: 0,
+        pageSize: 100,
+      },
+      searchSortType: 'ENROLL_DESC',
+    },
+  })) as AxiosResponse<TPostList>;
+  return data;
+};
+
 export default atom({
   key: 'ListState',
   default: selector({
     key: 'ListState/default',
-    get: async ({ get }) => {
-      const axios = customAxios();
-      const { data } = (await axios({
-        url: `/api/search`,
-        method: 'POST',
-        data: {
-          requestPagingStatus: {
-            currentContentsCount: 0,
-            pageNumber: 0,
-            pageSize: 100,
-          },
-          searchSortType: 'END_DATE_ASC',
-        },
-      })) as AxiosResponse<TPostList>;
-      // const filterList = get(FilterState);
-      return data;
-    },
+    get: () =>
+      getList({
+        exhibitionType: '',
+        feeTypes: [],
+        progressTypes: [],
+        regionTypes: [],
+      }),
   }),
 });

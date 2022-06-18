@@ -50,10 +50,10 @@ const Home: NextPage = () => {
       <ListCategory
         data={[
           { label: 'ALL', value: '' },
-          { label: '전시회', value: 'exhibition' },
-          { label: '콘서트', value: 'concert' },
-          { label: '뮤지컬', value: 'musical' },
-          { label: '뮤직페스티벌', value: 'musicFestival' },
+          { label: '전시회', value: 'EXHIBITION' },
+          { label: '콘서트', value: 'CONCERT' },
+          { label: '뮤지컬', value: 'MUSICAL' },
+          { label: '뮤직페스티벌', value: 'FESTIVAL' },
         ]}
       />
       <Layout>
