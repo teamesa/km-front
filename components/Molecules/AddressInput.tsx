@@ -34,7 +34,7 @@ export default function AddressInput({
                 payload: {
                   onChange: (e: any) => {
                     onChange && onChange(e);
-                    _onChange(e.road_address_name || e.address_name);
+                    _onChange(e.place_name);
                   },
                 },
               })

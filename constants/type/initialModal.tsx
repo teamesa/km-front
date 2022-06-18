@@ -5,7 +5,7 @@ import Select from 'components/Organisms/Modal/Select';
 export const ModalComponents = (payload?: any) => ({
   Select: <Select payload={payload} />,
   Filter: <Filter payload={payload} />,
-  SearchMap: <SearchMap />,
+  SearchMap: <SearchMap payload={payload} />,
 });
 
 export const modal = ModalComponents();

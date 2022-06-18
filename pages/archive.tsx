@@ -2,7 +2,6 @@ import { Box, Layout } from 'components/Atoms';
 import ExhibitionTitle from 'components/Organisms/Archive/ExhibitionTitle';
 import Rating from 'components/Organisms/Archive/Rating';
 import Write from 'components/Organisms/Archive/Write';
-import theme from 'styles/theme';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function Archive() {
@@ -16,8 +15,6 @@ export default function Archive() {
     <Layout>
       <ExhibitionTitle />
       <Rating />
-      <Box marginTop="30px" />
-      <Box height="1px" backgroundColor={theme.colors.grayEE} />
       <Write />
     </Layout>
   );

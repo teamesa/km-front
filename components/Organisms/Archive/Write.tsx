@@ -1,4 +1,6 @@
+import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Plus } from 'assets/archive/Plus';
@@ -12,6 +14,7 @@ import {
 } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
+import { ArchiveWirteState } from 'states';
 import theme from 'styles/theme';
 
 interface ArchiveWirteProps {
@@ -22,19 +25,30 @@ interface ArchiveWirteProps {
   placeInfos: {
     address: string;
     name: string;
-    placeType: string;
+    placeType: 'FOOD' | 'CAFE';
     roadAddress: string;
   }[];
+  food: string;
+  cafe: string;
   visibleAtItem: boolean;
 }
 
 export default function Write() {
+  const router = useRouter();
+  const [achiveWirte, setArchiveWirte] = useRecoilState(ArchiveWirteState);
+
   const { register, handleSubmit, formState, control } =
     useForm<ArchiveWirteProps>({
       mode: 'onChange',
     });
+
+  const onSubmit = (data: ArchiveWirteProps) => {
+    setArchiveWirte(data);
+    router.push('/');
+  };
+
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <Box paddingTop="30px">코멘트 & 사진</Box>
       <Box paddingTop="10px">
         <TextArea
@@ -43,6 +57,7 @@ export default function Write() {
           overflow="scroll"
           backgroundColor={theme.colors.grayF8}
           placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
+          {...register('comment')}
         />
         <Button paddingTop="20px">
           <Box
@@ -59,21 +74,15 @@ export default function Write() {
         <Box height="1px" backgroundColor={theme.colors.grayEE} />
         <FlexBox marginTop="30px">
           <MapPoint />
-          <Box marginLeft="10px">근처 다녀온 맛집</Box>
+          <Box marginLeft="10px" fontSize="13px">
+            근처 다녀온 맛집
+          </Box>
         </FlexBox>
         <Button marginTop="10px" width="100%">
           <FlexBox>
             <Box flex={1.5}>
-              <AddressInput name="placeInfos" control={control} />
+              <AddressInput name="food" control={control} />
             </Box>
-            {/* <Input
-              readOnly
-              padding="12px 15px"
-              border={`1px solid ${theme.colors.grayBB}`}
-              backgroundColor={theme.colors.white}
-              placeholder="장소찾기를 선택해 추가해주세요."
-             
-            /> */}
             <Box
               padding="13px 23px 12px"
               color={theme.colors.white}
@@ -89,17 +98,15 @@ export default function Write() {
         </Button>
         <FlexBox marginTop="20px">
           <MapPoint />
-          <Box marginLeft="10px">근처 다녀온 카페</Box>
+          <Box marginLeft="10px" fontSize="13px">
+            근처 다녀온 카페
+          </Box>
         </FlexBox>
         <Button marginTop="10px" width="100%">
           <FlexBox>
-            <Input
-              padding="12px 15px"
-              border={`1px solid ${theme.colors.grayBB}`}
-              backgroundColor={theme.colors.white}
-              placeholder="장소찾기를 선택해 추가해주세요."
-              flex={1.5}
-            />
+            <Box flex={1.5}>
+              <AddressInput name="cafe" control={control} />
+            </Box>
             <Box
               padding="13px 23px 12px"
               color={theme.colors.white}
@@ -117,12 +124,6 @@ export default function Write() {
         <Box height="1px" backgroundColor={theme.colors.grayEE} />
         <Box marginTop="30px" />
         <FlexBox>
-          {/* <Input
-            type="checkbox"
-            width="20px"
-            height="20px"
-            backgroundColor={theme.colors.grayEE}
-          /> */}
           <RadioLabel>
             <FlexBox>
               <CheckBox
@@ -148,6 +149,7 @@ export default function Write() {
             padding="15px 65px"
             width="100%"
             height="50px"
+            onClick={() => router.push('/')}
           >
             취소
           </Button>
@@ -159,11 +161,13 @@ export default function Write() {
             padding="15px 65px"
             width="100%"
             height="50px"
+            onClick={handleSubmit(onSubmit)}
+            disabled={!formState.isValid}
           >
             등록
           </Button>
         </Box>
       </FlexBox>
-    </>
+    </form>
   );
 }
