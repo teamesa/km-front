@@ -169,10 +169,13 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-input {
+input,
+textarea {
   border: none;
   border-radius: 0;
   box-shadow: none;
+  color: var(--black);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 input:focus,
 textarea:focus {
