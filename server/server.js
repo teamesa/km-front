@@ -40,7 +40,7 @@ const proxyLogic = async (req, res) => {
     }
   } catch (err) {
     console.log(err.response.data);
-    res.json({});
+    res.status(err.response.status).send({});
   }
 };
 
@@ -52,12 +52,19 @@ app.prepare().then(() => {
   server.use(express.urlencoded({ extended: true }));
 
   server.get('/api/login', (req, res) => {
+    res.clearCookie('kilometer_session');
     const serverUrl = process.env.BACK_URL;
     const frontDomain = process.env.FRONT_URL;
-    const redirectUrl = '/';
+    const redirectUrl = '/mypage';
 
     const finalRedirected = `${serverUrl}/oauth2/authorization/naver?redirect_uri=${frontDomain}/api/login/sucess?redirect_uri=${redirectUrl}`;
+    console.log(finalRedirected);
     res.redirect(finalRedirected);
+  });
+
+  server.get('/api/logout', (req, res) => {
+    res.clearCookie('kilometer_session');
+    res.redirect('/');
   });
 
   server.get('/api/login/sucess', (req, res) => {
@@ -66,8 +73,9 @@ app.prepare().then(() => {
       maxAge: 1000 * 60 * 60 * 24 * 365,
       httpOnly: true,
     });
-    req.res.redirect(req.query.redirect_uri);
+    res.redirect(req.query.redirect_uri);
   });
+
   server.all('/hello-example', proxyLogic);
   server.all('/api/*', proxyLogic);
 
