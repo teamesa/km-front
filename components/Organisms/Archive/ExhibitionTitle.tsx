@@ -7,7 +7,7 @@ export default function ExhibitionTitle() {
     'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg';
 
   return (
-    <FlexBox marginTop="48px">
+    <FlexBox marginTop="48px" paddingBottom="20px">
       <Image
         src={!imageData ? basiceImage : imageData}
         alt="image"

@@ -108,12 +108,7 @@ export default function SearchMap({
                 >
                   <Box fontSize="14px" padding="12px 0">
                     <Layout>
-                      <Box
-                        fontWeight={600}
-                        fontSize="17px"
-                        color="var(--primary-400)"
-                        marginBottom="4px"
-                      >
+                      <Box fontWeight={600} fontSize="17px" marginBottom="4px">
                         {item.place_name}
                       </Box>
                       <Box marginBottom="6px" fontSize="14px">

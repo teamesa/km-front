@@ -1,7 +1,5 @@
 import { Box, Layout } from 'components/Atoms';
-import ExhibitionTitle from 'components/Organisms/Archive/ExhibitionTitle';
-import Rating from 'components/Organisms/Archive/Rating';
-import Write from 'components/Organisms/Archive/Write';
+import Record from 'components/Organisms/Archive/Record';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function Archive() {
@@ -13,9 +11,8 @@ export default function Archive() {
 
   return (
     <Layout>
-      <ExhibitionTitle />
-      <Rating />
-      <Write />
+      <Record />
+      <Box height="60px" />
     </Layout>
   );
 }

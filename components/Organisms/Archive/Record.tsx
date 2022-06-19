@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 
@@ -14,6 +15,9 @@ import {
 } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
+import ExhibitionTitle from 'components/Organisms/Archive/ExhibitionTitle';
+import Rating from 'components/Organisms/Archive/Rating';
+import SearchTitle from 'components/Organisms/Archive/SearchTitle';
 import { ArchiveWirteState } from 'states';
 import theme from 'styles/theme';
 
@@ -33,22 +37,30 @@ interface ArchiveWirteProps {
   visibleAtItem: boolean;
 }
 
-export default function Write() {
+export default function Record() {
   const router = useRouter();
+  const { title } = router.query;
   const [achiveWirte, setArchiveWirte] = useRecoilState(ArchiveWirteState);
-
   const { register, handleSubmit, formState, control } =
     useForm<ArchiveWirteProps>({
       mode: 'onChange',
     });
 
-  const onSubmit = (data: ArchiveWirteProps) => {
+  const onSubmit = (data: any) => {
     setArchiveWirte(data);
-    router.push('/');
+    console.log('achiveWirte', achiveWirte);
+    // router.push('/');
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {title === 'true' ? <ExhibitionTitle /> : <SearchTitle />}
+      <Box textAlign="center" fontSize="18px">
+        <Box>이 문화생활, 어땠나요?</Box>
+        <Box marginTop="16px">
+          <Rating name="starRating" control={control} />
+        </Box>
+      </Box>
       <Box paddingTop="30px">코멘트 & 사진</Box>
       <Box paddingTop="10px">
         <TextArea
@@ -81,7 +93,7 @@ export default function Write() {
         <Button marginTop="10px" width="100%">
           <FlexBox>
             <Box flex={1.5}>
-              <AddressInput name="food" control={control} />
+              <AddressInput name={`placeInfos.[0].name`} control={control} />
             </Box>
             <Box
               padding="13px 23px 12px"
@@ -105,7 +117,7 @@ export default function Write() {
         <Button marginTop="10px" width="100%">
           <FlexBox>
             <Box flex={1.5}>
-              <AddressInput name="cafe" control={control} />
+              <AddressInput name={`placeInfos.[1].name`} control={control} />
             </Box>
             <Box
               padding="13px 23px 12px"
@@ -128,7 +140,7 @@ export default function Write() {
             <FlexBox>
               <CheckBox
                 type="checkbox"
-                {...register('visibleAtItem', { required: true })}
+                {...register('visibleAtItem', { required: false })}
               />
               <Box margin="3px 10px" fontSize="12px">
                 다른 사람도 보여주기
@@ -162,7 +174,6 @@ export default function Write() {
             width="100%"
             height="50px"
             onClick={handleSubmit(onSubmit)}
-            disabled={!formState.isValid}
           >
             등록
           </Button>

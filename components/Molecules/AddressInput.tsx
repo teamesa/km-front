@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Button, Input } from 'components/Atoms';
 import theme from 'styles/theme';
-import changeColorSVG from 'utils/changeColorSVG';
 import { useModal } from 'utils/hooks/useModal';
 
 export default function AddressInput({
@@ -10,12 +10,11 @@ export default function AddressInput({
   control,
   onChange,
 }: {
-  name: string;
-  control?: any;
+  name: any;
+  control: any;
   onChange?: (e: any) => void;
 }) {
   const { onModal } = useModal();
-
   return (
     <Controller
       name={name}

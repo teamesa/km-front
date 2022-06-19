@@ -5,7 +5,7 @@ import theme from 'styles/theme';
 
 function StarCheck({ currentStep }: { currentStep: number }) {
   return (
-    <FlexBox>
+    <FlexBox justifyContent="center">
       {[...Array(5)].map((_, index) => {
         const count = index + 1;
         return (
