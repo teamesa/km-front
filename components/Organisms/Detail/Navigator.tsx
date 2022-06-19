@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
@@ -7,6 +8,7 @@ import { Z_INDEX } from 'constants/common';
 import theme from 'styles/theme';
 
 export default function Navigator() {
+  const router = useRouter();
   const [currentUrl, setCurrentUrl] = useState('');
 
   useEffect(() => {
@@ -60,6 +62,12 @@ export default function Navigator() {
           fontWeight={500}
           textAlign="left"
           color={theme.colors.lime}
+          onClick={() => {
+            router.push({
+              pathname: '/archive',
+              query: { title: true },
+            });
+          }}
         >
           아카이브 기록하기
         </Button>
