@@ -1,8 +1,8 @@
 import { Box } from 'components/Atoms';
-import ItemAdditionalInfo from 'components/Organisms/List/ListItme/ItemAdditionalInfo';
-import ItemHeart from 'components/Organisms/List/ListItme/ItemHeart';
-import ItemImage from 'components/Organisms/List/ListItme/ItemImage';
-import ItemInfo from 'components/Organisms/List/ListItme/ItemInfo';
+import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditionalInfo';
+import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
+import ItemImage from 'components/Organisms/List/ListItem/ItemImage';
+import ItemInfo from 'components/Organisms/List/ListItem/ItemInfo';
 import type { ListPageContents } from 'states/list';
 
 interface ItemProps {
