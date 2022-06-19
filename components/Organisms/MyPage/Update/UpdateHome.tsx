@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import { Box } from 'components/Atoms';
@@ -8,7 +9,7 @@ import { UserProps } from 'utils/authentication/useUser';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function UpdateHome({
-  user: { name, phoneNumber, birthdate, gender, email },
+  user: { id, name, phoneNumber, birthdate, gender, email },
 }: UserProps) {
   useInitHeader({
     headerLeft: 'default',
@@ -17,16 +18,20 @@ export default function UpdateHome({
   });
   const setModifiedUserInfo = useSetRecoilState(UserModifyInfo);
 
-  const birthDayFormat = new Date(birthdate).toISOString().substring(0, 10);
   const phoneNumberFormat = phoneNumber.replaceAll('-', '');
 
-  setModifiedUserInfo({
-    name,
-    email,
-    birthDay: birthDayFormat,
-    phoneNumber: phoneNumberFormat,
-    gender,
-  });
+  useEffect(
+    () =>
+      setModifiedUserInfo({
+        id,
+        name,
+        email,
+        birthDay: birthdate,
+        phoneNumber: phoneNumberFormat,
+        gender,
+      }),
+    [],
+  );
 
   return (
     <Box paddingX="15px">

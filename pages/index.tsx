@@ -8,7 +8,6 @@ import ListFilter from 'components/Molecules/ListFilter';
 import ListCategory from 'components/Organisms/List/ListCategory';
 import { ResponseState, TestSate } from 'states';
 import theme from 'styles/theme';
-import { useUserProps } from 'utils/authentication/useUser';
 import customAxios from 'utils/hooks/customAxios';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
@@ -98,5 +97,4 @@ const Home: NextPage = () => {
   );
 };
 
-export const getServerSideProps = useUserProps;
 export default Home;

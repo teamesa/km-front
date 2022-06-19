@@ -17,6 +17,9 @@ const payloadString = (payload) =>
     .join('&');
 
 const proxyLogic = async (req, res) => {
+  const token =
+    req?.cookies?.kilometer_session ?? req?.headers?.authorization ?? null;
+
   try {
     const request = await axios({
       url: `${process.env.BACK_URL}${req.path}${
@@ -26,9 +29,7 @@ const proxyLogic = async (req, res) => {
       data: req.body,
       query: req.query,
       headers: {
-        Authorization: req?.cookies?.kilometer_session
-          ? `Bearer ${req.cookies?.kilometer_session}`
-          : null,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -39,8 +40,12 @@ const proxyLogic = async (req, res) => {
       res.json({});
     }
   } catch (err) {
-    console.log(err.response.data);
-    res.status(err.response.status).send({});
+    if (err.response.status === 400) {
+      res.status(err.response.status).send(err.response.data);
+    } else {
+      console.log(err);
+      res.status(err.response.status).send({});
+    }
   }
 };
 
