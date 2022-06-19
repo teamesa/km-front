@@ -7,9 +7,12 @@ const theme = {
     gray99: '#999999',
     grayEE: '#eeeeee',
     grayDD: '#dddddd',
+    grayBB: '#bbbbbb',
     grayF8: '#f8f8f8',
     grayE9: '#e9e9e9',
     gray66: '#666666',
+    gray77: '#777',
+    grayAA: '#aaaaaa',
   },
 };
 
