@@ -70,7 +70,6 @@ export default function UpdateButton() {
       } catch (error) {
         if (axios.isAxiosError(error)) {
           const serverError = error?.response?.data as UserModifyAlertInterface;
-          console.log(serverError);
           setUserModifyError(serverError);
           return;
         }
