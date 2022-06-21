@@ -52,7 +52,7 @@ export default function ItemHeart(props: HeartProps) {
   };
 
   return (
-    <Button position="absolute" right="0px" top="10px" onClick={setToPick}>
+    <Button position="absolute" right="0px" onClick={setToPick}>
       <NavWish
         width="17"
         height="16"

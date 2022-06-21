@@ -17,6 +17,7 @@ export default function ItemImage(props: ImagePorps) {
     <>
       <Box
         position="relative"
+        margin="0 -15px"
         css={css`
           cursor: pointer;
         `}

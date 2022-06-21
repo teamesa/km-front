@@ -12,7 +12,6 @@ export default function ListCategory({
 }: {
   data: { label: string; value: string }[];
 }) {
-  const router = useRouter();
   const [filterOptions, setFilterOptions] = useRecoilState(FilterOptions);
   const setListData = useSetRecoilState(ListState);
   const filter = filterOptions.exhibitionType;

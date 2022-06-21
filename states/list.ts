@@ -63,7 +63,12 @@ export const getList = async ({ exhibitionType }: filterOptionsInterface) => {
     url: `/api/search`,
     method: 'POST',
     data: {
-      exhibitionType: exhibitionType,
+      filterOptions: {
+        exhibitionType: exhibitionType,
+        feeTypes: [],
+        progressTypes: [],
+        regionTypes: [],
+      },
       requestPagingStatus: {
         currentContentsCount: 0,
         pageNumber: 0,
@@ -81,7 +86,7 @@ export default atom({
     key: 'ListState/default',
     get: () =>
       getList({
-        exhibitionType: '',
+        exhibitionType: 'ALL',
         feeTypes: [],
         progressTypes: [],
         regionTypes: [],

@@ -15,7 +15,7 @@ export type filterOptionsInterface = {
 export const FilterOptions = atom<filterOptionsInterface>({
   key: 'FilterState',
   default: {
-    exhibitionType: '',
+    exhibitionType: 'ALL',
     feeTypes: [],
     progressTypes: [],
     regionTypes: [],

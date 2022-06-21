@@ -30,7 +30,7 @@ export default function List() {
           >
             <ListCategory
               data={[
-                { label: 'ALL', value: '' },
+                { label: 'ALL', value: 'ALL' },
                 { label: '전시회', value: 'EXHIBITION' },
                 { label: '콘서트', value: 'CONCERT' },
                 { label: '뮤지컬', value: 'MUSICAL' },
@@ -48,7 +48,7 @@ export default function List() {
           </Box>
         </FlexBox>
       </Box>
-      <Layout marginBottom="120px">
+      <Layout padding="0px 15px !important" marginBottom="120px">
         <ListSection />
       </Layout>
     </>
