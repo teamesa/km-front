@@ -10,13 +10,13 @@ import theme from 'styles/theme';
 export default function Navigator() {
   const router = useRouter();
   const [currentUrl, setCurrentUrl] = useState('');
+  const { id } = router.query;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setCurrentUrl(window.location.href);
     }
   }, []);
-
   return (
     <Box
       zIndex={Z_INDEX.SKY}
@@ -65,7 +65,7 @@ export default function Navigator() {
           onClick={() => {
             router.push({
               pathname: '/archive',
-              query: { title: true },
+              query: { id: id, title: true },
             });
           }}
         >
