@@ -6,7 +6,7 @@ import { Box } from 'components/Atoms';
 import Archive from 'components/Organisms/Detail/Description/Archive';
 import Introduce from 'components/Organisms/Detail/Description/Introduce';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
-import MyArchiveListFragment from 'components/Organisms/MyPage/MyArchiveListFragment';
+import MyArchiveListFragment from 'components/Organisms/MyPage/Archive/MyArchiveListFragment';
 import theme from 'styles/theme';
 
 interface TopTabViewProps {
@@ -89,7 +89,24 @@ export default function TopTabView({
           ) : item.title === '소개' ? (
             <Introduce data={item.contents ?? ''} />
           ) : item.title === 'MY 아카이브' ? (
-            <MyArchiveListFragment />
+            <>
+              <Box
+                display="block"
+                flex-wrap="nowrap"
+                overflow="initial"
+                position="fixed"
+                bottom="50px"
+                right="10px"
+              >
+                <Box
+                  width="50px"
+                  height="50px"
+                  borderRadius="50px"
+                  backgroundColor={theme.colors.black}
+                />
+              </Box>
+              <MyArchiveListFragment />
+            </>
           ) : item.title === '설정' ? (
             <ConfigurationFragment />
           ) : (

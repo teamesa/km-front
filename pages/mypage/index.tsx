@@ -7,11 +7,12 @@ import { useUserProps, UserProps } from 'utils/authentication/useUser';
 // 임시 페이지 입니다.
 
 const MyPage: NextPage<UserProps> = ({ user }) => {
-  if (user.isLogin) {
-    return <MyPageHome user={user} />;
-  } else {
-    return <LoginPage />;
-  }
+  // if (user.isLogin) {
+  //   return <MyPageHome user={user} />;
+  // } else {
+  //   return <LoginPage />;
+  // }
+  return <MyPageHome user={user} />;
 };
 
 export const getServerSideProps = useUserProps;
