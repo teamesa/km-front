@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import noImage from 'assets/common/no_image_375x250.png';
 import { Box } from 'components/Atoms';
 import type { PresentationImage } from 'states/list';
 import theme from 'styles/theme';
@@ -53,11 +54,7 @@ export default function ItemImage(props: ImagePorps) {
           ''
         )}
         <Image
-          src={
-            !presentationImage.url
-              ? 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-              : presentationImage.url
-          }
+          src={!presentationImage.url ? noImage : presentationImage.url}
           alt="image"
           width="375"
           height="250"
