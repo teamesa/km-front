@@ -1,15 +1,19 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import { Box, FlexBox } from 'components/Atoms';
+
 export default function ExhibitionTitle() {
+  const router = useRouter();
   const imageData = null;
-  const basiceImage =
+  const { id } = router.query;
+  const basicImage =
     'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg';
 
   return (
     <FlexBox marginTop="48px" paddingBottom="20px">
       <Image
-        src={!imageData ? basiceImage : imageData}
+        src={!imageData ? basicImage : imageData}
         alt="image"
         width="48px"
         height="64px"

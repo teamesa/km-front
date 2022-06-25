@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Box, FlexBox, Tag } from 'components/Atoms';
-import { FilterOptions, ListState } from 'states';
+import { ListState } from 'states';
 import { searchRequest } from 'states/filter';
 import { getList } from 'states/list';
 import theme from 'styles/theme';

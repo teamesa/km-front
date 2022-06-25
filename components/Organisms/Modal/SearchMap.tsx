@@ -3,7 +3,9 @@ import 'react-kakao-maps-sdk';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { Close } from 'assets/archive/Close';
 import { Box, Button, FlexBox, Span, Input, Layout } from 'components/Atoms';
+import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
 interface MapType {
@@ -23,9 +25,11 @@ interface MapType {
 }
 function SearchMapManual() {
   return (
-    <Layout fontSize="13px" marginTop="24px">
+    <Layout fontSize="13px">
       <Box fontWeight={500}>TIP</Box>
-      <Box marginTop="28px">해당 장소의 정확한 상호명으로 검색해주세요</Box>
+      <Box marginTop="10px" color={theme.colors.gray77}>
+        해당 장소의 정확한 상호명으로 검색해주세요
+      </Box>
     </Layout>
   );
 }
@@ -57,41 +61,51 @@ export default function SearchMap({
     <FlexBox
       position="absolute"
       width="100%"
-      height="80vh"
+      height="652px"
       bottom="0px"
       background="white"
       overflow="auto"
       flexDirection="column"
     >
-      <FlexBox padding="15px" justifyContent="space-between">
-        <Box fontWeight={800}>다녀온 장소 찾기</Box>
+      <FlexBox
+        padding="20px 15px"
+        justifyContent="space-between"
+        borderBottom={`1px solid ${theme.colors.grayEE}`}
+      >
+        <Box fontWeight={500}>다녀온 장소 찾기</Box>
         <Box
           onClick={() => {
             offModal();
           }}
         >
-          닫기
+          <Close />
         </Box>
       </FlexBox>
       <Layout>
         <Box margin="4px 0 8px" position="relative">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              placeholder="예시주소 넣는곳"
-              {...register('search', { required: true })}
-              type="search"
-            />
-            <Button
-              position="absolute"
-              right="0px"
-              width="60px"
-              height="48px"
-              type="submit"
-            />
+            <Box
+              marginTop="30px"
+              marginBottom="40px"
+              padding="12px 15px"
+              border={`1px solid ${theme.colors.grayDD}`}
+            >
+              <Input
+                placeholder="예시주소 넣는곳"
+                {...register('search', { required: true })}
+                type="search"
+              />
+              <Button
+                position="absolute"
+                right="0px"
+                width="60px"
+                height="48px"
+                type="submit"
+              />
+            </Box>
           </form>
         </Box>
       </Layout>
-
       {data ? (
         <Box flex={1} overflow="auto">
           <Box>
@@ -106,27 +120,16 @@ export default function SearchMap({
                     offModal();
                   }}
                 >
-                  <Box fontSize="14px" padding="12px 0">
-                    <Layout>
-                      <Box fontWeight={600} fontSize="17px" marginBottom="4px">
+                  <Box
+                    fontSize="13px"
+                    borderBottom={`1px solid ${theme.colors.grayEE}`}
+                  >
+                    <Layout margin="20px 0">
+                      <Box fontWeight={600} marginBottom="11px">
                         {item.place_name}
                       </Box>
-                      <Box marginBottom="6px" fontSize="14px">
-                        {item.address_name}
-                      </Box>
-                      <FlexBox fontSize="14px">
-                        <FlexBox
-                          fontSize="11px"
-                          width="40px"
-                          height="20px"
-                          justifyContent="center"
-                          alignItems="center"
-                          marginRight="4px"
-                        >
-                          도로명
-                        </FlexBox>
-                        {item.road_address_name || '-'}
-                      </FlexBox>
+                      <Box fontSize="12px">{item.address_name}</Box>
+                      <Box fontSize="12px">{item.road_address_name || '-'}</Box>
                     </Layout>
                   </Box>
                 </Button>
