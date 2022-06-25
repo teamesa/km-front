@@ -48,7 +48,6 @@ export default function Record() {
 
   const onSubmit = (data: any) => {
     setArchiveWirte(data);
-    console.log('achiveWirte', achiveWirte);
     // router.push('/');
   };
 
