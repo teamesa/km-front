@@ -1,6 +1,11 @@
+import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { FlexBox, Tag } from 'components/Atoms';
+import { Box, FlexBox, Tag } from 'components/Atoms';
+import { ListState } from 'states';
+import { searchRequest } from 'states/filter';
+import { getList } from 'states/list';
 import theme from 'styles/theme';
 
 export default function ListCategory({
@@ -8,17 +13,25 @@ export default function ListCategory({
 }: {
   data: { label: string; value: string }[];
 }) {
-  const router = useRouter();
-  const { filter = '' } = router.query;
+  const [searchRequestBody, setSearchReques] = useRecoilState(searchRequest);
+  const setListData = useSetRecoilState(ListState);
+  const filter = searchRequestBody.filterOptions.exhibitionType;
+
+  const setCategoryList = async (value: string) => {
+    const newSearchRequestBody = {
+      ...searchRequestBody,
+      filterOptions: {
+        ...searchRequestBody.filterOptions,
+        exhibitionType: value,
+      },
+    };
+    setSearchReques(newSearchRequestBody);
+    const data = await getList(newSearchRequestBody);
+    setListData(data);
+  };
 
   return (
-    <FlexBox
-      padding="14px 0"
-      overflow="auto"
-      width="auto"
-      role="tablist"
-      background="white"
-    >
+    <>
       {data.map(({ label, value }, index) => (
         <Tag
           key={index}
@@ -27,20 +40,21 @@ export default function ListCategory({
               ? `${theme.colors.black}`
               : `${theme.colors.gray99}`
           }
+          display="inline-block"
+          marginRight="0px !important"
+          padding="0px 15px !important"
           fontSize="13px !important"
-          marginRight="15px"
+          lineHeight="45px !important"
           onClick={() => {
-            router.push({
-              pathname: router.pathname,
-              query: {
-                filter: value,
-              },
-            });
+            setCategoryList(value);
           }}
+          css={css`
+            cursor: pointer;
+          `}
         >
           {label}
         </Tag>
       ))}
-    </FlexBox>
+    </>
   );
 }

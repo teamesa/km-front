@@ -1,13 +1,13 @@
 import { Box } from 'components/Atoms';
-import ItemAdditionalInfo from 'components/Organisms/List/ItemAdditionalInfo';
-import ItemHeart from 'components/Organisms/List/ItemHeart';
-import ItemImage from 'components/Organisms/List/ItemImage';
-import ItemInfo from 'components/Organisms/List/ItemInfo';
+import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditionalInfo';
+import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
+import ItemImage from 'components/Organisms/List/ListItem/ItemImage';
+import ItemInfo from 'components/Organisms/List/ListItem/ItemInfo';
 import type { ListPageContents } from 'states/list';
 
-type ItemProps = {
+interface ItemProps {
   content: ListPageContents;
-};
+}
 
 export default function Item(props: ItemProps) {
   const content = props.content;

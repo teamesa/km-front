@@ -3,9 +3,9 @@ import StarRating from 'assets/list/StarRating';
 import { Box, FlexBox, Span } from 'components/Atoms';
 import { PresentationlistItemAdditionalInfo } from 'states/list';
 import theme from 'styles/theme';
-type AdditionalInfoProps = {
+interface AdditionalInfoProps {
   listItemAdditionalInfo: PresentationlistItemAdditionalInfo;
-};
+}
 export default function ItemAdditionalInfo(props: AdditionalInfoProps) {
   const listItemAdditionalInfo = props.listItemAdditionalInfo;
   return (
