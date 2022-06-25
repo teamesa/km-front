@@ -1,24 +1,22 @@
 import styled from '@emotion/styled';
 import {
-  color,
-  space,
-  SpaceProps,
-  layout,
-  LayoutProps,
-  ColorProps,
-  ShadowProps,
-  shadow,
   border,
   BorderProps,
-  typography,
-  TypographyProps,
+  color,
+  ColorProps,
   flexbox,
   FlexboxProps,
-  BackgroundProps,
-  background,
+  layout,
+  LayoutProps,
+  shadow,
+  ShadowProps,
+  space,
+  SpaceProps,
+  typography,
+  TypographyProps,
 } from 'styled-system';
 
-const Input = styled.input<
+const TextArea = styled.textarea<
   | SpaceProps
   | LayoutProps
   | ColorProps
@@ -26,7 +24,6 @@ const Input = styled.input<
   | BorderProps
   | TypographyProps
   | FlexboxProps
-  | BackgroundProps
 >`
   ${space}
   ${layout}
@@ -35,8 +32,12 @@ const Input = styled.input<
   ${border}
   ${typography}
   ${flexbox}
-  ${background}
+
   width: 100%;
+  &::placeholder {
+    color: #bbbbbb;
+    opacity: 1;
+  }
 `;
 
-export default Input;
+export default TextArea;

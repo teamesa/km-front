@@ -8,7 +8,7 @@ import RadioInput from './RadioInput';
 import Select from './Select';
 import Span from './Span';
 import Tag from './Tag';
-import TextInput from './TextInput';
+import TextArea from './TextArea';
 
 export {
   Box,
@@ -18,8 +18,8 @@ export {
   Tag,
   Span,
   Input,
-  TextInput,
   Select,
   RadioInput,
   RadioLabel,
+  TextArea,
 };
