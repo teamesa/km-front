@@ -40,12 +40,7 @@ export default function List() {
           </Box>
         </Box>
         <FlexBox background={theme.colors.white}>
-          <Box flex={1}>
-            <ListFilter title="조회순" icon={<ArrowDown />} />
-          </Box>
-          <Box flex={1}>
-            <ListFilter title="상세필터" icon={<Filter />} />
-          </Box>
+          <ListFilter />
         </FlexBox>
       </Box>
       <Layout padding="0px 15px !important" marginBottom="120px">

@@ -50,16 +50,11 @@ const Home: NextPage = () => {
   return (
     <>
       <FlexBox>
-        <Box flex={1}>
-          <ListFilter title="조회순" icon={<ArrowDown />} />
-        </Box>
-        <Box flex={1}>
-          <ListFilter title="조회순" icon={<ArrowDown />} />
-        </Box>
+        <ListFilter />
       </FlexBox>
       <ListCategory
         data={[
-          { label: 'ALL', value: '' },
+          { label: 'ALL', value: 'ALL' },
           { label: '전시회', value: 'EXHIBITION' },
           { label: '콘서트', value: 'CONCERT' },
           { label: '뮤지컬', value: 'MUSICAL' },

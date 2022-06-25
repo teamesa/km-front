@@ -4,6 +4,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Box, FlexBox, Tag } from 'components/Atoms';
 import { FilterOptions, ListState } from 'states';
+import { searchRequest } from 'states/filter';
 import { getList } from 'states/list';
 import theme from 'styles/theme';
 
@@ -12,17 +13,20 @@ export default function ListCategory({
 }: {
   data: { label: string; value: string }[];
 }) {
-  const [filterOptions, setFilterOptions] = useRecoilState(FilterOptions);
+  const [searchRequestBody, setSearchReques] = useRecoilState(searchRequest);
   const setListData = useSetRecoilState(ListState);
-  const filter = filterOptions.exhibitionType;
+  const filter = searchRequestBody.filterOptions.exhibitionType;
 
   const setCategoryList = async (value: string) => {
-    const newFilterOpions = {
-      ...filterOptions,
-      exhibitionType: value,
+    const newSearchRequestBody = {
+      ...searchRequestBody,
+      filterOptions: {
+        ...searchRequestBody.filterOptions,
+        exhibitionType: value,
+      },
     };
-    setFilterOptions(newFilterOpions);
-    const data = await getList(newFilterOpions);
+    setSearchReques(newSearchRequestBody);
+    const data = await getList(newSearchRequestBody);
     setListData(data);
   };
 
@@ -36,9 +40,11 @@ export default function ListCategory({
               ? `${theme.colors.black}`
               : `${theme.colors.gray99}`
           }
+          display="inline-block"
+          marginRight="0px !important"
+          padding="0px 15px !important"
           fontSize="13px !important"
           lineHeight="45px !important"
-          marginRight="15px"
           onClick={() => {
             setCategoryList(value);
           }}
