@@ -8,11 +8,21 @@ export type UpdateType =
   | 'email';
 
 export interface UserModifyInfoInterface {
+  id?: number;
   name?: string;
   email?: string;
   gender?: string;
   phoneNumber?: string;
   birthDay?: string;
+}
+
+export interface UserModifyAlertInterface {
+  id?: number;
+  nameMessage?: string;
+  emailMessage?: string;
+  genderMessage?: string;
+  phoneNumberMessage?: string;
+  birthDayMessage?: string;
 }
 
 export const UserModifyInfo = atom<UserModifyInfoInterface>({
@@ -22,9 +32,9 @@ export const UserModifyInfo = atom<UserModifyInfoInterface>({
   },
 });
 
-export const UserModifyErrorInfo = atom<UserModifyInfoInterface>({
+export const UserModifyErrorInfo = atom<UserModifyAlertInterface>({
   key: 'userModifyAlertInfo',
   default: {
-    email: '',
+    emailMessage: '',
   },
 });

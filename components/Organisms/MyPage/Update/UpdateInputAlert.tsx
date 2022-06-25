@@ -12,7 +12,7 @@ export default function UpdateInputAlert({ type }: UpdateInputAlertProps) {
   const userModifyInfo = useRecoilValue(UserModifyErrorInfo);
   const value: string =
     Object.entries(userModifyInfo)
-      .filter(([key, _]) => key === type)
+      .filter(([key, _]) => key === type + 'Message')
       .map(([_, val]) => val)
       .map((val) => val.toString())
       .shift() || '';
