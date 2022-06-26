@@ -1,11 +1,23 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled/types/base';
-import { Profile } from 'assets/mypage';
-import { Box, FlexBox } from 'components/Atoms';
-import type { ListPageContents } from 'states/list';
+
 import ItemAdditionalInfo from './ItemAdditionalInfo';
 import ItemImage from './ItemImage';
 import ItemInfo from './ItemInfo';
+
+import { Profile } from 'assets/mypage';
+import { Box, FlexBox } from 'components/Atoms';
+import type { ListPageContents } from 'states/list';
+
+// const af = styled.li`
+//   &:before {
+//     content: '·';
+//     font-size: 20px;
+//     vertical-align: middle;
+//     line-height: 20px;
+//     padding-right: 5px;
+//   }
+// `;
 
 type ItemProps = {
   content: ListPageContents;
@@ -15,11 +27,28 @@ export default function Item(props: ItemProps) {
   const content = props.content;
   return (
     <FlexBox
-      margin="20px 0"
-      padding="0 15px"
+      position="relative"
+      padding="0px 0px 40px"
       onClick={() => {
         alert('클릭됐어요');
       }}
+      css={css`
+        &:before {
+          content: '';
+          position: absolute;
+          left: 37.5px;
+          top: 75px;
+          bottom: 0;
+          width: 1px;
+          background: #ddd;
+        }
+        &:nth-child(1) {
+          padding: 20px 0px 40px;
+        }
+        &:nth-last-child(1):before {
+          display: none;
+        }
+      `}
     >
       <Box flex={0.3} width="75px" height="75px">
         <ItemImage presentationImage={content.presentationImage} />

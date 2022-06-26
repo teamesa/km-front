@@ -1,10 +1,11 @@
-import { Profile } from 'assets/mypage';
-import { Box, Button } from 'components/Atoms';
 import { useRecoilValueLoadable } from 'recoil';
 
+import ListCard from './ListCard';
+
+import { Profile } from 'assets/mypage';
+import { Box, Button } from 'components/Atoms';
 import { ListState } from 'states';
 import theme from 'styles/theme';
-import ListCard from './ListCard';
 
 export default function ListSection() {
   const data = useRecoilValueLoadable(ListState);

@@ -5,8 +5,8 @@ import SwipeableViews from 'react-swipeable-views';
 import { Box } from 'components/Atoms';
 import Archive from 'components/Organisms/Detail/Description/Archive';
 import Introduce from 'components/Organisms/Detail/Description/Introduce';
-import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
 import MyArchiveListFragment from 'components/Organisms/MyPage/Archive/MyArchiveListFragment';
+import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
 import theme from 'styles/theme';
 
 interface TopTabViewProps {
@@ -38,7 +38,7 @@ export default function TopTabView({
 
   return (
     <>
-      <Box ref={ref} padding="0 15px" background={theme.colors.white}>
+      <Box ref={ref} background={theme.colors.white}>
         <Box height="45px" overflow="auto" display="flex" zIndex={2}>
           {data.map((item, _index) => (
             <Box

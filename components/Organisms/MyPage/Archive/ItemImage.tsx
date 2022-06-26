@@ -13,20 +13,17 @@ export default function ItemImage(props: ImageProps) {
   const presentationImage = props.presentationImage;
   return (
     <>
-      <Box
-        width="75px"
-        height="75px"
-        position="relative"
-      >
-      <Image
-        src={
-          !presentationImage.url
-            ? 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-            : presentationImage.url
-        }
-        alt="image"
-        layout="fill"
-      />
+      <Box width="75px" height="75px" position="relative">
+        <Image
+          src={
+            !presentationImage.url
+              ? 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
+              : presentationImage.url
+          }
+          alt="image"
+          layout="fill"
+          objectFit="cover"
+        />
       </Box>
     </>
   );

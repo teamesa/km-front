@@ -60,11 +60,11 @@ export type PresentationlistItemAdditionalInfo = {
 
 export type PresentaionDate = {
   date: string;
-}
+};
 
 export type IsMultiImages = {
   isMultiImages: true | false;
-}
+};
 
 export default atom({
   key: 'ListState',

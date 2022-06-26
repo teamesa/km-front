@@ -1,7 +1,7 @@
+import { Profile } from 'assets/mypage';
 import { Box, FlexBox, Span, Tag } from 'components/Atoms';
 import type { PresentationBadge, PresentationTitle } from 'states/list';
 import theme from 'styles/theme';
-import { Profile } from 'assets/mypage';
 
 type InfoProps = {
   typeBadge: PresentationBadge;
