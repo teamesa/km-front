@@ -123,6 +123,7 @@ app.prepare().then(() => {
   });
 
   server.all('/hello-example', proxyLogic);
+  server.put('/api/image', upload.single('file'), fileProxy);
   server.put('/api/user/profile', upload.single('file'), fileProxy);
   server.all('/api/*', proxyLogic);
 
