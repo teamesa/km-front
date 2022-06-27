@@ -3,4 +3,5 @@ export const Z_INDEX = {
   SKY: 700,
   /** modal 에서 사용 */
   MODAL: 800,
+  LOADING: 900,
 };

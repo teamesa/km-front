@@ -1,21 +1,25 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ChangeEvent } from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Profile } from 'assets/mypage';
 import { Box, Input } from 'components/Atoms';
+import { loadingState } from 'states/loading';
 import { User } from 'states/user';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 export default function MyPageUserInfo() {
   const { name, imageUrl } = useRecoilValue(User);
+  const setLoading = useSetRecoilState(loadingState);
+
   const router = useRouter();
   const uploadProfile = async ({ target }: ChangeEvent<HTMLInputElement>) => {
     const file = target.files?.[0];
     if (!file) {
       return;
     }
+    setLoading(true);
     const formData = new FormData();
     formData.append('file', file, file.name);
     const axios = customAxios();
@@ -26,8 +30,10 @@ export default function MyPageUserInfo() {
         },
       });
     } catch (_) {
+      setLoading(false);
       return;
     }
+    setLoading(false);
     router.reload();
   };
   return (

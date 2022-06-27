@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { Suspense } from 'react';
 import { RecoilRoot } from 'recoil';
 
+import LoadingScreen from 'components/Molecules/LoadingScreen';
 import Portal from 'components/Molecules/Portal';
 import Container from 'components/Organisms/Common/Container';
 import ModalContainer from 'components/Organisms/Modal/ModalContainer';
@@ -27,6 +28,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Portal query="#modal">
             <ModalContainer />
           </Portal>
+          <LoadingScreen />
         </Suspense>
       </RecoilRoot>
     </ThemeProvider>
