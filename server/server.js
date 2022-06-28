@@ -3,6 +3,12 @@ const next = require('next');
 const dotenv = require('dotenv');
 const cookieparser = require('cookie-parser');
 const axios = require('axios');
+const multer = require('multer');
+const upload = multer({
+  dest: __dirname + '/uploads/',
+});
+const FormData = require('form-data');
+const fs = require('fs');
 
 const port = parseInt(process.env.PORT, 10) || 3000;
 const dev = process.env.NODE_ENV !== 'production';
@@ -30,6 +36,41 @@ const proxyLogic = async (req, res) => {
       query: req.query,
       headers: {
         Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (request.headers['content-type'].includes('json')) {
+      res.json(request.data);
+    } else {
+      console.log('please check content-type. we can accept json only');
+      res.json({});
+    }
+  } catch (err) {
+    if (err.response.status === 400) {
+      res.status(err.response.status).send(err.response.data);
+    } else {
+      console.log(err);
+      res.status(err.response.status).send({});
+    }
+  }
+};
+
+const fileProxy = async (req, res) => {
+  const token =
+    req?.cookies?.kilometer_session ?? req?.headers?.authorization ?? null;
+  const formData = new FormData();
+  formData.append('file', fs.createReadStream(req.file.path), {
+    filename: req.file.originalname,
+  });
+
+  try {
+    const request = await axios({
+      url: `${process.env.BACK_URL}${req.path}`,
+      method: req.method,
+      data: formData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        ...formData.getHeaders(),
       },
     });
 
@@ -82,6 +123,8 @@ app.prepare().then(() => {
   });
 
   server.all('/hello-example', proxyLogic);
+  server.put('/api/image', upload.single('file'), fileProxy);
+  server.put('/api/user/profile', upload.single('file'), fileProxy);
   server.all('/api/*', proxyLogic);
 
   server.all('*', (req, res) => {

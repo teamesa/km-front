@@ -15,7 +15,7 @@ const MyPage: NextPage<UserProps> = ({ user }) => {
   }, []);
 
   if (user.isLogin) {
-    return <MyPageHome user={user} />;
+    return <MyPageHome />;
   } else {
     return <LoginPage />;
   }
