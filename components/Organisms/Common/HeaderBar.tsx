@@ -91,7 +91,7 @@ function HeaderBar() {
         >
           {header?.title ?? ''}
         </Box>
-        <FlexBox textAlign="end" justifyContent="end" flex={1}>
+        <FlexBox textAlign="end" justifyContent="end" flex="0 0 auto">
           <Box
             aria-label="오른쪽 버튼"
             role="button"
