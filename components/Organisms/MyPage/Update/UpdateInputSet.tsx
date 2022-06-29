@@ -84,7 +84,7 @@ export default function UpdateInputSet({
             type="radio"
             name="gender"
             id="FEMALE"
-            value="FEMAIL"
+            value="FEMALE"
             onChange={(e) =>
               setUserModifyInfo((exValue) =>
                 makeNewValue(e.target.value, exValue, type),

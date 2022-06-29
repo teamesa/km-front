@@ -5,11 +5,11 @@ import { Box, Tag } from 'components/Atoms';
 import type { PresentationBadge, PresentationTitle } from 'states/list';
 import theme from 'styles/theme';
 
-type InfoProps = {
+interface InfoProps {
   typeBadge: PresentationBadge;
   additionalBadgeList: [PresentationBadge];
   presentationTitle: PresentationTitle;
-};
+}
 
 export default function ItemInfo(props: InfoProps) {
   const typeBadge = props.typeBadge;

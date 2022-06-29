@@ -19,7 +19,7 @@ export default function Description() {
       return (
         <Box
           position="relative"
-          top="445px"
+          top="390px"
           backgroundColor={theme.colors.white}
           borderRadius="24px 24px 0px 0px"
           overflow="hidden"

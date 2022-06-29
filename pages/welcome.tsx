@@ -3,14 +3,12 @@ import { useRouter } from 'next/router';
 import { MyPageImageAsset } from 'assets/mypage';
 import { Box, Button, Span } from 'components/Atoms';
 import theme from 'styles/theme';
-import { useUserProps } from 'utils/authentication/useUser';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const HEADER_SPACE = 45;
 const APP_BAR_SPACE = 60;
 const LAST_BUTTON = 60;
 
-export const getServerSideProps = useUserProps;
 export default function Welcome() {
   const router = useRouter();
   useInitHeader({ headerLeft: 'disabled', headerRight: 'disabled' });

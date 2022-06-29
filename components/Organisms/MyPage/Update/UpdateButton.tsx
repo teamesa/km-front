@@ -1,4 +1,6 @@
+import axios from 'axios';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box } from 'components/Atoms';
@@ -6,18 +8,42 @@ import {
   UserModifyInfo,
   UserModifyErrorInfo,
   UserModifyInfoInterface,
+  UserModifyAlertInterface,
 } from 'states/user-modify-info';
 import theme from 'styles/theme';
+import customAxios from 'utils/hooks/customAxios';
 
 const validate = (
-  { email }: UserModifyInfoInterface,
+  { email, phoneNumber, name }: UserModifyInfoInterface,
   setError: (a: UserModifyInfoInterface) => void,
-) => {
-  if (email && !validateEmail(email)) {
-    setError({ email: '이메일을 올바르게 입력해주세요.' });
-  } else {
-    setError({});
+): boolean => {
+  let hasError: boolean = false;
+  const errorSet: UserModifyAlertInterface = {};
+
+  if (!(name && name.length >= 1)) {
+    hasError = true;
+    errorSet.nameMessage = '닉네임은 빈 칸이 될 수 없습니다.';
   }
+
+  if (!email || (email && !validateEmail(email))) {
+    hasError = true;
+    errorSet.emailMessage = '이메일을 올바르게 입력해주세요.';
+  }
+
+  if (
+    !phoneNumber ||
+    !(
+      typeof phoneNumber === 'string' &&
+      10 <= phoneNumber.length &&
+      phoneNumber.length <= 11
+    )
+  ) {
+    hasError = true;
+    errorSet.phoneNumberMessage = '휴대폰 번호를 올바르게 입력해주세요.';
+  }
+
+  setError(errorSet);
+  return !hasError;
 };
 
 const validateEmail = (email: string) => {
@@ -32,6 +58,29 @@ export default function UpdateButton() {
   const router = useRouter();
   const userModifyValue = useRecoilValue(UserModifyInfo);
   const setUserModifyError = useSetRecoilState(UserModifyErrorInfo);
+  const axiosState = customAxios();
+  const update = async () => {
+    if (validate(userModifyValue, setUserModifyError)) {
+      try {
+        await axiosState({
+          url: `/api/user`,
+          method: 'POST',
+          data: userModifyValue,
+        });
+      } catch (error) {
+        if (axios.isAxiosError(error)) {
+          const serverError = error?.response?.data as UserModifyAlertInterface;
+          setUserModifyError(serverError);
+          return;
+        }
+      }
+
+      router.push('/mypage');
+    }
+  };
+
+  useEffect(() => setUserModifyError({}), []);
+
   return (
     <Box
       marginTop="60px"
@@ -43,7 +92,7 @@ export default function UpdateButton() {
       fontWeight={500}
       lineHeight={1.5}
       textAlign="center"
-      onClick={() => validate(userModifyValue, setUserModifyError)}
+      onClick={() => update()}
     >
       저장하기
     </Box>

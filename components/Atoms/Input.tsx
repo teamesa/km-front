@@ -36,6 +36,7 @@ const Input = styled.input<
   ${typography}
   ${flexbox}
   ${background}
+  width: 100%;
 `;
 
 export default Input;

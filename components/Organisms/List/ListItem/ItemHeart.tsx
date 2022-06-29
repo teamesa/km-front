@@ -8,9 +8,9 @@ import { PresentationHeart } from 'states/list';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
-type HeartProps = {
+interface HeartProps {
   heart: PresentationHeart;
-};
+}
 
 type PickStatus = {
   content: boolean;
@@ -52,7 +52,7 @@ export default function ItemHeart(props: HeartProps) {
   };
 
   return (
-    <Button position="absolute" right="0px" top="0px" onClick={setToPick}>
+    <Button position="absolute" right="0px" onClick={setToPick}>
       <NavWish
         width="17"
         height="16"
