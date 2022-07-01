@@ -1,4 +1,4 @@
-import { Profile } from 'assets/mypage';
+import { Photo } from 'assets/mypage';
 import { Box, FlexBox, Span, Tag } from 'components/Atoms';
 import type { PresentationBadge, PresentationTitle } from 'states/list';
 import theme from 'styles/theme';
@@ -23,7 +23,7 @@ export default function ItemInfo(props: InfoProps) {
           2022.04.02
         </Span>
       </Box>
-      <Profile width="20px" height="16px" />
+      <Photo width="20px" height="16px" />
     </FlexBox>
   );
 }
