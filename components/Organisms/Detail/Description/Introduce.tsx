@@ -17,7 +17,7 @@ export default function Introduce({ data }: IntroduceProps) {
       fontSize="13px"
       lineHeight="1.54"
       textAlign="left"
-      padding="40px 15px"
+      padding="40px 0px"
     >
       {showMore ? (
         <Box>
