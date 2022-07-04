@@ -17,13 +17,7 @@ export default function Description() {
   switch (state) {
     case 'hasValue':
       return (
-        <Box
-          position="relative"
-          top="390px"
-          // backgroundColor={theme.colors.white}
-          // borderRadius="24px 24px 0px 0px"
-          // overflow="hidden"
-        >
+        <Box position="relative" top="390px">
           <BottomSheetHeader />
           <Box backgroundColor={theme.colors.white} padding="0 15px 60px">
             <Tag border={`1px solid ${theme.colors.black}`}>{summary.type}</Tag>

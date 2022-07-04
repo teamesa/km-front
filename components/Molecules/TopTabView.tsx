@@ -87,7 +87,6 @@ export default function TopTabView({
         style={{
           background: `${theme.colors.white}`,
           width: '100%',
-          // height: `calc(100vh - ${headerSize}px`,
         }}
       >
         {data.map((item) =>
