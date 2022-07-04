@@ -20,9 +20,9 @@ export default function Description() {
         <Box
           position="relative"
           top="390px"
-          backgroundColor={theme.colors.white}
-          borderRadius="24px 24px 0px 0px"
-          overflow="hidden"
+          // backgroundColor={theme.colors.white}
+          // borderRadius="24px 24px 0px 0px"
+          // overflow="hidden"
         >
           <BottomSheetHeader />
           <Box backgroundColor={theme.colors.white} padding="0 15px 60px">
