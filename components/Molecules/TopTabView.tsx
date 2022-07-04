@@ -28,6 +28,7 @@ export default function TopTabView({
 }: TopTabViewProps) {
   const [index, setIndex] = useState(0);
   const [headerSize, setHeaderSize] = useState(0);
+  const [nowTab, setNowTab] = useState('');
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -90,21 +91,6 @@ export default function TopTabView({
             <Introduce data={item.contents ?? ''} />
           ) : item.title === 'MY 아카이브' ? (
             <>
-              <Box
-                display="block"
-                flex-wrap="nowrap"
-                overflow="initial"
-                position="fixed"
-                bottom="50px"
-                right="10px"
-              >
-                <Box
-                  width="50px"
-                  height="50px"
-                  borderRadius="50px"
-                  backgroundColor={theme.colors.black}
-                />
-              </Box>
               <MyArchiveListFragment />
             </>
           ) : item.title === '설정' ? (
@@ -114,6 +100,21 @@ export default function TopTabView({
           ),
         )}
       </SwipeableViews>
+      <Box
+        display="block"
+        flex-wrap="nowrap"
+        overflow="initial"
+        position="fixed"
+        bottom="100px"
+        right="10px"
+      >
+        <Box
+          width="50px"
+          height="50px"
+          borderRadius="50px"
+          backgroundColor={theme.colors.black}
+        />
+      </Box>
     </>
   );
 }

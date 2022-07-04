@@ -11,21 +11,6 @@ export default function MyArchiveListFragment() {
 
   return (
     <>
-      {/* <Box
-        display="block"
-        flex-wrap="nowrap"
-        overflow="initial"
-        position="fixed"
-        bottom="50px"
-        right="10px"
-      >
-        <Box
-          width="50px"
-          height="50px"
-          borderRadius="50px"
-          backgroundColor={theme.colors.black}
-        />
-      </Box> */}
       <ListSection />
     </>
     // <BlankArchiveListSection />
