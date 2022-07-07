@@ -39,7 +39,13 @@ export default function TopTabView({
 
   return (
     <>
-      <Box ref={ref} background={theme.colors.white}>
+      <Box
+        ref={ref}
+        position="sticky"
+        top="45px"
+        background={theme.colors.white}
+        zIndex={2}
+      >
         <Box height="45px" overflow="auto" display="flex" zIndex={2}>
           {data.map((item, _index) => (
             <Box
@@ -74,6 +80,7 @@ export default function TopTabView({
       </Box>
       <SwipeableViews
         enableMouseEvents
+        animateHeight={true}
         index={index}
         onChangeIndex={(_index) => {
           setIndex(_index);
@@ -81,7 +88,6 @@ export default function TopTabView({
         style={{
           background: `${theme.colors.white}`,
           width: '100%',
-          height: `calc(100vh - ${headerSize}px`,
         }}
       >
         {data.map((item) =>

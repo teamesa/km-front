@@ -10,32 +10,9 @@ import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const Home: NextPage = () => {
   useInitHeader({ headerLeft: 'logo', headerEnd: 'home' });
-  // 정렬레이어 팝업
-  const exampleSelect = [
-    { index: 0, label: 'test1', value: '010' },
-    { index: 1, label: 'test2', value: '010' },
-    { index: 2, label: 'test3', value: '010' },
-  ];
-  //상세필터 레이어
-  const exampleFilter = [
-    { index: 0, label: 'test1', value: '010' },
-    { index: 1, label: 'test2', value: '010' },
-    { index: 2, label: 'test3', value: '010' },
-  ];
+
   return (
     <>
-      <FlexBox>
-        <ListFilter />
-      </FlexBox>
-      <ListCategory
-        data={[
-          { label: 'ALL', value: 'ALL' },
-          { label: '전시회', value: 'EXHIBITION' },
-          { label: '콘서트', value: 'CONCERT' },
-          { label: '뮤지컬', value: 'MUSICAL' },
-          { label: '뮤직페스티벌', value: 'FESTIVAL' },
-        ]}
-      />
       <Layout>
         <Box margin="14px 0 10px">
           <Tag color={theme.colors.lime} background={theme.colors.black}>
@@ -46,20 +23,11 @@ const Home: NextPage = () => {
           </Tag>
         </Box>
         <hr />
-        <Select
-          modalType="Select"
-          data={exampleSelect}
-          onChange={(e) => {
-            e.target.value;
-          }}
-        />
-        <Select
-          modalType="Filter"
-          data={exampleFilter}
-          onChange={(e) => {
-            e.target.value;
-          }}
-        />
+        <Box>fontWeight Test</Box>
+        <Box fontWeight={800}>800</Box>
+        <Box fontWeight={500}>500</Box>
+        <Box fontWeight={400}>400</Box>
+        <Box fontWeight={200}>200</Box>
       </Layout>
     </>
   );
