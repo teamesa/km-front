@@ -29,7 +29,7 @@ export default function TopTabView({
   const [index, setIndex] = useState(0);
   const [headerSize, setHeaderSize] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
-  let nowTabTitle = '';
+  let isMyArchiveTab = false;
 
   useEffect(() => {
     if (ref.current?.offsetHeight) {
@@ -88,6 +88,7 @@ export default function TopTabView({
         style={{
           background: `${theme.colors.white}`,
           width: '100%',
+          // height: `calc(100vh - ${headerSize}px`,
         }}
       >
         {data.map((item) =>
@@ -97,7 +98,7 @@ export default function TopTabView({
             <Introduce data={item.contents ?? ''} />
           ) : item.title === 'MY 아카이브' ? (
             <>
-              {(nowTabTitle = 'MY 아카이브')}
+              {(isMyArchiveTab = true)}
               <MyArchiveListFragment />
             </>
           ) : item.title === '설정' ? (
@@ -115,7 +116,7 @@ export default function TopTabView({
         bottom="100px"
         right="10px"
         css={
-          index === 0 && nowTabTitle === 'MY 아카이브'
+          index === 0 && isMyArchiveTab
             ? css`
                 visibility: visible;
               `
