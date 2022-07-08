@@ -8,6 +8,7 @@ import Introduce from 'components/Organisms/Detail/Description/Introduce';
 import MyArchiveListFragment from 'components/Organisms/MyPage/Archive/MyArchiveListFragment';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
 import theme from 'styles/theme';
+import { Folder } from 'assets/mypage';
 
 interface TopTabViewProps {
   data: {
@@ -80,7 +81,7 @@ export default function TopTabView({
       </Box>
       <SwipeableViews
         enableMouseEvents
-        animateHeight={true}
+        // animateHeight={true}
         index={index}
         onChangeIndex={(_index) => {
           setIndex(_index);
@@ -88,7 +89,7 @@ export default function TopTabView({
         style={{
           background: `${theme.colors.white}`,
           width: '100%',
-          // height: `calc(100vh - ${headerSize}px`,
+          height: `calc(100vh - ${headerSize}px`,
         }}
       >
         {data.map((item) =>
@@ -113,8 +114,8 @@ export default function TopTabView({
         flex-wrap="nowrap"
         overflow="initial"
         position="fixed"
-        bottom="100px"
-        right="10px"
+        bottom="80px"
+        right="15px"
         css={
           index === 0 && isMyArchiveTab
             ? css`
@@ -125,12 +126,7 @@ export default function TopTabView({
               `
         }
       >
-        <Box
-          width="50px"
-          height="50px"
-          borderRadius="50px"
-          backgroundColor={theme.colors.black}
-        />
+        <Folder />
       </Box>
     </>
   );
