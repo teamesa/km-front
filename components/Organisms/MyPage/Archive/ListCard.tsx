@@ -1,13 +1,9 @@
 import { css } from '@emotion/react';
-import styled from '@emotion/styled/types/base';
-
-import ItemAdditionalInfo from './ItemAdditionalInfo';
 import ItemImage from './ItemImage';
 import ItemInfo from './ItemInfo';
-
-import { Profile } from 'assets/mypage';
-import { Box, FlexBox } from 'components/Atoms';
-import type { ListPageContents } from 'states/list';
+import { Box, FlexBox, Span } from 'components/Atoms';
+import { Pointer } from 'assets/mypage';
+import { MyArchivePageContents } from 'states/myArchiveList';
 
 // const af = styled.li`
 //   &:before {
@@ -20,11 +16,12 @@ import type { ListPageContents } from 'states/list';
 // `;
 
 type ItemProps = {
-  content: ListPageContents;
+  content: MyArchivePageContents;
 };
 
 export default function Item(props: ItemProps) {
   const content = props.content;
+
   return (
     <FlexBox
       position="relative"
@@ -51,12 +48,14 @@ export default function Item(props: ItemProps) {
       `}
     >
       <Box flex={0.3} width="75px" height="75px">
-        <ItemImage presentationImage={content.presentationImage} />
+        <ItemImage imageUrl={content.imageUrl} />
       </Box>
       <Box marginLeft="20px" flex={1}>
         <ItemInfo
           typeBadge={content.typeBadge}
           presentationTitle={content.title}
+          updatedDate={content.updateAt}
+          isMultiImages={content.existArchiveImages}
         />
         <Box
           fontSize="13px"
@@ -67,11 +66,15 @@ export default function Item(props: ItemProps) {
           {content.title.text}
         </Box>
         <Box marginTop="6px" fontSize="12px" lineHeight="18px">
-          친구들과 함께 다녀왔던 황도유 작가님 전시회! 너무너무 좋았다. 꽃사진이
-          이뻤고 볼거리도…
+          {content.comment}
         </Box>
         <Box marginTop="11px">
-          <ItemAdditionalInfo />
+          <FlexBox>
+            <Pointer width="11px" height="15px" />
+            <Span marginLeft="10px" fontSize="12px" lineHeight="18px">
+              {content.places}
+            </Span>
+          </FlexBox>
         </Box>
       </Box>
     </FlexBox>

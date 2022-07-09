@@ -1,14 +1,18 @@
 import { useRecoilValueLoadable } from 'recoil';
 import ListCard from './ListCard';
-import { Box, Button } from 'components/Atoms';
-import { ListState } from 'states';
-import theme from 'styles/theme';
+import { Box } from 'components/Atoms';
+import BlankArchiveListSection from './BlankArchiveListSection';
+import myArchiveList from 'states/myArchiveList';
 
 export default function ListSection() {
-  const data = useRecoilValueLoadable(ListState);
+  const data = useRecoilValueLoadable(myArchiveList);
 
   switch (data.state) {
     case 'hasValue':
+      if (data.contents.contents.length === 0) {
+        return <BlankArchiveListSection />;
+      }
+
       return (
         <>
           <Box>

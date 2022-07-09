@@ -1,17 +1,20 @@
 import { Photo } from 'assets/mypage';
 import { Box, FlexBox, Span, Tag } from 'components/Atoms';
-import type { PresentationBadge, PresentationTitle } from 'states/list';
+import { PresentationBadge, PresentationTitle } from 'states/myArchiveList';
+
 import theme from 'styles/theme';
 
 type InfoProps = {
   typeBadge: PresentationBadge;
   presentationTitle: PresentationTitle;
-  // presentationDate: PresentationDate;
-  // isMultiImages: IsMultiImages;
+  updatedDate: string;
+  isMultiImages: boolean;
 };
 
 export default function ItemInfo(props: InfoProps) {
   const typeBadge = props.typeBadge;
+  const updatedDate = props.updatedDate;
+  const isMultiImages = props.isMultiImages;
 
   return (
     <FlexBox justifyContent="space-between">
@@ -20,7 +23,7 @@ export default function ItemInfo(props: InfoProps) {
           {typeBadge.text}
         </Tag>
         <Span marginLeft="10px" color={theme.colors.gray99}>
-          2022.04.02
+          {updatedDate}
         </Span>
       </Box>
       <Photo

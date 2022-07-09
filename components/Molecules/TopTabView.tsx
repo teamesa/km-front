@@ -9,6 +9,7 @@ import MyArchiveListFragment from 'components/Organisms/MyPage/Archive/MyArchive
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
 import theme from 'styles/theme';
 import { Folder } from 'assets/mypage';
+import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
 
 interface TopTabViewProps {
   data: {
@@ -100,7 +101,7 @@ export default function TopTabView({
           ) : item.title === 'MY 아카이브' ? (
             <>
               {(isMyArchiveTab = true)}
-              <MyArchiveListFragment />
+              <ListSection />
             </>
           ) : item.title === '설정' ? (
             <ConfigurationFragment />
