@@ -23,7 +23,11 @@ export default function ItemInfo(props: InfoProps) {
           2022.04.02
         </Span>
       </Box>
-      <Photo width="20px" height="16px" />
+      <Photo
+        width="20px"
+        height="16px"
+        visibility={isMultiImages ? 'visible' : 'hidden'}
+      />
     </FlexBox>
   );
 }
