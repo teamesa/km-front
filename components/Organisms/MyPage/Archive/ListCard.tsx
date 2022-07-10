@@ -1,8 +1,10 @@
 import { css } from '@emotion/react';
+
 import ItemImage from './ItemImage';
 import ItemInfo from './ItemInfo';
-import { Box, FlexBox, Span } from 'components/Atoms';
+
 import { Pointer } from 'assets/mypage';
+import { Box, FlexBox, Span } from 'components/Atoms';
 import { MyArchivePageContents } from 'states/myArchiveList';
 
 // const af = styled.li`
