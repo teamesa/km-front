@@ -7,19 +7,19 @@ import { searchRequest } from 'states/filter';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
-interface sortTextProps {
-  sortText: string;
-}
+const sortType = [
+  { index: 0, label: '등록순', value: 'ENROLL_DESC' },
+  { index: 1, label: '종료임박순', value: 'END_DATE_ASC' },
+  { index: 2, label: '하트PICK순', value: 'HEART_DESC' },
+  { index: 3, label: '별점순', value: 'GRADE_DESC' },
+];
 
-export default function ListSortFilter(
-  props: SelectProps,
-  { sortText }: sortTextProps,
-) {
+export default function ListSortFilter() {
   const { onModal } = useModal();
   const targetText = useRecoilValue(searchRequest);
-  const getSortText = props.data.map((item) => {
+  const getSortText = sortType.map((item) => {
     if (targetText.searchSortType === item.value) {
-      sortText = item.label;
+      const sortText = item.label;
       return sortText;
     }
   });
@@ -37,8 +37,8 @@ export default function ListSortFilter(
       border={`1px solid ${theme.colors.grayDD}`}
       onClick={() => {
         onModal({
-          type: `${props.modalType}`,
-          payload: props,
+          type: 'Select',
+          payload: { data: sortType },
         });
       }}
     >
