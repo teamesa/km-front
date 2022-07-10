@@ -1,5 +1,4 @@
 import type { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
@@ -10,7 +9,6 @@ import { useUserProps, UserProps } from 'utils/authentication/useUser';
 
 const MyPage: NextPage<UserProps> = ({ user }) => {
   const setUserFirst = useSetRecoilState(User);
-  const router = useRouter();
 
   useEffect(() => {
     setUserFirst(user);
