@@ -5,9 +5,11 @@ import SwipeableViews from 'react-swipeable-views';
 import { Box } from 'components/Atoms';
 import Archive from 'components/Organisms/Detail/Description/Archive';
 import Introduce from 'components/Organisms/Detail/Description/Introduce';
+import MyArchiveListFragment from 'components/Organisms/MyPage/Archive/MyArchiveListFragment';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
-import MyArchiveListFragment from 'components/Organisms/MyPage/MyArchiveListFragment';
 import theme from 'styles/theme';
+import { Folder } from 'assets/mypage';
+import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
 
 interface TopTabViewProps {
   data: {
@@ -30,6 +32,7 @@ export default function TopTabView({
   const [headerSize, setHeaderSize] = useState(0);
   const [checkHeight, setCheckHeight] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  let isMyArchiveTab = false;
 
   useEffect(() => {
     if (ref.current?.offsetHeight) {
@@ -97,7 +100,10 @@ export default function TopTabView({
           ) : item.title === '소개' ? (
             <Introduce data={item.contents ?? ''} />
           ) : item.title === 'MY 아카이브' ? (
-            <MyArchiveListFragment />
+            <>
+              {(isMyArchiveTab = true)}
+              <ListSection />
+            </>
           ) : item.title === '설정' ? (
             <ConfigurationFragment />
           ) : (
@@ -105,6 +111,25 @@ export default function TopTabView({
           ),
         )}
       </SwipeableViews>
+      <Box
+        display="block"
+        flex-wrap="nowrap"
+        overflow="initial"
+        position="fixed"
+        bottom="80px"
+        right="15px"
+        css={
+          index === 0 && isMyArchiveTab
+            ? css`
+                visibility: visible;
+              `
+            : css`
+                visibility: hidden;
+              `
+        }
+      >
+        <Folder />
+      </Box>
     </>
   );
 }
