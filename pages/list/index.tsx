@@ -18,7 +18,12 @@ export default function List() {
 
   return (
     <>
-      <Box position="sticky" top="0px" zIndex={Z_INDEX.SKY}>
+      <Box
+        position="sticky"
+        top="0px"
+        zIndex={Z_INDEX.SKY}
+        backgroundColor={theme.colors.white}
+      >
         <Box position="relative" overflow="auto">
           <Box
             position="relative"
