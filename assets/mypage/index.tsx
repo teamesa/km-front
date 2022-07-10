@@ -4,7 +4,10 @@ import apple from 'assets/mypage/apple.png';
 import logo from 'assets/mypage/logo.png';
 import naver from 'assets/mypage/naver.png';
 import { Profile } from 'assets/mypage/Profile';
+import { Photo } from 'assets/mypage/Photo';
 import { Box } from 'components/Atoms';
+import { Pointer } from './Pointer';
+import { Folder } from './Folder';
 
 interface MyPageImageAssetProps {
   type: 'apple' | 'logo' | 'naver';
@@ -29,4 +32,4 @@ const MyPageImageAsset = ({
     </Box>
   );
 };
-export { MyPageImageAsset, Profile };
+export { MyPageImageAsset, Profile, Photo, Pointer, Folder };
