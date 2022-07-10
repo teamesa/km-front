@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+
 import { Box } from 'components/Atoms';
 
 type ImageProps = {

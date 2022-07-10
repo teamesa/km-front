@@ -1,7 +1,6 @@
 import { Photo } from 'assets/mypage';
 import { Box, FlexBox, Span, Tag } from 'components/Atoms';
 import { PresentationBadge, PresentationTitle } from 'states/myArchiveList';
-
 import theme from 'styles/theme';
 
 type InfoProps = {
