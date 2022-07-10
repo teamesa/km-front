@@ -1,33 +1,106 @@
-import { Box, Button, FlexBox, Layout } from 'components/Atoms';
+import { css } from '@emotion/react';
+
+import { Box, Button, FlexBox, Layout, RadioLabel } from 'components/Atoms';
+import { CheckBox } from 'components/Atoms/CheckBox';
 import ModalLayout from 'components/Organisms/Modal/ModalLayout';
-import { SelectProps } from 'constants/type/modal';
+import { FilterProps } from 'constants/type/modal';
+import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
-export default function SelectModal({ payload }: { payload: SelectProps }) {
+export default function SelectModal({ payload }: { payload: FilterProps }) {
   const { offModal } = useModal();
   const data = payload?.data ?? [];
   return (
     <ModalLayout>
-      {data.map((item, index) => (
-        <Layout key={index} overflow="auto" height="auto">
+      <Layout overflow="auto" height="auto">
+        {data.map((item, index) => (
+          <Box
+            key={index}
+            marginBottom="20px"
+            css={css`
+              &:nth-last-of-type(1) {
+                margin-bottom: 10px;
+              }
+            `}
+          >
+            <Box
+              marginBottom="20px"
+              fontSize="15px"
+              fontWeight="500"
+              lineHeight="19px"
+            >
+              {item.title}
+            </Box>
+            <FlexBox flexWrap="wrap">
+              {item.type.map((list, index) => (
+                <Box
+                  key={index}
+                  height="20px"
+                  marginBottom="20px"
+                  flex="0 0 50%"
+                >
+                  <CheckBox
+                    type="checkbox"
+                    id={list.value}
+                    css={css`
+                      margin: 0px !important;
+                    `}
+                  />
+                  <RadioLabel
+                    htmlFor={list.value}
+                    css={css`
+                      margin: 0px 0px 0px 10px !important;
+                      color: ${theme.colors.gray99};
+                      font-size: 13px;
+                      line-height: 20px;
+                      font-weight: 500;
+                    `}
+                  >
+                    {list.label}
+                  </RadioLabel>
+                </Box>
+              ))}
+            </FlexBox>
+          </Box>
+        ))}
+        <FlexBox margin="0px -2.5px">
           <Button
-            width="100%"
-            paddingBottom="30px"
-            fontSize="17px"
+            width="170px"
+            margin="0px 2.5px"
+            fontSize="16px"
+            lineHeight="50px"
+            fontWeight="500"
+            border={`1px solid ${theme.colors.grayAA}`}
             onClick={() => {
-              payload.onChange &&
-                payload.onChange({
-                  target: { value: item.value },
-                });
+              // payload.onChange &&
+              //   payload.onChange({
+              //     target: { value: item.value },
+              //   });
               offModal();
             }}
           >
-            <FlexBox>
-              <Box flex={1}>{item.label}</Box>
-            </FlexBox>
+            초기화
           </Button>
-        </Layout>
-      ))}
+          <Button
+            width="170px"
+            margin="0px 2.5px"
+            color={theme.colors.white}
+            fontSize="16px"
+            lineHeight="50px"
+            fontWeight="500"
+            backgroundColor={theme.colors.black}
+            onClick={() => {
+              // payload.onChange &&
+              //   payload.onChange({
+              //     target: { value: item.value },
+              //   });
+              offModal();
+            }}
+          >
+            적용
+          </Button>
+        </FlexBox>
+      </Layout>
     </ModalLayout>
   );
 }

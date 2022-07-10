@@ -7,7 +7,10 @@ export interface SelectProps {
 }
 
 export interface FilterProps {
-  name: string;
-  data: { index: number; label: string; value: string }[];
+  modalType: keyof typeof modal;
+  data: {
+    title: string;
+    type: { index: number; label: string; value: string }[];
+  }[];
   onChange?: (e: { target: { value: string } }) => void;
 }

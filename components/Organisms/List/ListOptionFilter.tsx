@@ -1,10 +1,10 @@
 import Filter from 'assets/list/Filter';
 import { Box, Button } from 'components/Atoms';
-import { SelectProps } from 'constants/type/modal';
+import { FilterProps } from 'constants/type/modal';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
-export default function ListOptionFilter(props: SelectProps) {
+export default function ListOptionFilter(props: FilterProps) {
   const { onModal } = useModal();
   return (
     <Button
