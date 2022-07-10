@@ -30,6 +30,7 @@ export default function TopTabView({
 }: TopTabViewProps) {
   const [index, setIndex] = useState(0);
   const [headerSize, setHeaderSize] = useState(0);
+  const [checkHeight, setCheckHeight] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   let isMyArchiveTab = false;
 
@@ -68,6 +69,7 @@ export default function TopTabView({
               `}
               onClick={() => {
                 setIndex(_index);
+                setCheckHeight(true);
               }}
               color={
                 _index === index
@@ -82,7 +84,7 @@ export default function TopTabView({
       </Box>
       <SwipeableViews
         enableMouseEvents
-        // animateHeight={true}
+        animateHeight={checkHeight}
         index={index}
         onChangeIndex={(_index) => {
           setIndex(_index);
@@ -90,7 +92,6 @@ export default function TopTabView({
         style={{
           background: `${theme.colors.white}`,
           width: '100%',
-          height: `calc(100vh - ${headerSize}px`,
         }}
       >
         {data.map((item) =>
