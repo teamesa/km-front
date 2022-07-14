@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 
@@ -53,13 +52,6 @@ export default function Record() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {title === 'true' ? <ExhibitionTitle /> : <SearchTitle />}
-      <Box textAlign="center" fontSize="18px">
-        <Box>이 문화생활, 어땠나요?</Box>
-        <Box marginTop="16px">
-          <Rating name="starRating" control={control} />
-        </Box>
-      </Box>
       <Box paddingTop="30px">코멘트 & 사진</Box>
       <Box paddingTop="10px">
         <TextArea
@@ -83,54 +75,14 @@ export default function Record() {
         </Button>
         <Box marginTop="30px" />
         <Box height="1px" backgroundColor={theme.colors.grayEE} />
-        <FlexBox marginTop="30px">
-          <MapPoint />
-          <Box marginLeft="10px" fontSize="13px">
-            근처 다녀온 맛집
-          </Box>
-        </FlexBox>
-        <Button marginTop="10px" width="100%">
-          <FlexBox>
-            <Box flex={1.5}>
-              <AddressInput name={`placeInfos.[0].name`} control={control} />
-            </Box>
-            <Box
-              padding="13px 23px 12px"
-              color={theme.colors.white}
-              backgroundColor={theme.colors.black}
-              fontSize="12px"
-              fontWeight={500}
-              flex={0.5}
-              marginLeft="5px"
-            >
-              장소찾기
-            </Box>
-          </FlexBox>
-        </Button>
+
         <FlexBox marginTop="20px">
           <MapPoint />
           <Box marginLeft="10px" fontSize="13px">
             근처 다녀온 카페
           </Box>
         </FlexBox>
-        <Button marginTop="10px" width="100%">
-          <FlexBox>
-            <Box flex={1.5}>
-              <AddressInput name={`placeInfos.[1].name`} control={control} />
-            </Box>
-            <Box
-              padding="13px 23px 12px"
-              color={theme.colors.white}
-              backgroundColor={theme.colors.black}
-              fontSize="12px"
-              fontWeight={500}
-              flex={0.5}
-              marginLeft="5px"
-            >
-              장소찾기
-            </Box>
-          </FlexBox>
-        </Button>
+
         <Box marginTop="30px" />
         <Box height="1px" backgroundColor={theme.colors.grayEE} />
         <Box marginTop="30px" />

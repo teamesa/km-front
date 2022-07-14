@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-interface ArchiveWirteProps {
+export interface ArchiveWirteProps {
   itemId: number;
   starRating: number;
   comment: string;

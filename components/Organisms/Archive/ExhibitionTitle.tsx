@@ -1,26 +1,27 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import noImage from 'assets/common/no_image_375x500.png';
 import { Box, FlexBox } from 'components/Atoms';
 
-export default function ExhibitionTitle() {
-  const router = useRouter();
-  const imageData = null;
-  const { id } = router.query;
-  const basicImage =
-    'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg';
-
+export default function ExhibitionTitle({
+  title,
+  thumbnailImageUrl,
+}: {
+  title: string | string[];
+  thumbnailImageUrl: string;
+}) {
   return (
     <FlexBox marginTop="48px" paddingBottom="20px">
       <Image
-        src={!imageData ? basicImage : imageData}
+        src={thumbnailImageUrl ? thumbnailImageUrl : noImage}
         alt="image"
-        width="48px"
+        width="64px"
         height="64px"
         objectFit="cover"
       />
       <Box fontSize="13px" margin="10px 15px">
-        황도유 : 희랍 화첩, 서른 세송이
+        {title}
       </Box>
     </FlexBox>
   );
