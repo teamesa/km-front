@@ -1,59 +1,81 @@
-import axios from 'axios';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Plus } from 'assets/archive/Plus';
-import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
+import noImage from 'assets/common/no_image_375x500.png';
+import {
+  Box,
+  Button,
+  FlexBox,
+  Input,
+  RadioLabel,
+  TextArea,
+} from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
-import ExhibitionTitle from 'components/Organisms/Archive/ExhibitionTitle';
 import Rating from 'components/Organisms/Archive/Rating';
 import SearchTitle from 'components/Organisms/Archive/SearchTitle';
 import { ArchiveWirteState } from 'states';
 import { ArchiveWirteProps } from 'states/archiveWirte';
 import theme from 'styles/theme';
-import customAxios from 'utils/hooks/customAxios';
 
 export default function ArchiveHome() {
   const router = useRouter();
   const { id, title } = router.query;
   const thumbnailImageUrl = String(router.query.thumbnailImageUrl);
-  const [checked, setChecked] = useState(title ? true : false);
-  // const foodAddress = useRecoilState(ArchiveWirteFood);
-  // const cafeAddress = useRecoilState(ArchiveWirteCafe);
   const [archiveWirte, setArchiveWirte] = useRecoilState(ArchiveWirteState);
-  const { register, handleSubmit, formState, control } =
-    useForm<ArchiveWirteProps>({
-      mode: 'onChange',
-      defaultValues: {
-        ...archiveWirte,
-        visibleAtItem: id ? true : false,
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm<ArchiveWirteProps>({
+    mode: 'onChange',
+  });
 
   const onSubmit = (data: ArchiveWirteProps) => {
     setArchiveWirte(data);
     console.log('data', data);
   };
 
+  const registerOptions = {
+    starRating: { required: '별점 등록은 필수입니다.' },
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box>
-        {/* {title ? (
-          <ExhibitionTitle
-            title={title}
-            thumbnailImageUrl={thumbnailImageUrl}
-          />
+        {title ? (
+          <>
+            <FlexBox marginTop="48px" paddingBottom="20px">
+              <Image
+                src={thumbnailImageUrl ? thumbnailImageUrl : noImage}
+                alt="image"
+                width="64px"
+                height="64px"
+                objectFit="cover"
+              />
+              <Box fontSize="13px" margin="10px 15px">
+                {title}
+              </Box>
+              <Input hidden value={id} {...register('itemId')} />
+            </FlexBox>
+          </>
         ) : (
           <SearchTitle />
-        )} */}
+        )}
         <Box textAlign="center" fontSize="18px">
           <Box>이 문화생활, 어땠나요?</Box>
           <Box marginTop="16px">
-            <Rating name="starRating" control={control} />
+            <Rating
+              name="starRating"
+              control={control}
+              rules={registerOptions.starRating}
+            />
+            <Box>{errors?.starRating && errors.starRating.message}</Box>
           </Box>
         </Box>
         <Box
@@ -113,7 +135,6 @@ export default function ArchiveHome() {
             </Box>
           </FlexBox>
         </Button>
-
         <FlexBox marginTop="20px">
           <MapPoint />
           <Box marginLeft="10px" fontSize="13px">
@@ -148,11 +169,7 @@ export default function ArchiveHome() {
         <FlexBox>
           <RadioLabel>
             <FlexBox>
-              <CheckBox
-                type="checkbox"
-                defaultChecked={false}
-                {...(register('visibleAtItem'), { required: true })}
-              />
+              <CheckBox type="checkbox" {...register('visibleAtItem')} />
               <Box margin="3px 10px" fontSize="12px">
                 다른 사람도 보여주기
               </Box>
@@ -182,6 +199,7 @@ export default function ArchiveHome() {
               width="100%"
               height="50px"
               onClick={handleSubmit(onSubmit)}
+              disabled={!errors}
             >
               등록
             </Button>
