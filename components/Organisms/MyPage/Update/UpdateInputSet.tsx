@@ -92,7 +92,7 @@ export default function UpdateInputSet({
             }
             checked={value !== 'MALE'}
           />
-          <RadioLabel htmlFor="female">여성</RadioLabel>
+          <RadioLabel htmlFor="FEMALE">여성</RadioLabel>
           <RadioInput
             type="radio"
             name="gender"
@@ -105,7 +105,7 @@ export default function UpdateInputSet({
             }
             checked={value === 'MALE'}
           />
-          <RadioLabel htmlFor="male">남성</RadioLabel>
+          <RadioLabel htmlFor="MALE">남성</RadioLabel>
         </Box>
       ) : (
         <Input

@@ -10,7 +10,12 @@ export interface FilterProps {
   modalType?: keyof typeof modal;
   data: {
     title: string;
-    type: { index: number; label: string; value: string }[];
+    list: {
+      index: number;
+      label: string;
+      value: string;
+      type: 'progressTypes' | 'feeTypes' | 'regionTypes';
+    }[];
   }[];
   onChange?: (e: { target: { value: string } }) => void;
 }

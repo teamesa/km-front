@@ -13,7 +13,7 @@ export default function ListCategory({
 }: {
   data: { label: string; value: string }[];
 }) {
-  const [searchRequestBody, setSearchReques] = useRecoilState(searchRequest);
+  const [searchRequestBody, setSearchRequest] = useRecoilState(searchRequest);
   const setListData = useSetRecoilState(ListState);
   const filter = searchRequestBody.filterOptions.exhibitionType;
 
@@ -25,7 +25,7 @@ export default function ListCategory({
         exhibitionType: value,
       },
     };
-    setSearchReques(newSearchRequestBody);
+    setSearchRequest(newSearchRequestBody);
     const data = await getList(newSearchRequestBody);
     setListData(data);
   };
