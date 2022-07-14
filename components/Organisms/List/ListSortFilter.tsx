@@ -43,8 +43,8 @@ export default function ListSortFilter() {
       }}
     >
       {getSortText}
-      <Box position="absolute" top="0" right="20px">
-        <ArrowDown />
+      <Box position="absolute" top="0" right="20px" width="12px" height="38px">
+        <ArrowDown width="100%" height="100%" />
       </Box>
     </Button>
   );

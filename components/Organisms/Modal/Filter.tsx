@@ -65,7 +65,7 @@ export default function SelectModal({ payload }: { payload: FilterProps }) {
         ))}
         <FlexBox margin="0px -2.5px">
           <Button
-            width="170px"
+            flexGrow="0.5"
             margin="0px 2.5px"
             fontSize="16px"
             lineHeight="50px"
@@ -82,7 +82,7 @@ export default function SelectModal({ payload }: { payload: FilterProps }) {
             초기화
           </Button>
           <Button
-            width="170px"
+            flexGrow="0.5"
             margin="0px 2.5px"
             color={theme.colors.white}
             fontSize="16px"

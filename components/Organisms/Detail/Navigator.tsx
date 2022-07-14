@@ -72,6 +72,7 @@ export default function Navigator() {
           아카이브 기록하기
         </Button>
       </FlexBox>
+      <Box width="100%" height="var(--platformBottomArea)" />
     </Box>
   );
 }

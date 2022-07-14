@@ -57,8 +57,8 @@ export default function ListOptionFilter() {
       }}
     >
       상세필터
-      <Box position="absolute" top="0" right="20px">
-        <Filter />
+      <Box position="absolute" top="0" right="20px" width="14px" height="38px">
+        <Filter width="100%" height="100%" />
       </Box>
     </Button>
   );
