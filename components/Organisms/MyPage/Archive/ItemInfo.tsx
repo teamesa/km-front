@@ -1,18 +1,18 @@
 import { Photo } from 'assets/mypage';
 import { Box, FlexBox, Span, Tag } from 'components/Atoms';
-import { PresentationBadge, PresentationTitle } from 'states/myArchiveList';
+import { PresentationBadge } from 'states/myArchiveList';
 import theme from 'styles/theme';
 
 type InfoProps = {
   typeBadge: PresentationBadge;
-  presentationTitle: PresentationTitle;
-  updatedDate: string;
+  presentationTitle: string;
+  updatedAt: string;
   isMultiImages: boolean;
 };
 
 export default function ItemInfo(props: InfoProps) {
   const typeBadge = props.typeBadge;
-  const updatedDate = props.updatedDate;
+  const updatedAt = props.updatedAt;
   const isMultiImages = props.isMultiImages;
 
   return (
@@ -22,7 +22,7 @@ export default function ItemInfo(props: InfoProps) {
           {typeBadge.text}
         </Tag>
         <Span marginLeft="10px" color={theme.colors.gray99}>
-          {updatedDate}
+          {updatedAt}
         </Span>
       </Box>
       <Photo
