@@ -64,10 +64,28 @@ export default function Item(props: ItemProps) {
           marginTop="10px"
           lineHeight="20px"
           fontWeight={500}
+          overflow="hidden"
+          display="-webkit-box"
+          css={css`
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+          `}
         >
           {content.title}
         </Box>
-        <Box marginTop="6px" fontSize="12px" lineHeight="18px">
+        <Box
+          marginTop="6px"
+          fontSize="12px"
+          lineHeight="18px"
+          overflow="hidden"
+          display="-webkit-box"
+          css={css`
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          `}
+        >
           {content.comment}
         </Box>
         <Box marginTop="11px">
