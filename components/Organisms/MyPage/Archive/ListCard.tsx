@@ -63,7 +63,7 @@ export default function Item(props: ItemProps) {
           fontSize="13px"
           marginTop="10px"
           lineHeight="20px"
-          fontWeight={500}
+          fontWeight="Bold"
           overflow="hidden"
           display="-webkit-box"
           css={css`
