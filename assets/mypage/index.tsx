@@ -1,13 +1,14 @@
 import Image from 'next/image';
 
+import { Folder } from './Folder';
+import { Pointer } from './Pointer';
+
 import apple from 'assets/mypage/apple.png';
 import logo from 'assets/mypage/logo.png';
 import naver from 'assets/mypage/naver.png';
-import { Profile } from 'assets/mypage/Profile';
 import { Photo } from 'assets/mypage/Photo';
+import { Profile } from 'assets/mypage/Profile';
 import { Box } from 'components/Atoms';
-import { Pointer } from './Pointer';
-import { Folder } from './Folder';
 
 interface MyPageImageAssetProps {
   type: 'apple' | 'logo' | 'naver';

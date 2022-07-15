@@ -56,6 +56,7 @@ export default function MyPageUserInfo() {
             height="22px"
             textAlign="center"
             color={theme.colors.white}
+            lineHeight="22px"
             borderRadius="50%"
           >
             +

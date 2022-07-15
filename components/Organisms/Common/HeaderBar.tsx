@@ -13,19 +13,19 @@ import { headerState } from 'states/common';
 import useRefUtils from 'utils/hooks/useRefUtils';
 
 const headerLeftIcon = {
-  default: <ArrowLeft />,
+  default: <ArrowLeft width="30" height="30" viewBox="-10 -6 30 30" />,
   logo: <>logo</>,
   disabled: <></>,
 };
 
 const headerRightIcon = {
-  search: <Search />,
+  search: <Search width="30" height="30" viewBox="-6 -6 30 30" />,
   disabled: <></>,
 };
 
 const headerEndIcon = {
   disabled: <></>,
-  home: <HeaderHome />,
+  home: <HeaderHome width="30" height="30" viewBox="-6 -5 30 30" />,
 };
 
 function HeaderBar() {
@@ -50,26 +50,30 @@ function HeaderBar() {
           content="내 근처 문화생활 로드맵, KM 킬로미터"
         />
       </Head>
-      <FlexBox
+      <Box
         ref={ref}
         role="menubar"
         position="fixed"
-        padding="14px 15px"
+        // padding="14px 15px"
         top="0px"
         width="100%"
         height="45px"
-        alignItems="center"
+        // alignItems="center"
         background="white"
         zIndex={Z_INDEX.SKY}
       >
         <Box
-          flex={1}
+          // flex={1}
           aria-label="왼쪽 버튼"
           role="button"
-          width="80px"
-          justifyContent="flex-start"
-          height="100%"
-          alignItems="center"
+          position="absolute"
+          top="6px"
+          left="5px"
+          width="30px"
+          height="30px"
+          // justifyContent="flex-start"
+          // height="100%"
+          // alignItems="center"
           onClick={() => {
             if (header.headerLeftAction) {
               header.headerLeftAction();
@@ -86,18 +90,19 @@ function HeaderBar() {
         <Box
           textAlign="center"
           fontSize="16px"
-          fontWeight={500}
-          lineHeight={1.5}
+          fontWeight="500"
+          lineHeight="45px"
         >
           {header?.title ?? ''}
         </Box>
-        <FlexBox textAlign="end" justifyContent="end" flex="0 0 auto">
+        <FlexBox position="absolute" top="6px" right="10px">
           <Box
             aria-label="오른쪽 버튼"
             role="button"
-            marginTop="5px"
-            justifyContent="flex-end"
-            height="100%"
+            // marginTop="5px"
+            // justifyContent="flex-end"
+            width="30px"
+            height="30px"
             alignItems="center"
             onClick={header.headerRightAction}
           >
@@ -105,14 +110,17 @@ function HeaderBar() {
           </Box>
           {header.headerEnd ? (
             <Box
-              marginLeft="15px"
+              // marginLeft="15px"
               aria-label="끝 버튼"
               role="button"
-              paddingLeft="5px"
-              marginTop="5px"
-              justifyContent="flex-end"
-              height="100%"
-              alignItems="center"
+              // paddingLeft="5px"
+              // marginTop="5px"
+              // justifyContent="flex-end"
+              // height="100%"
+              // alignItems="center"
+              marginLeft="8px"
+              width="30px"
+              height="30px"
               onClick={() => {
                 router.push('/');
               }}
@@ -121,7 +129,7 @@ function HeaderBar() {
             </Box>
           ) : null}
         </FlexBox>
-      </FlexBox>
+      </Box>
       <Box height={height} />
     </>
   );
