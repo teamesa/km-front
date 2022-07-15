@@ -17,11 +17,11 @@ export default function ItemInfo(props: InfoProps) {
 
   return (
     <FlexBox justifyContent="space-between">
-      <Box fontSize="11px">
+      <Box fontSize="11px" display="flex" alignItems="center">
         <Tag backgroundColor={theme.colors.black} color={theme.colors.lime}>
           {typeBadge.text}
         </Tag>
-        <Span marginLeft="10px" color={theme.colors.gray99}>
+        <Span marginLeft="5px" color={theme.colors.gray99}>
           {updatedAt}
         </Span>
       </Box>
