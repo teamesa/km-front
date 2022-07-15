@@ -19,18 +19,13 @@ export type TPostList = {
 
 export type MyArchivePageContents = {
   id: number;
-  title: PresentationTitle;
+  title: string;
   comment: string;
   places: string;
   typeBadge: PresentationBadge;
-  imageUrl: string;
-  updateAt: string;
+  itemImageUrl: string;
+  updatedAt: string;
   existArchiveImages: boolean;
-};
-
-export type PresentationTitle = {
-  text: string;
-  link: string;
 };
 
 export type PresentationBadge = {
@@ -47,7 +42,7 @@ export const getList = async () => {
       requestPagingStatus: {
         currentContentsCount: 0,
         pageNumber: 0,
-        pageSize: 0,
+        pageSize: 10,
       },
     },
   })) as AxiosResponse<TPostList>;

@@ -50,13 +50,13 @@ export default function Item(props: ItemProps) {
       `}
     >
       <Box flex={0.3} width="75px" height="75px">
-        <ItemImage imageUrl={content.imageUrl} />
+        <ItemImage imageUrl={content.itemImageUrl} />
       </Box>
       <Box marginLeft="20px" flex={1}>
         <ItemInfo
           typeBadge={content.typeBadge}
           presentationTitle={content.title}
-          updatedDate={content.updateAt}
+          updatedAt={content.updatedAt}
           isMultiImages={content.existArchiveImages}
         />
         <Box
@@ -65,7 +65,7 @@ export default function Item(props: ItemProps) {
           lineHeight="20px"
           fontWeight={500}
         >
-          {content.title.text}
+          {content.title}
         </Box>
         <Box marginTop="6px" fontSize="12px" lineHeight="18px">
           {content.comment}
