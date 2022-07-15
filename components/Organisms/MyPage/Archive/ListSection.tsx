@@ -1,7 +1,9 @@
 import { useRecoilValueLoadable } from 'recoil';
-import ListCard from './ListCard';
-import { Box } from 'components/Atoms';
+
 import BlankArchiveListSection from './BlankArchiveListSection';
+import ListCard from './ListCard';
+
+import { Box } from 'components/Atoms';
 import myArchiveList from 'states/myArchiveList';
 
 export default function ListSection() {

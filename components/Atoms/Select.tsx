@@ -16,7 +16,7 @@ export default function Select(props: SelectProps) {
         background={theme.colors.white}
         onClick={() => {
           onModal({
-            type: `${props.modalType}`,
+            type: 'Select',
             payload: props,
           });
         }}
