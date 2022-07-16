@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { ChangeEvent } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { Plus } from 'assets/archive/Plus';
 import { Profile } from 'assets/mypage';
 import { Box, Input } from 'components/Atoms';
 import { loadingState } from 'states/loading';
@@ -59,9 +58,7 @@ export default function MyPageUserInfo() {
             color={theme.colors.white}
             borderRadius="50%"
           >
-            <Box position="relative" top="1.5px" left="0.4px">
-              <Plus width="10px" height="10px" />
-            </Box>
+            +
           </Box>
           <Box width="70px" height="70px" top="0px" position="absolute">
             <Input
