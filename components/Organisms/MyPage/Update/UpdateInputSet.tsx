@@ -1,4 +1,3 @@
-import { css } from '@emotion/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box, Input, RadioInput, RadioLabel } from 'components/Atoms';
@@ -113,16 +112,7 @@ export default function UpdateInputSet({
           placeholder="입력해주세요"
           paddingX="15px"
           paddingY="12px"
-          css={css`
-            display: block;
-            -webkit-appearance: textfield;
-            -moz-appearance: textfield;
-            min-height: 1.2em;
-            ::-webkit-date-and-time-value {
-              text-align: left;
-            }
-          `}
-          backgroundColor={theme.colors.white}
+          width="100%"
           border={`solid 1px ${theme.colors.grayDD}`}
           type={getInputType(type)}
           value={value}
