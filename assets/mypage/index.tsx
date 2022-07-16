@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import apple from 'assets/mypage/apple.png';
-import logo from 'assets/mypage/logo.svg';
+import logo from 'assets/mypage/logo.png';
 import naver from 'assets/mypage/naver.png';
 import { Profile } from 'assets/mypage/Profile';
 import { Photo } from 'assets/mypage/Photo';
