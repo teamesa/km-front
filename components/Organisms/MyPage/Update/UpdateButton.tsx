@@ -22,7 +22,7 @@ const validate = (
 
   if (!(name && name.length >= 1)) {
     hasError = true;
-    errorSet.nameMessage = '닉네임은 빈 칸이 될 수 없습니다.';
+    errorSet.nameMessage = '닉네임을 올바르게 입력해주세요.';
   }
 
   if (!email || (email && !validateEmail(email))) {
