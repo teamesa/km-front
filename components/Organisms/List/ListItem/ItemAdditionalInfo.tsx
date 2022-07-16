@@ -10,25 +10,45 @@ export default function ItemAdditionalInfo(props: AdditionalInfoProps) {
   const listItemAdditionalInfo = props.listItemAdditionalInfo;
   return (
     <>
-      <FlexBox>
+      <FlexBox marginTop="15px">
         {listItemAdditionalInfo.heartCount ? (
-          <Box fontSize="9px" lineHeight="12px">
-            <ListWish width="10" height="9" fill={theme.colors.gray99} />
-            <Span display="inline-block" marginLeft="2px" verticalAlign="top">
+          <FlexBox alignItems="center" marginRight="10px" height="12px">
+            <ListWish
+              width="10px"
+              height="9px"
+              viewBox="0 0 10 9"
+              fill={theme.colors.gray99}
+            />
+            <Box
+              marginLeft="2px"
+              color={theme.colors.gray99}
+              fontSize="9px"
+              lineHeight="12px"
+            >
               {listItemAdditionalInfo.heartCount}
-            </Span>
-          </Box>
+            </Box>
+          </FlexBox>
         ) : (
           ''
         )}
         {listItemAdditionalInfo.grade ? (
-          <Box marginLeft="10px" fontSize="9px" lineHeight="12px">
-            <StarRating width="10" height="10" fill="#999" />
-            <Span display="inline-block" marginLeft="2px" verticalAlign="top">
+          <FlexBox marginRight="10px" height="12px">
+            <StarRating
+              width="10px"
+              height="10px"
+              viewBox="0 0 10 10"
+              fill={theme.colors.gray99}
+            />
+            <Box
+              marginLeft="2px"
+              color={theme.colors.gray99}
+              fontSize="9px"
+              lineHeight="12px"
+            >
               {listItemAdditionalInfo.grade} (
               {listItemAdditionalInfo.archiveCount})
-            </Span>
-          </Box>
+            </Box>
+          </FlexBox>
         ) : (
           ''
         )}

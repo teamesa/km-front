@@ -15,7 +15,7 @@ export default function Archive({ data }: ArchiveProps) {
     return <Box> 아카이브 없다</Box>;
   }
   return (
-    <Box color={theme.colors.black} fontSize="14px" padding="0 15px">
+    <Box color={theme.colors.black} fontSize="14px">
       {data.map((item, index) => (
         <Box key={index} paddingTop="24px">
           <FlexBox alignItems="center">
@@ -40,36 +40,27 @@ export default function Archive({ data }: ArchiveProps) {
             </Box>
             <Box flex="0 0 50px " height="20px">
               <Tag
-                display="inline-block"
-                padding="0px !important"
-                marginRight="0px !important"
-                width="100%"
-                textAlign="center"
-                fontSize="13px !important"
-                lineHeight="20px"
+                display="flex !important"
+                alignItems="center"
+                padding="0px 10px !important"
+                margin="0px !important"
                 color={theme.colors.lime}
                 background={theme.colors.black}
                 boxShadow="0 0 8px 0 rgba(0, 0, 0, 0.08)"
               >
-                <Span
-                  display="inline-block"
-                  marginRight="3px"
-                  lineHeight="0"
-                  verticalAlign="text-top"
-                >
-                  <NavWish
-                    fill={theme.colors.lime}
-                    width="15px"
-                    height="20px"
-                  />
-                </Span>
-                25
+                <NavWish
+                  fill={theme.colors.lime}
+                  width="13px"
+                  height="12px"
+                  viewBox="3 4 23 22"
+                />
+                <Span marginLeft="4px">25</Span>
               </Tag>
             </Box>
           </FlexBox>
           <Box
             fontSize="13px"
-            lineHeight="1.54"
+            lineHeight="20px"
             textAlign="left"
             marginTop="20px"
           >

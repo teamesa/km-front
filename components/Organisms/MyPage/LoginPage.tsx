@@ -37,8 +37,6 @@ export default function LoginPage() {
       </Box>
       <Box>
         <Box
-          paddingLeft="100px"
-          paddingRight="99px"
           fontSize="15px"
           fontWeight={500}
           lineHeight={1.47}

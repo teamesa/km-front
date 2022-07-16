@@ -3,13 +3,14 @@ export default function NavWish({
   height = '30',
   fill = 'none',
   stroke = '#000',
+  viewBox = '0 0 30 30',
 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox="0 0 30 30"
+      viewBox={viewBox}
     >
       <path data-name="사각형 10" fill="none" d="M0 0h30v30H0z" />
       <path

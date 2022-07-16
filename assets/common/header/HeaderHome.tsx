@@ -2,13 +2,14 @@ export default function HeaderHome({
   width = '18',
   height = '18',
   fill = '#000',
+  viewBox = '0 0 17.637 18.708',
 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox="0 0 17.637 18.708"
+      viewBox={viewBox}
     >
       <path
         data-name="패스 1381"

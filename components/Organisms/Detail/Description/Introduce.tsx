@@ -15,7 +15,7 @@ export default function Introduce({ data }: IntroduceProps) {
     <Box
       color={theme.colors.black}
       fontSize="13px"
-      lineHeight="1.54"
+      lineHeight="20px"
       textAlign="left"
       padding="40px 0px"
     >
@@ -64,7 +64,7 @@ export default function Introduce({ data }: IntroduceProps) {
           </Button>
         )} */}
       {data.photo?.map((item, index) => (
-        <Box paddingTop="20px" key={index}>
+        <Box marginTop="20px" key={index}>
           <Image
             src={
               !item
@@ -72,9 +72,13 @@ export default function Introduce({ data }: IntroduceProps) {
                 : item
             }
             alt="image"
-            width="345vmin"
-            height="400vmin"
-            objectFit="none"
+            // width="345vmin"
+            // height="400vmin"
+            // objectFit="none"
+            width="100%"
+            height="100%"
+            layout="responsive"
+            // objectFit="none"
           />
         </Box>
       ))}
