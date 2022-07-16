@@ -1,30 +1,32 @@
-import { useState } from 'react';
 import { Controller } from 'react-hook-form';
 
-import { Box, Button } from 'components/Atoms';
 import StarScope from 'components/Molecules/StarScope';
 
 export default function Rating({
   name,
   control,
   onChange,
+  rules,
 }: {
   name: string;
-  control?: any;
+  control: any;
   onChange?: (e: any) => void;
+  rules: any;
 }) {
-  const [starRating, setStarRating] = useState(0);
-
   return (
     <Controller
       name={name}
       control={control}
-      render={() => (
-        <Button type="button" width="100%">
-          <Button>
-            <StarScope currentStep={starRating} />
-          </Button>
-        </Button>
+      rules={rules}
+      render={({ field: { onChange: _onChange } }) => (
+        <>
+          <StarScope
+            onChange={(e) => {
+              onChange && onChange(e);
+              _onChange(e);
+            }}
+          />
+        </>
       )}
     ></Controller>
   );
