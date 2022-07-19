@@ -34,6 +34,11 @@ export default function ArchiveHome() {
     control,
   } = useForm<ArchiveWirteProps>({
     mode: 'onChange',
+    defaultValues: {
+      ...archiveWirte,
+      starRating: 5,
+      visibleAtItem: id ? true : false,
+    },
   });
 
   const onSubmit = (data: ArchiveWirteProps) => {
@@ -41,40 +46,30 @@ export default function ArchiveHome() {
     console.log('data', data);
   };
 
-  const registerOptions = {
-    starRating: { required: '별점 등록은 필수입니다.' },
-  };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box>
         {title ? (
-          <>
-            <FlexBox marginTop="48px" paddingBottom="20px">
-              <Image
-                src={thumbnailImageUrl ? thumbnailImageUrl : noImage}
-                alt="image"
-                width="64px"
-                height="64px"
-                objectFit="cover"
-              />
-              <Box fontSize="13px" margin="10px 15px">
-                {title}
-              </Box>
-              <Input hidden value={id} {...register('itemId')} />
-            </FlexBox>
-          </>
+          <FlexBox marginTop="48px" paddingBottom="20px">
+            <Image
+              src={thumbnailImageUrl ? thumbnailImageUrl : noImage}
+              alt="image"
+              width="64px"
+              height="64px"
+              objectFit="cover"
+            />
+            <Box fontSize="13px" margin="10px 15px">
+              {title}
+            </Box>
+            <Input hidden value={id} {...register('itemId')} />
+          </FlexBox>
         ) : (
           <SearchTitle />
         )}
         <Box textAlign="center" fontSize="18px">
           <Box>이 문화생활, 어땠나요?</Box>
           <Box marginTop="16px">
-            <Rating
-              name="starRating"
-              control={control}
-              rules={registerOptions.starRating}
-            />
+            <Rating name="starRating" control={control} />
             <Box>{errors?.starRating && errors.starRating.message}</Box>
           </Box>
         </Box>

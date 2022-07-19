@@ -46,7 +46,6 @@ export async function getArchiveSearch({ query }: { query: string }) {
       query,
     },
   })) as AxiosResponse<TGetArchiveSearch>;
-
   return data;
 }
 
@@ -54,12 +53,9 @@ export const ArchiveSearchState = selectorFamily({
   key: 'ArchiveSearchState',
   get: (query: string) => async () => {
     const search = await getArchiveSearch({ query: query });
-    return {
-      search,
-    };
+    return search;
   },
 });
-
 export const ArchiveWirteState = atom<ArchiveWirteProps | undefined>({
   key: 'ArchiveWirteState',
   default: undefined,
