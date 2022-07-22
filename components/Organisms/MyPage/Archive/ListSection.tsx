@@ -17,7 +17,7 @@ export default function ListSection() {
 
       return (
         <>
-          <Box>
+          <Box marginBottom="150px">
             {data.contents.contents.map((content, index) => (
               <ListCard key={content?.id ?? index} content={content} />
             ))}
