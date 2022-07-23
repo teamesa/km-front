@@ -116,7 +116,7 @@ export default function TopTabView({
         flex-wrap="nowrap"
         overflow="initial"
         position="fixed"
-        bottom="96px"
+        bottom="80px"
         marginBottom="var(--platformBottomArea)"
         right="15px"
         css={
