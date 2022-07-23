@@ -11,7 +11,7 @@ export default function Document() {
         <div id="modal" role="dialog" aria-label="모달" />
         <script
           type="text/javascript"
-          src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.KAKAO_APP_KEY}&libraries=services,clusterer`}
+          src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services,clusterer`}
         ></script>
       </body>
     </Html>
