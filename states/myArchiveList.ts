@@ -23,7 +23,7 @@ export type MyArchivePageContents = {
   comment: string;
   places: string;
   typeBadge: PresentationBadge;
-  itemImageUrl: string;
+  listImageUrl: string;
   updatedAt: string;
   existArchiveImages: boolean;
 };
