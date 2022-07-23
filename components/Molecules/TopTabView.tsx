@@ -91,7 +91,13 @@ export default function TopTabView({
         }}
         style={{
           background: `${theme.colors.white}`,
+          // transition: 'none',
           width: '100%',
+        }}
+        springConfig={{
+          duration: '0s',
+          easeFunction: '0s',
+          delay: '0s',
         }}
       >
         {data.map((item) =>
