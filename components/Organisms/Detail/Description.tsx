@@ -25,7 +25,17 @@ export default function Description() {
             <Box marginTop="30px" marginBottom="40px">
               <DescriptionInfo title="기간" description={summary.term} />
               <DescriptionInfo title="장소" description={summary.place} />
-              <DescriptionInfo title="입장료" description={summary.feeType} />
+              {summary.feeType === '유료' ? (
+                <>
+                  <DescriptionInfo
+                    title="입장료"
+                    description={summary.feeType}
+                  />
+                </>
+              ) : (
+                <DescriptionInfo title="입장료" description={summary.feeType} />
+              )}
+
               {summary.ticketUrl ? (
                 <DescriptionInfo
                   title="티켓구매"

@@ -86,7 +86,7 @@ export default function SearchMap({
           <form onSubmit={handleSubmit(onSubmit)}>
             <Box
               marginTop="30px"
-              marginBottom="40px"
+              marginBottom="20px"
               padding="12px 15px"
               border={`1px solid ${theme.colors.grayDD}`}
             >
@@ -129,7 +129,9 @@ export default function SearchMap({
                         {item.place_name}
                       </Box>
                       <Box fontSize="12px">{item.address_name}</Box>
-                      <Box fontSize="12px">{item.road_address_name || '-'}</Box>
+                      <Box fontSize="12px">
+                        {item.road_address_name ?? null}
+                      </Box>
                     </Layout>
                   </Box>
                 </Button>

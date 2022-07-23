@@ -1,6 +1,9 @@
-import { atom } from 'recoil';
+import { AxiosResponse } from 'axios';
+import { atom, selector, selectorFamily } from 'recoil';
 
-interface ArchiveWirteProps {
+import customAxios from 'utils/hooks/customAxios';
+
+export interface ArchiveWirteProps {
   itemId: number;
   starRating: number;
   comment: string;
@@ -12,6 +15,48 @@ interface ArchiveWirteProps {
     roadAddress: string;
   }[];
   visibleAtItem: boolean;
+}
+
+interface TGetArchiveSearch {
+  contents: {
+    id: number;
+    link: string;
+    searchedTextLocationEnd: number;
+    searchedTextLocationStart: number;
+    title: string;
+  }[];
+  responsePagingStatus: {
+    currentContentsCount: number;
+    currentPage: number;
+    hasNext: boolean;
+    nextPage: number;
+    pageSize: number;
+    query: string;
+    totalContentsCount: number;
+  };
+}
+
+const axios = customAxios();
+
+export async function getArchiveSearch({ query }: { query: string }) {
+  const { data } = (await axios({
+    url: `/api/search/auto-complete`,
+    method: 'GET',
+    params: {
+      query,
+    },
+  })) as AxiosResponse<TGetArchiveSearch>;
+
+  return data;
+}
+
+export async function postArchiveWirte({ body }: { body: ArchiveWirteProps }) {
+  const { data } = (await axios({
+    method: 'POST',
+    url: `/api/archive`,
+    data: body,
+  })) as AxiosResponse<ArchiveWirteProps>;
+  return data;
 }
 
 export const ArchiveWirteState = atom<ArchiveWirteProps | undefined>({
