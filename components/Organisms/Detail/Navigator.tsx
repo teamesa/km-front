@@ -76,6 +76,7 @@ export default function Navigator() {
                 id: id,
                 title: data?.title,
                 thumbnailImageUrl: data?.thumbnailImageUrl,
+                checked: true,
               },
             });
           }}
