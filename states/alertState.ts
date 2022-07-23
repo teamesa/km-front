@@ -1,9 +1,9 @@
 import { atom } from 'recoil';
 
-export const alertState = atom({
+export default atom({
   key: 'AlertState',
   default: {
-    title: '',
+    code: '',
     description: '',
   },
 });

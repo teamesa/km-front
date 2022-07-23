@@ -8,7 +8,7 @@ import { AlertState, PopupNameState } from 'states';
 const AlertSuccessPopup = () => {
   const alertState = useRecoilValue(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  console.log('sd');
+
   const handleClosePopup = () => {
     setPopupName(POPUP_NAME.NULL);
   };
@@ -17,7 +17,6 @@ const AlertSuccessPopup = () => {
     <Popup>
       <Box width="315px" borderRadius="12px">
         <Box>
-          <Box>{alertState.title}</Box>
           <Box>{alertState.description}</Box>
         </Box>
         <Button
