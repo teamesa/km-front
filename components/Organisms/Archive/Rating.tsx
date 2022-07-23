@@ -16,14 +16,12 @@ export default function Rating({
       name={name}
       control={control}
       render={({ field: { onChange: _onChange } }) => (
-        <>
-          <StarScope
-            onChange={(e) => {
-              onChange && onChange(e);
-              _onChange(e);
-            }}
-          />
-        </>
+        <StarScope
+          onChange={(e) => {
+            onChange && onChange(e);
+            _onChange(e);
+          }}
+        />
       )}
     ></Controller>
   );

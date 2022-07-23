@@ -1,7 +1,9 @@
 import { AxiosResponse } from 'axios';
 import { atom, selector } from 'recoil';
-import customAxios from 'utils/hooks/customAxios';
+
 import { defaultSearchRequset, TPostFilter } from './filter';
+
+import customAxios from 'utils/hooks/customAxios';
 
 export type TPostList = {
   responsePagingStatus: {

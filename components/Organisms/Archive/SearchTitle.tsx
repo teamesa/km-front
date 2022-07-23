@@ -1,10 +1,9 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
 
 import { Search } from 'assets/archive/Search';
-import { Box, Button, FlexBox, Input, Span } from 'components/Atoms';
-import { ArchiveSearchState, getArchiveSearch } from 'states/archiveWirte';
+import { Box, Button, FlexBox, Input } from 'components/Atoms';
+import { getArchiveSearch } from 'states/archiveWirte';
 import theme from 'styles/theme';
 
 interface AutoContents {
@@ -18,17 +17,18 @@ interface AutoContents {
 export default function SearchTitle() {
   const [keyword, setKeyword] = useState<string>('');
   const [keyItems, setKeyItems] = useState<AutoContents[]>([]);
-
-  const onChangeData = (e: React.FormEvent<HTMLInputElement>) => {
-    setKeyword(e.currentTarget.value);
+  const router = useRouter();
+  const onChangeData = (e: any) => {
+    setKeyword(e.target.value);
   };
 
   useEffect(() => {
     const debounce = setTimeout(() => {
       if (keyword) {
         const updateData = async () => {
-          const data = await getArchiveSearch({ query: keyword });
-          setKeyItems(data.contents);
+          const searchData = await getArchiveSearch({ query: keyword });
+          console.log('res', searchData);
+          setKeyItems(searchData.contents);
         };
         updateData();
       }
@@ -57,11 +57,12 @@ export default function SearchTitle() {
           <Search />
         </Button>
       </FlexBox>
-      {keyItems.length > 0 && keyword && (
+      {keyItems?.length > 0 && keyword && (
         <Box
           zIndex="3"
           width="345px"
           height="120px"
+          overflowY="scroll"
           backgroundColor={theme.colors.white}
           position="absolute"
           top="155px"
@@ -72,16 +73,20 @@ export default function SearchTitle() {
             {keyItems.map((search) => (
               <Box key={search.id}>
                 <Box paddingTop="23px">
-                  {search.title}
-                  {/* {search.title.includes(keyword) ? (
-                    <Span>
-                      {search.title.split(keyword)[0]}
-                      <Span color={theme.colors.orange}>{keyword}</Span>
-                      {search.title.split(keyword)[1]}
-                    </Span>
-                  ) : (
-                    search.title
-                  )} */}
+                  <Button
+                    onClick={() => {
+                      setKeyword(search.title);
+                      router.push({
+                        pathname: '/archive',
+                        query: {
+                          id: search.id,
+                          title: search?.title,
+                        },
+                      });
+                    }}
+                  >
+                    {search.title}
+                  </Button>
                 </Box>
               </Box>
             ))}

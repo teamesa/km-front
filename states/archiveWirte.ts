@@ -46,16 +46,19 @@ export async function getArchiveSearch({ query }: { query: string }) {
       query,
     },
   })) as AxiosResponse<TGetArchiveSearch>;
+
   return data;
 }
 
-export const ArchiveSearchState = selectorFamily({
-  key: 'ArchiveSearchState',
-  get: (query: string) => async () => {
-    const search = await getArchiveSearch({ query: query });
-    return search;
-  },
-});
+export async function postArchiveWirte({ body }: { body: ArchiveWirteProps }) {
+  const { data } = (await axios({
+    method: 'POST',
+    url: `/api/archive`,
+    data: body,
+  })) as AxiosResponse<ArchiveWirteProps>;
+  return data;
+}
+
 export const ArchiveWirteState = atom<ArchiveWirteProps | undefined>({
   key: 'ArchiveWirteState',
   default: undefined,
