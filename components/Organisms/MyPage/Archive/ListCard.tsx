@@ -50,7 +50,7 @@ export default function Item(props: ItemProps) {
       `}
     >
       <Box flex={0.3} width="75px" height="75px">
-        <ItemImage imageUrl={content.itemImageUrl} />
+        <ItemImage imageUrl={content.listImageUrl} />
       </Box>
       <Box marginLeft="20px" flex={1}>
         <ItemInfo
