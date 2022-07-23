@@ -52,10 +52,17 @@ export default function ItemHeart(props: HeartProps) {
   };
 
   return (
-    <Button position="absolute" right="0px" onClick={setToPick}>
+    <Button
+      position="absolute"
+      right="-3px"
+      width="20px"
+      height="20px"
+      onClick={setToPick}
+    >
       <NavWish
-        width="17"
-        height="16"
+        width="17px"
+        height="20px"
+        viewBox="1 2 27 26"
         fill={heart.heartClicked ? theme.colors.black : theme.colors.white}
       />
     </Button>

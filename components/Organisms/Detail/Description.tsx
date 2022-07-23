@@ -21,11 +21,28 @@ export default function Description() {
           <BottomSheetHeader />
           <Box backgroundColor={theme.colors.white} padding="0 15px 60px">
             <Tag border={`1px solid ${theme.colors.black}`}>{summary.type}</Tag>
-            <Box marginTop="19px">{summary.title}</Box>
-            <Box marginTop="30px" marginBottom="40px">
+            <Box
+              marginTop="14px"
+              fontSize="19px"
+              fontWeight="500"
+              lineHeight="26px"
+            >
+              {summary.title}
+            </Box>
+            <Box marginTop="30px" marginBottom="60px">
               <DescriptionInfo title="기간" description={summary.term} />
               <DescriptionInfo title="장소" description={summary.place} />
-              <DescriptionInfo title="입장료" description={summary.feeType} />
+              {summary.feeType === '유료' ? (
+                <>
+                  <DescriptionInfo
+                    title="입장료"
+                    description={summary.feeType}
+                  />
+                </>
+              ) : (
+                <DescriptionInfo title="입장료" description={summary.feeType} />
+              )}
+
               {summary.ticketUrl ? (
                 <DescriptionInfo
                   title="티켓구매"

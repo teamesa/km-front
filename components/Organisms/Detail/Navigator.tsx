@@ -1,22 +1,29 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
+import { useRecoilValueLoadable } from 'recoil';
 
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import Share from 'assets/detail/Share';
 import { Box, Button, FlexBox } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
+import { DetailState } from 'states';
+import { TGetSummary } from 'states/detail';
 import theme from 'styles/theme';
 
 export default function Navigator() {
   const router = useRouter();
   const [currentUrl, setCurrentUrl] = useState('');
+
   const { id } = router.query;
+  const state = useRecoilValueLoadable(DetailState(Number(id)));
+  const data: TGetSummary = state?.contents?.summary;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setCurrentUrl(window.location.href);
     }
   }, []);
+
   return (
     <Box
       zIndex={Z_INDEX.SKY}
@@ -38,7 +45,7 @@ export default function Navigator() {
             color={theme.colors.white}
             marginLeft="2px"
           >
-            241
+            {data?.itemInfoAdditionalInfo?.heartCount}
           </Box>
           <Button
             marginLeft="20px"
@@ -65,13 +72,18 @@ export default function Navigator() {
           onClick={() => {
             router.push({
               pathname: '/archive',
-              query: { id: id, title: true },
+              query: {
+                id: id,
+                title: data?.title,
+                thumbnailImageUrl: data?.thumbnailImageUrl,
+              },
             });
           }}
         >
           아카이브 기록하기
         </Button>
       </FlexBox>
+      <Box width="100%" height="var(--platformBottomArea)" />
     </Box>
   );
 }

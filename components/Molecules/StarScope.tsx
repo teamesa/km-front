@@ -1,27 +1,50 @@
+import { useState } from 'react';
+
 import StarBlack from 'assets/archive/StarBlack';
 import StarWhite from 'assets/archive/StarWhite';
-import { Box, FlexBox, Layout } from 'components/Atoms';
-import theme from 'styles/theme';
+import { Box, Button, FlexBox, Layout } from 'components/Atoms';
 
-function StarCheck({ currentStep }: { currentStep: number }) {
-  return (
-    <FlexBox justifyContent="center">
-      {[...Array(5)].map((_, index) => {
-        const count = index + 1;
-        return (
-          <Box key={index} paddingRight="10px">
-            {count <= currentStep ? <StarBlack /> : <StarWhite />}
-          </Box>
-        );
-      })}
-    </FlexBox>
-  );
-}
+export default function StarScope({
+  onChange,
+  currentStep,
+}: {
+  onChange?: (e: number) => void;
+  currentStep?: number;
+}) {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
 
-export default function StarScope({ currentStep }: { currentStep: number }) {
   return (
     <Box paddingTop="16px">
-      <StarCheck currentStep={currentStep} />
+      <FlexBox justifyContent="center">
+        {[...Array(5)].map((_, index) => {
+          index += 1;
+          return (
+            <Button
+              type="button"
+              key={index}
+              onClick={() => {
+                setRating(index);
+                onChange && onChange(index);
+              }}
+              onMouseEnter={() => setHover(index)}
+              onMouseLeave={() => setHover(rating)}
+            >
+              {currentStep ? (
+                index <= currentStep ? (
+                  <StarBlack />
+                ) : (
+                  <StarWhite />
+                )
+              ) : index <= (hover || rating) ? (
+                <StarBlack />
+              ) : (
+                <StarWhite />
+              )}
+            </Button>
+          );
+        })}
+      </FlexBox>
     </Box>
   );
 }

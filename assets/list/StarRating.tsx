@@ -2,13 +2,14 @@ export default function StarRating({
   width = '10',
   height = '9.511',
   fill = '#999',
+  viewBox = '0 0 10 9.511',
 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox="0 0 10 9.511"
+      viewBox={viewBox}
     >
       <path
         data-name="*star"

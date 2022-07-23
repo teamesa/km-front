@@ -1,10 +1,11 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Plus } from 'assets/archive/Plus';
+import noImage from 'assets/common/no_image_375x500.png';
 import {
   Box,
   Button,
@@ -15,54 +16,77 @@ import {
 } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
-import ExhibitionTitle from 'components/Organisms/Archive/ExhibitionTitle';
 import Rating from 'components/Organisms/Archive/Rating';
 import SearchTitle from 'components/Organisms/Archive/SearchTitle';
 import { ArchiveWirteState } from 'states';
+import { ArchiveWirteProps } from 'states/archiveWirte';
 import theme from 'styles/theme';
 
-interface ArchiveWirteProps {
-  itemId: number;
-  starRating: number;
-  comment: string;
-  photoUrls: string[];
-  placeInfos: {
-    address: string;
-    name: string;
-    placeType: 'FOOD' | 'CAFE';
-    roadAddress: string;
-  }[];
-  food: string;
-  cafe: string;
-  visibleAtItem: boolean;
-}
-
-export default function Record() {
+export default function ArchiveHome() {
   const router = useRouter();
-  const { title } = router.query;
-  const [achiveWirte, setArchiveWirte] = useRecoilState(ArchiveWirteState);
-  const { register, handleSubmit, formState, control } =
-    useForm<ArchiveWirteProps>({
-      mode: 'onChange',
-    });
+  const { id, title } = router.query;
+  const thumbnailImageUrl = String(router.query.thumbnailImageUrl);
+  const [archiveWirte, setArchiveWirte] = useRecoilState(ArchiveWirteState);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    control,
+  } = useForm<ArchiveWirteProps>({
+    mode: 'onChange',
+  });
 
-  const onSubmit = (data: any) => {
+  const onSubmit = (data: ArchiveWirteProps) => {
     setArchiveWirte(data);
-    // router.push('/');
+    console.log('data', data);
+  };
+
+  const registerOptions = {
+    starRating: { required: '별점 등록은 필수입니다.' },
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {title === 'true' ? <ExhibitionTitle /> : <SearchTitle />}
-      <Box textAlign="center" fontSize="18px">
-        <Box>이 문화생활, 어땠나요?</Box>
-        <Box marginTop="16px">
-          <Rating name="starRating" control={control} />
+      <Box>
+        {title ? (
+          <>
+            <FlexBox marginTop="48px" paddingBottom="20px">
+              <Image
+                src={thumbnailImageUrl ? thumbnailImageUrl : noImage}
+                alt="image"
+                width="64px"
+                height="64px"
+                objectFit="cover"
+              />
+              <Box fontSize="13px" margin="10px 15px">
+                {title}
+              </Box>
+              <Input hidden value={id} {...register('itemId')} />
+            </FlexBox>
+          </>
+        ) : (
+          <SearchTitle />
+        )}
+        <Box textAlign="center" fontSize="18px">
+          <Box>이 문화생활, 어땠나요?</Box>
+          <Box marginTop="16px">
+            <Rating
+              name="starRating"
+              control={control}
+              rules={registerOptions.starRating}
+            />
+            <Box>{errors?.starRating && errors.starRating.message}</Box>
+          </Box>
         </Box>
-      </Box>
-      <Box paddingTop="30px">코멘트 & 사진</Box>
-      <Box paddingTop="10px">
+        <Box
+          height="1px"
+          marginTop="30px"
+          backgroundColor={theme.colors.grayEE}
+          color={theme.colors.grayEE}
+        />
+        <Box paddingTop="30px">코멘트 & 사진</Box>
         <TextArea
+          marginTop="10px"
           padding="15px"
           height="150px"
           overflow="scroll"
@@ -92,7 +116,11 @@ export default function Record() {
         <Button marginTop="10px" width="100%">
           <FlexBox>
             <Box flex={1.5}>
-              <AddressInput name={`placeInfos.[0].name`} control={control} />
+              <AddressInput
+                name="placeInfos[0]"
+                type="FOOD"
+                control={control}
+              />
             </Box>
             <Box
               padding="13px 23px 12px"
@@ -116,7 +144,11 @@ export default function Record() {
         <Button marginTop="10px" width="100%">
           <FlexBox>
             <Box flex={1.5}>
-              <AddressInput name={`placeInfos.[1].name`} control={control} />
+              <AddressInput
+                name="placeInfos[1]"
+                type="CAFE"
+                control={control}
+              />
             </Box>
             <Box
               padding="13px 23px 12px"
@@ -137,10 +169,7 @@ export default function Record() {
         <FlexBox>
           <RadioLabel>
             <FlexBox>
-              <CheckBox
-                type="checkbox"
-                {...register('visibleAtItem', { required: false })}
-              />
+              <CheckBox type="checkbox" {...register('visibleAtItem')} />
               <Box margin="3px 10px" fontSize="12px">
                 다른 사람도 보여주기
               </Box>
@@ -150,34 +179,33 @@ export default function Record() {
         <Box marginTop="10px" fontSize="12px" color={theme.colors.gray99}>
           다른 사람들이 내가 작성한 아카이브를 볼 수 있습니다. ☺
         </Box>
+        <FlexBox marginTop="30px" justifyContent="space-between">
+          <Box flex={1}>
+            <Button
+              border={`1px solid ${theme.colors.grayAA}`}
+              backgroundColor={theme.colors.white}
+              color={theme.colors.black}
+              width="100%"
+              height="50px"
+              onClick={() => router.push('/')}
+            >
+              취소
+            </Button>
+          </Box>
+          <Box flex={1} paddingLeft="5px">
+            <Button
+              backgroundColor={theme.colors.black}
+              color={theme.colors.white}
+              width="100%"
+              height="50px"
+              onClick={handleSubmit(onSubmit)}
+              disabled={!errors}
+            >
+              등록
+            </Button>
+          </Box>
+        </FlexBox>
       </Box>
-      <FlexBox marginTop="30px" justifyContent="space-between">
-        <Box flex={1}>
-          <Button
-            border={`1px solid ${theme.colors.grayAA}`}
-            backgroundColor={theme.colors.white}
-            color={theme.colors.black}
-            padding="15px 65px"
-            width="100%"
-            height="50px"
-            onClick={() => router.push('/')}
-          >
-            취소
-          </Button>
-        </Box>
-        <Box flex={1} paddingLeft="5px">
-          <Button
-            backgroundColor={theme.colors.black}
-            color={theme.colors.white}
-            padding="15px 65px"
-            width="100%"
-            height="50px"
-            onClick={handleSubmit(onSubmit)}
-          >
-            등록
-          </Button>
-        </Box>
-      </FlexBox>
     </form>
   );
 }

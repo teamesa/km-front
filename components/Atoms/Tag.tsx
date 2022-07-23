@@ -15,10 +15,12 @@ interface TagProps {
 }
 
 const Tag = styled(Span)<BackgroundProps | ColorProps | BorderProps | TagProps>`
-  padding: 4px 12px;
+  display: inline-block;
+  padding: 0px 12px;
   border-radius: 11px;
   font-weight: 500;
   font-size: 11px;
+  line-height: 20px;
   margin-right: 5px;
   ${color}
   ${background}

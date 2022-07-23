@@ -1,5 +1,5 @@
 import { Box, Layout } from 'components/Atoms';
-import Record from 'components/Organisms/Archive/Record';
+import ArchiveHome from 'components/Organisms/Archive/ArchiveHome';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function Archive() {
@@ -11,7 +11,7 @@ export default function Archive() {
 
   return (
     <Layout>
-      <Record />
+      <ArchiveHome />
       <Box height="60px" />
     </Layout>
   );
