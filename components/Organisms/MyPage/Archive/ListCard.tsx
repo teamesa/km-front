@@ -50,28 +50,46 @@ export default function Item(props: ItemProps) {
       `}
     >
       <Box flex={0.3} width="75px" height="75px">
-        <ItemImage imageUrl={content.imageUrl} />
+        <ItemImage imageUrl={content.itemImageUrl} />
       </Box>
       <Box marginLeft="20px" flex={1}>
         <ItemInfo
           typeBadge={content.typeBadge}
           presentationTitle={content.title}
-          updatedDate={content.updateAt}
+          updatedAt={content.updatedAt}
           isMultiImages={content.existArchiveImages}
         />
         <Box
           fontSize="13px"
           marginTop="10px"
           lineHeight="20px"
-          fontWeight={500}
+          fontWeight="Bold"
+          overflow="hidden"
+          display="-webkit-box"
+          css={css`
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+          `}
         >
-          {content.title.text}
+          {content.title}
         </Box>
-        <Box marginTop="6px" fontSize="12px" lineHeight="18px">
+        <Box
+          marginTop="6px"
+          fontSize="12px"
+          lineHeight="18px"
+          overflow="hidden"
+          display="-webkit-box"
+          css={css`
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          `}
+        >
           {content.comment}
         </Box>
-        <Box marginTop="11px">
-          <FlexBox>
+        <Box marginTop="11px" display={content.places ? 'block' : 'none'}>
+          <FlexBox alignItems="center">
             <Pointer width="11px" height="15px" />
             <Span marginLeft="10px" fontSize="12px" lineHeight="18px">
               {content.places}

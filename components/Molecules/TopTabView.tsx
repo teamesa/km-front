@@ -116,7 +116,8 @@ export default function TopTabView({
         flex-wrap="nowrap"
         overflow="initial"
         position="fixed"
-        bottom="80px"
+        bottom="96px"
+        marginBottom="var(--platformBottomArea)"
         right="15px"
         css={
           index === 0 && isMyArchiveTab
