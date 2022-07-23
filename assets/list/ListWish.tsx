@@ -3,13 +3,14 @@ export default function ListWish({
   height = '8.44',
   fill = '#999',
   stroke = '#999',
+  viewBox = '0 0 9.2 8.44',
 }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox="0 0 9.2 8.44"
+      viewBox={viewBox}
     >
       <path
         data-name="*heart"

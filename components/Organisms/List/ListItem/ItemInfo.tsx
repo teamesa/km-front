@@ -24,6 +24,7 @@ export default function ItemInfo(props: InfoProps) {
         </Tag>
         {additionalBadgeList.map((badge, index) => (
           <Tag
+            lineHeight="20px"
             backgroundColor={theme.colors.grayEE}
             color={theme.colors.black}
             key={index}
@@ -33,7 +34,6 @@ export default function ItemInfo(props: InfoProps) {
         ))}
       </Box>
       <Box
-        margin="0px 0px 15px"
         fontSize="15px"
         lineHeight="18px"
         fontWeight="500"

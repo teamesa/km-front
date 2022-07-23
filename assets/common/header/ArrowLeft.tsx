@@ -1,10 +1,14 @@
-export default function ArrowLeft({ width = '10', height = '17' }) {
+export default function ArrowLeft({
+  width = '10',
+  height = '17',
+  viewBox = '0 0 9.737 17.116',
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox="0 0 9.737 17.116"
+      viewBox={viewBox}
     >
       <path
         data-name="패스 1383"

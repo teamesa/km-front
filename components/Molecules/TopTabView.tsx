@@ -117,6 +117,7 @@ export default function TopTabView({
         overflow="initial"
         position="fixed"
         bottom="80px"
+        marginBottom="var(--platformBottomArea)"
         right="15px"
         css={
           index === 0 && isMyArchiveTab

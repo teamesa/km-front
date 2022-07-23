@@ -13,15 +13,44 @@ export default function GlobalStyles() {
     <Global
       styles={css`
         body {
-          font-family: -apple-system, SpoqaHanSansNeo, sans-serif;
+          font-family: -apple-system, SpoqaHanSansNeo, sans-serif !important;
+        }
+        div,
+        input,
+        textarea,
+        button,
+        select,
+        a {
+          font-family: -apple-system, SpoqaHanSansNeo, sans-serif !important;
         }
         @font-face {
           font-family: 'SpoqaHanSansNeo';
-          src: url('/fonts/SpoqaHanSansNeo-Light.ttf') format('ttf'),
-            url('/fonts/SpoqaHanSansNeo-Medium.ttf') format('ttf'),
-            url('/fonts/SpoqaHanSansNeo-Bold.ttf') format('ttf'),
-            url('/fonts/SpoqaHanSansNeo-Regular.ttf') format('ttf'),
-            url('/fonts/SpoqaHanSansNeo-Thin.ttf') format('ttf');
+          font-weight: 700;
+          src: url('../fonts/SpoqaHanSansNeo-Bold.ttf') format('truetype');
+        }
+
+        @font-face {
+          font-family: 'SpoqaHanSansNeo';
+          font-weight: 500;
+          src: url('../fonts/SpoqaHanSansNeo-Medium.ttf') format('truetype');
+        }
+
+        @font-face {
+          font-family: 'SpoqaHanSansNeo';
+          font-weight: 400;
+          src: url('../fonts/SpoqaHanSansNeo-Regular.ttf') format('truetype');
+        }
+
+        @font-face {
+          font-family: 'SpoqaHanSansNeo';
+          font-weight: 300;
+          src: url('../fonts/SpoqaHanSansNeo-Light.ttf') format('truetype');
+        }
+
+        @font-face {
+          font-family: 'SpoqaHanSansNeo';
+          font-weight: 100;
+          src: url('../fonts/SpoqaHanSansNeo-Thin.ttf') format('truetype');
         }
 
         :root {

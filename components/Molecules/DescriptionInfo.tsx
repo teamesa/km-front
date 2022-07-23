@@ -38,11 +38,11 @@ export default function DescriptionInfo({
   };
   return (
     <FlexBox marginBottom="20px" fontSize="13px">
-      <Box flex={0.5}>
+      <Box flex="0 0 75px" fontWeight="500" lineHeight="20px">
         {title === '홈페이지' || title === '티켓구매' ? null : title}
         {/* {title} */}
       </Box>
-      <Box flex={2}>{showDescription()}</Box>
+      <Box lineHeight="20px">{showDescription()}</Box>
     </FlexBox>
   );
 }

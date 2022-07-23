@@ -1,10 +1,15 @@
-export default function Search({ width = '18', height = '18', fill = '#000' }) {
+export default function Search({
+  width = '18',
+  height = '18',
+  fill = '#000',
+  viewBox = '0 0 18.964 18.964',
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={width}
       height={height}
-      viewBox="0 0 18.964 18.964"
+      viewBox={viewBox}
     >
       <g data-name="*search">
         <path

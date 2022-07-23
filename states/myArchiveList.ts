@@ -19,18 +19,13 @@ export type TPostList = {
 
 export type MyArchivePageContents = {
   id: number;
-  title: PresentationTitle;
+  title: string;
   comment: string;
   places: string;
   typeBadge: PresentationBadge;
-  imageUrl: string;
-  updateAt: string;
+  listImageUrl: string;
+  updatedAt: string;
   existArchiveImages: boolean;
-};
-
-export type PresentationTitle = {
-  text: string;
-  link: string;
 };
 
 export type PresentationBadge = {
@@ -38,26 +33,17 @@ export type PresentationBadge = {
   typeBadge: boolean;
 };
 
-export const getList = async (post: TPostFilter) => {
-  const exhibitionType = post.filterOptions.exhibitionType;
-  const searchSortType = post.searchSortType;
+export const getList = async () => {
   const axios = customAxios();
   const { data } = (await axios({
-    url: `/api/search`,
+    url: `/api/archive/my`,
     method: 'POST',
     data: {
-      filterOptions: {
-        exhibitionType: exhibitionType,
-        feeTypes: [],
-        progressTypes: [],
-        regionTypes: [],
-      },
       requestPagingStatus: {
         currentContentsCount: 0,
         pageNumber: 0,
-        pageSize: 100,
+        pageSize: 10,
       },
-      searchSortType: searchSortType,
     },
   })) as AxiosResponse<TPostList>;
   return data;
@@ -67,6 +53,6 @@ export default atom({
   key: 'MyArchiveListState',
   default: selector({
     key: 'MyArchiveListState/default',
-    get: () => getList(defaultSearchRequset),
+    get: () => getList(),
   }),
 });
