@@ -19,7 +19,11 @@ export default function Description() {
       return (
         <Box position="relative" top="390px">
           <BottomSheetHeader />
-          <Box backgroundColor={theme.colors.white} padding="0 15px 60px">
+          <Box
+            backgroundColor={theme.colors.white}
+            padding="0 15px 60px"
+            marginTop="-1px"
+          >
             <Tag border={`1px solid ${theme.colors.black}`}>{summary.type}</Tag>
             <Box
               marginTop="14px"
