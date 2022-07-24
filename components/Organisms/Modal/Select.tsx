@@ -5,7 +5,7 @@ import ModalLayout from 'components/Organisms/Modal/ModalLayout';
 import { SelectProps } from 'constants/type/modal';
 import { ListState } from 'states';
 import { searchRequest } from 'states/filter';
-import { getList } from 'states/list';
+import { getListByFilterState } from 'states/list';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
@@ -22,7 +22,7 @@ export default function SelectModal({ payload }: { payload: SelectProps }) {
       searchSortType: value,
     };
     setSearchReques(newSearchRequestBody);
-    const data = await getList(newSearchRequestBody);
+    const data = await getListByFilterState(newSearchRequestBody);
     setListData(data);
   };
 

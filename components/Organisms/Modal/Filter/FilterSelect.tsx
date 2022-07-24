@@ -3,11 +3,11 @@ import { useRecoilState } from 'recoil';
 
 import { Box, RadioLabel } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
-import { searchRequest, SelectInterface, TPostFilter } from 'states/filter';
+import { searchRequest, SelectInterface, FilterState } from 'states/filter';
 import theme from 'styles/theme';
 
 const getFilterCurrValue = (
-  { filterOptions: { feeTypes, progressTypes, regionTypes } }: TPostFilter,
+  { filterOptions: { feeTypes, progressTypes, regionTypes } }: FilterState,
   { label }: SelectInterface,
 ): boolean => {
   const select = new Map<string, SelectInterface>();
@@ -19,8 +19,8 @@ const getFilterCurrValue = (
 
 const makeNewSearchRequest = (
   filter: SelectInterface,
-  exValue: TPostFilter,
-): TPostFilter => {
+  exValue: FilterState,
+): FilterState => {
   const { feeTypes, progressTypes, regionTypes } = exValue.filterOptions;
   const select = new Map<string, SelectInterface>();
   const newFeeTypes: SelectInterface[] = [];

@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
-import { useRouter } from 'next/router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { Box, FlexBox, Tag } from 'components/Atoms';
+import { Tag } from 'components/Atoms';
 import { ListState } from 'states';
 import { searchRequest } from 'states/filter';
-import { getList } from 'states/list';
+import { getListByFilterState } from 'states/list';
 import theme from 'styles/theme';
 
 export default function ListCategory({
@@ -26,7 +25,7 @@ export default function ListCategory({
       },
     };
     setSearchReques(newSearchRequestBody);
-    const data = await getList(newSearchRequestBody);
+    const data = await getListByFilterState(newSearchRequestBody);
     setListData(data);
   };
 

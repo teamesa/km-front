@@ -10,11 +10,14 @@ export const useModal = () =>
     }
 
     function offModal() {
-      set(modalState, (modals) =>
-        modals.map((modal, index) =>
+      set(modalState, (modals) => {
+        if (modals[modals.length - 1].type === 'Filter') {
+          // TODO 적용된 필터만 남겨두고 다 삭제.
+        }
+        return modals.map((modal, index) =>
           index !== modals.length - 1 ? modal : { ...modal, isOff: true },
-        ),
-      );
+        );
+      });
     }
 
     return { onModal, offModal };

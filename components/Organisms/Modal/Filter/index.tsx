@@ -1,4 +1,4 @@
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Button, FlexBox, Layout } from 'components/Atoms';
 import { filterType } from 'components/Organisms/List/ListOptionFilter';
@@ -6,13 +6,15 @@ import { FilterSelectGroup } from 'components/Organisms/Modal/Filter/FilterSelec
 import ModalLayout from 'components/Organisms/Modal/ModalLayout';
 import { searchRequest } from 'states';
 import { makeEmtpyFilterOption } from 'states/filter';
+import list, { getListByFilterState } from 'states/list';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
 export default function SelectModal() {
   const { offModal } = useModal();
   const data = filterType;
-  const setFilter = useSetRecoilState(searchRequest);
+  const [searchRequestState, setFilter] = useRecoilState(searchRequest);
+  const setPostList = useSetRecoilState(list);
   return (
     <ModalLayout>
       <Layout overflow="auto" height="auto">
@@ -42,7 +44,9 @@ export default function SelectModal() {
             lineHeight="50px"
             fontWeight="500"
             backgroundColor={theme.colors.black}
-            onClick={() => {
+            onClick={async () => {
+              const data = await getListByFilterState(searchRequestState);
+              setPostList(data);
               offModal();
             }}
           >

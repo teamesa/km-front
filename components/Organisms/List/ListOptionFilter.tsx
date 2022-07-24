@@ -51,7 +51,7 @@ export const filterType: { title: string; type: SelectInterface[] }[] = [
     ],
   },
   {
-    title: '입장료',
+    title: '지역',
     type: [
       {
         index: 0,

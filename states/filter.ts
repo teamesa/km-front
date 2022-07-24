@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export type TPostFilter = {
+export type FilterState = {
   filterOptions: filterOptionsInterface;
   queryString: '';
   requestPagingStatus: {
@@ -27,8 +27,8 @@ export interface SelectInterface {
 }
 
 export const makeEmtpyFilterOption = (
-  exPostFilter: TPostFilter,
-): TPostFilter => ({
+  exPostFilter: FilterState,
+): FilterState => ({
   ...exPostFilter,
   filterOptions: {
     ...exPostFilter.filterOptions,
@@ -38,7 +38,7 @@ export const makeEmtpyFilterOption = (
   },
 });
 
-export const defaultSearchRequset: TPostFilter = {
+export const defaultSearchRequset: FilterState = {
   filterOptions: {
     exhibitionType: 'ALL',
     feeTypes: [],
@@ -54,7 +54,7 @@ export const defaultSearchRequset: TPostFilter = {
   searchSortType: 'ENROLL_DESC',
 };
 
-export const searchRequest = atom<TPostFilter>({
+export const searchRequest = atom<FilterState>({
   key: 'SearchRequest',
   default: defaultSearchRequset,
 });
