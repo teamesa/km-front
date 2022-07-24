@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 
 import { Box, FlexBox } from 'components/Atoms';
 import { FilterSelect } from 'components/Organisms/Modal/Filter/FilterSelect';
-import { SelectInterface } from 'states/filter';
+import { SelectInterface } from 'states/search-request';
 
 export function FilterSelectGroup({
   filterGroup: item,

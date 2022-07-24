@@ -3,7 +3,11 @@ import { useRecoilState } from 'recoil';
 
 import { Box, RadioLabel } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
-import { searchRequest, SelectInterface, FilterState } from 'states/filter';
+import {
+  searchRequest,
+  SelectInterface,
+  FilterState,
+} from 'states/search-request';
 import theme from 'styles/theme';
 
 const getFilterCurrValue = (

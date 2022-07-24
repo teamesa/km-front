@@ -5,7 +5,7 @@ import {
   defaultSearchRequset,
   FilterState,
   SelectInterface,
-} from 'states/filter';
+} from 'states/search-request';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TPostList = {

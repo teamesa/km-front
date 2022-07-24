@@ -3,8 +3,8 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Tag } from 'components/Atoms';
 import { ListState } from 'states';
-import { searchRequest } from 'states/filter';
 import { getListByFilterState } from 'states/list';
+import { searchRequest } from 'states/search-request';
 import theme from 'styles/theme';
 
 export default function ListCategory({

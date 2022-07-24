@@ -5,8 +5,8 @@ import { filterType } from 'components/Organisms/List/ListOptionFilter';
 import { FilterSelectGroup } from 'components/Organisms/Modal/Filter/FilterSelectGroup';
 import ModalLayout from 'components/Organisms/Modal/ModalLayout';
 import { searchRequest } from 'states';
-import { makeEmtpyFilterOption } from 'states/filter';
 import list, { getListByFilterState } from 'states/list';
+import { makeEmtpyFilterOption } from 'states/search-request';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 

@@ -1,6 +1,6 @@
 import Filter from 'assets/list/Filter';
 import { Box, Button } from 'components/Atoms';
-import { SelectInterface } from 'states/filter';
+import { SelectInterface } from 'states/search-request';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 

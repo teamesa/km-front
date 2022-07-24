@@ -4,8 +4,8 @@ import { Box, Button, FlexBox, Layout } from 'components/Atoms';
 import ModalLayout from 'components/Organisms/Modal/ModalLayout';
 import { SelectProps } from 'constants/type/modal';
 import { ListState } from 'states';
-import { searchRequest } from 'states/filter';
 import { getListByFilterState } from 'states/list';
+import { searchRequest } from 'states/search-request';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
