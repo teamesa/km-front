@@ -22,7 +22,7 @@ const AlertConfirmPopup = () => {
         height="167px"
         backgroundColor={theme.colors.white}
       >
-        <Box padding="50px 0 0" height="117px">
+        <Box padding="50px 40px">
           <Box
             fontSize="13px"
             lineHeight="1.54"
