@@ -6,20 +6,8 @@ import customAxios from 'utils/hooks/customAxios';
 
 export type TGetSummary = {
   detailImageUrl: string;
-  listImageUrl: string;
-  summary: any;
   feeType: string;
   homePageUrl: string;
-  lat: number;
-  lng: number;
-  place: string;
-  progress: boolean;
-  term: string;
-  time: string;
-  title: string;
-  type: string;
-
-  ticketUrl: string;
   itemInfoAdditionalInfo: {
     createArchiveUrl: string;
     heart: {
@@ -29,6 +17,16 @@ export type TGetSummary = {
     };
     heartCount: number;
   };
+  lat: number;
+  listImageUrl: string;
+  lng: number;
+  place: string;
+  price: string;
+  term: string;
+  ticketUrl: string;
+  time: string;
+  title: string;
+  type: string;
 };
 
 type TGetIntroduction = {
