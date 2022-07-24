@@ -47,7 +47,13 @@ export default function ArchiveHome() {
 
   const onSubmit = async (data: ArchiveWirteProps) => {
     setArchiveWirte(data);
-    const postData = { ...data, itemId: Number(data.itemId) };
+    const postData = {
+      ...data,
+      itemId: Number(data.itemId),
+      placeInfos: data.placeInfos.filter((item) =>
+        item === undefined ? null : item,
+      ),
+    };
     return await postArchiveWirte({
       body: {
         itemId: postData.itemId,
