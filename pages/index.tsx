@@ -1,11 +1,7 @@
 import type { NextPage } from 'next';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
-import ArrowDown from 'assets/list/ArrowDown';
-import { Box, Button, FlexBox, Layout, Tag } from 'components/Atoms';
-import Select from 'components/Atoms/Select';
-import ListFilter from 'components/Molecules/ListFilter';
-import ListCategory from 'components/Organisms/List/ListCategory';
+import { Box, Button, Layout, Tag } from 'components/Atoms';
 import PopupRouter from 'components/Organisms/Popup/PopupRouter';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
@@ -36,13 +32,23 @@ const Home: NextPage = () => {
         <Box fontWeight={500}>medium - 500</Box>
         <Box fontWeight={400}>normal - 400</Box>
         <Box fontWeight={200}>light - 300</Box>
+        <hr />
         <Button
           onClick={() => {
             setAlertState(ALERT_MESSAGE.ALERT.COPY_TO_CLIPBOARD);
-            setPopupName(POPUP_NAME.ALERT_SUCCESS);
+            setPopupName(POPUP_NAME.ALERT_CONFIRM);
           }}
         >
           확인팝업 띄우기
+        </Button>
+        <hr />
+        <Button
+          onClick={() => {
+            setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
+            setPopupName(POPUP_NAME.ALERT_CANCEL_CONFIRM);
+          }}
+        >
+          취소/확인팝업 띄우기
         </Button>
       </Layout>
     </>
