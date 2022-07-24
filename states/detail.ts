@@ -70,7 +70,7 @@ export const DetailState = selectorFamily({
     const archive = await getArchive({ itemId: itemId });
 
     const tabViewData: Array<TabViewData> =
-      introduction.summary === null
+      introduction.summary === null && introduction.photo.length === 0
         ? [{ ...archive }]
         : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
 

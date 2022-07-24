@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Box, Button, Span } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
@@ -11,13 +11,20 @@ interface IntroduceProps {
 }
 export default function Introduce({ data }: IntroduceProps) {
   const [showMore, setShowMore] = useState(false);
+
+  useEffect(() => {
+    if (data.summary?.length < 300 || data.summary === null) {
+      setShowMore(true);
+    }
+  }, [data.summary, data.summary?.length]);
+
   return (
     <Box
       color={theme.colors.black}
       fontSize="13px"
       lineHeight="20px"
       textAlign="left"
-      padding="40px 0px"
+      padding="40px 15px 0 0"
     >
       {showMore ? (
         <Box>
@@ -45,24 +52,6 @@ export default function Introduce({ data }: IntroduceProps) {
           </Button>
         </Box>
       )}
-
-      {/* {showMore ? (
-          <InnerHTML data={data.summary} />
-        ) : (
-          <Span>
-            <InnerHTML data={data.summary.substring(0)} />
-            ...
-          </Span>
-        )}
-        {showMore ? null : (
-          <Button
-            fontSize="13px"
-            color={theme.colors.orange}
-            onClick={() => setShowMore(!showMore)}
-          >
-            more
-          </Button>
-        )} */}
       {data.photo?.map((item, index) => (
         <Box marginTop="20px" key={index}>
           <Image
@@ -72,13 +61,9 @@ export default function Introduce({ data }: IntroduceProps) {
                 : item
             }
             alt="image"
-            // width="345vmin"
-            // height="400vmin"
-            // objectFit="none"
             width="100%"
             height="100%"
             layout="responsive"
-            // objectFit="none"
           />
         </Box>
       ))}
