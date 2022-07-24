@@ -4,6 +4,6 @@ export default atom({
   key: 'AlertState',
   default: {
     code: '',
-    description: '',
+    message: '',
   },
 });

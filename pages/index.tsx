@@ -7,15 +7,16 @@ import Select from 'components/Atoms/Select';
 import ListFilter from 'components/Molecules/ListFilter';
 import ListCategory from 'components/Organisms/List/ListCategory';
 import PopupRouter from 'components/Organisms/Popup/PopupRouter';
+import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { PopupNameState } from 'states';
+import { AlertState, PopupNameState } from 'states';
 import theme from 'styles/theme';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const Home: NextPage = () => {
   useInitHeader({ headerLeft: 'logo', headerEnd: 'home' });
-  const [popup, setPopupName] = useRecoilState(PopupNameState);
-  console.log('sd', popup);
+  const setAlertState = useSetRecoilState(AlertState);
+  const setPopupName = useSetRecoilState(PopupNameState);
 
   return (
     <>
@@ -37,10 +38,11 @@ const Home: NextPage = () => {
         <Box fontWeight={200}>light - 300</Box>
         <Button
           onClick={() => {
+            setAlertState(ALERT_MESSAGE.ALERT.COPY_TO_CLIPBOARD);
             setPopupName(POPUP_NAME.ALERT_SUCCESS);
           }}
         >
-          팝업
+          확인팝업 띄우기
         </Button>
       </Layout>
     </>
