@@ -4,14 +4,14 @@ import { useRecoilState } from 'recoil';
 import { Box, RadioLabel } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import {
-  searchRequest,
+  filter,
+  SearchFilterSelectGroup,
   SelectInterface,
-  FilterState,
-} from 'states/search-request';
+} from 'states/filter';
 import theme from 'styles/theme';
 
 const getFilterCurrValue = (
-  { filterOptions: { feeTypes, progressTypes, regionTypes } }: FilterState,
+  { feeTypes, progressTypes, regionTypes }: SearchFilterSelectGroup,
   { label }: SelectInterface,
 ): boolean => {
   const select = new Map<string, SelectInterface>();
@@ -23,9 +23,9 @@ const getFilterCurrValue = (
 
 const makeNewSearchRequest = (
   filter: SelectInterface,
-  exValue: FilterState,
-): FilterState => {
-  const { feeTypes, progressTypes, regionTypes } = exValue.filterOptions;
+  exValue: SearchFilterSelectGroup,
+): SearchFilterSelectGroup => {
+  const { feeTypes, progressTypes, regionTypes } = exValue;
   const select = new Map<string, SelectInterface>();
   const newFeeTypes: SelectInterface[] = [];
   const newProgressTypes: SelectInterface[] = [];
@@ -54,18 +54,14 @@ const makeNewSearchRequest = (
   });
 
   return {
-    ...exValue,
-    filterOptions: {
-      exhibitionType: exValue.filterOptions.exhibitionType,
-      feeTypes: newFeeTypes,
-      progressTypes: newProgressTypes,
-      regionTypes: newRegionTypes,
-    },
+    feeTypes: newFeeTypes,
+    progressTypes: newProgressTypes,
+    regionTypes: newRegionTypes,
   };
 };
 
 export function FilterSelect({ filter: list }: { filter: SelectInterface }) {
-  const [requestStatus, setRequestStatus] = useRecoilState(searchRequest);
+  const [requestStatus, setRequestStatus] = useRecoilState(filter);
   const currValue = getFilterCurrValue(requestStatus, list);
   return (
     <Box height="20px" marginBottom="20px" flex="0 0 50%">

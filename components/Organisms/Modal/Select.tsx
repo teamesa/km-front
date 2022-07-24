@@ -4,7 +4,7 @@ import { Box, Button, FlexBox, Layout } from 'components/Atoms';
 import ModalLayout from 'components/Organisms/Modal/ModalLayout';
 import { SelectProps } from 'constants/type/modal';
 import { ListState } from 'states';
-import { getListByFilterState } from 'states/list';
+import { getList } from 'states/list';
 import { searchRequest } from 'states/search-request';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
@@ -22,7 +22,7 @@ export default function SelectModal({ payload }: { payload: SelectProps }) {
       searchSortType: value,
     };
     setSearchReques(newSearchRequestBody);
-    const data = await getListByFilterState(newSearchRequestBody);
+    const data = await getList(newSearchRequestBody);
     setListData(data);
   };
 

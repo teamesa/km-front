@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export type FilterState = {
+export type SearchRequestInterface = {
   filterOptions: filterOptionsInterface;
   queryString: '';
   requestPagingStatus: {
@@ -13,22 +13,14 @@ export type FilterState = {
 
 export type filterOptionsInterface = {
   exhibitionType: string;
-  feeTypes: SelectInterface[] | [];
-  progressTypes: SelectInterface[] | [];
-  regionTypes: SelectInterface[] | [];
+  feeTypes: string[] | [];
+  progressTypes: string[] | [];
+  regionTypes: string[] | [];
 };
 
-export interface SelectInterface {
-  index: number;
-  label: string;
-  value: string;
-  status: boolean;
-  group: 'feeTypes' | 'progressTypes' | 'regionTypes';
-}
-
-export const makeEmtpyFilterOption = (
-  exPostFilter: FilterState,
-): FilterState => ({
+export const makeEmtpyRequestOption = (
+  exPostFilter: SearchRequestInterface,
+): SearchRequestInterface => ({
   ...exPostFilter,
   filterOptions: {
     ...exPostFilter.filterOptions,
@@ -38,7 +30,7 @@ export const makeEmtpyFilterOption = (
   },
 });
 
-export const defaultSearchRequset: FilterState = {
+export const makeDefaultSearchRequest = (): SearchRequestInterface => ({
   filterOptions: {
     exhibitionType: 'ALL',
     feeTypes: [],
@@ -52,9 +44,9 @@ export const defaultSearchRequset: FilterState = {
     pageSize: 100,
   },
   searchSortType: 'ENROLL_DESC',
-};
+});
 
-export const searchRequest = atom<FilterState>({
+export const searchRequest = atom<SearchRequestInterface>({
   key: 'SearchRequest',
-  default: defaultSearchRequset,
+  default: makeDefaultSearchRequest(),
 });

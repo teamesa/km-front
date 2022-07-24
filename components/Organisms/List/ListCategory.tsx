@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Tag } from 'components/Atoms';
 import { ListState } from 'states';
-import { getListByFilterState } from 'states/list';
+import { getList } from 'states/list';
 import { searchRequest } from 'states/search-request';
 import theme from 'styles/theme';
 
@@ -25,7 +25,7 @@ export default function ListCategory({
       },
     };
     setSearchReques(newSearchRequestBody);
-    const data = await getListByFilterState(newSearchRequestBody);
+    const data = await getList(newSearchRequestBody);
     setListData(data);
   };
 
