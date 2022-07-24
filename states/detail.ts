@@ -5,6 +5,8 @@ import { noIntroData } from 'components/Organisms/Detail/data';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TGetSummary = {
+  detailImageUrl: string;
+  listImageUrl: string;
   summary: any;
   feeType: string;
   homePageUrl: string;
@@ -16,7 +18,7 @@ export type TGetSummary = {
   time: string;
   title: string;
   type: string;
-  thumbnailImageUrl: string;
+
   ticketUrl: string;
   itemInfoAdditionalInfo: {
     createArchiveUrl: string;
