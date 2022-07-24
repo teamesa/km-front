@@ -13,10 +13,30 @@ export type TPostFilter = {
 
 export type filterOptionsInterface = {
   exhibitionType: string;
-  feeTypes: string[] | [];
-  progressTypes: string[] | [];
-  regionTypes: string[] | [];
+  feeTypes: SelectInterface[] | [];
+  progressTypes: SelectInterface[] | [];
+  regionTypes: SelectInterface[] | [];
 };
+
+export interface SelectInterface {
+  index: number;
+  label: string;
+  value: string;
+  status: boolean;
+  group: 'feeTypes' | 'progressTypes' | 'regionTypes';
+}
+
+export const makeEmtpyFilterOption = (
+  exPostFilter: TPostFilter,
+): TPostFilter => ({
+  ...exPostFilter,
+  filterOptions: {
+    ...exPostFilter.filterOptions,
+    feeTypes: [],
+    progressTypes: [],
+    regionTypes: [],
+  },
+});
 
 export const defaultSearchRequset: TPostFilter = {
   filterOptions: {
