@@ -1,12 +1,14 @@
 import { css } from '@emotion/react';
+import { useSetRecoilState } from 'recoil';
 
 import ItemImage from './ItemImage';
 import ItemInfo from './ItemInfo';
 
 import { Pointer } from 'assets/mypage';
 import { Box, FlexBox, Span } from 'components/Atoms';
+import { POPUP_NAME } from 'constants/popupName';
+import { PopupNameState } from 'states';
 import { MyArchivePageContents } from 'states/myArchiveList';
-
 // const af = styled.li`
 //   &:before {
 //     content: '·';
@@ -23,13 +25,13 @@ type ItemProps = {
 
 export default function Item(props: ItemProps) {
   const content = props.content;
-
+  const setPopupName = useSetRecoilState(PopupNameState);
   return (
     <FlexBox
       position="relative"
       padding="0px 0px 40px"
       onClick={() => {
-        alert('클릭됐어요');
+        setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
       }}
       css={css`
         &:before {
