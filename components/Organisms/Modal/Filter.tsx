@@ -100,6 +100,7 @@ export default function SelectModal({ payload }: { payload: FilterProps }) {
             적용
           </Button>
         </FlexBox>
+        <Box width="100%" height="var(--platformBottomArea)" />
       </Layout>
     </ModalLayout>
   );

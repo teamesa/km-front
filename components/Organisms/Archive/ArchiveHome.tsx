@@ -92,12 +92,16 @@ export default function ArchiveHome() {
             backgroundColor={theme.colors.grayEE}
             color={theme.colors.grayEE}
           />
-          <Box paddingTop="30px">코멘트 & 사진</Box>
+          <Box paddingTop="30px" fontSize="13px">
+            코멘트 & 사진
+          </Box>
           <TextArea
             marginTop="10px"
             padding="15px"
             height="150px"
             overflow="scroll"
+            fontSize="13px"
+            lineHeight="18px"
             backgroundColor={theme.colors.grayF8}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
             {...register('comment')}
