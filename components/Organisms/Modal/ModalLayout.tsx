@@ -10,7 +10,7 @@ interface ModalLayoutProps {
 }
 
 export default function ModalLayout({ children }: ModalLayoutProps) {
-  const { offModal } = useModal();
+  const { offModal, resetFilter } = useModal();
   return (
     <Box
       position="absolute"
@@ -22,7 +22,12 @@ export default function ModalLayout({ children }: ModalLayoutProps) {
       background={theme.colors.white}
       overflow="auto"
     >
-      <ModalHeader headerLeftAction={offModal} />
+      <ModalHeader
+        headerLeftAction={() => {
+          offModal();
+          resetFilter();
+        }}
+      />
       <Box position="relative" height="auto" paddingBottom="10px">
         {children}
       </Box>

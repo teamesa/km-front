@@ -1,12 +1,13 @@
+import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Button, FlexBox, Layout } from 'components/Atoms';
-import { filterType } from 'components/Organisms/List/ListOptionFilter';
 import { FilterSelectGroup } from 'components/Organisms/Modal/Filter/FilterSelectGroup';
 import ModalLayout from 'components/Organisms/Modal/ModalLayout';
 import { searchRequest } from 'states';
 import {
   filter,
+  filterType,
   makeEmtpyFilterOption,
   makeRequestFilterOptionBySearchFilterSelectGroup,
 } from 'states/filter';
@@ -14,7 +15,7 @@ import list, { getList } from 'states/list';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
-export default function SelectModal() {
+export default function FilterModal() {
   const { offModal } = useModal();
   const data = filterType;
   const [searchRequestState, setSearchRequestState] =
