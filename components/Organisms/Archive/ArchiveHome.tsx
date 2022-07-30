@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Plus } from 'assets/archive/Plus';
@@ -19,16 +18,19 @@ import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
 import Rating from 'components/Organisms/Archive/Rating';
 import SearchTitle from 'components/Organisms/Archive/SearchTitle';
-import { ArchiveWirteState } from 'states';
-import { ArchiveWirteProps, postArchiveWirte } from 'states/archiveWirte';
+import PopupRouter from 'components/Organisms/Popup/PopupRouter';
+import { ALERT_MESSAGE } from 'constants/alertMessage';
+import { POPUP_NAME } from 'constants/popupName';
+import { AlertState, ArchiveWirteState, PopupNameState } from 'states';
+import { ArchiveWirteProps } from 'states/archiveWirte';
 import theme from 'styles/theme';
 
 export default function ArchiveHome() {
   const router = useRouter();
   const { id, title, checked } = router.query;
-  const thumbnailImageUrl = router.query.thumbnailImageUrl
-    ? String(router.query.thumbnailImageUrl)
-    : '';
+  const thumbnailImageUrl = String(router.query.thumbnailImageUrl);
+  const setAlertState = useSetRecoilState(AlertState);
+  const setPopupName = useSetRecoilState(PopupNameState);
   const [archiveWirte, setArchiveWirte] = useRecoilState(ArchiveWirteState);
   const {
     register,
@@ -46,7 +48,6 @@ export default function ArchiveHome() {
   });
 
   const onSubmit = async (data: ArchiveWirteProps) => {
-    setArchiveWirte(data);
     const postData = {
       ...data,
       itemId: Number(data.itemId),
@@ -54,20 +55,14 @@ export default function ArchiveHome() {
         item === undefined ? null : item,
       ),
     };
-    return await postArchiveWirte({
-      body: {
-        itemId: postData.itemId,
-        starRating: postData.starRating,
-        comment: postData.comment,
-        photoUrls: [],
-        placeInfos: postData.placeInfos,
-        visibleAtItem: postData.visibleAtItem,
-      },
-    });
+    setArchiveWirte(postData);
+    setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_REGISTRATION_QUESTION);
+    setPopupName(POPUP_NAME.ALERT_ARCHIVE_ASK);
   };
 
   return (
     <>
+      <PopupRouter />
       <Box>{title ? null : <SearchTitle />}</Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box>
@@ -127,7 +122,7 @@ export default function ArchiveHome() {
               근처 다녀온 맛집
             </Box>
           </FlexBox>
-          <Button marginTop="10px" width="100%">
+          <Button type="button" marginTop="10px" width="100%">
             <FlexBox>
               <Box flex={1.5}>
                 <AddressInput
@@ -155,7 +150,7 @@ export default function ArchiveHome() {
               근처 다녀온 카페
             </Box>
           </FlexBox>
-          <Button marginTop="10px" width="100%">
+          <Button type="button" marginTop="10px" width="100%">
             <FlexBox>
               <Box flex={1.5}>
                 <AddressInput

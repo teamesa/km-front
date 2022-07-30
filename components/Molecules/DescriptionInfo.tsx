@@ -1,7 +1,4 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-
-import { FlexBox, Box, Button } from 'components/Atoms';
+import { FlexBox, Box } from 'components/Atoms';
 
 interface DescriptionInfoProps {
   title: string;

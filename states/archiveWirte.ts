@@ -56,6 +56,7 @@ export async function postArchiveWirte({ body }: { body: ArchiveWirteProps }) {
     url: `/api/archive`,
     data: body,
   })) as AxiosResponse<ArchiveWirteProps>;
+  console.log(data);
   return data;
 }
 
