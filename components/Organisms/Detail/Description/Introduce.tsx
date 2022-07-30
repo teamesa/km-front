@@ -14,7 +14,7 @@ export default function Introduce({ data }: IntroduceProps) {
       fontSize="13px"
       lineHeight="20px"
       textAlign="left"
-      padding="40px 15px 0 0"
+      padding="40px 0px"
     >
       <Box>
         <InnerHTML data={data.summary} />
