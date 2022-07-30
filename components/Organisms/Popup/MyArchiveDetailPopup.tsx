@@ -1,18 +1,29 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
+import { useSetRecoilState } from 'recoil';
 
 import StarRating from 'assets/list/StarRating';
 import { Pointer, CloseBtn } from 'assets/mypage';
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
 import Popup from 'components/Molecules/Popup';
+import { POPUP_NAME } from 'constants/popupName';
+import { PopupNameState } from 'states';
 import theme from 'styles/theme';
 
 const MyArchiveDetailPopup = () => {
+  const setPopupName = useSetRecoilState(PopupNameState);
+
+  const handleClosePopup = () => {
+    setPopupName(POPUP_NAME.NULL);
+  };
+
   return (
     <Popup>
       <Box>
         <Box marginLeft="172.5px">
-          <CloseBtn />
+          <Button onClick={handleClosePopup}>
+            <CloseBtn />
+          </Button>
         </Box>
         <Box background="#fff" width="345px" height="652px" margin="15px">
           <Box height="99px" padding="20px 15px">
