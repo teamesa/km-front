@@ -27,7 +27,6 @@ export default function SearchTitle() {
       if (keyword) {
         const updateData = async () => {
           const searchData = await getArchiveSearch({ query: keyword });
-          console.log('res', searchData);
           setKeyItems(searchData.contents);
         };
         updateData();
