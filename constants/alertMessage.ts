@@ -26,5 +26,9 @@ export const ALERT_MESSAGE = {
       code: 'ERROR-001',
       message: '알수없는 에러가 발생했습니다.',
     },
+    LOGIN_CONFIRMATION: {
+      code: 'ALT-006',
+      message: '로그인 후 이용 가능합니다.\n로그인 하시겠습니까?',
+    },
   },
 };
