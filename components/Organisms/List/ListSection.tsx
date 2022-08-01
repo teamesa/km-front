@@ -2,6 +2,7 @@ import { useRecoilValueLoadable } from 'recoil';
 
 import ListCard from 'components/Organisms/List/ListCard';
 import NoItemList from 'components/Organisms/List/NoItemList';
+import PopupRouter from 'components/Organisms/Popup/PopupRouter';
 import { ListState } from 'states';
 
 export default function ListSection() {
@@ -15,6 +16,7 @@ export default function ListSection() {
 
       return (
         <>
+          <PopupRouter />
           {data.contents.contents.map((content, index) => (
             <ListCard key={content?.id ?? index} content={content} />
           ))}
