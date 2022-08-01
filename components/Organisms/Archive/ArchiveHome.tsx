@@ -123,26 +123,7 @@ export default function ArchiveHome() {
             </Box>
           </FlexBox>
           <Button type="button" marginTop="10px" width="100%">
-            <FlexBox>
-              <Box flex={1.5}>
-                <AddressInput
-                  name="placeInfos[0]"
-                  type="FOOD"
-                  control={control}
-                />
-              </Box>
-              <Box
-                padding="13px 23px 12px"
-                color={theme.colors.white}
-                backgroundColor={theme.colors.black}
-                fontSize="12px"
-                fontWeight={500}
-                flex={0.5}
-                marginLeft="5px"
-              >
-                장소찾기
-              </Box>
-            </FlexBox>
+            <AddressInput name="placeInfos[0]" type="FOOD" control={control} />
           </Button>
           <FlexBox marginTop="20px">
             <MapPoint />
@@ -151,26 +132,7 @@ export default function ArchiveHome() {
             </Box>
           </FlexBox>
           <Button type="button" marginTop="10px" width="100%">
-            <FlexBox>
-              <Box flex={1.5}>
-                <AddressInput
-                  name="placeInfos[1]"
-                  type="CAFE"
-                  control={control}
-                />
-              </Box>
-              <Box
-                padding="13px 23px 12px"
-                color={theme.colors.white}
-                backgroundColor={theme.colors.black}
-                fontSize="12px"
-                fontWeight={500}
-                flex={0.5}
-                marginLeft="5px"
-              >
-                장소찾기
-              </Box>
-            </FlexBox>
+            <AddressInput name="placeInfos[1]" type="CAFE" control={control} />
           </Button>
           <Box marginTop="30px" />
           <Box height="1px" backgroundColor={theme.colors.grayEE} />

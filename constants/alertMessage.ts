@@ -20,7 +20,7 @@ export const ALERT_MESSAGE = {
   ERROR: {
     ARCHIVE_REGISTRATION_QUESTION: {
       code: 'ERROR-001',
-      message: '이미 등록된 아카이브 입니다. 마이아카이브에서 확인해주세요.',
+      message: '알수없는 에러가 발생했습니다.',
     },
   },
 };

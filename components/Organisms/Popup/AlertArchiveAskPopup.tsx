@@ -10,7 +10,7 @@ import customAxios from 'utils/hooks/customAxios';
 const AlertArchiveAskPopup = () => {
   const alertState = useRecoilValue(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const archiveWirte = useSetRecoilState(ArchiveWirteState);
+  const archiveWirte = useRecoilValue(ArchiveWirteState);
 
   const handleConfirm = async () => {
     const axios = customAxios();
