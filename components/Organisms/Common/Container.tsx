@@ -8,15 +8,20 @@ import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import { Box } from 'components/Atoms';
 import BottomTabNavigator from 'components/Organisms/Common/BottomTabNavigator';
 import HeaderBar from 'components/Organisms/Common/HeaderBar';
+import { modalOutState } from 'states/modal';
 import { setPopup } from 'states/popupName';
 import theme from 'styles/theme';
 
 export default function Container({ children }: { children: ReactNode }) {
   const PopupState = useRecoilValue(setPopup);
+  const modalOut = useRecoilValue(modalOutState);
+
   return (
     <Box
       style={
-        PopupState ? { position: 'fixed', inset: '0', touchAction: 'none' } : {}
+        modalOut || PopupState
+          ? { position: 'fixed', inset: '0', touchAction: 'none' }
+          : {}
       }
     >
       <HeaderBar />
@@ -40,7 +45,7 @@ export default function Container({ children }: { children: ReactNode }) {
             selectedIcon: <NavWish fill={theme.colors.black} />,
             icon: <NavWish />,
             pathName: 'PICK',
-            path: ['/wish'],
+            path: ['/pick'],
           },
           {
             selectedIcon: <NavMyPage fill={theme.colors.black} />,
