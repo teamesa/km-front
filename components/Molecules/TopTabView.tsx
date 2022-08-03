@@ -7,7 +7,6 @@ import { Box } from 'components/Atoms';
 import Archive from 'components/Organisms/Detail/Description/Archive';
 import Introduce from 'components/Organisms/Detail/Description/Introduce';
 import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
-import MyArchiveListFragment from 'components/Organisms/MyPage/Archive/MyArchiveListFragment';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
 import theme from 'styles/theme';
 

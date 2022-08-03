@@ -1,19 +1,23 @@
 import type { NextPage } from 'next';
+import { useSetRecoilState } from 'recoil';
 
-import ArrowDown from 'assets/list/ArrowDown';
-import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
-import Select from 'components/Atoms/Select';
-import ListFilter from 'components/Molecules/ListFilter';
-import ListCategory from 'components/Organisms/List/ListCategory';
+import { Box, Button, Layout, Tag } from 'components/Atoms';
+import PopupRouter from 'components/Organisms/Popup/PopupRouter';
+import { ALERT_MESSAGE } from 'constants/alertMessage';
+import { POPUP_NAME } from 'constants/popupName';
+import { AlertState, PopupNameState } from 'states';
 import theme from 'styles/theme';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const Home: NextPage = () => {
   useInitHeader({ headerLeft: 'logo', headerEnd: 'home' });
+  const setAlertState = useSetRecoilState(AlertState);
+  const setPopupName = useSetRecoilState(PopupNameState);
 
   return (
     <>
       <Layout>
+        <PopupRouter />
         <Box margin="14px 0 10px">
           <Tag color={theme.colors.lime} background={theme.colors.black}>
             전시회
@@ -28,6 +32,24 @@ const Home: NextPage = () => {
         <Box fontWeight={500}>medium - 500</Box>
         <Box fontWeight={400}>normal - 400</Box>
         <Box fontWeight={200}>light - 300</Box>
+        <hr />
+        <Button
+          onClick={() => {
+            setAlertState(ALERT_MESSAGE.ALERT.COPY_TO_CLIPBOARD);
+            setPopupName(POPUP_NAME.ALERT_CONFIRM);
+          }}
+        >
+          확인팝업 띄우기
+        </Button>
+        <hr />
+        <Button
+          onClick={() => {
+            setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
+            setPopupName(POPUP_NAME.ALERT_CANCEL_CONFIRM);
+          }}
+        >
+          취소/확인팝업 띄우기
+        </Button>
       </Layout>
     </>
   );

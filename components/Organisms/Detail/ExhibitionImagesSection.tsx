@@ -11,7 +11,7 @@ export default function ExhibitionImagesSection() {
   const router = useRouter();
   const { id } = router.query;
   const state = useRecoilValueLoadable(DetailState(Number(id)));
-  const thumbnailImageUrl = state?.contents?.summary?.thumbnailImageUrl;
+  const detailImageUrl = state?.contents?.summary?.detailImageUrl;
 
   return (
     <Box
@@ -22,7 +22,7 @@ export default function ExhibitionImagesSection() {
       maxHeight="450px"
     >
       <Image
-        src={thumbnailImageUrl ? thumbnailImageUrl : noImage}
+        src={detailImageUrl ? detailImageUrl : noImage}
         alt="image"
         width="375"
         height="500"
