@@ -1,4 +1,4 @@
-import { useRecoilValue } from 'recoil';
+import { constSelector, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import AlertArchiveAskPopup from 'components/Organisms/Popup/AlertArchiveAskPopup';
 import AlertCancelConfirmPopup from 'components/Organisms/Popup/AlertCancelConfirmPopup';
@@ -8,9 +8,17 @@ import ArchiveWirteConfirmPopup from 'components/Organisms/Popup/ArchiveWirteCon
 import ArchiveWirteErrorPopup from 'components/Organisms/Popup/ArchiveWirteErrorPopup';
 import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
+import { setPopup } from 'states/popupName';
 
 const PopupRouter = () => {
   const popupName = useRecoilValue(PopupNameState);
+  const setPopupState = useSetRecoilState(setPopup);
+
+  if (popupName?.length) {
+    setPopupState(true);
+  } else {
+    setPopupState(false);
+  }
 
   switch (popupName) {
     case POPUP_NAME.ALERT_CONFIRM:
