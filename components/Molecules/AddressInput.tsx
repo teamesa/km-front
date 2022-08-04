@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Controller } from 'react-hook-form';
 
-import { Input } from 'components/Atoms';
+import { Box, Button, FlexBox, Input } from 'components/Atoms';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
@@ -25,14 +25,70 @@ export default function AddressInput({
       control={control}
       render={({ field: { onChange: _onChange } }) => (
         <>
-          {placeAddress ? (
-            <Input
-              readOnly
-              padding="12px 15px"
-              border={`1px solid ${theme.colors.grayBB}`}
-              backgroundColor={theme.colors.grayEE}
-              color={theme.colors.gray77}
-              placeholder="인수 장소 검색"
+          <Button
+            width="100%"
+            type="button"
+            onClick={() =>
+              onModal({
+                type: 'SearchMap',
+                payload: {
+                  onChange: (e: any) => {
+                    onChange && onChange(e);
+                    setPlaceAddress(e.place_name);
+                    _onChange({
+                      address: e.address_name,
+                      name: e.place_name,
+                      placeType: type,
+                      roadAddress: e.road_address_name,
+                    });
+                  },
+                },
+              })
+            }
+          >
+            <FlexBox>
+              <Box width="100%" flex={1.5}>
+                {placeAddress ? (
+                  <Input
+                    readOnly
+                    padding="12px 15px"
+                    border={`1px solid ${theme.colors.grayBB}`}
+                    backgroundColor={theme.colors.grayEE}
+                    color={theme.colors.gray77}
+                    placeholder="인수 장소 검색"
+                    value={placeAddress}
+                    onChange={_onChange}
+                  />
+                ) : (
+                  <Input
+                    readOnly
+                    name={name}
+                    padding="12px 15px"
+                    border={`1px solid ${theme.colors.grayBB}`}
+                    backgroundColor={theme.colors.white}
+                    placeholder="장소찾기를 선택해 추가해주세요."
+                    value={placeAddress}
+                    onChange={onChange}
+                  />
+                )}
+              </Box>
+              <Box
+                width="100%"
+                flex={0.5}
+                padding="13px 23px 12px"
+                color={theme.colors.white}
+                backgroundColor={theme.colors.black}
+                fontSize="12px"
+                fontWeight={500}
+                marginLeft="5px"
+              >
+                장소찾기
+              </Box>
+            </FlexBox>
+          </Button>
+          {/* {placeAddress ? (
+            <Button
+              type="button"
               onClick={() =>
                 onModal({
                   type: 'SearchMap',
@@ -50,17 +106,34 @@ export default function AddressInput({
                   },
                 })
               }
-              value={placeAddress}
-              onChange={_onChange}
-            />
+            >
+              <FlexBox>
+                <Input
+                  readOnly
+                  padding="12px 15px"
+                  border={`1px solid ${theme.colors.grayBB}`}
+                  backgroundColor={theme.colors.grayEE}
+                  color={theme.colors.gray77}
+                  placeholder="인수 장소 검색"
+                  value={placeAddress}
+                  onChange={_onChange}
+                />
+                <Box
+                  padding="13px 23px 12px"
+                  color={theme.colors.white}
+                  backgroundColor={theme.colors.black}
+                  fontSize="12px"
+                  fontWeight={500}
+                  flex={0.5}
+                  marginLeft="5px"
+                >
+                  장소찾기
+                </Box>
+              </FlexBox>
+            </Button>
           ) : (
-            <Input
-              readOnly
-              name={name}
-              padding="12px 15px"
-              border={`1px solid ${theme.colors.grayBB}`}
-              backgroundColor={theme.colors.white}
-              placeholder="장소찾기를 선택해 추가해주세요."
+            <Button
+              type="button"
               onClick={() =>
                 onModal({
                   type: 'SearchMap',
@@ -78,10 +151,32 @@ export default function AddressInput({
                   },
                 })
               }
-              value={placeAddress}
-              onChange={onChange}
-            />
-          )}
+            >
+              <FlexBox>
+                <Input
+                  readOnly
+                  name={name}
+                  padding="12px 15px"
+                  border={`1px solid ${theme.colors.grayBB}`}
+                  backgroundColor={theme.colors.white}
+                  placeholder="장소찾기를 선택해 추가해주세요."
+                  value={placeAddress}
+                  onChange={onChange}
+                />
+                <Box
+                  padding="13px 23px 12px"
+                  color={theme.colors.white}
+                  backgroundColor={theme.colors.black}
+                  fontSize="12px"
+                  fontWeight={500}
+                  flex={0.5}
+                  marginLeft="5px"
+                >
+                  장소찾기
+                </Box>
+              </FlexBox>
+            </Button>
+          )} */}
         </>
       )}
     ></Controller>

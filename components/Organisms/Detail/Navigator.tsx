@@ -75,7 +75,7 @@ export default function Navigator() {
               query: {
                 id: id,
                 title: data?.title,
-                thumbnailImageUrl: data?.thumbnailImageUrl,
+                thumbnailImageUrl: data?.listImageUrl,
                 checked: true,
               },
             });
