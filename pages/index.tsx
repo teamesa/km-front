@@ -2,7 +2,6 @@ import type { NextPage } from 'next';
 import { useSetRecoilState } from 'recoil';
 
 import { Box, Button, Layout, Tag } from 'components/Atoms';
-import PopupRouter from 'components/Organisms/Popup/PopupRouter';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
@@ -17,7 +16,6 @@ const Home: NextPage = () => {
   return (
     <>
       <Layout>
-        <PopupRouter />
         <Box margin="14px 0 10px">
           <Tag color={theme.colors.lime} background={theme.colors.black}>
             전시회
