@@ -10,7 +10,7 @@ export default function ModalContainer() {
   return (
     <>
       {modals.map((modal, i) => (
-        <ModalBox isOff={modal.isOff} key={i}>
+        <ModalBox key={i}>
           {ModalComponents(modal.payload)[modal.type]}
         </ModalBox>
       ))}

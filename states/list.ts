@@ -1,7 +1,10 @@
 import { AxiosResponse } from 'axios';
 import { atom, selector } from 'recoil';
 
-import { defaultSearchRequset, TPostFilter } from 'states/filter';
+import {
+  makeDefaultSearchRequest,
+  SearchRequestInterface,
+} from 'states/search-request';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TPostList = {
@@ -57,20 +60,14 @@ export type PresentationlistItemAdditionalInfo = {
   archiveCount: number | null;
 };
 
-export const getList = async (post: TPostFilter) => {
-  const exhibitionType = post.filterOptions.exhibitionType;
+export const getList = async (post: SearchRequestInterface) => {
   const searchSortType = post.searchSortType;
   const axios = customAxios();
   const { data } = (await axios({
     url: `/api/search`,
     method: 'POST',
     data: {
-      filterOptions: {
-        exhibitionType: exhibitionType,
-        feeTypes: [],
-        progressTypes: [],
-        regionTypes: [],
-      },
+      filterOptions: post.filterOptions,
       requestPagingStatus: {
         currentContentsCount: 0,
         pageNumber: 0,
@@ -86,6 +83,6 @@ export default atom({
   key: 'ListState',
   default: selector({
     key: 'ListState/default',
-    get: () => getList(defaultSearchRequset),
+    get: () => getList(makeDefaultSearchRequest()),
   }),
 });
