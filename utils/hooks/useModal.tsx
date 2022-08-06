@@ -22,9 +22,6 @@ export const useModal = () => {
     function resetFilter() {
       const modals = snapshot.getLoadable(modalState).contents;
       const searchRequestStatus = snapshot.getLoadable(searchRequest).contents;
-      console.log(modals);
-      console.log(searchRequestStatus);
-      console.log(makeRequestToFilters(searchRequestStatus));
       if (modals[modals.length - 1]?.type === 'Filter') {
         set(filter, makeRequestToFilters(searchRequestStatus));
       }
