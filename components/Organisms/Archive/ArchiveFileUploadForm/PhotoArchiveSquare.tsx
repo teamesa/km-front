@@ -1,9 +1,50 @@
 import Image from 'next/image';
+import { useSetRecoilState } from 'recoil';
 
 import { WhiteClose } from 'assets/archive/WhiteClose';
 import { Box, Button } from 'components/Atoms';
+import {
+  ArchiveSquareState,
+  ArchiveSqureStateEnum,
+} from 'states/archive-square';
 import theme from 'styles/theme';
-export default function PhotoArchiveSquare() {
+export default function PhotoArchiveSquare({
+  src,
+  squareId,
+}: {
+  src: string;
+  squareId: number;
+}) {
+  const setArchiveSquareState = useSetRecoilState(ArchiveSquareState);
+  const onClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setArchiveSquareState((archiveSquareState) => {
+      const filteredSquares = archiveSquareState
+        .filter(({ key }) => key !== squareId)
+        .filter(
+          ({ pictureSrc, state }) =>
+            pictureSrc !== undefined && state === ArchiveSqureStateEnum.photo,
+        )
+        .map((square, index) => ({
+          ...square,
+          key: index,
+        }));
+
+      const blankSquares =
+        filteredSquares.length === 1
+          ? [{ key: 2, state: ArchiveSqureStateEnum.empty }]
+          : [];
+
+      return [
+        ...filteredSquares,
+        {
+          key: filteredSquares.length,
+          state: ArchiveSqureStateEnum.input,
+        },
+        ...blankSquares,
+      ];
+    });
+  };
   return (
     <Box
       width="111px"
@@ -11,12 +52,7 @@ export default function PhotoArchiveSquare() {
       backgroundColor={theme.colors.gray99}
       position="relative"
     >
-      <Image
-        width="111px"
-        height="111px"
-        alt="picture"
-        src="https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/api/2022-07-30/090002-%C3%A1%C2%84%C2%86%C3%A1%C2%85%C2%B5%C3%A1%C2%84%C2%8B%C3%A1%C2%85%C2%A9.jpeg"
-      ></Image>
+      <Image width="111px" height="111px" alt="picture" src={src}></Image>
       <Button
         width="20px"
         height="20px"
@@ -24,6 +60,7 @@ export default function PhotoArchiveSquare() {
         top="0px"
         right="0px"
         backgroundColor={theme.colors.black}
+        onClick={onClick}
       >
         <WhiteClose />
       </Button>

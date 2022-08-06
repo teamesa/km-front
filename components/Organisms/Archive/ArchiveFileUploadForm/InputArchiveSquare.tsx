@@ -1,10 +1,137 @@
 import { ChangeEvent } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { Plus } from 'assets/archive/Plus';
 import { Box, Input } from 'components/Atoms';
+import {
+  ArchiveSquareState,
+  ArchiveSqureStateEnum,
+} from 'states/archive-square';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
-export default function InputArchiveSquare() {
+export default function InputArchiveSquare({ squareId }: { squareId: number }) {
+  const [archiveSquares, setArchiveSquareState] =
+    useRecoilState(ArchiveSquareState);
+
+  const uploadArchivePicture = async ({
+    target,
+  }: ChangeEvent<HTMLInputElement>) => {
+    const alreadyPhotos = archiveSquares.filter(
+      ({ state }) => state === ArchiveSqureStateEnum.photo,
+    );
+    const alreadyPhotosCount = alreadyPhotos.length;
+    if (
+      target.files?.length === undefined ||
+      target.files.length + alreadyPhotosCount > 3
+    ) {
+      alert('임시 방편');
+      return;
+    }
+
+    // setLoading
+    const newLoading = new Array(target.files.length)
+      .fill(1)
+      .map((_, index) => ({
+        key: alreadyPhotosCount + index,
+        state: ArchiveSqureStateEnum.loading,
+      }));
+    const newLoadingCount = newLoading.length;
+    if (newLoadingCount === 3) {
+      setArchiveSquareState([...newLoading]);
+    } else if (newLoadingCount === 2 && alreadyPhotosCount == 1) {
+      setArchiveSquareState([...alreadyPhotos, ...newLoading]);
+    } else if (newLoadingCount === 2 && alreadyPhotosCount == 0) {
+      const input: ArchiveSquareState = {
+        key: 2,
+        state: ArchiveSqureStateEnum.input,
+      };
+      setArchiveSquareState([...newLoading, input]);
+    } else if (newLoadingCount == 1 && alreadyPhotosCount == 2) {
+      setArchiveSquareState([...alreadyPhotos, ...newLoading]);
+    } else if (newLoadingCount == 1 && alreadyPhotosCount == 1) {
+      const input: ArchiveSquareState = {
+        key: 2,
+        state: ArchiveSqureStateEnum.input,
+      };
+      setArchiveSquareState([...alreadyPhotos, ...newLoading, input]);
+    } else if (newLoadingCount == 1 && alreadyPhotosCount == 0) {
+      const input: ArchiveSquareState = {
+        key: 1,
+        state: ArchiveSqureStateEnum.input,
+      };
+      const blank: ArchiveSquareState = {
+        key: 2,
+        state: ArchiveSqureStateEnum.empty,
+      };
+      setArchiveSquareState([...newLoading, input, blank]);
+    }
+
+    // setData
+    const newArchivePhotos = await Promise.all(
+      Array.from(target.files).map(
+        async (file, index): Promise<ArchiveSquareState> => {
+          const formData = new FormData();
+          formData.append('file', file, file.name);
+          const axios = customAxios();
+          try {
+            const { data } = await axios.post('/api/image', formData, {
+              headers: {
+                'content-type': 'multipart/form-data',
+              },
+            });
+            return {
+              key: alreadyPhotosCount + index,
+              state: ArchiveSqureStateEnum.photo,
+              pictureSrc: data,
+            };
+          } catch (_) {}
+          return {
+            key: alreadyPhotosCount + index,
+            state: ArchiveSqureStateEnum.photo,
+            pictureSrc: undefined,
+          };
+        },
+      ),
+    );
+
+    const newFilteredArchivePhotos = newArchivePhotos.filter(
+      ({ pictureSrc }) => pictureSrc !== undefined,
+    );
+    const newFilteredArchivePhotosCount = newFilteredArchivePhotos.length;
+    if (newFilteredArchivePhotosCount === 3) {
+      setArchiveSquareState([...newFilteredArchivePhotos]);
+    } else if (newFilteredArchivePhotosCount === 2 && alreadyPhotosCount == 1) {
+      setArchiveSquareState([...alreadyPhotos, ...newFilteredArchivePhotos]);
+    } else if (newFilteredArchivePhotosCount === 2 && alreadyPhotosCount == 0) {
+      const input: ArchiveSquareState = {
+        key: 2,
+        state: ArchiveSqureStateEnum.input,
+      };
+      setArchiveSquareState([...newFilteredArchivePhotos, input]);
+    } else if (newFilteredArchivePhotosCount == 1 && alreadyPhotosCount == 2) {
+      setArchiveSquareState([...alreadyPhotos, ...newFilteredArchivePhotos]);
+    } else if (newFilteredArchivePhotosCount == 1 && alreadyPhotosCount == 1) {
+      const input: ArchiveSquareState = {
+        key: 2,
+        state: ArchiveSqureStateEnum.input,
+      };
+      setArchiveSquareState([
+        ...alreadyPhotos,
+        ...newFilteredArchivePhotos,
+        input,
+      ]);
+    } else if (newFilteredArchivePhotosCount == 1 && alreadyPhotosCount == 0) {
+      const input: ArchiveSquareState = {
+        key: 1,
+        state: ArchiveSqureStateEnum.input,
+      };
+      const blank: ArchiveSquareState = {
+        key: 2,
+        state: ArchiveSqureStateEnum.empty,
+      };
+      setArchiveSquareState([...newFilteredArchivePhotos, input, blank]);
+    }
+  };
   return (
     <Box
       width="111px"
@@ -19,6 +146,7 @@ export default function InputArchiveSquare() {
         opacity="0"
         border="none"
         id="profile"
+        multiple={true}
         backgroundColor="transparent"
         onChange={(e) => uploadArchivePicture(e)}
       />
@@ -34,25 +162,3 @@ export default function InputArchiveSquare() {
     </Box>
   );
 }
-
-const uploadArchivePicture = async ({
-  target,
-}: ChangeEvent<HTMLInputElement>) => {
-  const file = target.files?.[0];
-  if (!file) {
-    return;
-  }
-
-  const formData = new FormData();
-  formData.append('file', file, file.name);
-  const axios = customAxios();
-  try {
-    // await axios.put('/api/user/profile', formData, {
-    //   headers: {
-    //     'content-type': 'multipart/form-data',
-    //   },
-    // });
-  } catch (_) {
-    return;
-  }
-};
