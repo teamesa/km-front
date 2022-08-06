@@ -26,7 +26,12 @@ const MyArchiveDetailPopup = () => {
           </Button>
         </Box>
         <Box background="#fff" width="345px" height="652px" margin="15px">
-          <Box height="99px" padding="20px 15px">
+          <Box
+            height="99px"
+            padding="20px 15px"
+            borderBottom="1px solid"
+            borderBottomColor={theme.colors.gray77}
+          >
             <FlexBox justifyContent="space-between">
               <Box fontSize="11px" display="flex" alignItems="center">
                 <Tag
@@ -91,38 +96,54 @@ const MyArchiveDetailPopup = () => {
           </FlexBox>
           <Box
             height="88px"
-            margin="20px 15px"
+            margin="20px 5px"
             overflowY="scroll"
             fontSize="12px"
             textAlign="left"
             lineHeight="18px"
+            css={css`
+              ::-webkit-scrollbar {
+                display: block;
+                width: 2px;
+                height: 100%;
+                background: gray;
+              }
+              ::-webkit-scrollbar-thumb {
+                background: #000;
+              }
+            `}
           >
-            사용자가 작성한 코멘트 영역이 뿌려집니다 그냥 인스타하는 사람들을
-            위한 전시같은 느낌 물론 전시를 보는건 즐거웠음 하지만 사람들
-            사진찍느라 앞으로 나아가질않음…ㅠㅠㅠ 웨이팅도 평일 2시에 갔을때
-            1시간정도 웨이팅했움요 굿즈는 몇몇 품절된거있었음요 사용자가 작성한
-            코멘트 영역이 뿌려집니다 사용자가 작성한 코멘트 영역이 뿌려집니다
-            그냥 인스타하는 사람들을 위한 전시같은 느낌 물론 전시를 보는건
-            즐거웠음 하지만 사람들 사진찍느라 앞으로 나아가질않음…ㅠㅠㅠ
-            웨이팅도 평일 2시에 갔을때 1시간정도 웨이팅했움요 굿즈는 몇몇
-            품절된거있었음요 사용자가 작성한 코멘트 영역이 뿌려집니다
+            <Box margin="0 10px">
+              사용자가 작성한 코멘트 영역이 뿌려집니다 그냥 인스타하는 사람들을
+              위한 전시같은 느낌 물론 전시를 보는건 즐거웠음 하지만 사람들
+              사진찍느라 앞으로 나아가질않음…ㅠㅠㅠ 웨이팅도 평일 2시에 갔을때
+              1시간정도 웨이팅했움요 굿즈는 몇몇 품절된거있었음요 사용자가
+              작성한 코멘트 영역이 뿌려집니다 사용자가 작성한 코멘트 영역이
+              뿌려집니다 그냥 인스타하는 사람들을 위한 전시같은 느낌 물론 전시를
+              보는건 즐거웠음 하지만 사람들 사진찍느라 앞으로
+              나아가질않음…ㅠㅠㅠ 웨이팅도 평일 2시에 갔을때 1시간정도
+              웨이팅했움요 굿즈는 몇몇 품절된거있었음요 사용자가 작성한 코멘트
+              영역이 뿌려집니다
+            </Box>
           </Box>
-          <FlexBox>
+          <FlexBox borderTop="solid 1px" borderTopColor={theme.colors.gray99}>
             <Box
               width="172.5px"
               height="80px"
               background="#000"
-              borderTop="1px solid"
-              borderTopColor={theme.colors.gray99}
               padding="20px 15px"
             >
-              <FlexBox alignItems="center" color={theme.colors.white}>
-                <Pointer width="11px" height="15px" />
+              <FlexBox alignItems="center">
+                <Box>
+                  <Pointer color="#fff" />
+                </Box>
                 <Span
                   marginLeft="10px"
                   fontSize="12px"
                   lineHeight="18px"
                   display="-webkit-box"
+                  overflow="hidden"
+                  color="#fff"
                   css={css`
                     text-overflow: ellipsis;
                     -webkit-line-clamp: 1;
@@ -132,13 +153,17 @@ const MyArchiveDetailPopup = () => {
                   소문난 감자탕 소문난 감자탕 소문난 감자탕
                 </Span>
               </FlexBox>
-              <FlexBox alignItems="center" color={theme.colors.white}>
-                <Pointer width="11px" height="15px" />
-                <Span
+              <FlexBox alignItems="center">
+                <Box>
+                  <Pointer color="#fff" />
+                </Box>
+                <Box
                   marginLeft="10px"
                   fontSize="12px"
                   lineHeight="18px"
+                  overflow="hidden"
                   display="-webkit-box"
+                  color="#fff"
                   css={css`
                     text-overflow: ellipsis;
                     -webkit-line-clamp: 1;
@@ -146,7 +171,7 @@ const MyArchiveDetailPopup = () => {
                   `}
                 >
                   성수다락
-                </Span>
+                </Box>
               </FlexBox>
             </Box>
             <FlexBox
