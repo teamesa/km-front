@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import noImage from 'assets/common/no_image_375x500.png';
@@ -19,6 +19,10 @@ import ArchiveFileUploadForm from 'components/Organisms/Archive/ArchiveFileUploa
 import Rating from 'components/Organisms/Archive/Rating';
 import SearchTitle from 'components/Organisms/Archive/SearchTitle';
 import { ArchiveWirteState } from 'states';
+import {
+  ArchiveSquareState,
+  ArchiveSqureStateEnum,
+} from 'states/archive-square';
 import { ArchiveWirteProps, postArchiveWirte } from 'states/archiveWirte';
 import theme from 'styles/theme';
 
@@ -29,6 +33,7 @@ export default function ArchiveHome() {
     ? String(router.query.thumbnailImageUrl)
     : '';
   const [archiveWirte, setArchiveWirte] = useRecoilState(ArchiveWirteState);
+  const archivePhotos = useRecoilValue(ArchiveSquareState);
   const {
     register,
     handleSubmit,
@@ -52,7 +57,13 @@ export default function ArchiveHome() {
         itemId: postData.itemId,
         starRating: postData.starRating,
         comment: postData.comment,
-        photoUrls: [],
+        photoUrls: archivePhotos
+          .filter(
+            (archivePhoto) =>
+              archivePhoto.state === ArchiveSqureStateEnum.photo,
+          )
+          .map((archivePhoto) => archivePhoto.pictureSrc)
+          .filter(isDefined),
         placeInfos: postData.placeInfos,
         visibleAtItem: postData.visibleAtItem,
       },
@@ -210,4 +221,8 @@ export default function ArchiveHome() {
       </form>
     </>
   );
+}
+
+function isDefined<T>(argument: T | undefined | null): argument is T {
+  return argument !== undefined && argument !== null;
 }
