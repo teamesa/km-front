@@ -1,7 +1,9 @@
 import { ReactNode } from 'react';
+import { useResetRecoilState } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import ModalHeader from 'components/Molecules/ModalHeader';
+import { filter } from 'states/filter';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
@@ -10,7 +12,8 @@ interface ModalLayoutProps {
 }
 
 export default function ModalLayout({ children }: ModalLayoutProps) {
-  const { offModal, resetFilter } = useModal();
+  const { offModal } = useModal();
+  const resetFilter = useResetRecoilState(filter);
   return (
     <Box
       position="absolute"

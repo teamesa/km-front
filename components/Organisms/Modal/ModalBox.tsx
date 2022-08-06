@@ -1,10 +1,14 @@
+import { useResetRecoilState } from 'recoil';
+
 import { Box } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
+import { filter } from 'states/filter';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
 export default function ModalBox({ children }: { children: React.ReactNode }) {
-  const { offModal, resetFilter } = useModal();
+  const { offModal } = useModal();
+  const resetFilter = useResetRecoilState(filter);
 
   return (
     <>

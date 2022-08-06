@@ -1,12 +1,10 @@
 import { useRecoilCallback } from 'recoil';
 
 import { ModalProps } from 'constants/type/initialModal';
-import { searchRequest } from 'states';
-import { filter, makeRequestToFilters } from 'states/filter';
 import { modalState } from 'states/modal';
 
 export const useModal = () => {
-  return useRecoilCallback(({ set, snapshot }) => () => {
+  return useRecoilCallback(({ set }) => () => {
     function onModal(_modal: ModalProps) {
       set(modalState, (modals) => [...modals, _modal]);
     }
@@ -19,14 +17,6 @@ export const useModal = () => {
       );
     }
 
-    function resetFilter() {
-      const modals = snapshot.getLoadable(modalState).contents;
-      const searchRequestStatus = snapshot.getLoadable(searchRequest).contents;
-      if (modals[modals.length - 1]?.type === 'Filter') {
-        set(filter, makeRequestToFilters(searchRequestStatus));
-      }
-    }
-
-    return { onModal, offModal, resetFilter };
+    return { onModal, offModal };
   })();
 };

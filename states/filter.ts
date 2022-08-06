@@ -1,7 +1,6 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
-import Item from 'components/Organisms/List/ListCard';
-import { SearchRequestInterface } from 'states/search-request';
+import { searchRequest, SearchRequestInterface } from 'states/search-request';
 
 export interface SearchFilterSelectGroup {
   feeTypes: SelectInterface[] | [];
@@ -143,11 +142,12 @@ export const makeEmtpyFilterOption = (): SearchFilterSelectGroup => ({
 
 const makeFilterStringToSelectInterface = (
   filterString: string,
-): SelectInterface => {
-  return [...filterType[0].type, ...filterType[1].type, ...filterType[2].type]
-    .filter((it) => it.label === filterString)
-    .map((selectInterface) => ({ ...selectInterface, status: true }))?.[0];
-};
+): SelectInterface =>
+  [...filterType[0].type, ...filterType[1].type, ...filterType[2].type]
+    .filter((it) => it.value === filterString)
+    .map((selectInterface) => {
+      return { ...selectInterface, status: true };
+    })?.[0];
 
 export const makeRequestToFilters = ({
   filterOptions: { feeTypes, regionTypes, progressTypes },
@@ -159,5 +159,8 @@ export const makeRequestToFilters = ({
 
 export const filter = atom<SearchFilterSelectGroup>({
   key: 'searchFilter',
-  default: makeEmtpyFilterOption(),
+  default: selector({
+    key: 'searchFilter/default',
+    get: async ({ get }) => makeRequestToFilters(get(searchRequest)),
+  }),
 });

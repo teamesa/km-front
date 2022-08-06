@@ -61,8 +61,8 @@ const makeNewSearchRequest = (
 };
 
 export function FilterSelect({ filter: list }: { filter: SelectInterface }) {
-  const [requestStatus, setRequestStatus] = useRecoilState(filter);
-  const currValue = getFilterCurrValue(requestStatus, list);
+  const [filterState, setfilterState] = useRecoilState(filter);
+  const currValue = getFilterCurrValue(filterState, list);
   return (
     <Box height="20px" marginBottom="20px" flex="0 0 50%">
       <CheckBox
@@ -73,7 +73,7 @@ export function FilterSelect({ filter: list }: { filter: SelectInterface }) {
         `}
         checked={currValue}
         onChange={() =>
-          setRequestStatus((exValue) => makeNewSearchRequest(list, exValue))
+          setfilterState((exValue) => makeNewSearchRequest(list, exValue))
         }
       />
       <RadioLabel
