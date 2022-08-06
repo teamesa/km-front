@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
+import { Plus } from 'assets/archive/Plus';
 import noImage from 'assets/common/no_image_375x500.png';
 import {
   Box,
@@ -15,7 +16,6 @@ import {
 } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
-import ArchiveFileUploadForm from 'components/Organisms/Archive/ArchiveFileUploadForm';
 import Rating from 'components/Organisms/Archive/Rating';
 import SearchTitle from 'components/Organisms/Archive/SearchTitle';
 import PopupRouter from 'components/Organisms/Popup/PopupRouter';
@@ -93,21 +93,27 @@ export default function ArchiveHome() {
             backgroundColor={theme.colors.grayEE}
             color={theme.colors.grayEE}
           />
-          <Box paddingTop="30px" fontSize="13px">
-            코멘트 & 사진
-          </Box>
+          <Box paddingTop="30px">코멘트 & 사진</Box>
           <TextArea
             marginTop="10px"
             padding="15px"
             height="150px"
             overflow="scroll"
-            fontSize="13px"
-            lineHeight="18px"
             backgroundColor={theme.colors.grayF8}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
             {...register('comment')}
           />
-          <ArchiveFileUploadForm />
+          <Button paddingTop="20px">
+            <Box
+              width="111px"
+              height="111px"
+              backgroundColor={theme.colors.gray99}
+            >
+              <Box position="relative" top="46px">
+                <Plus />
+              </Box>
+            </Box>
+          </Button>
           <Box marginTop="30px" />
           <Box height="1px" backgroundColor={theme.colors.grayEE} />
           <FlexBox marginTop="30px">
