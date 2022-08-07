@@ -1,38 +1,7 @@
 import Filter from 'assets/list/Filter';
 import { Box, Button } from 'components/Atoms';
-import { FilterProps } from 'constants/type/modal';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
-
-const filterType = [
-  {
-    title: '진행',
-    type: [
-      { index: 0, label: 'ON', value: 'ON' },
-      { index: 1, label: 'OFF', value: 'OFF' },
-      { index: 2, label: 'UPCOMING', value: 'UPCOMING' },
-    ],
-  },
-  {
-    title: '입장료',
-    type: [
-      { index: 0, label: '무료', value: 'FREE' },
-      { index: 1, label: '유료', value: 'COST' },
-    ],
-  },
-  {
-    title: '입장료',
-    type: [
-      { index: 0, label: '서울', value: 'SEOUL' },
-      { index: 1, label: '경기', value: 'GYEONGGI' },
-      { index: 1, label: '강원', value: 'GANGWON' },
-      { index: 1, label: '충청', value: 'CHUNGCHEONG' },
-      { index: 1, label: '경상', value: 'GYEONGSANG' },
-      { index: 1, label: '전라', value: 'JEOLLA' },
-      { index: 1, label: '제주', value: 'JEJU' },
-    ],
-  },
-];
 
 export default function ListOptionFilter() {
   const { onModal } = useModal();
@@ -52,7 +21,6 @@ export default function ListOptionFilter() {
       onClick={() => {
         onModal({
           type: `Filter`,
-          payload: { data: filterType },
         });
       }}
     >

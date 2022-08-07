@@ -6,6 +6,7 @@ import { RadioLabel } from './Label';
 import Layout from './Layout';
 import RadioInput from './RadioInput';
 import Select from './Select';
+import Shadow from './Shadow';
 import Span from './Span';
 import Tag from './Tag';
 import TextArea from './TextArea';
@@ -22,4 +23,5 @@ export {
   RadioInput,
   RadioLabel,
   TextArea,
+  Shadow,
 };

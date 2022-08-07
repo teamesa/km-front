@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
-import { useRouter } from 'next/router';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { Box, FlexBox, Tag } from 'components/Atoms';
+import { Tag } from 'components/Atoms';
 import { ListState } from 'states';
-import { searchRequest } from 'states/filter';
 import { getList } from 'states/list';
+import { searchRequest } from 'states/search-request';
 import theme from 'styles/theme';
 
 export default function ListCategory({
