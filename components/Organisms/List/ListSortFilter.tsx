@@ -2,8 +2,7 @@ import { useRecoilValue } from 'recoil';
 
 import ArrowDown from 'assets/list/ArrowDown';
 import { Box, Button } from 'components/Atoms';
-import { SelectProps } from 'constants/type/modal';
-import { searchRequest } from 'states/filter';
+import { searchRequest } from 'states/search-request';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 

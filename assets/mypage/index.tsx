@@ -4,6 +4,7 @@ import { Folder } from './Folder';
 import { Pointer } from './Pointer';
 
 import apple from 'assets/mypage/apple.png';
+import { CloseBtn } from 'assets/mypage/CloseBtn';
 import logo from 'assets/mypage/logo.png';
 import naver from 'assets/mypage/naver.png';
 import { Photo } from 'assets/mypage/Photo';
@@ -33,4 +34,4 @@ const MyPageImageAsset = ({
     </Box>
   );
 };
-export { MyPageImageAsset, Profile, Photo, Pointer, Folder };
+export { MyPageImageAsset, Profile, Photo, Pointer, Folder, CloseBtn };

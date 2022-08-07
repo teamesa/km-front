@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Close } from 'assets/archive/Close';
+import { Search } from 'assets/archive/Search';
 import { Box, Button, FlexBox, Span, Input, Layout } from 'components/Atoms';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
@@ -84,10 +85,10 @@ export default function SearchMap({
       <Layout>
         <Box margin="4px 0 8px" position="relative">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Box
+            <FlexBox
               marginTop="30px"
               marginBottom="20px"
-              padding="12px 15px"
+              padding="12px 37px 12px 15px"
               border={`1px solid ${theme.colors.grayDD}`}
             >
               <Input
@@ -97,12 +98,13 @@ export default function SearchMap({
               />
               <Button
                 position="absolute"
-                right="0px"
-                width="60px"
-                height="48px"
+                right="15px"
+                width="15px"
                 type="submit"
-              />
-            </Box>
+              >
+                <Search />
+              </Button>
+            </FlexBox>
           </form>
         </Box>
       </Layout>

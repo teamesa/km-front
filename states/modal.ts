@@ -6,3 +6,8 @@ export const modalState = atom<ModalProps[]>({
   key: 'modalState',
   default: [],
 });
+
+export const modalOutState = atom<boolean>({
+  key: 'modalOutState',
+  default: false,
+});
