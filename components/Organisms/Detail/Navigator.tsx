@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { useState, useEffect } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
@@ -12,18 +11,22 @@ import theme from 'styles/theme';
 
 export default function Navigator() {
   const router = useRouter();
-  const [currentUrl, setCurrentUrl] = useState('');
 
   const { id } = router.query;
   const state = useRecoilValueLoadable(DetailState(Number(id)));
   const data: TGetSummary = state?.contents?.summary;
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setCurrentUrl(window.location.href);
+  const handle = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: '공유하기',
+        text: '전시회 공유하기',
+        url: window.location.href,
+      });
+    } else {
+      alert('공유하기가 지원되지 않는 환경 입니다.');
     }
-  }, []);
-
+  };
   return (
     <Box
       zIndex={Z_INDEX.SKY}
@@ -47,20 +50,7 @@ export default function Navigator() {
           >
             {data?.itemInfoAdditionalInfo?.heartCount}
           </Box>
-          <Button
-            marginLeft="20px"
-            marginTop="5px"
-            onClick={() => {
-              navigator.clipboard
-                .writeText(currentUrl)
-                .then(() => {
-                  alert('클립보드에 복사되었습니다.');
-                })
-                .catch(() => {
-                  alert('주소복사에 실패했습니다');
-                });
-            }}
-          >
+          <Button marginLeft="20px" marginTop="5px" onClick={() => handle()}>
             <Share />
           </Button>
         </FlexBox>
