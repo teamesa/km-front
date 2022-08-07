@@ -2,12 +2,14 @@ import styled from '@emotion/styled';
 
 import Box from './Box';
 
-export const Loader = styled(Box)`
-  border: 10px solid #f3f3f3;
-  border-top: 10px solid #ceff00;
-  border-radius: 50%;
-  width: 100%;
-  height: 100%;
+import Loading from 'assets/common/Loading';
+
+export const Loader = () => (
+  <SpinnedBox height="60px" width="60px">
+    <Loading></Loading>
+  </SpinnedBox>
+);
+const SpinnedBox = styled(Box)`
   animation: spin 1s linear infinite;
 
   @keyframes spin {
