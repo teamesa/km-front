@@ -164,3 +164,8 @@ export const filter = atom<SearchFilterSelectGroup>({
     get: async ({ get }) => makeRequestToFilters(get(searchRequest)),
   }),
 });
+
+export const setFilterState = atom<boolean>({
+  key: 'setFilterState',
+  default: false,
+});

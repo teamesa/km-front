@@ -10,6 +10,7 @@ import {
   filterType,
   makeEmtpyFilterOption,
   makeRequestFilterOptionBySearchFilterSelectGroup,
+  setFilterState,
 } from 'states/filter';
 import list, { getList } from 'states/list';
 import theme from 'styles/theme';
@@ -22,6 +23,7 @@ export default function FilterModal() {
     useRecoilState(searchRequest);
   const [filters, setFilters] = useRecoilState(filter);
   const setPostList = useSetRecoilState(list);
+  const setFilter = useSetRecoilState(setFilterState);
   return (
     <ModalLayout>
       <Layout overflow="auto" height="auto">
@@ -47,6 +49,7 @@ export default function FilterModal() {
               setSearchRequestState(newSearchRequest);
               const data = await getList(newSearchRequest);
               setPostList(data);
+              setFilter(false);
               offModal();
             }}
           >
@@ -69,6 +72,7 @@ export default function FilterModal() {
               setSearchRequestState(newSearchRequest);
               const data = await getList(newSearchRequest);
               setPostList(data);
+              setFilter(true);
               offModal();
             }}
           >
