@@ -1,8 +1,5 @@
-import { UrlObject } from 'url';
-
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactElement, JSXElementConstructor, ReactFragment } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 
 import { Box, Button, Span, Tag } from 'components/Atoms';
