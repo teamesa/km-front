@@ -3,7 +3,9 @@ import { useSetRecoilState } from 'recoil';
 
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import { Button } from 'components/Atoms';
-import { ListState } from 'states';
+import { ALERT_MESSAGE } from 'constants/alertMessage';
+import { POPUP_NAME } from 'constants/popupName';
+import { AlertState, ListState, PopupNameState } from 'states';
 import { PresentationHeart } from 'states/list';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
@@ -19,6 +21,8 @@ type PickStatus = {
 export default function ItemHeart(props: HeartProps) {
   const heart = props.heart;
   const setPickState = useSetRecoilState(ListState);
+  const setAlertState = useSetRecoilState(AlertState);
+  const setPopupName = useSetRecoilState(PopupNameState);
 
   const setToPick = async () => {
     const axios = customAxios();
@@ -42,12 +46,13 @@ export default function ItemHeart(props: HeartProps) {
               return it;
             }
           });
-
           return { ...val, contents };
         });
       }
     } catch (error) {
       console.log(error);
+      setAlertState(ALERT_MESSAGE.ALERT.LOGIN_CONFIRMATION);
+      setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
     }
   };
 
