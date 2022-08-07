@@ -5,16 +5,6 @@ import { Box, Span } from 'components/Atoms';
 import ListItems from 'components/Atoms/ListItems';
 import theme from 'styles/theme';
 
-// const ListItem = styled.li`
-//   &:before {
-//     content: '·';
-//     font-size: 20px;
-//     vertical-align: middle;
-//     line-height: 20px;
-//     padding-right: 5px;
-//   }
-// `;
-
 export default function ConfigurationFragment() {
   const router = useRouter();
 

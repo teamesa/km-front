@@ -4,12 +4,6 @@ import { Box, FlexBox } from 'components/Atoms';
 export default function BlankArchiveListSection() {
   return (
     <Box
-      // position="fixed"
-      // top="calc(50% - 10px)"
-      // width="100%"
-      // textAlign="center"
-      // flexDirection="column"
-      // alignItems="center"
       paddingTop="140px"
       margin="0 auto"
       max-width="200px"
