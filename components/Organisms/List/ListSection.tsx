@@ -16,7 +16,6 @@ export default function ListSection() {
 
       return (
         <>
-          {/* <PopupRouter /> */}
           {data.contents.contents.map((content, index) => (
             <ListCard key={content?.id ?? index} content={content} />
           ))}
