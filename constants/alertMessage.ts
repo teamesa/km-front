@@ -6,7 +6,21 @@ export const ALERT_MESSAGE = {
     },
     CANCEL_RECONFIRM: {
       code: 'ALT-002',
-      message: '취소 시 작성했던 기록은 저장되지 않습니다.취소하시겠습니까?',
+      message: '취소 시 작성했던 기록은 저장되지 않습니다. 취소하시겠습니까?',
+    },
+    ARCHIVE_REGISTRATION_QUESTION: {
+      code: 'ALT-003',
+      message: '아카이브를 등록하시겠습니까?',
+    },
+    SAVED_SUCCESS: {
+      code: 'ALT-009',
+      message: '저장되었습니다.',
+    },
+  },
+  ERROR: {
+    ARCHIVE_REGISTRATION_QUESTION: {
+      code: 'ERROR-001',
+      message: '알수없는 에러가 발생했습니다.',
     },
   },
 };

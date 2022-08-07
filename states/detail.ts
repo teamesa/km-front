@@ -5,19 +5,9 @@ import { noIntroData } from 'components/Organisms/Detail/data';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TGetSummary = {
-  summary: any;
+  detailImageUrl: string;
   feeType: string;
   homePageUrl: string;
-  lat: number;
-  lng: number;
-  place: string;
-  progress: boolean;
-  term: string;
-  time: string;
-  title: string;
-  type: string;
-  thumbnailImageUrl: string;
-  ticketUrl: string;
   itemInfoAdditionalInfo: {
     createArchiveUrl: string;
     heart: {
@@ -27,6 +17,16 @@ export type TGetSummary = {
     };
     heartCount: number;
   };
+  lat: number;
+  listImageUrl: string;
+  lng: number;
+  place: string;
+  price: string;
+  term: string;
+  ticketUrl: string;
+  time: string;
+  title: string;
+  type: string;
 };
 
 type TGetIntroduction = {
@@ -70,7 +70,7 @@ export const DetailState = selectorFamily({
     const archive = await getArchive({ itemId: itemId });
 
     const tabViewData: Array<TabViewData> =
-      introduction.summary === null
+      introduction.summary === null && introduction.photo.length === 0
         ? [{ ...archive }]
         : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
 
