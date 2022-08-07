@@ -1,62 +1,66 @@
-import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 
-import { Box } from 'components/Atoms';
+import { Box, Span } from 'components/Atoms';
+import ListItems from 'components/Atoms/ListItems';
 import theme from 'styles/theme';
-
-const ListItem = styled.li`
-  &:before {
-    content: '·';
-    font-size: 20px;
-    vertical-align: middle;
-    line-height: 20px;
-    padding-right: 5px;
-  }
-`;
 
 export default function ConfigurationFragment() {
   const router = useRouter();
 
   return (
-    <Box>
-      <Box paddingX="15px">
-        <Box
-          marginTop="10px"
-          paddingY="15px"
-          fontSize="15px"
-          fontWeight={500}
-          lineHeight={1.47}
-          textAlign="left"
-          color={theme.colors.black}
-          onClick={() => router.push('/mypage/update')}
-        >
-          회원정보 수정
-        </Box>
-        <Box
-          fontSize="15px"
-          paddingY="15px"
-          fontWeight={500}
-          lineHeight={1.47}
-          textAlign="left"
-          color={theme.colors.black}
-          onClick={() => router.push('/api/logout')}
-        >
-          로그아웃
-        </Box>
-        <Box
-          fontSize="13px"
-          paddingY="15px"
-          lineHeight={1.54}
-          textAlign="left"
-          color={theme.colors.gray99}
-        >
-          <ol>
-            <ListItem>문의사항이 있으실 경우</ListItem>
-          </ol>
-          <Box paddingLeft="12px">
-            kilometerservice@gmail.com 로 연락주세요.
-          </Box>
-        </Box>
+    <Box padding="40px 0px">
+      <Box
+        marginBottom="30px"
+        fontSize="15px"
+        fontWeight={500}
+        lineHeight="19px"
+        color={theme.colors.black}
+        onClick={() => router.push('/mypage/update')}
+      >
+        회원정보 수정
+      </Box>
+      <Box
+        marginBottom="30px"
+        fontSize="15px"
+        fontWeight={500}
+        lineHeight="19px"
+        color={theme.colors.black}
+        onClick={() => router.push('/api/logout')}
+      >
+        로그아웃
+      </Box>
+      <Box marginTop="60px">
+        <ul>
+          <ListItems
+            position="relative"
+            paddingLeft="7px"
+            fontSize="13px"
+            lineHeight="18px"
+            color={theme.colors.gray99}
+            css={css`
+              &:before {
+                content: '';
+                position: absolute;
+                left: 0px;
+                top: 8px;
+                width: 2px;
+                height: 2px;
+                background: #999;
+              }
+            `}
+          >
+            문의사항이 있으실 경우 <br />
+            <Span
+              css={css`
+                text-decoration: underline;
+              `}
+            >
+              kilometerservice@gmail.com
+            </Span>{' '}
+            로 연락주세요.
+          </ListItems>
+        </ul>
       </Box>
     </Box>
   );
