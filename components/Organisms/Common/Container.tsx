@@ -1,4 +1,5 @@
 import { ReactNode } from 'react';
+import { useRecoilValue } from 'recoil';
 
 import NavHome from 'assets/common/bottomTabNavigator/NavHome';
 import NavList from 'assets/common/bottomTabNavigator/NavList';
@@ -7,11 +8,17 @@ import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import { Box } from 'components/Atoms';
 import BottomTabNavigator from 'components/Organisms/Common/BottomTabNavigator';
 import HeaderBar from 'components/Organisms/Common/HeaderBar';
+import { modalOutState } from 'states/modal';
 import theme from 'styles/theme';
 
 export default function Container({ children }: { children: ReactNode }) {
+  const modalOut = useRecoilValue(modalOutState);
   return (
-    <>
+    <Box
+      style={
+        modalOut ? { position: 'fixed', inset: '0', touchAction: 'none' } : {}
+      }
+    >
       <HeaderBar />
       <Box>{children}</Box>
       <BottomTabNavigator
@@ -43,6 +50,6 @@ export default function Container({ children }: { children: ReactNode }) {
           },
         ]}
       />
-    </>
+    </Box>
   );
 }
