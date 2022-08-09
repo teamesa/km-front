@@ -12,7 +12,6 @@ export default function MyPageHome() {
   ];
   return (
     <Box paddingLeft="15px" paddingRight="15px">
-      <PopupRouter />
       <MyPageUserInfo />
       {/* 앵커 */}
       <TopTabView data={data} minusHeight={200}></TopTabView>
