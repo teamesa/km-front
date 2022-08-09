@@ -12,6 +12,6 @@ export default styled.div<PopupProps>`
   width: 100%;
   height: 100vh;
   left: 0;
-  background-color: rgb(0, 0, 0, 0.8);
+  background-color: rgb(0, 0, 0, 0.7);
   z-index: ${Z_INDEX.LOADING};
 `;
