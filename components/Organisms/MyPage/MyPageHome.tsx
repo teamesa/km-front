@@ -1,7 +1,6 @@
 import { Box } from 'components/Atoms';
-import TopTabView from 'components/Molecules/TopTabView';
 import MyPageUserInfo from 'components/Organisms/MyPage/Home/MyPageUserInfo';
-import { MyPageNavigator } from 'components/Organisms/MyPage/MyPageNavigator';
+import MyPageInfoFragment from 'components/Organisms/MyPage/MyPageInfoFragment';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function MyPageHome() {
@@ -13,9 +12,7 @@ export default function MyPageHome() {
   return (
     <Box paddingLeft="15px" paddingRight="15px">
       <MyPageUserInfo />
-      {/* 앵커 */}
-      <MyPageNavigator />
-      {/* <TopTabView data={data} minusHeight={200}></TopTabView> */}
+      <MyPageInfoFragment />
     </Box>
   );
 }
