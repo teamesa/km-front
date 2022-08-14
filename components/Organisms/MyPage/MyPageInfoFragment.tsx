@@ -7,7 +7,7 @@ import theme from 'styles/theme';
 
 const MyPageNavigatorMetaInfo = [{ title: 'MY 아카이브' }, { title: '설정' }];
 
-export function MyPageNavigator() {
+export default function MyPageInfoFragment() {
   const [isMyArchiveShowed, setMyArhiveShowedFlag] = useState<boolean>(true);
   const clicked = isMyArchiveShowed ? 0 : 1;
 
