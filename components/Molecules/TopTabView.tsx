@@ -21,23 +21,11 @@ interface TopTabViewProps {
   minusHeight?: number;
 }
 
-const ANCHOR_SECTION = 45 + 55;
-
-export default function TopTabView({
-  data,
-  minusHeight = ANCHOR_SECTION,
-}: TopTabViewProps) {
+export default function TopTabView({ data }: TopTabViewProps) {
   const [index, setIndex] = useState(0);
-  const [headerSize, setHeaderSize] = useState(0);
   const [checkHeight, setCheckHeight] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   let isMyArchiveTab = false;
-
-  useEffect(() => {
-    if (ref.current?.offsetHeight) {
-      setHeaderSize(ref.current.offsetHeight + minusHeight);
-    }
-  }, [ref]);
 
   return (
     <>
@@ -90,7 +78,6 @@ export default function TopTabView({
         }}
         style={{
           background: `${theme.colors.white}`,
-          // transition: 'none',
           width: '100%',
         }}
         springConfig={{
