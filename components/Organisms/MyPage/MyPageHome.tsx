@@ -1,7 +1,6 @@
-import MyPageInfoFragment from 'components/Organisms/MyPage/MyPageInfoFragment';
-
 import { Box } from 'components/Atoms';
 import MyPageUserInfo from 'components/Organisms/MyPage/Home/MyPageUserInfo';
+import MyPageInfoFragment from 'components/Organisms/MyPage/MyPageInfoFragment';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function MyPageHome() {
