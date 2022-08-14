@@ -1,12 +1,15 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { createRef } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 
 import { Box, Button, Span, Tag } from 'components/Atoms';
 import DescriptionInfo from 'components/Molecules/DescriptionInfo';
 import InnerHTML from 'components/Molecules/InnerHTML';
-import TopTabView from 'components/Molecules/TopTabView';
+import Archive from 'components/Organisms/Detail/Description/Archive';
 import BottomSheetHeader from 'components/Organisms/Detail/Description/BottomSheetHeader';
+import { DetailNavigation } from 'components/Organisms/Detail/Description/DetailNavigation';
+import Introduce from 'components/Organisms/Detail/Description/Introduce';
 import { DetailState } from 'states';
 import theme from 'styles/theme';
 
@@ -15,6 +18,8 @@ export default function Description() {
   const { id } = router.query;
   const { contents, state } = useRecoilValueLoadable(DetailState(Number(id)));
   const { summary, tabViewData } = contents;
+  const archiveRef = createRef<HTMLDivElement>();
+  const introduceRef = createRef<HTMLDivElement>();
 
   const isShowLink = (link: string, title: string) => {
     if (link) {
@@ -95,12 +100,25 @@ export default function Description() {
                 />
               ) : null}
             </Box>
-            <TopTabView
-              data={tabViewData.map((item: { title: any; contents: any }) => ({
-                title: item.title,
-                contents: item.contents,
-              }))}
+            <DetailNavigation
+              deatailMetaInfo={tabViewData}
+              archiveRef={archiveRef}
+              introduceRef={introduceRef}
             />
+            {tabViewData.map(
+              ({ title, contents }: { title: string; contents: any }) =>
+                title === '아카이브' ? (
+                  <Archive
+                    data={contents}
+                    scrollRef={archiveRef}
+                    introYn={tabViewData.length}
+                  />
+                ) : title === '소개' ? (
+                  <Introduce data={contents} scrollRef={introduceRef} />
+                ) : (
+                  <div />
+                ),
+            )}
           </Box>
         </Box>
       );

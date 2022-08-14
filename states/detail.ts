@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { selectorFamily } from 'recoil';
 
-import { noIntroData } from 'components/Organisms/Detail/data';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TGetSummary = {
