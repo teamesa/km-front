@@ -34,7 +34,7 @@ type TGetIntroduction = {
   summary: string | null;
 };
 
-type TabViewData = {
+export type TabViewData = {
   title?: string | null;
   contents: any;
 };
