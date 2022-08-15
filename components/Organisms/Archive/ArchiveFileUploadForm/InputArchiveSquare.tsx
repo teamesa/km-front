@@ -1,17 +1,22 @@
 import { ChangeEvent } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Plus } from 'assets/archive/Plus';
 import { Box, Input } from 'components/Atoms';
+import { ALERT_MESSAGE } from 'constants/alertMessage';
+import { POPUP_NAME } from 'constants/popupName';
+import { AlertState, PopupNameState } from 'states';
 import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
 } from 'states/archive-square';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
-export default function InputArchiveSquare({ squareId }: { squareId: number }) {
+export default function InputArchiveSquare() {
   const [archiveSquares, setArchiveSquareState] =
     useRecoilState(ArchiveSquareState);
+  const setAlertState = useSetRecoilState(AlertState);
+  const setPopupName = useSetRecoilState(PopupNameState);
 
   const uploadArchivePicture = async ({
     target,
@@ -24,7 +29,8 @@ export default function InputArchiveSquare({ squareId }: { squareId: number }) {
       target.files?.length === undefined ||
       target.files.length + alreadyPhotosCount > 3
     ) {
-      alert('임시 방편');
+      setAlertState(ALERT_MESSAGE.ALERT.OVERFLOW_PICTURE);
+      setPopupName(POPUP_NAME.OVERFLOW_PICTURE);
       return;
     }
 
@@ -100,17 +106,29 @@ export default function InputArchiveSquare({ squareId }: { squareId: number }) {
     const newFilteredArchivePhotosCount = newFilteredArchivePhotos.length;
     if (newFilteredArchivePhotosCount === 3) {
       setArchiveSquareState([...newFilteredArchivePhotos]);
-    } else if (newFilteredArchivePhotosCount === 2 && alreadyPhotosCount == 1) {
+    } else if (
+      newFilteredArchivePhotosCount === 2 &&
+      alreadyPhotosCount === 1
+    ) {
       setArchiveSquareState([...alreadyPhotos, ...newFilteredArchivePhotos]);
-    } else if (newFilteredArchivePhotosCount === 2 && alreadyPhotosCount == 0) {
+    } else if (
+      newFilteredArchivePhotosCount === 2 &&
+      alreadyPhotosCount === 0
+    ) {
       const input: ArchiveSquareState = {
         key: 2,
         state: ArchiveSqureStateEnum.input,
       };
       setArchiveSquareState([...newFilteredArchivePhotos, input]);
-    } else if (newFilteredArchivePhotosCount == 1 && alreadyPhotosCount == 2) {
+    } else if (
+      newFilteredArchivePhotosCount === 1 &&
+      alreadyPhotosCount === 2
+    ) {
       setArchiveSquareState([...alreadyPhotos, ...newFilteredArchivePhotos]);
-    } else if (newFilteredArchivePhotosCount == 1 && alreadyPhotosCount == 1) {
+    } else if (
+      newFilteredArchivePhotosCount === 1 &&
+      alreadyPhotosCount === 1
+    ) {
       const input: ArchiveSquareState = {
         key: 2,
         state: ArchiveSqureStateEnum.input,
@@ -120,7 +138,10 @@ export default function InputArchiveSquare({ squareId }: { squareId: number }) {
         ...newFilteredArchivePhotos,
         input,
       ]);
-    } else if (newFilteredArchivePhotosCount == 1 && alreadyPhotosCount == 0) {
+    } else if (
+      newFilteredArchivePhotosCount === 1 &&
+      alreadyPhotosCount === 0
+    ) {
       const input: ArchiveSquareState = {
         key: 1,
         state: ArchiveSqureStateEnum.input,
@@ -130,6 +151,8 @@ export default function InputArchiveSquare({ squareId }: { squareId: number }) {
         state: ArchiveSqureStateEnum.empty,
       };
       setArchiveSquareState([...newFilteredArchivePhotos, input, blank]);
+    } else if (newFilteredArchivePhotosCount === 0) {
+      setArchiveSquareState(archiveSquares);
     }
   };
   return (
@@ -146,6 +169,7 @@ export default function InputArchiveSquare({ squareId }: { squareId: number }) {
         opacity="0"
         border="none"
         id="profile"
+        accept="image/gif, image/jpeg, image/png, image/heic"
         multiple={true}
         backgroundColor="transparent"
         onChange={(e) => uploadArchivePicture(e)}

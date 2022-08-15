@@ -20,6 +20,10 @@ export const ALERT_MESSAGE = {
       code: 'ALT-009',
       message: '저장되었습니다.',
     },
+    OVERFLOW_PICTURE: {
+      code: 'ALT-013',
+      message: '사진은 3개까지 등록할 수 있습니다.',
+    },
   },
   ERROR: {
     ARCHIVE_REGISTRATION_QUESTION: {
