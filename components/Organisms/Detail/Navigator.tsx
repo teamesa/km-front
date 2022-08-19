@@ -1,109 +1,90 @@
 import { useRouter } from 'next/router';
-import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
-import useCopy from 'use-copy';
+import { useState, useEffect } from 'react';
+import { useRecoilValueLoadable } from 'recoil';
 
+import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import Share from 'assets/detail/Share';
 import { Box, Button, FlexBox } from 'components/Atoms';
-import NavigatorHeart from 'components/Organisms/Detail/NavigatorHeart';
-import PopupRouter from 'components/Organisms/Popup/PopupRouter';
-import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { Z_INDEX } from 'constants/common';
-import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, DetailState, PopupNameState } from 'states';
+import { DetailState } from 'states';
 import { TGetSummary } from 'states/detail';
 import theme from 'styles/theme';
 
 export default function Navigator() {
   const router = useRouter();
+  const [currentUrl, setCurrentUrl] = useState('');
+
   const { id } = router.query;
-  const data = useRecoilValueLoadable(DetailState(Number(id)));
-  const contents: TGetSummary = data?.contents?.summary;
-  const setAlertState = useSetRecoilState(AlertState);
-  const setPopupName = useSetRecoilState(PopupNameState);
-  const [_, copy, setCopied] = useCopy(`${window.location.href}`);
+  const state = useRecoilValueLoadable(DetailState(Number(id)));
+  const data: TGetSummary = state?.contents?.summary;
 
-  const handle = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: '공유하기',
-        text: '전시회 공유하기',
-        url: `${window.location.href}`,
-      });
-      setAlertState(ALERT_MESSAGE.ALERT.COPY_TO_CLIPBOARD);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM);
-    } else {
-      copy();
-      setTimeout(() => {
-        setCopied(false);
-        setAlertState(ALERT_MESSAGE.ALERT.COPY_TO_CLIPBOARD);
-        setPopupName(POPUP_NAME.ALERT_CONFIRM);
-      }, 200);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setCurrentUrl(window.location.href);
     }
-  };
+  }, []);
 
-  switch (data.state) {
-    case 'hasValue':
-      return (
-        <>
-          <PopupRouter />
+  return (
+    <Box
+      zIndex={Z_INDEX.SKY}
+      backgroundColor={theme.colors.black}
+      width="100%"
+      bottom="0px"
+      position="fixed"
+      padding="0 15px"
+    >
+      <FlexBox height="60px" alignItems="center" justifyContent="space-between">
+        <FlexBox>
+          <Button marginTop="5px">
+            <NavWish stroke={theme.colors.white} />
+          </Button>
           <Box
-            zIndex={Z_INDEX.SKY}
-            backgroundColor={theme.colors.black}
-            width="100%"
-            bottom="0px"
-            position="fixed"
-            padding="0 15px"
+            fontSize="10px"
+            fontWeight={500}
+            alignSelf="center"
+            color={theme.colors.white}
+            marginLeft="2px"
           >
-            <FlexBox
-              height="60px"
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <FlexBox>
-                <Box>
-                  <NavigatorHeart
-                    heart={contents?.itemInfoAdditionalInfo?.heart}
-                    heartCount={contents?.itemInfoAdditionalInfo?.heartCount}
-                  />
-                </Box>
-                <Box marginLeft="20px" marginTop="5px" onClick={handle}>
-                  <Share />
-                </Box>
-              </FlexBox>
-              <Button
-                fontSize="16px"
-                fontWeight={500}
-                textAlign="left"
-                color={theme.colors.lime}
-                onClick={() => {
-                  router.push({
-                    pathname: '/archive',
-                    query: {
-                      id: id,
-                      title: contents?.title,
-                      thumbnailImageUrl: contents?.listImageUrl,
-                      checked: true,
-                    },
-                  });
-                }}
-              >
-                아카이브 기록하기
-              </Button>
-            </FlexBox>
-            <Box width="100%" height="var(--platformBottomArea)" />
+            {data?.itemInfoAdditionalInfo?.heartCount}
           </Box>
-        </>
-      );
-    case 'loading':
-      return <div>Loading...</div>;
-    case 'hasError':
-      throw data.contents;
-  }
-}
-function setAlertState(COPY_TO_CLIPBOARD: any) {
-  throw new Error('Function not implemented.');
-}
-
-function setPopupName(ALERT_CONFIRM: any) {
-  throw new Error('Function not implemented.');
+          <Button
+            marginLeft="20px"
+            marginTop="5px"
+            onClick={() => {
+              navigator.clipboard
+                .writeText(currentUrl)
+                .then(() => {
+                  alert('클립보드에 복사되었습니다.');
+                })
+                .catch(() => {
+                  alert('주소복사에 실패했습니다');
+                });
+            }}
+          >
+            <Share />
+          </Button>
+        </FlexBox>
+        <Button
+          fontSize="16px"
+          fontWeight={500}
+          textAlign="left"
+          color={theme.colors.lime}
+          onClick={() => {
+            router.push({
+              pathname: '/archive',
+              query: {
+                id: id,
+                title: data?.title,
+                thumbnailImageUrl: data?.listImageUrl,
+                checked: true,
+              },
+            });
+          }}
+        >
+          아카이브 기록하기
+        </Button>
+      </FlexBox>
+      <Box width="100%" height="var(--platformBottomArea)" />
+    </Box>
+  );
 }
