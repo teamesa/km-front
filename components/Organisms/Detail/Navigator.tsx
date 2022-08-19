@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useRecoilValueLoadable } from 'recoil';
+import useCopy from 'use-copy';
 
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import Share from 'assets/detail/Share';
@@ -11,20 +12,23 @@ import theme from 'styles/theme';
 
 export default function Navigator() {
   const router = useRouter();
-
   const { id } = router.query;
   const state = useRecoilValueLoadable(DetailState(Number(id)));
   const data: TGetSummary = state?.contents?.summary;
+  const [_, copy, setCopied] = useCopy(`${window.location.href}`);
 
   const handle = () => {
     if (navigator.share) {
       navigator.share({
         title: '공유하기',
         text: '전시회 공유하기',
-        url: window.location.href,
+        url: `${window.location.href}`,
       });
     } else {
-      alert('공유하기가 지원되지 않는 환경 입니다.');
+      copy();
+      setTimeout(() => {
+        setCopied(false);
+      }, 3000);
     }
   };
   return (
@@ -50,9 +54,9 @@ export default function Navigator() {
           >
             {data?.itemInfoAdditionalInfo?.heartCount}
           </Box>
-          <Button marginLeft="20px" marginTop="5px" onClick={() => handle()}>
+          <Box marginLeft="20px" marginTop="5px" onClick={handle}>
             <Share />
-          </Button>
+          </Box>
         </FlexBox>
         <Button
           fontSize="16px"
