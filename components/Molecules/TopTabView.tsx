@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 
 import { Folder } from 'assets/mypage';
-import { Box } from 'components/Atoms';
+import { Box, FlexBox } from 'components/Atoms';
 import Archive from 'components/Organisms/Detail/Description/Archive';
 import Introduce from 'components/Organisms/Detail/Description/Introduce';
 import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
@@ -134,7 +134,20 @@ export default function TopTabView({
               `
         }
       >
-        <Folder />
+        <Box position="absolute" zIndex="1000">
+          <Folder />
+        </Box>
+        <Box
+          width="50px"
+          height="50px"
+          borderRadius="50%"
+          backgroundColor="#000"
+          zIndex="-1"
+          css={css`
+            filter: blur(10px);
+            -webkit-filter: blur(10px);
+          `}
+        ></Box>
       </Box>
     </>
   );
