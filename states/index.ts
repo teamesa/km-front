@@ -3,6 +3,7 @@ import { ArchiveWirteState } from './archiveWirte';
 import { DetailState } from './detail';
 import { searchRequest } from './filter';
 import ListState from './list';
+import MyArchiveDetailState from './myArchiveDetail';
 import MyArchiveListState from './myArchiveList';
 import PopupNameState from './popupName';
 import TestSate from './test';
@@ -16,4 +17,5 @@ export {
   MyArchiveListState,
   PopupNameState,
   AlertState,
+  MyArchiveDetailState,
 };

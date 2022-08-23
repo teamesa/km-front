@@ -32,7 +32,6 @@ export const getMyArchiveDetail = async (archiveId: string) => {
 };
 
 export default atom({
-  key: 'MyArchiveDetailState',
   default: selector({
     key: 'MyArchiveDetailState/default',
     get: () => getMyArchiveDetail('596'),

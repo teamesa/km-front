@@ -1,16 +1,18 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
 
 import StarRating from 'assets/list/StarRating';
 import { Pointer, CloseBtn } from 'assets/mypage';
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
 import Popup from 'components/Molecules/Popup';
 import { POPUP_NAME } from 'constants/popupName';
+import { MyArchiveDetailState } from 'states';
 import { PopupNameState } from 'states';
 import theme from 'styles/theme';
 
 const MyArchiveDetailPopup = () => {
+  const data = useRecoilValueLoadable(MyArchiveDetailState);
   const setPopupName = useSetRecoilState(PopupNameState);
 
   const handleClosePopup = () => {
@@ -39,7 +41,7 @@ const MyArchiveDetailPopup = () => {
                   color={theme.colors.black}
                   border="1px solid"
                 >
-                  전시회
+                  {data.contents.typeBadge.text}
                 </Tag>
                 <Span marginLeft="5px" color={theme.colors.gray99}>
                   2022.07.29
@@ -80,8 +82,7 @@ const MyArchiveDetailPopup = () => {
                 -webkit-box-orient: vertical;
               `}
             >
-              이건희 특별전 : 어느 수집가의 초대 이건희 특별전 : 어느 수집가의
-              초대 이건희 특별전 : 어느 수집가의 초대
+              {data.contents.title}
             </Box>
           </Box>
           <FlexBox width="345px" height="345px">
@@ -113,18 +114,7 @@ const MyArchiveDetailPopup = () => {
               }
             `}
           >
-            <Box margin="0 10px">
-              사용자가 작성한 코멘트 영역이 뿌려집니다 그냥 인스타하는 사람들을
-              위한 전시같은 느낌 물론 전시를 보는건 즐거웠음 하지만 사람들
-              사진찍느라 앞으로 나아가질않음…ㅠㅠㅠ 웨이팅도 평일 2시에 갔을때
-              1시간정도 웨이팅했움요 굿즈는 몇몇 품절된거있었음요 사용자가
-              작성한 코멘트 영역이 뿌려집니다 사용자가 작성한 코멘트 영역이
-              뿌려집니다 그냥 인스타하는 사람들을 위한 전시같은 느낌 물론 전시를
-              보는건 즐거웠음 하지만 사람들 사진찍느라 앞으로
-              나아가질않음…ㅠㅠㅠ 웨이팅도 평일 2시에 갔을때 1시간정도
-              웨이팅했움요 굿즈는 몇몇 품절된거있었음요 사용자가 작성한 코멘트
-              영역이 뿌려집니다
-            </Box>
+            <Box margin="0 10px">{data.contents.comment}</Box>
           </Box>
           <FlexBox borderTop="solid 1px" borderTopColor={theme.colors.gray99}>
             <Box
@@ -150,7 +140,7 @@ const MyArchiveDetailPopup = () => {
                     -webkit-box-orient: vertical;
                   `}
                 >
-                  소문난 감자탕 소문난 감자탕 소문난 감자탕
+                  {data.contents.food}
                 </Span>
               </FlexBox>
               <FlexBox alignItems="center">
@@ -170,7 +160,7 @@ const MyArchiveDetailPopup = () => {
                     -webkit-box-orient: vertical;
                   `}
                 >
-                  성수다락
+                  {data.contents.food}
                 </Box>
               </FlexBox>
             </Box>
