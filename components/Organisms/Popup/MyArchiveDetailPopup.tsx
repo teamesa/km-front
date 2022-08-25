@@ -5,6 +5,7 @@ import { useSetRecoilState } from 'recoil';
 import StarRating from 'assets/list/StarRating';
 import { Pointer, CloseBtn } from 'assets/mypage';
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
+import Carousel from 'components/Molecules/Carousel';
 import Popup from 'components/Molecules/Popup';
 import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
@@ -84,7 +85,9 @@ const MyArchiveDetailPopup = () => {
               초대 이건희 특별전 : 어느 수집가의 초대
             </Box>
           </Box>
-          <FlexBox width="345px" height="345px">
+          {/* 이미지캐러셀 */}
+          <Carousel />
+          {/* <FlexBox width="345px" height="345px">
             <Image
               src={
                 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
@@ -93,7 +96,7 @@ const MyArchiveDetailPopup = () => {
               width="345px"
               height="345px"
             />
-          </FlexBox>
+          </FlexBox> */}
           <Box
             height="88px"
             margin="20px 5px"
