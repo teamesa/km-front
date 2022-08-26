@@ -24,6 +24,10 @@ export const ALERT_MESSAGE = {
       code: 'ALT-013',
       message: '사진은 3개까지 등록할 수 있습니다.',
     },
+    ASK_LOGIN: {
+      code: 'ALT-006',
+      message: '로그인 후 이용 가능합니다.로그인 하시겠습니까?',
+    },
   },
   ERROR: {
     ARCHIVE_REGISTRATION_QUESTION: {
