@@ -8,5 +8,4 @@ export const POPUP_NAME = {
   ARCHIVE_WRITE_CONFIRM: 'ArchiveWirteConfirm',
   ARCHIVE_WRITE_ERROR: 'ArchiveWirteError',
   OVERFLOW_PICTURE: 'ArchivePictureOverflowPopup',
-  ALERT_MOVE_MYPAGE: 'AlertMoveMyPage',
 };

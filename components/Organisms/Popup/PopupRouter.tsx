@@ -3,6 +3,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import AlertArchiveAskPopup from 'components/Organisms/Popup/AlertArchiveAskPopup';
 import AlertCancelConfirmPopup from 'components/Organisms/Popup/AlertCancelConfirmPopup';
 import AlertSuccessPopup from 'components/Organisms/Popup/AlertConfirmPopup';
+import AlertCopyLinkPopup from 'components/Organisms/Popup/AlertCopyLinkPopup';
 import AlertLoginConfirmationPopup from 'components/Organisms/Popup/AlertLoginConfirmationPopup';
 import ArchivePictureOverflowPopup from 'components/Organisms/Popup/ArchivePictureOverflowPopup';
 import ArchiveWirteConfirmPopup from 'components/Organisms/Popup/ArchiveWirteConfirmPopup';
@@ -39,6 +40,8 @@ const PopupRouter = () => {
       return <ArchiveWirteErrorPopup />;
     case POPUP_NAME.OVERFLOW_PICTURE:
       return <ArchivePictureOverflowPopup />;
+    case POPUP_NAME.ALERT_COPY_LINK:
+      return <AlertCopyLinkPopup />;
     default:
       return null;
   }
