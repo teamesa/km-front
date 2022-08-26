@@ -81,7 +81,7 @@ export default function Description() {
               ) : null}
               {summary?.homePageUrl ? (
                 <DescriptionInfo
-                  title="홈페이지"
+                  title=""
                   description={
                     <Box paddingTop="20px">
                       <Button>
