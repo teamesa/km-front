@@ -78,7 +78,9 @@ export default function Description() {
                 title={summary?.time ? '시간' : ''}
                 description={
                   <>
-                    <InnerHTML data={summary?.time} />
+                    <Box>
+                      <InnerHTML data={summary?.time} />
+                    </Box>
                     {linkUrl({
                       title: '홈페이지 이동',
                       link: `${summary?.homePageUrl}`,
