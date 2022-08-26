@@ -32,6 +32,8 @@ export default function AddressInput({
               onModal({
                 type: 'SearchMap',
                 payload: {
+                  title:
+                    type === 'FOOD' ? '다녀온 맛집 찾기' : '다녀온 카페 찾기',
                   onChange: (e: any) => {
                     onChange && onChange(e);
                     setPlaceAddress(e.place_name);
