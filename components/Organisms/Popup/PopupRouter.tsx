@@ -3,6 +3,7 @@ import { useRecoilValue } from 'recoil';
 import AlertArchiveAskPopup from 'components/Organisms/Popup/AlertArchiveAskPopup';
 import AlertCancelConfirmPopup from 'components/Organisms/Popup/AlertCancelConfirmPopup';
 import AlertSuccessPopup from 'components/Organisms/Popup/AlertConfirmPopup';
+import AlertCopyLinkPopup from 'components/Organisms/Popup/AlertCopyLinkPopup';
 import ArchiveWirteConfirmPopup from 'components/Organisms/Popup/ArchiveWirteConfirmPopup';
 import ArchiveWirteErrorPopup from 'components/Organisms/Popup/ArchiveWirteErrorPopup';
 import { POPUP_NAME } from 'constants/popupName';
@@ -22,6 +23,8 @@ const PopupRouter = () => {
       return <ArchiveWirteConfirmPopup />;
     case POPUP_NAME.ARCHIVE_WRITE_ERROR:
       return <ArchiveWirteErrorPopup />;
+    case POPUP_NAME.ALERT_COPY_LINK:
+      return <AlertCopyLinkPopup />;
     default:
       return null;
   }
