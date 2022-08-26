@@ -1,10 +1,12 @@
 import Image from 'next/image';
 
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
+import DetailNoData from 'assets/detail/noData';
 import { Profile } from 'assets/mypage';
 import { Box, FlexBox, Span, Tag } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import StarScope from 'components/Molecules/StarScope';
+import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
 import { ArchiveContents } from 'states/detail';
 import theme from 'styles/theme';
 interface ArchiveProps {
@@ -12,7 +14,23 @@ interface ArchiveProps {
 }
 export default function Archive({ data }: ArchiveProps) {
   if (data.archives.length === 0) {
-    return <Box> 아카이브 없다</Box>;
+    return (
+      <Box
+        paddingTop="100px"
+        margin="0 auto"
+        maxWidth="300px"
+        width="100%"
+        textAlign="center"
+      >
+        <DetailNoData />
+        <Box marginTop="20px" fontSize="13px" lineHeight="20px">
+          아카이브가 비어있습니다.
+          <br /> 코멘트를 기록해주세요.
+        </Box>
+        <Box width="100%" height="60px" />
+        <Box width="100%" height="var(--platformBottomArea)" />
+      </Box>
+    );
   }
 
   return (
@@ -31,11 +49,6 @@ export default function Archive({ data }: ArchiveProps) {
           5
         </Box>
       </FlexBox>
-      {/* <Box
-        height="1px"
-        backgroundColor={theme.colors.grayEE}
-        marginTop="23px"
-      /> */}
       <Box paddingTop="24px">
         {data.archives.map((item, index) => (
           <Box key={index}>
@@ -86,23 +99,7 @@ export default function Archive({ data }: ArchiveProps) {
                 </Box>
               </FlexBox>
               <Box height="20px">
-                <Tag
-                  display="flex !important"
-                  alignItems="center"
-                  padding="0px 10px !important"
-                  margin="0px !important"
-                  color={theme.colors.lime}
-                  background={theme.colors.black}
-                  boxShadow="0 0 8px 0 rgba(0, 0, 0, 0.08)"
-                >
-                  <NavWish
-                    fill={theme.colors.lime}
-                    width="13px"
-                    height="12px"
-                    viewBox="3 4 23 22"
-                  />
-                  <Span marginLeft="4px">25</Span>
-                </Tag>
+                <ArchiveHeart heart={item.heart} heartCount={25} />
               </Box>
             </FlexBox>
             {item.photoUrls ? (
