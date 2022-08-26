@@ -34,9 +34,37 @@ type TGetIntroduction = {
   summary: string | null;
 };
 
-type TabViewData = {
-  title?: string | null;
-  contents: any;
+export interface ArchiveContents {
+  responsePagingStatus: {
+    nextPage: number;
+    currentPage: number;
+    pageSize: number;
+    hasNext: false;
+    totalContentsCount: number;
+    currentContentsCount: number;
+  };
+  avgStarRating: number;
+  archives: {
+    id: number;
+    userProfileUrl: string;
+    userName: string;
+    updatedAt: string;
+    starRating: number;
+    likeCount: number;
+    heart: {
+      heartClicked: boolean;
+      link: string;
+    };
+    comment: string;
+    food: string;
+    cafe: string;
+    photoUrls: string[];
+  }[];
+}
+
+type TGetArchive = {
+  title: string;
+  contents: ArchiveContents;
 };
 
 const axios = customAxios();
@@ -50,7 +78,12 @@ export async function getSummary({ itemId }: { itemId: number }) {
   return data;
 }
 export async function getArchive({ itemId }: { itemId: number }) {
-  return noIntroData;
+  const { data } = (await axios({
+    url: `/api/archive/${itemId}`,
+    method: 'GET',
+  })) as AxiosResponse<TGetArchive>;
+
+  return data;
 }
 
 export async function getIntroduction({ itemId }: { itemId: number }) {
@@ -68,8 +101,7 @@ export const DetailState = selectorFamily({
     const summary = await getSummary({ itemId: itemId });
     const introduction = await getIntroduction({ itemId: itemId });
     const archive = await getArchive({ itemId: itemId });
-
-    const tabViewData: Array<TabViewData> =
+    const tabViewData =
       introduction.summary === null && introduction.photo.length === 0
         ? [{ ...archive }]
         : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
