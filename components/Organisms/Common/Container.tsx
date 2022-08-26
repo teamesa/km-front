@@ -45,7 +45,7 @@ export default function Container({ children }: { children: ReactNode }) {
             selectedIcon: <NavWish fill={theme.colors.black} />,
             icon: <NavWish />,
             pathName: 'PICK',
-            path: ['/wish'],
+            path: ['/pick'],
           },
           {
             selectedIcon: <NavMyPage fill={theme.colors.black} />,
