@@ -30,14 +30,14 @@ export default function Navigator() {
         url: `${window.location.href}`,
       });
       setAlertState(ALERT_MESSAGE.ALERT.COPY_TO_CLIPBOARD);
-      setPopupName(POPUP_NAME.ALERT_COPY_LINK);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM);
     } else {
       copy();
       setTimeout(() => {
         setCopied(false);
         setAlertState(ALERT_MESSAGE.ALERT.COPY_TO_CLIPBOARD);
-        setPopupName(POPUP_NAME.ALERT_COPY_LINK);
-      }, 3000);
+        setPopupName(POPUP_NAME.ALERT_CONFIRM);
+      }, 200);
     }
   };
 

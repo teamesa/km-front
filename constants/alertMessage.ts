@@ -16,6 +16,10 @@ export const ALERT_MESSAGE = {
       code: 'ALT-009',
       message: '저장되었습니다.',
     },
+    ASK_LOGIN: {
+      code: 'ALT-006',
+      message: '로그인 후 이용 가능합니다.로그인 하시겠습니까?',
+    },
   },
   ERROR: {
     ARCHIVE_REGISTRATION_QUESTION: {

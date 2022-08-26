@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box, Button } from 'components/Atoms';
@@ -6,11 +7,17 @@ import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import theme from 'styles/theme';
 
-const AlertCopyLinkPopup = () => {
+const AlertMoveMypagePopup = () => {
+  const router = useRouter();
   const alertState = useRecoilValue(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
 
-  const handleClosePopup = () => {
+  const handleConfirm = () => {
+    setPopupName(POPUP_NAME.NULL);
+    router.push('/mypage');
+  };
+
+  const handleCancel = () => {
     setPopupName(POPUP_NAME.NULL);
   };
 
@@ -34,11 +41,21 @@ const AlertCopyLinkPopup = () => {
         </Box>
         <Button
           height="50px"
-          width="100%"
+          width="50%"
           fontSize="16px"
-          borderRadius="0 0 12px 12px"
+          borderRadius="0 0 0 12px"
+          backgroundColor={theme.colors.grayEE}
+          onClick={handleCancel}
+        >
+          <Box color={theme.colors.black}>취소</Box>
+        </Button>
+        <Button
+          height="50px"
+          width="50%"
+          fontSize="16px"
+          borderRadius="0 0 12px 0"
           backgroundColor={theme.colors.black}
-          onClick={handleClosePopup}
+          onClick={handleConfirm}
         >
           <Box color={theme.colors.white}>확인</Box>
         </Button>
@@ -47,4 +64,4 @@ const AlertCopyLinkPopup = () => {
   );
 };
 
-export default AlertCopyLinkPopup;
+export default AlertMoveMypagePopup;
