@@ -39,6 +39,7 @@ export default function SearchMap({
   payload,
 }: {
   payload: {
+    title: string;
     onChange?: (e: kakao.maps.services.PlacesSearchResultItem) => void;
   };
 }) {
@@ -73,7 +74,7 @@ export default function SearchMap({
         justifyContent="space-between"
         borderBottom={`1px solid ${theme.colors.grayEE}`}
       >
-        <Box fontWeight={500}>다녀온 장소 찾기</Box>
+        <Box fontWeight={500}>{payload.title}</Box>
         <Box
           onClick={() => {
             offModal();
