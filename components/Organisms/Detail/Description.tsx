@@ -16,6 +16,23 @@ export default function Description() {
   const { contents, state } = useRecoilValueLoadable(DetailState(Number(id)));
   const { summary, tabViewData } = contents;
 
+  const linkUrl = ({ title, link }: { title: string; link: string }) => {
+    if (!link) {
+      return null;
+    }
+    return (
+      <Button paddingTop="8px">
+        <Link href={link}>
+          <a target="_blank" rel="noreferrer">
+            <Box color={theme.colors.gray99}>
+              {title} {'>'}
+            </Box>
+          </a>
+        </Link>
+      </Button>
+    );
+  };
+
   switch (state) {
     case 'hasValue':
       return (
@@ -40,61 +57,35 @@ export default function Description() {
             <Box marginTop="30px" marginBottom="60px">
               <DescriptionInfo title="기간" description={summary?.term} />
               <DescriptionInfo title="장소" description={summary?.place} />
-              {summary?.feeType === '유료' ? (
-                <>
-                  <DescriptionInfo
-                    title="입장료"
-                    description={summary?.feeType}
-                  />
-                  {summary?.price ? (
-                    <DescriptionInfo
-                      title=""
-                      description={<InnerHTML data={summary?.price} />}
-                    />
-                  ) : null}
-                </>
-              ) : (
-                <DescriptionInfo
-                  title="입장료"
-                  description={summary?.feeType}
-                />
-              )}
-              {summary?.ticketUrl ? (
-                <DescriptionInfo
-                  title=""
-                  description={
-                    <Button>
-                      <Link href={summary?.ticketUrl}>
-                        <a target="_blank" rel="noreferrer">
-                          티켓 구매하기 {'>'}
-                        </a>
-                      </Link>
-                    </Button>
-                  }
-                />
-              ) : null}
-              {summary?.time ? (
-                <DescriptionInfo
-                  title="시간"
-                  description={<InnerHTML data={summary?.time} />}
-                />
-              ) : null}
-              {summary?.homePageUrl ? (
-                <DescriptionInfo
-                  title=""
-                  description={
-                    <Box paddingTop="20px">
-                      <Button>
-                        <Link href={summary?.homePageUrl}>
-                          <a target="_blank" rel="noreferrer">
-                            홈페이지 이동 {'>'}
-                          </a>
-                        </Link>
-                      </Button>
+              <DescriptionInfo
+                title="입장료"
+                description={
+                  <>
+                    <Box>{summary?.feeType}</Box>
+                    <Box>
+                      {summary?.price ? (
+                        <InnerHTML data={summary?.price} />
+                      ) : null}
                     </Box>
-                  }
-                />
-              ) : null}
+                    {linkUrl({
+                      title: '티켓 구매하기',
+                      link: `${summary?.ticketUrl}`,
+                    })}
+                  </>
+                }
+              />
+              <DescriptionInfo
+                title={summary?.time ? '시간' : ''}
+                description={
+                  <>
+                    <InnerHTML data={summary?.time} />
+                    {linkUrl({
+                      title: '홈페이지 이동',
+                      link: `${summary?.homePageUrl}`,
+                    })}
+                  </>
+                }
+              />
             </Box>
             <TopTabView
               data={tabViewData.map((item: { title: any; contents: any }) => ({
