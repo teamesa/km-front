@@ -1,13 +1,17 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { createRef } from 'react';
+import { useRecoilValueLoadable } from 'recoil';
 
-import { Box, Button, Tag } from 'components/Atoms';
+import { Box, Button, Span, Tag } from 'components/Atoms';
 import DescriptionInfo from 'components/Molecules/DescriptionInfo';
 import InnerHTML from 'components/Molecules/InnerHTML';
-import TopTabView from 'components/Molecules/TopTabView';
+import Archive from 'components/Organisms/Detail/Description/Archive';
 import BottomSheetHeader from 'components/Organisms/Detail/Description/BottomSheetHeader';
+import { DetailNavigation } from 'components/Organisms/Detail/Description/DetailNavigation';
+import Introduce from 'components/Organisms/Detail/Description/Introduce';
 import { DetailState } from 'states';
+import { TabViewData } from 'states/detail';
 import theme from 'styles/theme';
 
 export default function Description() {
@@ -15,28 +19,25 @@ export default function Description() {
   const { id } = router.query;
   const { contents, state } = useRecoilValueLoadable(DetailState(Number(id)));
   const { summary, tabViewData } = contents;
+  const archiveRef = createRef<HTMLDivElement>();
+  const introduceRef = createRef<HTMLDivElement>();
 
-  const generateLinkUrl = ({
-    title,
-    link,
-  }: {
-    title: string;
-    link: string;
-  }) => {
-    if (!link) {
-      return null;
+  const isShowLink = (link: string, title: string) => {
+    if (link) {
+      return (
+        <Button marginTop="8px">
+          <Link href={link}>
+            <a target="_blank" rel="noreferrer">
+              <Span color={theme.colors.gray99}>
+                {title}
+                <Span paddingLeft="8px">{'>'}</Span>
+              </Span>
+            </a>
+          </Link>
+        </Button>
+      );
     }
-    return (
-      <Button paddingTop="8px">
-        <Link href={link}>
-          <a target="_blank" rel="noreferrer">
-            <Box color={theme.colors.gray99}>
-              {title} {'>'}
-            </Box>
-          </a>
-        </Link>
-      </Button>
-    );
+    return;
   };
 
   switch (state) {
@@ -63,50 +64,63 @@ export default function Description() {
             <Box marginTop="30px" marginBottom="60px">
               <DescriptionInfo title="기간" description={summary?.term} />
               <DescriptionInfo title="장소" description={summary?.place} />
-              <DescriptionInfo
-                title="입장료"
-                description={
-                  <>
-                    <Box>{summary?.feeType}</Box>
+              {summary?.feeType === '유료' ? (
+                <>
+                  <DescriptionInfo
+                    title="입장료"
+                    description={
+                      <Box>
+                        <Box>{summary?.feeType}</Box>
+                        <Box>
+                          {summary?.price ? (
+                            <InnerHTML data={summary?.price} />
+                          ) : null}
+                        </Box>
+                        {isShowLink(summary?.ticketUrl, '티켓 구매하기')}
+                      </Box>
+                    }
+                  />
+                </>
+              ) : (
+                <DescriptionInfo
+                  title="입장료"
+                  description={summary?.feeType}
+                />
+              )}
+              {summary?.time ? (
+                <DescriptionInfo
+                  title="시간"
+                  description={
                     <Box>
-                      {summary?.price ? (
-                        <InnerHTML data={summary?.price} />
-                      ) : null}
+                      <Box>
+                        <InnerHTML data={summary?.time} />
+                      </Box>
+                      {isShowLink(summary?.homePageUrl, '홈페이지 이동')}
                     </Box>
-                    {generateLinkUrl({
-                      title: '티켓 구매하기',
-                      link: `${summary?.ticketUrl}`,
-                    })}
-                  </>
-                }
-              />
-              <DescriptionInfo
-                title={summary?.time ? '시간' : ''}
-                description={
-                  <>
-                    <Box>
-                      <InnerHTML data={summary?.time} />
-                    </Box>
-                    {generateLinkUrl({
-                      title: '홈페이지 이동',
-                      link: `${summary?.homePageUrl}`,
-                    })}
-                  </>
-                }
-              />
+                  }
+                />
+              ) : null}
             </Box>
-            <TopTabView
-              data={tabViewData.map((item: { title: any; contents: any }) => ({
-                title: item.title,
-                contents: item.contents,
-              }))}
+            <DetailNavigation
+              deatailMetaInfo={tabViewData}
+              archiveRef={archiveRef}
+              introduceRef={introduceRef}
             />
+            {tabViewData.map(({ title, contents }: TabViewData) =>
+              title === '아카이브' ? (
+                <Archive data={contents ?? ''} scrollRef={archiveRef} />
+              ) : title === '소개' ? (
+                <Introduce data={contents ?? ''} scrollRef={introduceRef} />
+              ) : (
+                <div></div>
+              ),
+            )}
           </Box>
         </Box>
       );
     case 'loading':
       return <div>Loading...</div>;
     case 'hasError':
-      throw <div>Error....</div>;
+      throw Error('상세페이지 정보를 가져오는데 실패했습니다.');
   }
 }
