@@ -16,7 +16,13 @@ export default function Description() {
   const { contents, state } = useRecoilValueLoadable(DetailState(Number(id)));
   const { summary, tabViewData } = contents;
 
-  const linkUrl = ({ title, link }: { title: string; link: string }) => {
+  const generateLinkUrl = ({
+    title,
+    link,
+  }: {
+    title: string;
+    link: string;
+  }) => {
     if (!link) {
       return null;
     }
@@ -67,7 +73,7 @@ export default function Description() {
                         <InnerHTML data={summary?.price} />
                       ) : null}
                     </Box>
-                    {linkUrl({
+                    {generateLinkUrl({
                       title: '티켓 구매하기',
                       link: `${summary?.ticketUrl}`,
                     })}
@@ -81,7 +87,7 @@ export default function Description() {
                     <Box>
                       <InnerHTML data={summary?.time} />
                     </Box>
-                    {linkUrl({
+                    {generateLinkUrl({
                       title: '홈페이지 이동',
                       link: `${summary?.homePageUrl}`,
                     })}
