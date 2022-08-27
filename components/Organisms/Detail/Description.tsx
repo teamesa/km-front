@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { createRef } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 
-import { Box, Button, Tag } from 'components/Atoms';
+import { Box, Button, Span, Tag } from 'components/Atoms';
 import DescriptionInfo from 'components/Molecules/DescriptionInfo';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import Archive from 'components/Organisms/Detail/Description/Archive';
@@ -21,6 +21,24 @@ export default function Description() {
   const { summary, tabViewData } = contents;
   const archiveRef = createRef<HTMLDivElement>();
   const introduceRef = createRef<HTMLDivElement>();
+
+  const isShowLink = (link: string, title: string) => {
+    if (link) {
+      return (
+        <Button marginTop="8px">
+          <Link href={link}>
+            <a target="_blank" rel="noreferrer">
+              <Span color={theme.colors.gray99}>
+                {title}
+                <Span paddingLeft="8px">{'>'}</Span>
+              </Span>
+            </a>
+          </Link>
+        </Button>
+      );
+    }
+    return;
+  };
 
   switch (state) {
     case 'hasValue':
@@ -50,14 +68,18 @@ export default function Description() {
                 <>
                   <DescriptionInfo
                     title="입장료"
-                    description={summary?.feeType}
+                    description={
+                      <Box>
+                        <Box>{summary?.feeType}</Box>
+                        <Box>
+                          {summary?.price ? (
+                            <InnerHTML data={summary?.price} />
+                          ) : null}
+                        </Box>
+                        {isShowLink(summary?.ticketUrl, '티켓 구매하기')}
+                      </Box>
+                    }
                   />
-                  {summary?.price ? (
-                    <DescriptionInfo
-                      title=""
-                      description={<InnerHTML data={summary?.price} />}
-                    />
-                  ) : null}
                 </>
               ) : (
                 <DescriptionInfo
@@ -65,38 +87,15 @@ export default function Description() {
                   description={summary?.feeType}
                 />
               )}
-              {summary?.ticketUrl ? (
-                <DescriptionInfo
-                  title=""
-                  description={
-                    <Button>
-                      <Link href={summary?.ticketUrl}>
-                        <a target="_blank" rel="noreferrer">
-                          티켓 구매하기 {'>'}
-                        </a>
-                      </Link>
-                    </Button>
-                  }
-                />
-              ) : null}
               {summary?.time ? (
                 <DescriptionInfo
                   title="시간"
-                  description={<InnerHTML data={summary?.time} />}
-                />
-              ) : null}
-              {summary?.homePageUrl ? (
-                <DescriptionInfo
-                  title="홈페이지"
                   description={
-                    <Box paddingTop="20px">
-                      <Button>
-                        <Link href={summary?.homePageUrl}>
-                          <a target="_blank" rel="noreferrer">
-                            홈페이지 이동 {'>'}
-                          </a>
-                        </Link>
-                      </Button>
+                    <Box>
+                      <Box>
+                        <InnerHTML data={summary?.time} />
+                      </Box>
+                      {isShowLink(summary?.homePageUrl, '홈페이지 이동')}
                     </Box>
                   }
                 />
@@ -122,6 +121,6 @@ export default function Description() {
     case 'loading':
       return <div>Loading...</div>;
     case 'hasError':
-      throw <div>Error....</div>;
+      throw Error('상세페이지 정보를 가져오는데 실패했습니다.');
   }
 }

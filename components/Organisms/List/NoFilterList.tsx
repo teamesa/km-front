@@ -1,7 +1,7 @@
 import Alert from 'assets/error/Alert';
 import { Box } from 'components/Atoms';
 
-export default function NoItemList() {
+export default function NoFilterList() {
   return (
     <Box
       position="fixed"
@@ -18,7 +18,9 @@ export default function NoItemList() {
         lineHeight="20px"
         fontWeight="500"
       >
-        등록된 문화생활이 없습니다.
+        해당 필터에 맞는 결과가 없습니다.
+        <br />
+        상세필터를 다시 설정해주세요.
       </Box>
     </Box>
   );

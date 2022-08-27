@@ -15,12 +15,13 @@ export default function StarScope({
   const [hover, setHover] = useState(0);
 
   return (
-    <Box paddingTop="16px">
+    <Box>
       <FlexBox justifyContent="center">
         {[...Array(5)].map((_, index) => {
           index += 1;
           return (
             <Button
+              margin="0px 5px"
               type="button"
               key={index}
               onClick={() => {
@@ -32,12 +33,20 @@ export default function StarScope({
             >
               {currentStep ? (
                 index <= currentStep ? (
-                  <StarBlack />
+                  <StarBlack
+                    width="30.645px"
+                    height="29.143px"
+                    viewBox="0 0 30.645 29.143"
+                  />
                 ) : (
                   <StarWhite />
                 )
               ) : index <= (hover || rating) ? (
-                <StarBlack />
+                <StarBlack
+                  width="30.645px"
+                  height="29.143px"
+                  viewBox="0 0 30.645 29.143"
+                />
               ) : (
                 <StarWhite />
               )}
