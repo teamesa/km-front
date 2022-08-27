@@ -41,6 +41,7 @@ export default function PickItem({ content }: ItemProps) {
       flex="0 0 50%"
       padding="0px 2.5px"
       css={css`
+        // 픽 리스트가 3개 이상일 경우 3번째 리스트 부터 margin-top(40)
         &:nth-child(n + 3) {
           margin-top: 40px;
         }

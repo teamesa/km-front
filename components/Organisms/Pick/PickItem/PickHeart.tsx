@@ -2,7 +2,7 @@ import ListWish from 'assets/list/ListWish';
 import { Box } from 'components/Atoms';
 import theme from 'styles/theme';
 
-export default function ItemHeart() {
+export default function PickHeart() {
   const pickClick = () => {
     console.log('click');
   };
