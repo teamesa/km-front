@@ -6,27 +6,7 @@ export const Folder = ({ width = '50', height = '50' }) => {
       height={height}
       viewBox="0 0 50 50"
     >
-      <defs>
-        <filter
-          id="wlz4kabgza"
-          x="0"
-          y="0"
-          width="50"
-          height="50"
-          filterUnits="userSpaceOnUse"
-        >
-          <feOffset />
-          <feGaussianBlur stdDeviation="5" result="blur" />
-          <feFlood floodOpacity=".22" />
-          <feComposite operator="in" in2="blur" />
-          <feComposite in="SourceGraphic" />
-        </filter>
-      </defs>
-      <path
-        data-name="패스 1632"
-        d="M25 0A25 25 0 1 1 0 25 25 25 0 0 1 25 0"
-        filter="url(#wlz4kabgza)"
-      />
+      <path data-name="패스 1632" d="M25 0A25 25 0 1 1 0 25 25 25 0 0 1 25 0" />
       <path
         data-name="패스 1633"
         d="M36.024 34.964H13.976a.516.516 0 0 1-.515-.515v-18.9a.516.516 0 0 1 .515-.516h6.185a.515.515 0 0 1 .33.12l1.715 1.429a.112.112 0 0 0 .073.026h13.745a.516.516 0 0 1 .515.515v17.326a.516.516 0 0 1-.515.515m-21.533-1.03h21.018V21.1H14.491zm0-13.859h21.018V17.64H22.051a.518.518 0 0 1-.33-.119l-1.746-1.456h-5.484z"
@@ -44,24 +24,22 @@ export const Folder = ({ width = '50', height = '50' }) => {
         stroke="#fff"
         strokeWidth="1.2px"
       />
-      <g transform="translate(-15 -15)">
-        <path
-          data-name="선 1009"
-          transform="translate(40 39.27)"
-          fill="none"
-          stroke="#fff"
-          strokeWidth="1.2px"
-          d="M0 6.5V0"
-        />
-        <path
-          data-name="선 1010"
-          transform="translate(36.75 42.52)"
-          fill="none"
-          stroke="#fff"
-          strokeWidth="1.2px"
-          d="M0 0h6.5"
-        />
-      </g>
+      <path
+        data-name="선 1009"
+        transform="translate(25 24.27)"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="1.2px"
+        d="M0 6.5V0"
+      />
+      <path
+        data-name="선 1010"
+        transform="translate(21.75 27.52)"
+        fill="none"
+        stroke="#fff"
+        strokeWidth="1.2px"
+        d="M0 0h6.5"
+      />
     </svg>
   );
 };
