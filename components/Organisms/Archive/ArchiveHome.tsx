@@ -74,7 +74,6 @@ export default function ArchiveHome() {
 
   return (
     <>
-      <PopupRouter />
       <Box>{title ? null : <SearchTitle />}</Box>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Box>
