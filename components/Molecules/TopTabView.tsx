@@ -144,8 +144,9 @@ export default function TopTabView({
           backgroundColor="#000"
           zIndex="-1"
           css={css`
-            filter: blur(10px);
-            -webkit-filter: blur(10px);
+            filter: blur(4px);
+            -webkit-filter: blur(4px);
+            opacity: 0.8;
           `}
         ></Box>
       </Box>
