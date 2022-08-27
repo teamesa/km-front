@@ -22,7 +22,7 @@ export default function PickTitle() {
         >
           {pickCount.count}
         </Span>
-        PCIK
+        PICK
       </Box>
     </>
   );

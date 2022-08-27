@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import Alert from 'assets/error/Alert';
 import { Box, Button } from 'components/Atoms';
+import theme from 'styles/theme';
 
 export default function PickLogin() {
   const router = useRouter();
@@ -13,7 +14,7 @@ export default function PickLogin() {
         lineHeight="27px"
         fontWeight="500"
       >
-        PCIK
+        PICK
       </Box>
       <Box
         position="fixed"
@@ -36,10 +37,10 @@ export default function PickLogin() {
           display="inline-block"
           height="40px"
           width="130px"
-          color="#ffffff"
+          color={theme.colors.white}
           fontSize="13px"
           lineHeight="40px"
-          background="#000000"
+          background={theme.colors.black}
           onClick={() => {
             router.push('/mypage');
           }}
