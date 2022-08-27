@@ -86,7 +86,7 @@ const MyArchiveDetailPopup = () => {
             </Box>
           </Box>
           {/* 이미지캐러셀 */}
-          <Carousel />
+          <Carousel itemsPerSlide={3} />
           {/* <FlexBox width="345px" height="345px">
             <Image
               src={
