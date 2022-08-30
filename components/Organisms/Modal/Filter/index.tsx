@@ -30,7 +30,7 @@ export default function FilterModal() {
         {data.map((item, index) => (
           <FilterSelectGroup filterGroup={item} key={index} />
         ))}
-        <FlexBox margin="0px -2.5px">
+        <FlexBox margin="0px -2.5px" paddingBottom="20px">
           <Button
             margin="0px 2.5px"
             width="50%"

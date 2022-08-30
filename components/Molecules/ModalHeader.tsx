@@ -1,3 +1,4 @@
+import { CloseBtn } from 'assets/mypage';
 import { Button, Box } from 'components/Atoms';
 import theme from 'styles/theme';
 
@@ -9,21 +10,12 @@ export default function ModalHeader({
 }) {
   return (
     <Box
-      width="100%"
-      height="49px"
-      alignItems="center"
-      justifyContent="center"
-      textAlign="center"
+      position="absolute"
+      top="-48px"
+      left="calc(50% - 14px)"
+      onClick={headerLeftAction}
     >
-      <Button width="40px" onClick={headerLeftAction}>
-        <Box
-          width="48px"
-          height="4px"
-          borderRadius="2px"
-          backgroundColor={theme.colors.grayE9}
-          alignItems="center"
-        />
-      </Button>
+      <CloseBtn />
     </Box>
   );
 }
