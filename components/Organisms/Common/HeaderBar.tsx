@@ -34,8 +34,6 @@ function HeaderBar() {
   const header = useRecoilValue(headerState);
   const resetHeader = useResetRecoilState(headerState);
 
-  const { ref, height } = useRefUtils();
-
   useEffect(() => {
     resetHeader();
   }, [resetHeader, router.pathname]);
@@ -51,86 +49,81 @@ function HeaderBar() {
         />
       </Head>
       <Box
-        ref={ref}
+        display={header.invisible ? 'none' : ''}
         role="menubar"
         position="fixed"
-        // padding="14px 15px"
+        css={css`
+          padding-top: env(safe-area-inset-top);
+          height: calc(45px + env(safe-area-inset-top));
+        `}
         top="0px"
         width="100%"
-        height="45px"
-        // alignItems="center"
         background="white"
         zIndex={Z_INDEX.SKY}
       >
-        <Box
-          // flex={1}
-          aria-label="왼쪽 버튼"
-          role="button"
-          position="absolute"
-          top="6px"
-          left="5px"
-          width="30px"
-          height="30px"
-          // justifyContent="flex-start"
-          // height="100%"
-          // alignItems="center"
-          onClick={() => {
-            if (header.headerLeftAction) {
-              header.headerLeftAction();
-            } else {
-              router.back();
-            }
-          }}
-          css={css`
-            cursor: pointer;
-          `}
-        >
-          {headerLeftIcon[header.headerLeft ?? 'disabled']}
-        </Box>
-        <Box
-          textAlign="center"
-          fontSize="16px"
-          fontWeight="500"
-          lineHeight="45px"
-        >
-          {header?.title ?? ''}
-        </Box>
-        <FlexBox position="absolute" top="6px" right="10px">
+        <Box position="relative">
           <Box
-            aria-label="오른쪽 버튼"
+            aria-label="왼쪽 버튼"
             role="button"
-            // marginTop="5px"
-            // justifyContent="flex-end"
+            position="absolute"
+            top="6px"
+            left="5px"
             width="30px"
             height="30px"
-            alignItems="center"
-            onClick={header.headerRightAction}
+            onClick={() => {
+              if (header.headerLeftAction) {
+                header.headerLeftAction();
+              } else {
+                router.back();
+              }
+            }}
+            css={css`
+              cursor: pointer;
+            `}
           >
-            {headerRightIcon[header.headerRight ?? 'search']}
+            {headerLeftIcon[header.headerLeft ?? 'disabled']}
           </Box>
-          {header.headerEnd ? (
+          <Box
+            textAlign="center"
+            fontSize="16px"
+            fontWeight="500"
+            lineHeight="45px"
+          >
+            {header?.title ?? ''}
+          </Box>
+          <FlexBox position="absolute" top="6px" right="10px">
             <Box
-              // marginLeft="15px"
-              aria-label="끝 버튼"
+              aria-label="오른쪽 버튼"
               role="button"
-              // paddingLeft="5px"
-              // marginTop="5px"
-              // justifyContent="flex-end"
-              // height="100%"
-              // alignItems="center"
-              marginLeft="8px"
               width="30px"
               height="30px"
-              onClick={() => {
-                router.push('/');
-              }}
+              alignItems="center"
+              onClick={header.headerRightAction}
             >
-              {headerEndIcon[header.headerEnd]}
+              {headerRightIcon[header.headerRight ?? 'search']}
             </Box>
-          ) : null}
-        </FlexBox>
+            {header.headerEnd ? (
+              <Box
+                aria-label="끝 버튼"
+                role="button"
+                width="30px"
+                height="30px"
+                onClick={() => {
+                  router.push('/');
+                }}
+              >
+                {headerEndIcon[header.headerEnd]}
+              </Box>
+            ) : null}
+          </FlexBox>
+        </Box>
       </Box>
-      <Box height={height} />
+      <Box
+        css={css`
+          height: calc(45px + env(safe-area-inset-top));
+        `}
+        display={header.invisible ? 'none' : ''}
+      />
     </>
   );
 }

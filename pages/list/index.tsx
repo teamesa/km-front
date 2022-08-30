@@ -20,7 +20,7 @@ export default function List() {
     <>
       <Box
         position="sticky"
-        top="0px"
+        top="env(safe-area-inset-top)"
         zIndex={Z_INDEX.SKY}
         backgroundColor={theme.colors.white}
       >
