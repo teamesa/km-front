@@ -26,7 +26,7 @@ export default function FilterModal() {
   const setFilter = useSetRecoilState(setFilterState);
   return (
     <ModalLayout>
-      <Layout overflow="auto" height="auto">
+      <Layout padding="30px 15px !important" maxHeight="555px" overflow="auto">
         {data.map((item, index) => (
           <FilterSelectGroup filterGroup={item} key={index} />
         ))}

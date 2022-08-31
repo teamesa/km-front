@@ -10,9 +10,10 @@ export default function ModalHeader({
 }) {
   return (
     <Box
-      position="absolute"
-      top="-48px"
-      left="calc(50% - 14px)"
+      position="relative"
+      width="28px"
+      margin="0 auto"
+      paddingBottom="20px"
       onClick={headerLeftAction}
     >
       <CloseBtn />
