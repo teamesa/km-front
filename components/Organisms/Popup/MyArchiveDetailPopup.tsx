@@ -5,6 +5,7 @@ import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
 import StarRating from 'assets/list/StarRating';
 import { Pointer, CloseBtn } from 'assets/mypage';
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
+import Carousel from 'components/Molecules/Carousel';
 import Popup from 'components/Molecules/Popup';
 import { POPUP_NAME } from 'constants/popupName';
 import { MyArchiveDetailState } from 'states';
@@ -90,6 +91,7 @@ const MyArchiveDetailPopup = () => {
                   {data.contents.title}
                 </Box>
               </Box>
+              <Carousel itemsPerSlide={3} />
               <FlexBox width="345px" height="345px">
                 <Image
                   src={

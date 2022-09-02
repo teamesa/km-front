@@ -1,10 +1,9 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
-import { Plus } from 'assets/archive/Plus';
 import noImage from 'assets/common/no_image_375x500.png';
 import {
   Box,
@@ -16,12 +15,17 @@ import {
 } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
+import ArchiveFileUploadForm from 'components/Organisms/Archive/ArchiveFileUploadForm';
 import Rating from 'components/Organisms/Archive/Rating';
 import SearchTitle from 'components/Organisms/Archive/SearchTitle';
 import PopupRouter from 'components/Organisms/Popup/PopupRouter';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, ArchiveWirteState, PopupNameState } from 'states';
+import {
+  ArchiveSquareState,
+  ArchiveSqureStateEnum,
+} from 'states/archive-square';
 import { ArchiveWirteProps } from 'states/archiveWirte';
 import theme from 'styles/theme';
 
@@ -32,6 +36,8 @@ export default function ArchiveHome() {
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const [archiveWirte, setArchiveWirte] = useRecoilState(ArchiveWirteState);
+  const archivePhotos = useRecoilValue(ArchiveSquareState);
+
   const {
     register,
     handleSubmit,
@@ -54,6 +60,12 @@ export default function ArchiveHome() {
       placeInfos: data.placeInfos.filter((item) =>
         item === undefined ? null : item,
       ),
+      photoUrls: archivePhotos
+        .filter(
+          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
+        )
+        .map((archivePhoto) => archivePhoto.pictureSrc)
+        .filter(isDefined),
     };
     setArchiveWirte(postData);
     setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_REGISTRATION_QUESTION);
@@ -93,27 +105,21 @@ export default function ArchiveHome() {
             backgroundColor={theme.colors.grayEE}
             color={theme.colors.grayEE}
           />
-          <Box paddingTop="30px">코멘트 & 사진</Box>
+          <Box paddingTop="30px" fontSize="13px">
+            코멘트 & 사진
+          </Box>
           <TextArea
             marginTop="10px"
             padding="15px"
             height="150px"
             overflow="scroll"
+            fontSize="13px"
+            lineHeight="18px"
             backgroundColor={theme.colors.grayF8}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
             {...register('comment')}
           />
-          <Button paddingTop="20px">
-            <Box
-              width="111px"
-              height="111px"
-              backgroundColor={theme.colors.gray99}
-            >
-              <Box position="relative" top="46px">
-                <Plus />
-              </Box>
-            </Box>
-          </Button>
+          <ArchiveFileUploadForm />
           <Box marginTop="30px" />
           <Box height="1px" backgroundColor={theme.colors.grayEE} />
           <FlexBox marginTop="30px">
@@ -184,4 +190,8 @@ export default function ArchiveHome() {
       </form>
     </>
   );
+}
+
+function isDefined<T>(argument: T | undefined | null): argument is T {
+  return argument !== undefined && argument !== null;
 }

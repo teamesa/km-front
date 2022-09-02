@@ -8,3 +8,8 @@ export default atom<TPopupName>({
   key: 'PopupNameState',
   default: null,
 });
+
+export const setPopup = atom<boolean>({
+  key: 'setPopup',
+  default: false,
+});

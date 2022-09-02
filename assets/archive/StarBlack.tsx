@@ -1,10 +1,14 @@
-export default function StarBlack() {
+export default function StarBlack({
+  width = '30',
+  height = '28.532',
+  viewBox = '0 0 30 28.532',
+}) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="30"
-      height="28.532"
-      viewBox="0 0 30 28.532"
+      width={width}
+      height={height}
+      viewBox={viewBox}
     >
       <path
         data-name="패스 122"

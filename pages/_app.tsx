@@ -8,6 +8,7 @@ import LoadingScreen from 'components/Molecules/LoadingScreen';
 import Portal from 'components/Molecules/Portal';
 import Container from 'components/Organisms/Common/Container';
 import ModalContainer from 'components/Organisms/Modal/ModalContainer';
+import PopupRouter from 'components/Organisms/Popup/PopupRouter';
 import GlobalStyles from 'styles/GlobalStyles';
 import 'styles/index.css';
 import theme from 'styles/theme';
@@ -29,6 +30,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <ModalContainer />
           </Portal>
           <LoadingScreen />
+          <PopupRouter />
         </Suspense>
       </RecoilRoot>
     </ThemeProvider>
