@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { FlexBox, Box } from 'components/Atoms';
+import theme from 'styles/theme';
 
 export default function Carousel({
   itemsPerSlide,
@@ -75,64 +76,83 @@ export default function Carousel({
   };
 
   return (
-    <Box
-      width="345px"
-      height="345px"
-      overflowX="scroll"
-      onScroll={handleIndicator}
-      css={css`
-        scroll-snap-type: x mandatory;
-      `}
-      ref={scrollRef}
-    >
-      {/* 이미지 아이템 들어가는 곳 */}
-      <FlexBox width="1035px" height="345px" flexDirection="row" ref={itemsRef}>
-        <Box
-          css={css`
-            scroll-snap-align: start;
-          `}
-        >
-          <Image
-            src={
-              'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-            }
-            alt="image"
-            width="345px"
-            height="345px"
-          />
-        </Box>
-        <Box
-          css={css`
-            scroll-snap-align: start;
-          `}
-        >
-          <Image
-            src={
-              'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-            }
-            alt="image"
-            width="345px"
-            height="345px"
-          />
-        </Box>
-        <Box
-          css={css`
-            scroll-snap-align: start;
-          `}
-        >
-          <Image
-            src={
-              'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-            }
-            alt="image"
-            width="345px"
-            height="345px"
-          />
-        </Box>
-      </FlexBox>
+    <Box position="relative">
       {/* 인디케이터 */}
-      <Box width="100px" height="50px" position="absolute">
+      <Box
+        width="inherit"
+        height="fit-content"
+        position="absolute"
+        fontSize="14px"
+        lineHeight="0.91px"
+        textAlign="right"
+        letterSpacing="0.11px"
+        bottom="15px"
+        right="15px"
+        zIndex="100"
+        color={theme.colors.white}
+      >
         {numberOfIndicators} / {itemsPerSlide}
+      </Box>
+      <Box
+        width="345px"
+        height="345px"
+        overflowX="scroll"
+        onScroll={handleIndicator}
+        css={css`
+          scroll-snap-type: x mandatory;
+        `}
+        ref={scrollRef}
+      >
+        {/* 이미지 아이템 들어가는 곳 */}
+        <FlexBox
+          width="1035px"
+          height="345px"
+          flexDirection="row"
+          ref={itemsRef}
+        >
+          <Box
+            css={css`
+              scroll-snap-align: start;
+            `}
+          >
+            <Image
+              src={
+                'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
+              }
+              alt="image"
+              width="345px"
+              height="345px"
+            />
+          </Box>
+          <Box
+            css={css`
+              scroll-snap-align: start;
+            `}
+          >
+            <Image
+              src={
+                'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
+              }
+              alt="image"
+              width="345px"
+              height="345px"
+            />
+          </Box>
+          <Box
+            css={css`
+              scroll-snap-align: start;
+            `}
+          >
+            <Image
+              src={
+                'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
+              }
+              alt="image"
+              width="345px"
+              height="345px"
+            />
+          </Box>
+        </FlexBox>
       </Box>
     </Box>
   );
