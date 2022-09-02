@@ -50,7 +50,7 @@ const MyArchiveDetailPopup = () => {
                       {data.contents.typeBadge.text}
                     </Tag>
                     <Span marginLeft="5px" color={theme.colors.gray99}>
-                      2022.07.29
+                      {data.contents.updatedAt}
                     </Span>
                   </Box>
                   <Box>
@@ -92,16 +92,6 @@ const MyArchiveDetailPopup = () => {
                 </Box>
               </Box>
               <Carousel itemsPerSlide={3} />
-              <FlexBox width="345px" height="345px">
-                <Image
-                  src={
-                    'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-                  }
-                  alt="image"
-                  width="345px"
-                  height="345px"
-                />
-              </FlexBox>
               <Box
                 height="88px"
                 margin="20px 5px"
