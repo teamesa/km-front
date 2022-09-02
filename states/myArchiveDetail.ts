@@ -1,8 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { atom, selector } from 'recoil';
 
-import { PresentationBadge } from './myArchiveList';
-
 import customAxios from 'utils/hooks/customAxios';
 export interface MyArchiveDetailProps {
   typeBadge: PresentationBadge;
@@ -16,6 +14,10 @@ export interface MyArchiveDetailProps {
   archiveAdditionalInfos: ArchiveDetailLinkInfos[];
 }
 
+export interface PresentationBadge {
+  text: string;
+  typeBadge: boolean;
+}
 export interface ArchiveDetailLinkInfos {
   title: string;
   link: string;
@@ -31,9 +33,10 @@ export const getMyArchiveDetail = async (archiveId: string) => {
   return data;
 };
 
-export default atom({
+export default atom<MyArchiveDetailProps | undefined>({
+  key: 'MyArchiveDetailState',
   default: selector({
     key: 'MyArchiveDetailState/default',
-    get: () => getMyArchiveDetail('596'),
+    get: () => getMyArchiveDetail('578'),
   }),
 });
