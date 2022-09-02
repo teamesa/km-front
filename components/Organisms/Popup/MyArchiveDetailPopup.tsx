@@ -132,7 +132,7 @@ const MyArchiveDetailPopup = () => {
                   padding="20px 15px"
                 >
                   <FlexBox alignItems="center">
-                    <Box>
+                    <Box display={data.contents.food ? 'visible' : 'none'}>
                       <Pointer color="#fff" />
                     </Box>
                     <Span
@@ -152,7 +152,7 @@ const MyArchiveDetailPopup = () => {
                     </Span>
                   </FlexBox>
                   <FlexBox alignItems="center">
-                    <Box>
+                    <Box display={data.contents.cafe ? 'visible' : 'none'}>
                       <Pointer color="#fff" />
                     </Box>
                     <Box
