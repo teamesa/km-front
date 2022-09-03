@@ -92,7 +92,7 @@ const MyArchiveDetailPopup = () => {
                   {data.contents.title}
                 </Box>
               </Box>
-              <Carousel itemsPerSlide={3} />
+              <Carousel itemsPerSlide={3} imgUrlArr={data.contents.photoUrls} />
               <Box
                 height="88px"
                 margin="20px 5px"
