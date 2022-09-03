@@ -1,12 +1,12 @@
 import { useRecoilValueLoadable } from 'recoil';
 
+import ListCard from './ArchiveListCard';
 import BlankArchiveListSection from './BlankArchiveListSection';
-import ListCard from './ListCard';
 
 import { Box } from 'components/Atoms';
 import { ListState, MyArchiveListState } from 'states';
 
-export default function ListSection() {
+export default function ArchiveListSection() {
   const data = useRecoilValueLoadable(MyArchiveListState);
 
   switch (data.state) {

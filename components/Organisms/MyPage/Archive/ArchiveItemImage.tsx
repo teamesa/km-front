@@ -8,7 +8,7 @@ type ImageProps = {
   imageUrl: string;
 };
 
-export default function ItemImage(props: ImageProps) {
+export default function ArchiveItemImage(props: ImageProps) {
   const imageUrl = props.imageUrl;
   return (
     <>

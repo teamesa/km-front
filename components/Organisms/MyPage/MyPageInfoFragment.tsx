@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Box } from 'components/Atoms';
-import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
+import ListSection from 'components/Organisms/MyPage/Archive/ArchiveListSection';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
 import theme from 'styles/theme';
 

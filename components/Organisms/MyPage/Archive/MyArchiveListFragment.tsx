@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
+import ListSection from './ArchiveListSection';
 import BlankArchiveListSection from './BlankArchiveListSection';
-import ListSection from './ListSection';
 
 import { Box, Button, Layout } from 'components/Atoms';
 import theme from 'styles/theme';

@@ -10,7 +10,7 @@ type InfoProps = {
   isMultiImages: boolean;
 };
 
-export default function ItemInfo(props: InfoProps) {
+export default function ArchiveItemInfo(props: InfoProps) {
   const typeBadge = props.typeBadge;
   const updatedAt = props.updatedAt;
   const isMultiImages = props.isMultiImages;

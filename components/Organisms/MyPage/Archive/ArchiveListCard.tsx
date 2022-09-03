@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
 import { useSetRecoilState } from 'recoil';
 
-import ItemImage from './ItemImage';
-import ItemInfo from './ItemInfo';
+import ItemInfo from './ArchiveItemInfo';
 
 import { Pointer } from 'assets/mypage';
 import { Box, FlexBox, Span } from 'components/Atoms';
+import ItemImage from 'components/Organisms/List/ListItem/ItemImage';
 import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
 import { MyArchivePageContents } from 'states/myArchiveList';
