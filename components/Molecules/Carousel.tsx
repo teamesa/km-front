@@ -8,11 +8,9 @@ import theme from 'styles/theme';
 export default function Carousel({
   itemsPerSlide,
   imgUrlArr,
-}: // children,
-{
+}: {
   itemsPerSlide: number;
   imgUrlArr: string[];
-  // children: any;
 }) {
   const itemsRef = useRef<any>(null);
   const scrollRef = useRef<any>(null);
@@ -24,23 +22,13 @@ export default function Carousel({
   let indexScrollPositionArr: number[] = [];
 
   const calculateIndicatorDimensions = useCallback(() => {
-    // const childrenCount = React.Children.count(children);
     const itemWidth = Math.ceil(itemsRef.current.offsetWidth / itemsPerSlide);
-
     let indexScrollPosition = 0;
 
     for (let i = 0; i < itemsPerSlide; i++) {
       indexScrollPositionArr.push(indexScrollPosition);
       indexScrollPosition += itemWidth;
     }
-    // if (itemsRef) {
-    //   for (const item of itemsRef.current.children) {
-    // item.style.minWidth =
-    //   Math.ceil(itemsRef.current.offsetWidth / itemsPerSlide) -
-    //   itemGap +
-    //   'px';
-    // item.style.marginRight = itemGap + 'px';
-    console.log(indexScrollPositionArr);
     setNumberOfItems(numberOfIndicators);
   }, [indexScrollPositionArr, itemsPerSlide, numberOfIndicators]);
 
@@ -56,19 +44,10 @@ export default function Carousel({
     calculateIndicatorDimensions();
   }, [calculateIndicatorDimensions]);
 
-  // useEffect(() => {
-  //   itemsRef.current.addEventListener('transitioned', handleIndicator);
-  //   return () => {
-  //     // eslint-disable-next-line react-hooks/exhaustive-deps
-  //     itemsRef.current.addEventListener('transitioned', handleIndicator);
-  //   };
-  // }, []);
-
   // scroll 이벤트 멈췄을때 scrollTop 이 어디 범위(인덱스에) 있는지 판단해서
   // 인디케이터 useState 하기.
 
   const handleIndicator = () => {
-    // console.log(Math.ceil(scrollRef.current.scrollLeft));
     const index = indexScrollPositionArr.indexOf(
       Math.ceil(scrollRef.current.scrollLeft),
     );
@@ -105,7 +84,6 @@ export default function Carousel({
         `}
         ref={scrollRef}
       >
-        {/* 이미지 아이템 들어가는 곳 */}
         <FlexBox
           width="1035px"
           height="345px"
