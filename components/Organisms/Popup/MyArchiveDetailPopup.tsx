@@ -8,12 +8,13 @@ import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
 import Carousel from 'components/Molecules/Carousel';
 import Popup from 'components/Molecules/Popup';
 import { POPUP_NAME } from 'constants/popupName';
-import { MyArchiveDetailState } from 'states';
 import { PopupNameState } from 'states';
+import { myArchiveDetailInfoState } from 'states/myArchiveDetail';
 import theme from 'styles/theme';
 
 const MyArchiveDetailPopup = () => {
-  const data = useRecoilValueLoadable(MyArchiveDetailState);
+  const data = useRecoilValueLoadable(myArchiveDetailInfoState);
+
   const setPopupName = useSetRecoilState(PopupNameState);
 
   const handleClosePopup = () => {
