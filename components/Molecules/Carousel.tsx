@@ -58,26 +58,28 @@ export default function Carousel({
 
   return (
     <Box position="relative">
-      {/* 인디케이터 */}
-      <Box
-        width="inherit"
-        height="fit-content"
-        position="absolute"
-        fontSize="14px"
-        lineHeight="0.91px"
-        textAlign="right"
-        letterSpacing="0.11px"
-        bottom="15px"
-        right="15px"
-        zIndex="100"
-        color={theme.colors.white}
-      >
-        {numberOfIndicators} / {itemsPerSlide}
-      </Box>
+      {imgUrlArr.length > 1 ? (
+        <Box
+          width="inherit"
+          height="fit-content"
+          position="absolute"
+          fontSize="14px"
+          lineHeight="0.91px"
+          textAlign="right"
+          letterSpacing="0.11px"
+          bottom="15px"
+          right="15px"
+          zIndex="100"
+          color={theme.colors.white}
+        >
+          {numberOfIndicators} / {itemsPerSlide}
+        </Box>
+      ) : null}
       <Box
         width="345px"
         height="345px"
-        overflowX="scroll"
+        overflowY="hidden"
+        overflowX={imgUrlArr.length < 2 ? 'hidden' : 'scroll'}
         onScroll={handleIndicator}
         css={css`
           scroll-snap-type: x mandatory;
@@ -90,21 +92,32 @@ export default function Carousel({
           flexDirection="row"
           ref={itemsRef}
         >
-          {imgUrlArr.map((imgUrl, _index) => (
+          {imgUrlArr.length > 0 ? (
+            imgUrlArr.map((imgUrl, _index) => (
+              <Box
+                key={_index}
+                css={css`
+                  scroll-snap-align: start;
+                `}
+              >
+                <Image
+                  src={`${imgUrl}`}
+                  alt="image"
+                  width="345px"
+                  height="345px"
+                />
+              </Box>
+            ))
+          ) : (
             <Box
-              key={_index}
-              css={css`
-                scroll-snap-align: start;
-              `}
+              margin="auto 0"
+              fontSize="19px"
+              textAlign="center"
+              color={theme.colors.gray77}
             >
-              <Image
-                src={`${imgUrl}`}
-                alt="image"
-                width="345px"
-                height="345px"
-              />
+              사진
             </Box>
-          ))}
+          )}
         </FlexBox>
       </Box>
     </Box>
