@@ -1,13 +1,29 @@
 import { css } from '@emotion/react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
+import { useSetRecoilState } from 'recoil';
 
 import { Box } from 'components/Atoms';
+import { headerState } from 'states/common';
 import theme from 'styles/theme';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
+import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
 
 const Home: NextPage = () => {
-  useInitHeader({ headerLeft: 'logo', invisible: true });
+  const setHeaderState = useSetRecoilState(headerState);
+  useInitHeader({ headerLeft: 'logo', frontTopTransparent: true });
+  const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
+    console.log(isIntersecting);
+    setHeaderState({
+      headerLeft: 'logo',
+      frontTopTransparent: true,
+      transparent: isIntersecting,
+    });
+  };
+
+  const setTarget = useIntersectionObserver({
+    onIntersect,
+  });
 
   return (
     <Box marginBottom="120px">
@@ -57,6 +73,15 @@ const Home: NextPage = () => {
             </Box>
           </Box>
         </Box>
+        <Box
+          id="anchor"
+          position="absolute"
+          top={0}
+          css={css`
+            height: calc(500px - env(safe-area-inset-top) - 45px);
+          `}
+          ref={setTarget}
+        ></Box>
       </Box>
       <Box marginTop="60px">
         <Box width="100%" height="420px">
