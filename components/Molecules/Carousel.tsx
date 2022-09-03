@@ -7,9 +7,11 @@ import theme from 'styles/theme';
 
 export default function Carousel({
   itemsPerSlide,
+  imgUrlArr,
 }: // children,
 {
   itemsPerSlide: number;
+  imgUrlArr: string[];
   // children: any;
 }) {
   const itemsRef = useRef<any>(null);
@@ -110,48 +112,21 @@ export default function Carousel({
           flexDirection="row"
           ref={itemsRef}
         >
-          <Box
-            css={css`
-              scroll-snap-align: start;
-            `}
-          >
-            <Image
-              src={
-                'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-              }
-              alt="image"
-              width="345px"
-              height="345px"
-            />
-          </Box>
-          <Box
-            css={css`
-              scroll-snap-align: start;
-            `}
-          >
-            <Image
-              src={
-                'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-              }
-              alt="image"
-              width="345px"
-              height="345px"
-            />
-          </Box>
-          <Box
-            css={css`
-              scroll-snap-align: start;
-            `}
-          >
-            <Image
-              src={
-                'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
-              }
-              alt="image"
-              width="345px"
-              height="345px"
-            />
-          </Box>
+          {imgUrlArr.map((imgUrl, _index) => (
+            <Box
+              key={_index}
+              css={css`
+                scroll-snap-align: start;
+              `}
+            >
+              <Image
+                src={`${imgUrl}`}
+                alt="image"
+                width="345px"
+                height="345px"
+              />
+            </Box>
+          ))}
         </FlexBox>
       </Box>
     </Box>
