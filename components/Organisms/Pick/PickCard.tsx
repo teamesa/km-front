@@ -4,34 +4,10 @@ import { Box } from 'components/Atoms';
 import PickHeart from 'components/Organisms/Pick/PickItem/PickHeart';
 import PickItemImage from 'components/Organisms/Pick/PickItem/PickItemImage';
 import PickItemInfo from 'components/Organisms/Pick/PickItem/PickItemInfo';
+import { PickPageContents } from 'states/pick';
 
 interface ItemProps {
-  content: PickPageContent;
-}
-
-interface PickPageContent {
-  additionalBadgeList: {
-    text: string;
-    typeBadge: boolean;
-  }[];
-  heart: {
-    heartClicked: boolean;
-    id: number;
-    link: string;
-  };
-  id: number;
-  presentationImage: {
-    url: string;
-    link: string;
-    backgroundText: string;
-    dimColor: string;
-    opacity: number;
-    dimTarget: boolean;
-  };
-  title: {
-    link: string;
-    text: string;
-  };
+  content: PickPageContents;
 }
 
 export default function PickItem({ content }: ItemProps) {
@@ -42,7 +18,7 @@ export default function PickItem({ content }: ItemProps) {
       padding="0px 2.5px"
       css={css`
         // 픽 리스트가 3개 이상일 경우 3번째 리스트 부터 margin-top(40)
-        &:nth-child(n + 3) {
+        &:nth-of-type(n + 3) {
           margin-top: 40px;
         }
       `}

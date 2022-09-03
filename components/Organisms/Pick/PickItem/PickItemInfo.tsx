@@ -1,15 +1,10 @@
 import { Box, Tag } from 'components/Atoms';
+import { PresentationPickBadge, PresentationPickTitle } from 'states/pick';
 import theme from 'styles/theme';
 
 interface InfoPorps {
-  title: {
-    link: string;
-    text: string;
-  };
-  additionalBadgeList: {
-    text: string;
-    typeBadge: boolean;
-  }[];
+  title: PresentationPickTitle;
+  additionalBadgeList: [PresentationPickBadge];
 }
 
 export default function PickItemInfo({
@@ -18,7 +13,7 @@ export default function PickItemInfo({
 }: InfoPorps) {
   return (
     <Box position="relative" marginTop="10px">
-      <Box position="absolute" bottom="35px" left="5px" zIndex="1">
+      <Box position="absolute" top="-40px" left="5px" zIndex="1">
         {additionalBadgeList.map((badge, index) => (
           <Tag
             padding="0px 10px !important"
