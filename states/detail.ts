@@ -8,7 +8,10 @@ export type TGetSummary = {
   feeType: string;
   homePageUrl: string;
   itemInfoAdditionalInfo: {
-    createArchiveUrl: string;
+    archiveLink: {
+      title: string;
+      link: string;
+    };
     heart: {
       heartClicked: boolean;
       id: number;
