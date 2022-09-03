@@ -83,14 +83,88 @@ const Home: NextPage = () => {
           ref={setTarget}
         ></Box>
       </Box>
-      <Box marginTop="60px">
-        <Box width="100%" height="420px">
-          <Image
-            width={315}
-            height={420}
-            alt="image"
-            src="https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/131516-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%288%29.jpg"
-          />
+      <Box
+        marginTop="60px"
+        width="100vw"
+        height="420px"
+        overflowY="hidden"
+        overflowX="scroll"
+        css={css`
+          scroll-snap-type: x mandatory;
+        `}
+      >
+        <Box display="flex" width="max-content" flexDirection="row">
+          <Box
+            width="315px"
+            height="420px"
+            marginRight="15px"
+            css={css`
+              scroll-snap-align: start;
+            `}
+          >
+            <Image
+              width={315}
+              height={420}
+              alt="image"
+              src="https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/131516-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%288%29.jpg"
+            />
+          </Box>
+          <Box
+            paddingY="37px"
+            marginRight="15px"
+            css={css`
+              scroll-snap-align: start;
+            `}
+          >
+            <Image
+              width={260}
+              height={347}
+              alt="image"
+              src="https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/131516-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%288%29.jpg"
+            />
+          </Box>
+          <Box
+            paddingY="37px"
+            marginRight="15px"
+            css={css`
+              scroll-snap-align: start;
+            `}
+          >
+            <Image
+              width={260}
+              height={347}
+              alt="image"
+              src="https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/131516-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%288%29.jpg"
+            />
+          </Box>
+          <Box
+            paddingY="37px"
+            marginRight="15px"
+            css={css`
+              scroll-snap-align: start;
+            `}
+          >
+            <Image
+              width={260}
+              height={347}
+              alt="image"
+              src="https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/131516-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%288%29.jpg"
+            />
+          </Box>
+          <Box
+            paddingY="37px"
+            marginRight="15px"
+            css={css`
+              scroll-snap-align: start;
+            `}
+          >
+            <Image
+              width={260}
+              height={347}
+              alt="image"
+              src="https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/131516-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%288%29.jpg"
+            />
+          </Box>
         </Box>
       </Box>
       <Box paddingTop="20px" width="300px" paddingX="15px">
