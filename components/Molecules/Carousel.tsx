@@ -87,7 +87,7 @@ export default function Carousel({
         ref={scrollRef}
       >
         <FlexBox
-          width="1035px"
+          width="max-content"
           height="345px"
           flexDirection="row"
           ref={itemsRef}
@@ -110,7 +110,9 @@ export default function Carousel({
             ))
           ) : (
             <Box
-              margin="auto 0"
+              width="345px"
+              height="345px"
+              margin="0 auto"
               fontSize="19px"
               textAlign="center"
               color={theme.colors.gray77}
