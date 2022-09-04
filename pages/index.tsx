@@ -1,13 +1,9 @@
-import { css } from '@emotion/react';
 import type { NextPage } from 'next';
-import Image from 'next/image';
 
-import { Box, Tag } from 'components/Atoms';
+import { Box } from 'components/Atoms';
 import KeyVisual from 'components/Organisms/Home/Module/KeyVisual';
+import MonthlyFreeItem from 'components/Organisms/Home/Module/MonthlyFreeItem';
 import SwipeItem from 'components/Organisms/Home/Module/SwipeItem';
-import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditionalInfo';
-import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
-import theme from 'styles/theme';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const Home: NextPage = () => {
@@ -52,74 +48,114 @@ const Home: NextPage = () => {
         }
         keywords={['#전시회', '#한가람미술관']}
       />
-      <Box width="100%" paddingX="15px" marginTop="60px" marginBottom="20px">
-        <Box
-          textAlign="left"
-          fontSize="22px"
-          fontWeight={500}
-          lineHeight={1.27}
-          color={theme.colors.black}
-        >
-          <Box>이달의</Box>
-          <Box>FREE TICKET</Box>
-        </Box>
-        <Box marginTop="20px" width="100%" height="120px" display="flex">
-          <Box width="90px">
-            <Image
-              width={90}
-              height={120}
-              alt="image"
-              src="https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/131516-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%288%29.jpg"
-            />
-          </Box>
-          <Box
-            css={css`
-              width: calc(100% - 90px - 20px);
-            `}
-            height="100%"
-            paddingLeft="15px"
-            paddingTop="10px"
-          >
-            <Tag backgroundColor={theme.colors.black} color={theme.colors.lime}>
-              전시회
-            </Tag>
-            <Box
-              marginTop="10px"
-              width="220px"
-              fontSize="13px"
-              fontWeight={500}
-              lineHeight={1.54}
-              textAlign="left"
-              css={css`
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-              `}
-            >
-              시작된 미래
-            </Box>
-            <ItemAdditionalInfo
-              listItemAdditionalInfo={{
-                heartCount: 1,
-                grade: 3,
-                archiveCount: 10,
-              }}
-              marginTop={10}
-            />
-          </Box>
-          <Box width="20px" marginTop="10px" position="relative">
-            <ItemHeart
-              heart={{
-                heartClicked: false,
-                link: '',
-                id: 0,
-              }}
-            />
-          </Box>
-        </Box>
-      </Box>
+      <MonthlyFreeItem
+        contents={[
+          {
+            id: 1099,
+            presentationImage: {
+              url: 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-09-03/182036-1660956474412.jpg',
+              link: '/detail/1099',
+            },
+            typeBadge: { text: '콘서트', typeBadge: true },
+            title: {
+              text: 'BLACKPINK WORLD TOUR BORN PINK SEOUL',
+              link: '/detail/1099',
+            },
+            heart: {
+              heartClicked: false,
+              link: '/api/pick/1099?status=',
+              id: 1099,
+            },
+            listItemAdditionalInfo: {
+              heartCount: 1,
+              grade: 0,
+              archiveCount: 0,
+            },
+          },
+          {
+            id: 1097,
+            presentationImage: {
+              url: 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-09-03/181129-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%282%29.jpg',
+              link: '/detail/1097',
+            },
+            typeBadge: { text: '콘서트', typeBadge: true },
+            title: { text: 'BTS Yet To Come in BUSAN', link: '/detail/1097' },
+            heart: {
+              heartClicked: false,
+              link: '/api/pick/1097?status=',
+              id: 1097,
+            },
+            listItemAdditionalInfo: {
+              heartCount: 1,
+              grade: 0,
+              archiveCount: 0,
+            },
+          },
+          {
+            id: 1094,
+            presentationImage: {
+              url: 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-09-03/180454-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C.jpg',
+              link: '/detail/1094',
+            },
+            typeBadge: { text: '뮤직페스티벌', typeBadge: true },
+            title: { text: '2022 춘천 팸팸 페스타', link: '/detail/1094' },
+            heart: {
+              heartClicked: false,
+              link: '/api/pick/1094?status=',
+              id: 1094,
+            },
+            listItemAdditionalInfo: {
+              heartCount: 0,
+              grade: 0,
+              archiveCount: 0,
+            },
+          },
+          {
+            id: 1083,
+            presentationImage: {
+              url: 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-09-01/213102-r.png',
+              link: '/detail/1083',
+            },
+            typeBadge: { text: '전시회', typeBadge: true },
+            title: {
+              text: 'MMCA 이건희컬렉션 특별전 : 이중섭',
+              link: '/detail/1083',
+            },
+            heart: {
+              heartClicked: false,
+              link: '/api/pick/1083?status=',
+              id: 1083,
+            },
+            listItemAdditionalInfo: {
+              heartCount: 2,
+              grade: 4.5,
+              archiveCount: 2,
+            },
+          },
+          {
+            id: 1064,
+            presentationImage: {
+              url: 'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-08-07/064132-ttt.jpg',
+              link: '/detail/1064',
+            },
+            typeBadge: { text: '전시회', typeBadge: true },
+            title: {
+              text: '2022 아시아프 & 히든아티스트 페스티벌',
+              link: '/detail/1064',
+            },
+            heart: {
+              heartClicked: false,
+              link: '/api/pick/1064?status=',
+              id: 1064,
+            },
+            listItemAdditionalInfo: {
+              heartCount: 18,
+              grade: 4,
+              archiveCount: 2,
+            },
+          },
+        ]}
+      />
     </Box>
   );
 };

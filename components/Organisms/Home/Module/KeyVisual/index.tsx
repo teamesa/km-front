@@ -9,7 +9,6 @@ import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
 export default function KeyVisual() {
   const setHeaderState = useSetRecoilState(headerState);
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
-    console.log(isIntersecting);
     setHeaderState({
       headerLeft: 'logo',
       frontTopTransparent: true,
