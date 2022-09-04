@@ -2,17 +2,25 @@ import { css } from '@emotion/react';
 
 import { Box } from 'components/Atoms';
 import SwipeItemKeyword from 'components/Organisms/Home/Module/SwipeItem/SwipeItemKeyword';
+import { useRouter } from 'next/router';
 import theme from 'styles/theme';
 
 export default function SwipeItemInfo({
-  title,
-  content,
+  title: { text: titleText, link: titleLink },
+  content: { text: contentText, link: contentLink },
   keywords,
 }: {
-  title: string;
-  content: string;
+  title: {
+    text: string;
+    link: string;
+  };
+  content: {
+    text: string;
+    link: string;
+  };
   keywords: string[];
 }) {
+  const router = useRouter();
   return (
     <Box paddingTop="20px" width="300px" paddingX="15px">
       <Box
@@ -28,8 +36,11 @@ export default function SwipeItemInfo({
           -webkit-box-orient: vertical;
         `}
         color={theme.colors.black}
+        onClick={() => {
+          router.push(titleLink);
+        }}
       >
-        {title}
+        {titleText}
       </Box>
       <Box
         marginTop="10px"
@@ -45,8 +56,11 @@ export default function SwipeItemInfo({
           -webkit-line-clamp: 5;
           -webkit-box-orient: vertical;
         `}
+        onClick={() => {
+          router.push(contentLink);
+        }}
       >
-        {content}
+        {contentText}
       </Box>
       <Box marginTop="20px" display="flex">
         {keywords.map((keyword) => (

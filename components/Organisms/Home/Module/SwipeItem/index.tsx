@@ -1,6 +1,7 @@
 import { Box } from 'components/Atoms';
 import SwipeItemInfo from 'components/Organisms/Home/Module/SwipeItem/SwipeItemInfo';
 import UnbalencedSwiper from 'components/Organisms/Home/Module/SwipeItem/UnbalencedSwiper';
+import { SwipeItemProps } from 'components/Organisms/Home/ModuleTypes';
 
 export default function SwipeItem({
   thumbnailPhotoUrl,
@@ -8,13 +9,7 @@ export default function SwipeItem({
   title,
   content,
   keywords,
-}: {
-  thumbnailPhotoUrl: string;
-  photoUrls: string[];
-  title: string;
-  content: string;
-  keywords: string[];
-}) {
+}: SwipeItemProps) {
   return (
     <Box>
       <UnbalencedSwiper

@@ -5,11 +5,15 @@ import { Box, Tag } from 'components/Atoms';
 import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditionalInfo';
 import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
 import theme from 'styles/theme';
+import { useRouter } from 'next/router';
 
 export default function MonthlyFreeItemHeader({
   content: {
-    presentationImage: { url: presentationImageUrl },
-    title: { text: titleText },
+    presentationImage: {
+      url: presentationImageUrl,
+      link: presentationImageLink,
+    },
+    title: { text: titleText, link: titleLink },
     listItemAdditionalInfo,
     heart,
     typeBadge: { text: typeBadgeString },
@@ -33,9 +37,15 @@ export default function MonthlyFreeItemHeader({
     typeBadge: { text: string; typeBadge: boolean };
   };
 }) {
+  const router = useRouter();
   return (
     <Box width="100%" height="120px" display="flex" marginBottom="10px">
-      <Box width="90px">
+      <Box
+        width="90px"
+        onClick={() => {
+          router.push(presentationImageLink);
+        }}
+      >
         <Image width={90} height={120} alt="image" src={presentationImageUrl} />
       </Box>
       <Box
@@ -63,6 +73,9 @@ export default function MonthlyFreeItemHeader({
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
           `}
+          onClick={() => {
+            router.push(titleLink);
+          }}
         >
           {titleText}
         </Box>
