@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
 
-import ArrowDown from 'assets/list/ArrowDown';
-import Filter from 'assets/list/Filter';
 import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
 import ListFilter from 'components/Molecules/ListFilter';
 import ListCategory from 'components/Organisms/List/ListCategory';

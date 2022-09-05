@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { ModuleData } from 'components/Organisms/Home/ModuleTypes';
-import { selector } from 'recoil';
+import { selector, atom } from 'recoil';
 
-const getHomeInfo = async (): Promise<ModuleData[]> => {
+export const getHomeInfo = async (): Promise<ModuleData[]> => {
   const _ = await axios({
     url: `/api/item/detail/${1099}`,
     method: 'GET',
@@ -167,7 +167,10 @@ const getHomeInfo = async (): Promise<ModuleData[]> => {
   ];
 };
 
-export const homeModuleState = selector<ModuleData[]>({
+export const homeModuleState = atom<ModuleData[]>({
   key: 'home-module',
-  get: async () => getHomeInfo(),
+  default: selector({
+    key: 'home-module/default',
+    get: async () => getHomeInfo(),
+  }),
 });
