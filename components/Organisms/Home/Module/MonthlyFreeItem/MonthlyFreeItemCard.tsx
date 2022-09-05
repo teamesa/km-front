@@ -87,7 +87,7 @@ export default function MonthlyFreeItemHeader({
           marginTop={10}
         />
       </Box>
-      <Box width="20px" marginTop="10px" position="relative">
+      <Box width="20px" marginTop="9px" position="relative">
         <ItemHeart heart={heart} optionalFunction={resetHomeModules} />
       </Box>
     </Box>
