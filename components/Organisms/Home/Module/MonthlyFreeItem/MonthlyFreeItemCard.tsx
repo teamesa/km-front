@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import { Box, Tag } from 'components/Atoms';
 import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditionalInfo';
 import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
+import { useResetHomeModulesFunction } from 'states/home';
 import theme from 'styles/theme';
-import { useRouter } from 'next/router';
 
 export default function MonthlyFreeItemHeader({
   content: {
@@ -38,6 +39,8 @@ export default function MonthlyFreeItemHeader({
   };
 }) {
   const router = useRouter();
+  const resetHomeModules = useResetHomeModulesFunction();
+
   return (
     <Box width="100%" height="120px" display="flex" marginBottom="10px">
       <Box
@@ -85,7 +88,7 @@ export default function MonthlyFreeItemHeader({
         />
       </Box>
       <Box width="20px" marginTop="10px" position="relative">
-        <ItemHeart heart={heart} />
+        <ItemHeart heart={heart} optionalFunction={resetHomeModules} />
       </Box>
     </Box>
   );

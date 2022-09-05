@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { selector, atom, useRecoilCallback } from 'recoil';
+
 import { ModuleData } from 'components/Organisms/Home/ModuleTypes';
-import { selector, atom } from 'recoil';
 
 export const getHomeInfo = async (): Promise<ModuleData[]> => {
   const _ = await axios({
@@ -69,7 +70,7 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
               link: '/detail/1099',
             },
             heart: {
-              heartClicked: false,
+              heartClicked: true,
               link: '/api/pick/1099?status=',
               id: 1099,
             },
@@ -151,7 +152,7 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
               link: '/detail/1064',
             },
             heart: {
-              heartClicked: false,
+              heartClicked: true,
               link: '/api/pick/1064?status=',
               id: 1064,
             },
@@ -166,6 +167,16 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
     },
   ];
 };
+
+export const useResetHomeModulesFunction = () =>
+  useRecoilCallback(
+    ({ set }) =>
+      async () => {
+        const homeModuleData = await getHomeInfo();
+        set(homeModuleState, homeModuleData);
+      },
+    [],
+  );
 
 export const homeModuleState = atom<ModuleData[]>({
   key: 'home-module',

@@ -1,29 +1,21 @@
 import type { NextPage } from 'next';
+import { useEffect } from 'react';
+import { useRecoilValueLoadable } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import KeyVisual from 'components/Organisms/Home/Module/KeyVisual';
-import { useInitHeader } from 'utils/hooks/useInitHeader';
-import { useRecoilCallback, useRecoilValueLoadable } from 'recoil';
-import { getHomeInfo, homeModuleState } from 'states/home';
 import ModuleResolver from 'components/Organisms/Home/ModuleResolver';
-import { useEffect } from 'react';
+import { useResetHomeModulesFunction, homeModuleState } from 'states/home';
+import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const Home: NextPage = () => {
   useInitHeader({ headerLeft: 'logo', frontTopTransparent: true });
   const data = useRecoilValueLoadable(homeModuleState);
-
-  const resetHomeModules = useRecoilCallback(
-    ({ set }) =>
-      async () => {
-        const homeModuleData = await getHomeInfo();
-        set(homeModuleState, homeModuleData);
-      },
-    [],
-  );
+  const resetHomeModules = useResetHomeModulesFunction();
 
   useEffect(() => {
     resetHomeModules();
-  }, []);
+  }, [resetHomeModules]);
 
   switch (data.state) {
     case 'hasValue':
