@@ -93,7 +93,7 @@ export default function SearchMap({
               border={`1px solid ${theme.colors.grayDD}`}
             >
               <Input
-                placeholder="예시주소 넣는곳"
+                placeholder="예) 스타벅스, 빠레트한남, 맘스터치"
                 {...register('search', { required: true })}
                 type="search"
               />

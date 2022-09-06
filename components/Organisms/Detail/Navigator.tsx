@@ -71,7 +71,7 @@ export default function Navigator() {
           color={theme.colors.lime}
           onClick={() => {
             router.push({
-              pathname: '/archive',
+              pathname: data?.itemInfoAdditionalInfo?.archiveLink.link,
               query: {
                 id: id,
                 title: data?.title,
@@ -81,7 +81,7 @@ export default function Navigator() {
             });
           }}
         >
-          아카이브 기록하기
+          {data?.itemInfoAdditionalInfo?.archiveLink.title}
         </Button>
       </FlexBox>
       <Box width="100%" height="var(--platformBottomArea)" />
