@@ -11,7 +11,6 @@ import BottomSheetHeader from 'components/Organisms/Detail/Description/BottomShe
 import { DetailNavigation } from 'components/Organisms/Detail/Description/DetailNavigation';
 import Introduce from 'components/Organisms/Detail/Description/Introduce';
 import { DetailState } from 'states';
-import { TabViewData } from 'states/detail';
 import theme from 'styles/theme';
 
 export default function Description() {
@@ -106,14 +105,19 @@ export default function Description() {
               archiveRef={archiveRef}
               introduceRef={introduceRef}
             />
-            {tabViewData.map(({ title, contents }: TabViewData) =>
-              title === '아카이브' ? (
-                <Archive data={contents ?? ''} scrollRef={archiveRef} />
-              ) : title === '소개' ? (
-                <Introduce data={contents ?? ''} scrollRef={introduceRef} />
-              ) : (
-                <div></div>
-              ),
+            {tabViewData.map(
+              ({ title, contents }: { title: string; contents: any }) =>
+                title === '아카이브' ? (
+                  <Archive
+                    data={contents}
+                    scrollRef={archiveRef}
+                    introYn={tabViewData.length}
+                  />
+                ) : title === '소개' ? (
+                  <Introduce data={contents} scrollRef={introduceRef} />
+                ) : (
+                  <div />
+                ),
             )}
           </Box>
         </Box>

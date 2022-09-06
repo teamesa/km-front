@@ -7,9 +7,15 @@ import { Box, Button, FlexBox, Layout } from 'components/Atoms';
 export default function StarScope({
   onChange,
   currentStep,
+  height,
+  width,
+  margin,
 }: {
   onChange?: (e: number) => void;
   currentStep?: number;
+  height?: string;
+  width?: string;
+  margin?: string;
 }) {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
@@ -21,7 +27,7 @@ export default function StarScope({
           index += 1;
           return (
             <Button
-              margin="0px 5px"
+              margin={margin ? margin : '0px 5px'}
               type="button"
               key={index}
               onClick={() => {
@@ -34,21 +40,27 @@ export default function StarScope({
               {currentStep ? (
                 index <= currentStep ? (
                   <StarBlack
-                    width="30.645px"
-                    height="29.143px"
+                    width={width ? width : '30.645px'}
+                    height={height ? height : '29.143px'}
                     viewBox="0 0 30.645 29.143"
                   />
                 ) : (
-                  <StarWhite />
+                  <StarWhite
+                    width={width ? width : '30.645px'}
+                    height={height ? height : '29.143px'}
+                  />
                 )
               ) : index <= (hover || rating) ? (
                 <StarBlack
-                  width="30.645px"
-                  height="29.143px"
+                  width={width ? width : '30.645px'}
+                  height={height ? height : '29.143px'}
                   viewBox="0 0 30.645 29.143"
                 />
               ) : (
-                <StarWhite />
+                <StarWhite
+                  width={width ? width : '30.645px'}
+                  height={height ? height : '29.143px'}
+                />
               )}
             </Button>
           );
