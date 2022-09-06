@@ -10,4 +10,6 @@ export interface HeaderBarProps {
   headerLeftAction?: () => void;
   /** header 오른쪽 버튼의 액션을 설정합니다. (기본 : 없음)*/
   headerRightAction?: () => void;
+  frontTopTransparent?: boolean;
+  transparent?: boolean;
 }

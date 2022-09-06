@@ -30,7 +30,16 @@ export default function UpdateHome({
         phoneNumber: phoneNumberFormat,
         gender,
       }),
-    [],
+    [
+      setModifiedUserInfo,
+      id,
+      name,
+      phoneNumber,
+      birthdate,
+      gender,
+      email,
+      phoneNumberFormat,
+    ],
   );
 
   return (
