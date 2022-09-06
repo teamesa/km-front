@@ -12,6 +12,7 @@ import customAxios from 'utils/hooks/customAxios';
 
 interface HeartProps {
   heart: PresentationHeart;
+  optionalFunction?: () => {};
 }
 
 type PickStatus = {
@@ -20,6 +21,7 @@ type PickStatus = {
 
 export default function ItemHeart(props: HeartProps) {
   const heart = props.heart;
+  const optionalFunction = props.optionalFunction;
   const setPickState = useSetRecoilState(ListState);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
@@ -35,19 +37,23 @@ export default function ItemHeart(props: HeartProps) {
       })) as AxiosResponse<PickStatus>;
 
       if (axiosData.data.content !== undefined) {
-        setPickState((val) => {
-          const contents = val.contents.map((it) => {
-            if (it.heart.id === heart.id) {
-              return {
-                ...it,
-                heart: { ...it.heart, heartClicked: !heart.heartClicked },
-              };
-            } else {
-              return it;
-            }
+        if (optionalFunction === undefined) {
+          setPickState((val) => {
+            const contents = val.contents.map((it) => {
+              if (it.heart.id === heart.id) {
+                return {
+                  ...it,
+                  heart: { ...it.heart, heartClicked: !heart.heartClicked },
+                };
+              } else {
+                return it;
+              }
+            });
+            return { ...val, contents };
           });
-          return { ...val, contents };
-        });
+        } else {
+          optionalFunction();
+        }
       }
     } catch (error) {
       console.log(error);

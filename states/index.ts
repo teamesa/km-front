@@ -6,10 +6,8 @@ import MyArchiveListState from './myArchiveList';
 import PickState from './pick';
 import PopupNameState from './popupName';
 import { searchRequest } from './search-request';
-import TestSate from './test';
 
 export {
-  TestSate,
   DetailState,
   ListState,
   ArchiveWirteState,

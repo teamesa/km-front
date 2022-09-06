@@ -57,6 +57,12 @@ export default function GlobalStyles() {
           --platformPadding: ${isiOS ? '24px' : '16px'};
           --platformBottomArea: ${isiOS ? '24px' : '0px'};
         }
+
+        * {
+          -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+          user-select: none;
+          -webkit-touch-callout: none;
+        }
       `}
     />
   );
