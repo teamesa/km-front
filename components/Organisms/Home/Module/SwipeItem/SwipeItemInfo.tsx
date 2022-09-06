@@ -1,8 +1,8 @@
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 
 import { Box } from 'components/Atoms';
 import SwipeItemKeyword from 'components/Organisms/Home/Module/SwipeItem/SwipeItemKeyword';
-import { useRouter } from 'next/router';
 import theme from 'styles/theme';
 
 export default function SwipeItemInfo({

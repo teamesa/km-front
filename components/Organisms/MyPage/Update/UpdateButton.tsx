@@ -79,7 +79,7 @@ export default function UpdateButton() {
     }
   };
 
-  useEffect(() => setUserModifyError({}), []);
+  useEffect(() => setUserModifyError({}), [setUserModifyError]);
 
   return (
     <Box
