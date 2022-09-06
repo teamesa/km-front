@@ -34,6 +34,7 @@ export default function ListSortFilter() {
       textAlign="left"
       background={theme.colors.white}
       border={`1px solid ${theme.colors.grayDD}`}
+      borderLeft="none"
       onClick={() => {
         onModal({
           type: 'Select',
