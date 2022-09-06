@@ -36,7 +36,6 @@ export default function SelectModal({ payload }: { payload: SelectProps }) {
               paddingBottom="30px"
               fontSize="13px"
               onClick={() => {
-                // setCategoryList(item.value);
                 payload.onChange &&
                   payload.onChange({
                     target: { value: item.value },

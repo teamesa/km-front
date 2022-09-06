@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { Button, FlexBox, Layout } from 'components/Atoms';
+import { Box, Button, FlexBox, Layout } from 'components/Atoms';
 import { FilterSelectGroup } from 'components/Organisms/Modal/Filter/FilterSelectGroup';
 import ModalLayout from 'components/Organisms/Modal/ModalLayout';
 import { searchRequest } from 'states';
@@ -30,7 +30,7 @@ export default function FilterModal() {
         {data.map((item, index) => (
           <FilterSelectGroup filterGroup={item} key={index} />
         ))}
-        <FlexBox margin="0px -2.5px" paddingBottom="20px">
+        <FlexBox margin="0px -2.5px">
           <Button
             margin="0px 2.5px"
             width="50%"
@@ -79,6 +79,7 @@ export default function FilterModal() {
             적용
           </Button>
         </FlexBox>
+        <Box width="100%" height="var(--platformBottomArea)" />
       </Layout>
     </ModalLayout>
   );
