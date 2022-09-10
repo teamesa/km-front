@@ -1,7 +1,18 @@
 import axios from 'axios';
-import { selector, atom, useRecoilCallback } from 'recoil';
+import {
+  selector,
+  atom,
+  useRecoilCallback,
+  atomFamily,
+  selectorFamily,
+} from 'recoil';
 
-import { ModuleData } from 'components/Organisms/Home/ModuleTypes';
+import { MonthlyFreeItemCardProps } from './../components/Organisms/Home/ModuleTypes';
+
+import {
+  ModuleData,
+  MonthlyFreeItemProps,
+} from 'components/Organisms/Home/ModuleTypes';
 
 export const getHomeInfo = async (): Promise<ModuleData[]> => {
   const _ = await axios({
@@ -188,9 +199,61 @@ export const useResetHomeModulesFunction = () =>
       async () => {
         const homeModuleData = await getHomeInfo();
         set(homeModuleState, homeModuleData);
+        homeModuleData.forEach((_, index) =>
+          set(
+            homeModuleIndivisualStateFamily(index),
+            getFromModuledata(homeModuleData[index]),
+          ),
+        );
       },
     [],
   );
+
+export const getFromModuledata = ({ moduleName, data }: ModuleData) => {
+  switch (moduleName) {
+    case 'monthly-free-item':
+      const { contents } = data as MonthlyFreeItemProps;
+      return contents;
+    default:
+      return null;
+  }
+};
+
+export const useTurnPickstateFunction = (moduleId: number, itemId: number) =>
+  useRecoilCallback(
+    ({ set }) =>
+      async () => {
+        set(
+          homeModuleIndivisualStateFamily(moduleId),
+          (exHomeindivisualState) => {
+            const monthlyData =
+              exHomeindivisualState as MonthlyFreeItemCardProps[];
+            return monthlyData.map((it: MonthlyFreeItemCardProps) => {
+              if (it.heart.id === itemId) {
+                return {
+                  ...it,
+                  heart: { ...it.heart, heartClicked: !it.heart.heartClicked },
+                };
+              } else {
+                return it;
+              }
+            });
+          },
+        );
+      },
+    [],
+  );
+
+export const homeModuleIndivisualStateFamily = atomFamily({
+  key: 'home-module-indivisual',
+  default: selectorFamily({
+    key: 'home-module-indivisual/Default',
+    get:
+      (index: number) =>
+      ({ get }) =>
+        getFromModuledata(get(homeModuleState)[index]),
+  }),
+});
 
 export const homeModuleState = atom<ModuleData[]>({
   key: 'home-module',
