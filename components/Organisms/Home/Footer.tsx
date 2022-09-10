@@ -1,0 +1,67 @@
+import Image from 'next/image';
+
+import Logo from 'assets/common/header/logo.png';
+import Instagram from 'assets/home/instagram.png';
+import { Box } from 'components/Atoms';
+import theme from 'styles/theme';
+
+export default function Footer() {
+  return (
+    <Box
+      width="100%"
+      height="231px"
+      paddingTop="30px"
+      paddingX="15px"
+      borderTop="1px solid #ccc"
+    >
+      <Box marginBottom="20px">
+        <Image src={Logo} alt="image" width="136px" height="20px" />
+      </Box>
+
+      <Box
+        color={theme.colors.gray33}
+        fontSize="12px"
+        lineHeight={1.5}
+        textAlign="left"
+        marginBottom="30px"
+      >
+        문의사항이 있으실 경우
+        <br /> kilometerservice@gmail.com 로 연락주세요.
+      </Box>
+      <Box
+        display="flex"
+        fontSize="12px"
+        lineHeight={1.5}
+        textAlign="left"
+        marginBottom="30px"
+      >
+        <Box
+          color={theme.colors.gray77}
+          paddingRight="20px"
+          borderRight="1px solid #ccc"
+        >
+          킬로미터소개
+        </Box>
+        <Box
+          color={theme.colors.gray77}
+          paddingX="20px"
+          borderRight="1px solid #ccc"
+        >
+          이용약관
+        </Box>
+        <Box color={theme.colors.gray77} paddingLeft="20px">
+          개인정보처리방침
+        </Box>
+      </Box>
+      <Box
+        padding="12px"
+        border="1px solid #ccc"
+        width="44px"
+        height="44px"
+        borderRadius="50%"
+      >
+        <Image src={Instagram} alt="image" width="20px" height="20px" />
+      </Box>
+    </Box>
+  );
+}

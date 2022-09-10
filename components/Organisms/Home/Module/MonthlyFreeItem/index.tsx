@@ -13,7 +13,7 @@ export default function MonthlyFreeItem({
 }: MonthlyFreeItemProps) {
   const contents = useRecoilValue(homeModuleIndivisualStateFamily(index));
   return (
-    <Box width="100%" paddingX="15px" marginTop="60px" marginBottom="20px">
+    <Box width="100%" paddingX="15px" marginTop="60px" marginBottom="60px">
       <MonthlyFreeItemHeader
         topTitle={topTitle ?? '이달의'}
         bottomTitle={bottomTitle ?? 'FREE TICKET'}

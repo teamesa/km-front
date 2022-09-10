@@ -42,7 +42,7 @@ export default function KeyVisual({ keyvisualDatas, index }: KeyVisualProps) {
             lineHeight={1.2}
             textAlign="left"
           >
-            9월, 이 달의 전시
+            9월, 이달의 전시
           </Box>
           <Box
             fontSize="30px"
