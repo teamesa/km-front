@@ -11,8 +11,22 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
 
   return [
     {
+      moduleName: 'key-visual',
+      data: {
+        index: 0,
+        keyvisualDatas: [
+          {
+            photoUrl: 'fdasfsa',
+            upperTitle: '10월',
+            lowerTitle: '이달의 전시',
+          },
+        ],
+      },
+    },
+    {
       moduleName: 'swipe-item',
       data: {
+        index: 1,
         thumbnailPhotoUrl:
           'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/125415-0bea704056e58f6195dd80ef18b09d3a_VOCpostergiorgiko.jpg',
         photoUrls: [
@@ -33,6 +47,7 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
     {
       moduleName: 'swipe-item',
       data: {
+        index: 2,
         thumbnailPhotoUrl:
           'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-06-27/122816-KakaoTalk_20211024_201607908_02.jpg',
         photoUrls: [
@@ -55,6 +70,7 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
     {
       moduleName: 'monthly-free-item',
       data: {
+        index: 3,
         contents: [
           {
             id: 1099,
