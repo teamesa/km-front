@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import Logo from 'assets/common/header/logo.png';
 import Instagram from 'assets/home/instagram.png';
@@ -6,6 +7,7 @@ import { Box } from 'components/Atoms';
 import theme from 'styles/theme';
 
 export default function Footer() {
+  const router = useRouter();
   return (
     <Box
       width="100%"
@@ -46,10 +48,15 @@ export default function Footer() {
           color={theme.colors.gray77}
           paddingX="20px"
           borderRight="1px solid #ccc"
+          onClick={() => router.push('/info?type=service')}
         >
           이용약관
         </Box>
-        <Box color={theme.colors.gray77} paddingLeft="20px">
+        <Box
+          color={theme.colors.gray77}
+          paddingLeft="20px"
+          onClick={() => router.push('/info?type=privacy')}
+        >
           개인정보처리방침
         </Box>
       </Box>
