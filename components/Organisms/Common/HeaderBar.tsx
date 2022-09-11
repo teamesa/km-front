@@ -83,10 +83,10 @@ function HeaderBar() {
                 aria-label="왼쪽 버튼"
                 role="button"
                 position="absolute"
-                top={header.headerLeft !== 'logo' ? '13px' : '6px'}
-                left={header.headerLeft !== 'logo' ? '15px' : '5px'}
-                width={header.headerLeft !== 'logo' ? '136px' : '30px'}
-                height={header.headerLeft !== 'logo' ? '20px' : '30px'}
+                top={header.headerLeft !== 'default' ? '13px' : '6px'}
+                left={header.headerLeft !== 'default' ? '15px' : '5px'}
+                width={header.headerLeft !== 'default' ? '136px' : '30px'}
+                height={header.headerLeft !== 'default' ? '20px' : '30px'}
                 onClick={() => {
                   if (header.headerLeftAction) {
                     header.headerLeftAction();
@@ -110,7 +110,7 @@ function HeaderBar() {
               </Box>
               <FlexBox
                 position="absolute"
-                top={header.headerRight !== 'close' ? '13px' : '10px'}
+                top={header.headerRight === 'close' ? '10px' : '6px'}
                 right="10px"
               >
                 <Box
