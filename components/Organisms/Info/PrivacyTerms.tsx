@@ -117,7 +117,7 @@ export default function PrivacyTerms() {
           수시로
         </Paragraph>
         <SmallHeader>
-          제4조 정보주체, 법정대리인의 권리ㆍ의무 및 그 행사방법
+          제5조 정보주체, 법정대리인의 권리ㆍ의무 및 그 행사방법
         </SmallHeader>
         <Paragraph>
           정보주체는 회사에 언제든지 개인정보 열람, 정정, 삭제, 처리정지 요구
@@ -190,7 +190,7 @@ export default function PrivacyTerms() {
           대한 정보를 수집할 수 있습니다. 회사는 이를 위하여 전항의 [제5호]와
           같은 수탁업체의 분석서비스를 이용할 수 있습니다.
         </Paragraph>
-        <SmallHeader>제7조 개인정보의 파기 (추후 기입)</SmallHeader>
+        <SmallHeader>제8조 개인정보의 파기 (추후 기입)</SmallHeader>
         <Paragraph>
           회사는 개인정보 보유기간의 경과, 처리목적 달성 등 개인정보가
           불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다. 개인정보
@@ -204,7 +204,7 @@ export default function PrivacyTerms() {
           개인정보는 분쇄기로 분쇄하거나 소각하여 파기합니다.
         </Paragraph>
         <SmallHeader>
-          제8조 개인정보 자동수집 장치의 설치/운영 및 그 거부에 관한 사항
+          제9조 개인정보 자동수집 장치의 설치/운영 및 그 거부에 관한 사항
         </SmallHeader>
         <Paragraph>
           회사는 귀하의 정보를 수시로 저장하고 찾아내는
