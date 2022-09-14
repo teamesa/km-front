@@ -70,7 +70,7 @@ export default function Navigator() {
               color={theme.colors.lime}
               onClick={() => {
                 router.push({
-                  pathname: data.itemInfoAdditionalInfo.archiveLink.link,
+                  pathname: data?.itemInfoAdditionalInfo?.archiveLink.link,
                   query: {
                     id: id,
                     title: data?.title,
@@ -78,32 +78,26 @@ export default function Navigator() {
                     checked: true,
                   },
                 });
-            }}
-          >
-            <Share />
-          </Button>
-        </FlexBox>
-        <Button
-          fontSize="16px"
-          fontWeight={500}
-          textAlign="left"
-          color={theme.colors.lime}
-          onClick={() => {
-            router.push({
-              pathname: data?.itemInfoAdditionalInfo?.archiveLink.link,
-              query: {
-                id: id,
-                title: data?.title,
-                thumbnailImageUrl: data?.listImageUrl,
-                checked: true,
-              },
-            });
-          }}
-        >
-          {data?.itemInfoAdditionalInfo?.archiveLink.title}
-        </Button>
-      </FlexBox>
-      <Box width="100%" height="var(--platformBottomArea)" />
-    </Box>
-  );
+              }}
+            >
+              {data?.itemInfoAdditionalInfo?.archiveLink.title}
+            </Button>
+          </FlexBox>
+          <Box width="100%" height="var(--platformBottomArea)" />
+        </Box>
+      );
+    case 'loading':
+      return (
+        <Box
+          zIndex={Z_INDEX.SKY}
+          backgroundColor={theme.colors.black}
+          width="100%"
+          bottom="0px"
+          position="fixed"
+          padding="0 15px"
+        />
+      );
+    case 'hasError':
+      throw Error('상세페이지 정보를 가져오는데 실패했습니다.');
+  }
 }

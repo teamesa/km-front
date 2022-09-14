@@ -109,12 +109,17 @@ export default function Description() {
               ({ title, contents }: { title: string; contents: any }) =>
                 title === '아카이브' ? (
                   <Archive
+                    key={title}
                     data={contents}
                     scrollRef={archiveRef}
                     introYn={tabViewData.length}
                   />
                 ) : title === '소개' ? (
-                  <Introduce data={contents} scrollRef={introduceRef} />
+                  <Introduce
+                    key={title}
+                    data={contents}
+                    scrollRef={introduceRef}
+                  />
                 ) : (
                   <div />
                 ),
