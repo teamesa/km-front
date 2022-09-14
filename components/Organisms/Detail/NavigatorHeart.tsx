@@ -31,10 +31,11 @@ export default function NavigatorHeart({
   const [click, setClick] = useState(heart.heartClicked);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const userId = useRecoilValue(User).id;
+  const loginState = useRecoilValue(User);
+
 
   const setToPick = async () => {
-    if (userId < 0) {
+    if (loginState.isLogin) {
       setAlertState(ALERT_MESSAGE.ALERT.ASK_LOGIN);
       setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
       return null;

@@ -25,7 +25,7 @@ export default function Navigator() {
   const { id } = router.query;
   const { contents, state } = useRecoilValueLoadable(DetailState(Number(id)));
   const data: TGetSummary = contents?.summary;
-  const userId = useRecoilValue(User).id;
+  const loginState = useRecoilValue(User);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -47,7 +47,7 @@ export default function Navigator() {
   };
 
   const archiveLink = () => {
-    if (userId < 0) {
+    if (loginState.isLogin) {
       setAlertState(ALERT_MESSAGE.ALERT.ASK_LOGIN);
       setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
       return null;
