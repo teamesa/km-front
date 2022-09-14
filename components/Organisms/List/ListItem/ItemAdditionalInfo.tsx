@@ -1,6 +1,6 @@
 import ListWish from 'assets/list/ListWish';
 import StarRating from 'assets/list/StarRating';
-import { Box, FlexBox, Span } from 'components/Atoms';
+import { Box, FlexBox } from 'components/Atoms';
 import { PresentationlistItemAdditionalInfo } from 'states/list';
 import theme from 'styles/theme';
 interface AdditionalInfoProps {
@@ -12,7 +12,7 @@ export default function ItemAdditionalInfo(props: AdditionalInfoProps) {
   const marginTop = props.marginTop;
   return (
     <>
-      <FlexBox marginTop={marginTop !== undefined ? `${marginTop}px` : '15px'}>
+      <FlexBox marginTop={`${marginTop ?? 15}px`}>
         {listItemAdditionalInfo.heartCount ? (
           <FlexBox alignItems="center" marginRight="10px" height="12px">
             <ListWish

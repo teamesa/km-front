@@ -5,11 +5,13 @@ import { useRouter } from 'next/router';
 import { Box, Tag } from 'components/Atoms';
 import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditionalInfo';
 import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
-import { useResetHomeModulesFunction } from 'states/home';
+import { useTurnPickstateFunction } from 'states/home';
 import theme from 'styles/theme';
 
-export default function MonthlyFreeItemHeader({
+export default function MonthlyFreeItemCard({
+  moduleIndex,
   content: {
+    id: itemId,
     presentationImage: {
       url: presentationImageUrl,
       link: presentationImageLink,
@@ -20,7 +22,9 @@ export default function MonthlyFreeItemHeader({
     typeBadge: { text: typeBadgeString },
   },
 }: {
+  moduleIndex: number;
   content: {
+    id: number;
     presentationImage: {
       url: string;
       link: string;
@@ -39,7 +43,7 @@ export default function MonthlyFreeItemHeader({
   };
 }) {
   const router = useRouter();
-  const resetHomeModules = useResetHomeModulesFunction();
+  const turnPickState = useTurnPickstateFunction(moduleIndex, itemId);
 
   return (
     <Box width="100%" height="120px" display="flex" marginBottom="10px">
@@ -88,7 +92,7 @@ export default function MonthlyFreeItemHeader({
         />
       </Box>
       <Box width="20px" marginTop="9px" position="relative">
-        <ItemHeart heart={heart} optionalFunction={resetHomeModules} />
+        <ItemHeart heart={heart} optionalFunction={turnPickState} />
       </Box>
     </Box>
   );
