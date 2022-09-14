@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box, Button } from 'components/Atoms';
 import Popup from 'components/Molecules/Popup';
@@ -8,7 +8,7 @@ import { AlertState, ArchiveWirteState, PopupNameState } from 'states';
 import theme from 'styles/theme';
 
 const AlertArchiveAskPopup = () => {
-  const [alertState] = useRecoilState(AlertState);
+  const alertState = useRecoilValue(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const router = useRouter();
 
