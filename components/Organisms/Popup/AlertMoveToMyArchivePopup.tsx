@@ -4,7 +4,7 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Box, Button } from 'components/Atoms';
 import Popup from 'components/Molecules/Popup';
 import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, ArchiveWirteState, PopupNameState } from 'states';
+import { AlertState, PopupNameState } from 'states';
 import theme from 'styles/theme';
 
 const AlertArchiveAskPopup = () => {

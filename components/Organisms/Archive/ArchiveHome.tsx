@@ -21,7 +21,7 @@ import SearchTitle from 'components/Organisms/Archive/SearchTitle';
 import PopupRouter from 'components/Organisms/Popup/PopupRouter';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, ArchiveWirteState, PopupNameState } from 'states';
+import { AlertState, ArchiveWriteState, PopupNameState } from 'states';
 import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
@@ -36,7 +36,7 @@ export default function ArchiveHome() {
   const thumbnailImageUrl = String(router.query.thumbnailImageUrl);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const [archiveWirte, setArchiveWirte] = useRecoilState(ArchiveWirteState);
+  const [archiveWrite, setArchiveWrite] = useRecoilState(ArchiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
 
   const {
@@ -47,7 +47,7 @@ export default function ArchiveHome() {
   } = useForm<ArchiveWirteProps>({
     mode: 'onChange',
     defaultValues: {
-      ...archiveWirte,
+      ...archiveWrite,
       starRating: 5,
       visibleAtItem: checked ? true : false,
       photoUrls: [],
@@ -69,7 +69,7 @@ export default function ArchiveHome() {
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
     };
-    setArchiveWirte(postData);
+    setArchiveWrite(postData);
 
     try {
       await axios({
