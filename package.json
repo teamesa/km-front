@@ -12,7 +12,6 @@
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@types/jsonwebtoken": "^8.5.8",
-    "@types/react-copy-to-clipboard": "^5.0.4",
     "axios": "^0.26.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
@@ -23,13 +22,11 @@
     "multer": "^1.4.5-lts.1",
     "next": "^12.1.6",
     "react": "^18.0.0",
-    "react-copy-to-clipboard": "^5.0.4",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.31.2",
     "react-kakao-maps-sdk": "^1.1.0",
     "recoil": "^0.7.2",
-    "styled-system": "^5.1.5",
-    "use-copy": "^0.0.2"
+    "styled-system": "^5.1.5"
   },
   "devDependencies": {
     "@types/node": "^17.0.34",
