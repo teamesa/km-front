@@ -2,8 +2,7 @@ import { css } from '@emotion/react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Tag } from 'components/Atoms';
-import { ListState } from 'states';
-import { getList } from 'states/list';
+import { getList, listState } from 'states/list';
 import { searchRequest } from 'states/search-request';
 import theme from 'styles/theme';
 
@@ -13,7 +12,7 @@ export default function ListCategory({
   data: { label: string; value: string }[];
 }) {
   const [searchRequestBody, setSearchReques] = useRecoilState(searchRequest);
-  const setListData = useSetRecoilState(ListState);
+  const setListData = useSetRecoilState(listState);
   const filter = searchRequestBody.filterOptions.exhibitionType;
 
   const setCategoryList = async (value: string) => {

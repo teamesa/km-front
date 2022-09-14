@@ -4,7 +4,7 @@ import BlankArchiveListSection from './BlankArchiveListSection';
 import ListCard from './ListCard';
 
 import { Box } from 'components/Atoms';
-import { ListState, MyArchiveListState } from 'states';
+import { MyArchiveListState } from 'states';
 
 export default function ListSection() {
   const data = useRecoilValueLoadable(MyArchiveListState);

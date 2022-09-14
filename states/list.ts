@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { atom, selector } from 'recoil';
+import { atom, selector, useRecoilCallback } from 'recoil';
 
 import {
   makeDefaultSearchRequest,
@@ -79,7 +79,13 @@ export const getList = async (post: SearchRequestInterface) => {
   return data;
 };
 
-export default atom({
+export const useResetListStateFunction = () =>
+  useRecoilCallback(({ set }) => async () => {
+    const listStateData = await getList(makeDefaultSearchRequest());
+    set(listState, listStateData);
+  });
+
+export const listState = atom<TPostList>({
   key: 'ListState',
   default: selector({
     key: 'ListState/default',
