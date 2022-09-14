@@ -17,7 +17,7 @@ export default function StarScope({
   width?: string;
   margin?: string;
 }) {
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(5);
   const [hover, setHover] = useState(0);
 
   return (

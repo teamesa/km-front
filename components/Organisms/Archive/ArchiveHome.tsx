@@ -75,7 +75,7 @@ export default function ArchiveHome() {
       await axios({
         method: 'POST',
         url: `/api/archive`,
-        data: archiveWirte,
+        data: postData,
       });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
       setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);

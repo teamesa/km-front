@@ -17,7 +17,6 @@ export default function Rating({
       control={control}
       render={({ field: { onChange: _onChange } }) => (
         <StarScope
-          currentStep={5}
           onChange={(e) => {
             onChange && onChange(e);
             _onChange(e);
