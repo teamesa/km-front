@@ -28,6 +28,7 @@ import {
 } from 'states/archive-square';
 import { ArchiveWirteProps } from 'states/archiveWirte';
 import theme from 'styles/theme';
+import customAxios from 'utils/hooks/customAxios';
 
 export default function ArchiveHome() {
   const router = useRouter();
@@ -54,6 +55,7 @@ export default function ArchiveHome() {
   });
 
   const onSubmit = async (data: ArchiveWirteProps) => {
+    const axios = customAxios();
     const postData = {
       ...data,
       itemId: Number(data.itemId),
@@ -68,8 +70,19 @@ export default function ArchiveHome() {
         .filter(isDefined),
     };
     setArchiveWirte(postData);
-    setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_REGISTRATION_QUESTION);
-    setPopupName(POPUP_NAME.ALERT_ARCHIVE_ASK);
+
+    try {
+      await axios({
+        method: 'POST',
+        url: `/api/archive`,
+        data: archiveWirte,
+      });
+      setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
+      setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
+    } catch (error: any) {
+      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+    }
   };
 
   return (

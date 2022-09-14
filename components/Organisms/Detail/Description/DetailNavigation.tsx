@@ -37,7 +37,7 @@ export function DetailNavigation({
       <Box height="45px" overflow="auto" display="flex" zIndex={2}>
         {deatailMetaInfo.map(({ title }, index) => (
           <Box
-            key={title}
+            key={index}
             flex="1"
             display="flex"
             alignItems="center"

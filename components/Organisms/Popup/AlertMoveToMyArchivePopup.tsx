@@ -1,20 +1,20 @@
 import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box, Button } from 'components/Atoms';
 import Popup from 'components/Molecules/Popup';
-import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { PopupNameState } from 'states';
+import { AlertState, ArchiveWirteState, PopupNameState } from 'states';
 import theme from 'styles/theme';
 
-const ArchiveWirteErrorPopup = () => {
-  const router = useRouter();
+const AlertArchiveAskPopup = () => {
+  const [alertState] = useRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
+  const router = useRouter();
 
   const handleClosePopup = () => {
-    setPopupName(POPUP_NAME.NULL);
     router.push('/mypage');
+    setPopupName(POPUP_NAME.NULL);
   };
 
   return (
@@ -32,7 +32,7 @@ const ArchiveWirteErrorPopup = () => {
             textAlign="center"
             color={theme.colors.black}
           >
-            {ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION.message}
+            {alertState.message}
           </Box>
         </Box>
         <Button
@@ -50,4 +50,4 @@ const ArchiveWirteErrorPopup = () => {
   );
 };
 
-export default ArchiveWirteErrorPopup;
+export default AlertArchiveAskPopup;
