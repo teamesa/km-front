@@ -1,11 +1,13 @@
 import { css } from '@emotion/react';
-import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { FlexBox, Box } from 'components/Atoms';
+import CarouselItem from 'components/Molecules/CarouselItem';
 import theme from 'styles/theme';
 
-export default function Carousel({}: {}) {
+export default function Carousel({ imgUrlArr }: { imgUrlArr: string[] }) {
+  const rootRef = useRef<any>();
+
   return (
     <Box position="relative">
       {imgUrlArr.length > 1 ? (
@@ -20,7 +22,7 @@ export default function Carousel({}: {}) {
           bottom="15px"
           right="15px"
           zIndex="100"
-          color={theme.colors.white}
+          color={theme.colors.black}
         ></Box>
       ) : null}
       <Box
@@ -31,24 +33,17 @@ export default function Carousel({}: {}) {
         css={css`
           scroll-snap-type: x mandatory;
         `}
-        ref={scrollRef}
+        ref={rootRef}
       >
         <FlexBox width="max-content" height="345px" flexDirection="row">
           {imgUrlArr.length > 0 ? (
             imgUrlArr.map((imgUrl, _index) => (
-              <Box
+              <CarouselItem
+                id={_index}
                 key={_index}
-                css={css`
-                  scroll-snap-align: start;
-                `}
-              >
-                <Image
-                  src={`${imgUrl}`}
-                  alt="image"
-                  width="345px"
-                  height="345px"
-                />
-              </Box>
+                imgUrl={imgUrl}
+                rootRef={rootRef}
+              />
             ))
           ) : (
             <Box
