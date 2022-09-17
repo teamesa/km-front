@@ -1,7 +1,5 @@
 import { css } from '@emotion/react';
 
-import ArrowDown from 'assets/list/ArrowDown';
-import Filter from 'assets/list/Filter';
 import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
 import ListFilter from 'components/Molecules/ListFilter';
 import ListCategory from 'components/Organisms/List/ListCategory';
@@ -20,7 +18,7 @@ export default function List() {
     <>
       <Box
         position="sticky"
-        top="0px"
+        top="env(safe-area-inset-top)"
         zIndex={Z_INDEX.SKY}
         backgroundColor={theme.colors.white}
       >

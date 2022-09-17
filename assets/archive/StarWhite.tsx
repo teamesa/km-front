@@ -1,9 +1,9 @@
-export default function StarWhite() {
+export default function StarWhite({ width = '30', height = '28.532' }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="30.645"
-      height="29.143"
+      width={width}
+      height={height}
       viewBox="0 0 30.645 29.143"
     >
       <path

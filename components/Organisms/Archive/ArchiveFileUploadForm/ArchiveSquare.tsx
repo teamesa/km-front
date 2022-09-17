@@ -14,7 +14,7 @@ export default function ArchiveSquare({
 }) {
   switch (state) {
     case ArchiveSqureStateEnum.input:
-      return <InputArchiveSquare squareId={key} />;
+      return <InputArchiveSquare />;
     case ArchiveSqureStateEnum.loading:
       return <LoadingArchiveSquare />;
     case ArchiveSqureStateEnum.photo:
