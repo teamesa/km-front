@@ -10,11 +10,15 @@ export default function CarouselItem({
   imgUrl,
   rootRef,
   handleIndicator,
+  width,
+  height,
 }: {
   itemOrder: number;
   imgUrl: string;
   rootRef: any;
   handleIndicator: Function;
+  width: string;
+  height: string;
 }) {
   const onIntersect: IntersectionObserverCallback = (entries) => {
     entries.forEach((entry) => {
@@ -36,7 +40,7 @@ export default function CarouselItem({
       `}
       ref={setTarget}
     >
-      <Image src={`${imgUrl}`} alt="image" width="345px" height="345px" />
+      <Image src={`${imgUrl}`} alt="image" width={width} height={height} />
     </Box>
   );
 }

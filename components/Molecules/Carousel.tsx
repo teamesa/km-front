@@ -5,7 +5,15 @@ import { FlexBox, Box } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
 import theme from 'styles/theme';
 
-export default function Carousel({ imgUrlArr }: { imgUrlArr: string[] }) {
+export default function Carousel({
+  imgUrlArr,
+  width,
+  height,
+}: {
+  imgUrlArr: string[];
+  width: string;
+  height: string;
+}) {
   const rootRef = useRef<any>();
   const [nowIndex, setNowIndex] = useState<Number>(1);
 
@@ -34,8 +42,8 @@ export default function Carousel({ imgUrlArr }: { imgUrlArr: string[] }) {
         </Box>
       ) : null}
       <Box
-        width="345px"
-        height="345px"
+        width={width}
+        height={height}
         overflowY="hidden"
         overflowX={imgUrlArr.length < 2 ? 'hidden' : 'scroll'}
         css={css`
@@ -43,7 +51,7 @@ export default function Carousel({ imgUrlArr }: { imgUrlArr: string[] }) {
         `}
         ref={rootRef}
       >
-        <FlexBox width="max-content" height="345px" flexDirection="row">
+        <FlexBox width="max-content" height="inherit" flexDirection="row">
           {imgUrlArr.length > 0 ? (
             imgUrlArr.map((imgUrl, _index) => (
               <CarouselItem
@@ -52,6 +60,8 @@ export default function Carousel({ imgUrlArr }: { imgUrlArr: string[] }) {
                 imgUrl={imgUrl}
                 rootRef={rootRef}
                 handleIndicator={handleIndicator}
+                width={width}
+                height={height}
               />
             ))
           ) : (
