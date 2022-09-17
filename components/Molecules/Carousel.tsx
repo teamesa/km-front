@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useRef } from 'react';
+import { SetStateAction, useCallback, useRef, useState } from 'react';
 
 import { FlexBox, Box } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
@@ -7,7 +7,11 @@ import theme from 'styles/theme';
 
 export default function Carousel({ imgUrlArr }: { imgUrlArr: string[] }) {
   const rootRef = useRef<any>();
+  const [nowIndex, setNowIndex] = useState<Number>(1);
 
+  const handleIndicator = (index: Number) => {
+    setNowIndex(index);
+  };
   return (
     <Box position="relative">
       {imgUrlArr.length > 1 ? (
@@ -23,7 +27,11 @@ export default function Carousel({ imgUrlArr }: { imgUrlArr: string[] }) {
           right="15px"
           zIndex="100"
           color={theme.colors.black}
-        ></Box>
+        >
+          <>
+            {nowIndex} / {imgUrlArr.length}
+          </>
+        </Box>
       ) : null}
       <Box
         width="345px"
@@ -39,10 +47,11 @@ export default function Carousel({ imgUrlArr }: { imgUrlArr: string[] }) {
           {imgUrlArr.length > 0 ? (
             imgUrlArr.map((imgUrl, _index) => (
               <CarouselItem
-                id={_index}
+                itemOrder={_index}
                 key={_index}
                 imgUrl={imgUrl}
                 rootRef={rootRef}
+                handleIndicator={handleIndicator}
               />
             ))
           ) : (

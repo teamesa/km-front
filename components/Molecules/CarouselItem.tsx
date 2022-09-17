@@ -1,27 +1,32 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 
 import Box from 'components/Atoms/Box';
 import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
 
 export default function CarouselItem({
-  id,
+  itemOrder,
   imgUrl,
   rootRef,
+  handleIndicator,
 }: {
-  id: number;
+  itemOrder: number;
   imgUrl: string;
   rootRef: any;
+  handleIndicator: Function;
 }) {
-  const onIntersect: IntersectionObserverCallback = (entries, observe) => {
-    //root와 타겟이 100% 교차 되면 (threshold: 1),
-    //현재 교차된 이미지의 index 번호로 indicator 업데이트 하기.
+  const onIntersect: IntersectionObserverCallback = (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        handleIndicator(itemOrder + 1);
+      }
+    });
   };
 
   const setTarget = useIntersectionObserver({
     root: rootRef.current,
-    threshold: 0.7,
+    threshold: 0.9,
     onIntersect,
   });
   return (
