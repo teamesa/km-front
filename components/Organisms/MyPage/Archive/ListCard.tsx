@@ -38,7 +38,6 @@ export default function Item(props: ItemProps) {
       padding="0px 0px 40px"
       onClick={() => {
         setArchiveId(apiArr[3]);
-        console.log(apiArr[3]);
         setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
       }}
       css={css`
