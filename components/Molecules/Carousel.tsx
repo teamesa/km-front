@@ -23,23 +23,22 @@ export default function Carousel({
   return (
     <Box position="relative">
       {imgUrlArr.length > 1 ? (
-        <Box
+        <FlexBox
           width="inherit"
           height="fit-content"
           position="absolute"
           fontSize="14px"
           lineHeight="0.91px"
-          textAlign="right"
           letterSpacing="0.11px"
           bottom="15px"
           right="15px"
           zIndex="100"
-          color={theme.colors.black}
         >
-          <>
-            {nowIndex} / {imgUrlArr.length}
-          </>
-        </Box>
+          <Box color={theme.colors.white}>
+            <>{nowIndex}</>{' '}
+          </Box>
+          <Box color={theme.colors.gray99}>/ {imgUrlArr.length}</Box>
+        </FlexBox>
       ) : null}
       <Box
         width={width}
