@@ -21,7 +21,7 @@ export default function Carousel({
     setNowIndex(index);
   };
   return (
-    <Box position="relative">
+    <Box width="fit-content" height="fit-content" position="relative">
       {imgUrlArr.length > 1 ? (
         <FlexBox
           width="inherit"
@@ -34,10 +34,10 @@ export default function Carousel({
           right="15px"
           zIndex="100"
         >
-          <Box color={theme.colors.white}>
+          <Box marginRight="3.2px" color={theme.colors.white}>
             <>{nowIndex}</>{' '}
           </Box>
-          <Box color={theme.colors.gray99}>/ {imgUrlArr.length}</Box>
+          <Box color={theme.colors.gray99}> / {imgUrlArr.length}</Box>
         </FlexBox>
       ) : null}
       <Box
