@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { SetStateAction, useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { FlexBox, Box } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
@@ -52,30 +52,17 @@ export default function Carousel({
         ref={rootRef}
       >
         <FlexBox width="max-content" height="inherit" flexDirection="row">
-          {imgUrlArr.length > 0 ? (
-            imgUrlArr.map((imgUrl, _index) => (
-              <CarouselItem
-                itemOrder={_index}
-                key={_index}
-                imgUrl={imgUrl}
-                rootRef={rootRef}
-                handleIndicator={handleIndicator}
-                width={width}
-                height={height}
-              />
-            ))
-          ) : (
-            <Box
-              width="345px"
-              height="345px"
-              margin="0 auto"
-              fontSize="19px"
-              textAlign="center"
-              color={theme.colors.gray77}
-            >
-              사진
-            </Box>
-          )}
+          {imgUrlArr.map((imgUrl, _index) => (
+            <CarouselItem
+              itemOrder={_index}
+              key={_index}
+              imgUrl={imgUrl}
+              rootRef={rootRef}
+              handleIndicator={handleIndicator}
+              width={width}
+              height={height}
+            />
+          ))}
         </FlexBox>
       </Box>
     </Box>
