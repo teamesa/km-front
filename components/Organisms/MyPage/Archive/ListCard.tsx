@@ -43,10 +43,10 @@ export default function Item(props: ItemProps) {
           width: 1px;
           background: #ddd;
         }
-        &:nth-child(1) {
+        &:nth-of-type(1) {
           padding: 20px 0px 40px;
         }
-        &:nth-last-child(1):before {
+        &:nth-last-of-type(1):before {
           display: none;
         }
       `}
