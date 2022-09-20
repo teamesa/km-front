@@ -24,20 +24,36 @@ export default function Carousel({
     <Box width="fit-content" height="fit-content" position="relative">
       {imgUrlArr.length > 1 ? (
         <FlexBox
-          width="inherit"
-          height="fit-content"
+          width="38px"
+          height="22px"
           position="absolute"
+          alignItems="center"
+          justifyContent="space-around"
           fontSize="14px"
           lineHeight="0.91px"
           letterSpacing="0.11px"
-          bottom="15px"
-          right="15px"
+          bottom="0px"
+          right="0px"
           zIndex="100"
+          backgroundColor="black"
+          opacity="0.4"
         >
-          <Box marginRight="3.2px" color={theme.colors.white}>
+          <Box
+            width="fit-content"
+            height="fit-content"
+            marginRight="3.2px"
+            color={theme.colors.white}
+          >
             <>{nowIndex}</>{' '}
           </Box>
-          <Box color={theme.colors.gray99}> / {imgUrlArr.length}</Box>
+          <Box
+            width="fit-content"
+            height="fit-content"
+            color={theme.colors.gray99}
+          >
+            {' '}
+            / {imgUrlArr.length}
+          </Box>
         </FlexBox>
       ) : null}
       <Box
