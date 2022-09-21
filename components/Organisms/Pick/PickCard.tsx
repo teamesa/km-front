@@ -23,7 +23,7 @@ export default function PickItem({ content }: ItemProps) {
         }
       `}
     >
-      <PickHeart />
+      <PickHeart heart={content.heart} />
       <PickItemImage presentationImage={content.presentationImage} />
       <PickItemInfo
         title={content.title}

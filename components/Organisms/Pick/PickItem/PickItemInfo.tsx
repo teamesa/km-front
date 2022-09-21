@@ -1,3 +1,5 @@
+import { css } from '@emotion/react';
+
 import { Box, Tag } from 'components/Atoms';
 import { PresentationPickBadge, PresentationPickTitle } from 'states/pick';
 import theme from 'styles/theme';
@@ -25,7 +27,18 @@ export default function PickItemInfo({
           </Tag>
         ))}
       </Box>
-      <Box fontSize="13px" fontWeight="500" lineHeight="18px">
+      <Box
+        fontSize="13px"
+        fontWeight="500"
+        lineHeight="18px"
+        overflow="hidden"
+        css={css`
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          text-overflow: ellipsis;
+        `}
+      >
         {title.text}
       </Box>
     </Box>

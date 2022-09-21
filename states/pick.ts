@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { atom, selector } from 'recoil';
+import { atom, selector, useRecoilCallback } from 'recoil';
 
 export type TPoistPick = {
   responsePagingStatus: {
@@ -56,7 +56,6 @@ export type PresentationPicklistItemAdditionalInfo = {
 };
 
 export const getPick = async () => {
-  console.log('reset');
   const { data } = (await axios({
     url: '/api/pick',
     method: 'POST',
@@ -71,15 +70,20 @@ export const getPick = async () => {
   return data;
 };
 
-export default atom({
+export const useResetPickStateFunction = () =>
+  useRecoilCallback(
+    ({ set }) =>
+      async () => {
+        const pickStateData = await getPick();
+        set(pickState, pickStateData);
+      },
+    [],
+  );
+
+export const pickState = atom<TPoistPick>({
   key: 'PickState',
   default: selector({
     key: 'PickState/default',
     get: () => getPick(),
   }),
 });
-
-// export default selector({
-//   key: 'PickState',
-//   get: () => getPick(),
-// });
