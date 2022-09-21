@@ -12,6 +12,7 @@ const theme = {
     grayE9: '#e9e9e9',
     gray66: '#666666',
     gray77: '#777',
+    gray33: '#333',
     grayAA: '#aaaaaa',
   },
 };

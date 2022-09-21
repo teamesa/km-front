@@ -6,5 +6,6 @@ export const headerState = atom<HeaderBarProps>({
   key: 'headerState',
   default: {
     headerLeft: 'default',
+    frontTopTransparent: false,
   },
 });

@@ -22,7 +22,7 @@ export default function MyPageInfoFragment() {
     <>
       <Box
         position="sticky"
-        top="45px"
+        top="calc(45px + env(safe-area-inset-top))"
         background={theme.colors.white}
         zIndex={2}
       >
