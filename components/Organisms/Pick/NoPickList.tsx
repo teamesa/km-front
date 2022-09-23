@@ -5,7 +5,7 @@ export default function NoPickList() {
   return (
     <>
       <Box
-        position="fixed"
+        position="absolute"
         top="calc(50% - 110px)"
         left="0px"
         width="100%"

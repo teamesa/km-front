@@ -17,7 +17,7 @@ export default function PickLogin() {
         PICK
       </Box>
       <Box
-        position="fixed"
+        position="absolute"
         top="calc(50% - 110px)"
         left="0px"
         width="100%"
@@ -26,7 +26,7 @@ export default function PickLogin() {
       >
         <Alert width="40px" height="40px" />
         <Box
-          margin="20px 0px 12px"
+          margin="20px 0px 40px"
           fontSize="13px"
           lineHeight="20px"
           fontWeight="500"
