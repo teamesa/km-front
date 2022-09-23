@@ -11,6 +11,7 @@ import WhiteLogo from 'assets/common/header/logo-white.png';
 import Logo from 'assets/common/header/logo.png';
 import Search from 'assets/common/header/Search';
 import WhiteSearch from 'assets/common/header/search-white.png';
+import { CloseBtn } from 'assets/mypage';
 import { Box, FlexBox } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
 import { headerState } from 'states/common';
@@ -20,10 +21,21 @@ const headerLeftIcon = {
   default: <ArrowLeft width="30" height="30" viewBox="-10 -6 30 30" />,
   logo: <Image src={Logo} alt="image" width="136px" height="20px" />,
   disabled: <></>,
+  privacy: (
+    <Box fontSize="16px" fontWeight={500} lineHeight={1.5}>
+      개인정보처리방침
+    </Box>
+  ),
+  service: (
+    <Box fontSize="16px" fontWeight={500} lineHeight={1.5}>
+      이용약관
+    </Box>
+  ),
 };
 
 const headerRightIcon = {
   search: <Search width="30" height="30" viewBox="-6 -6 30 30" />,
+  close: <CloseBtn stroke="#000"></CloseBtn>,
   disabled: <></>,
 };
 
@@ -71,10 +83,10 @@ function HeaderBar() {
                 aria-label="왼쪽 버튼"
                 role="button"
                 position="absolute"
-                top={header.headerLeft === 'logo' ? '13px' : '6px'}
-                left={header.headerLeft === 'logo' ? '15px' : '5px'}
-                width={header.headerLeft === 'logo' ? '136px' : '30px'}
-                height={header.headerLeft === 'logo' ? '20px' : '30px'}
+                top={header.headerLeft !== 'default' ? '13px' : '6px'}
+                left={header.headerLeft !== 'default' ? '15px' : '5px'}
+                width={header.headerLeft !== 'default' ? '136px' : '30px'}
+                height={header.headerLeft !== 'default' ? '20px' : '30px'}
                 onClick={() => {
                   if (header.headerLeftAction) {
                     header.headerLeftAction();
@@ -96,7 +108,11 @@ function HeaderBar() {
               >
                 {header?.title ?? ''}
               </Box>
-              <FlexBox position="absolute" top="6px" right="10px">
+              <FlexBox
+                position="absolute"
+                top={header.headerRight === 'close' ? '10px' : '6px'}
+                right="10px"
+              >
                 <Box
                   aria-label="오른쪽 버튼"
                   role="button"

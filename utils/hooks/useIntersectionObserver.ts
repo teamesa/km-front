@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 interface useIntersectionObserverProps {
-  root?: null;
+  root?: null | any;
   rootMargin?: string;
   threshold?: number;
   onIntersect: IntersectionObserverCallback;

@@ -1,4 +1,4 @@
-export const CloseBtn = ({ width = '28', height = '28' }) => {
+export const CloseBtn = ({ width = '28', height = '28', stroke = '#fff' }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@ export const CloseBtn = ({ width = '28', height = '28' }) => {
           d="m860 5-5 5 5-5-5-5 5 5 5-5-5 5 5 5z"
           transform="translate(-606 759)"
           fill="none"
-          stroke="#fff"
+          stroke={stroke}
           strokeWidth="1.4px"
         />
       </g>

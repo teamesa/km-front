@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 
 import { Box } from 'components/Atoms';
-import KeyVisual from 'components/Organisms/Home/Module/KeyVisual';
+import Footer from 'components/Organisms/Home/Footer';
 import ModuleResolver from 'components/Organisms/Home/ModuleResolver';
 import { useResetHomeModulesFunction, homeModuleState } from 'states/home';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
@@ -21,7 +21,6 @@ const Home: NextPage = () => {
     case 'hasValue':
       return (
         <Box marginBottom="120px">
-          <KeyVisual />
           {data.contents.map(({ moduleName, data }, index) => (
             <ModuleResolver
               moduleName={moduleName}
@@ -29,6 +28,7 @@ const Home: NextPage = () => {
               key={`${moduleName}-${index}`}
             />
           ))}
+          <Footer />
         </Box>
       );
     case 'loading':
