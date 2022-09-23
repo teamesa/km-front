@@ -21,13 +21,14 @@ import SearchTitle from 'components/Organisms/Archive/SearchTitle';
 import PopupRouter from 'components/Organisms/Popup/PopupRouter';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, ArchiveWirteState, PopupNameState } from 'states';
+import { AlertState, ArchiveWriteState, PopupNameState } from 'states';
 import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
 } from 'states/archive-square';
 import { ArchiveWirteProps } from 'states/archiveWirte';
 import theme from 'styles/theme';
+import customAxios from 'utils/hooks/customAxios';
 
 export default function ArchiveHome() {
   const router = useRouter();
@@ -35,7 +36,7 @@ export default function ArchiveHome() {
   const thumbnailImageUrl = String(router.query.thumbnailImageUrl);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const [archiveWirte, setArchiveWirte] = useRecoilState(ArchiveWirteState);
+  const [archiveWrite, setArchiveWrite] = useRecoilState(ArchiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
 
   const {
@@ -46,7 +47,7 @@ export default function ArchiveHome() {
   } = useForm<ArchiveWirteProps>({
     mode: 'onChange',
     defaultValues: {
-      ...archiveWirte,
+      ...archiveWrite,
       starRating: 5,
       visibleAtItem: checked ? true : false,
       photoUrls: [],
@@ -54,6 +55,7 @@ export default function ArchiveHome() {
   });
 
   const onSubmit = async (data: ArchiveWirteProps) => {
+    const axios = customAxios();
     const postData = {
       ...data,
       itemId: Number(data.itemId),
@@ -67,9 +69,20 @@ export default function ArchiveHome() {
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
     };
-    setArchiveWirte(postData);
-    setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_REGISTRATION_QUESTION);
-    setPopupName(POPUP_NAME.ALERT_ARCHIVE_ASK);
+    setArchiveWrite(postData);
+
+    try {
+      await axios({
+        method: 'POST',
+        url: `/api/archive`,
+        data: postData,
+      });
+      setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
+      setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
+    } catch (error: any) {
+      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+    }
   };
 
   return (

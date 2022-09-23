@@ -4,8 +4,7 @@ export const POPUP_NAME = {
   ALERT_CANCEL_CONFIRM: 'AlertCancelConfirmPopup',
   ALERT_LOGIN_CONFIRMATION: 'AlertLoginConfirmationPopup',
   POPUP_ARCHIVE_DETAIL: 'MyArchiveDetailPopup',
-  ALERT_ARCHIVE_ASK: 'AlertArchiveAsk',
+  ALERT_MOVE_MyARCHIVE_PAGE: 'AlertMoveMyArchivePage',
   ARCHIVE_WRITE_CONFIRM: 'ArchiveWirteConfirm',
-  ARCHIVE_WRITE_ERROR: 'ArchiveWirteError',
   OVERFLOW_PICTURE: 'ArchivePictureOverflowPopup',
 };
