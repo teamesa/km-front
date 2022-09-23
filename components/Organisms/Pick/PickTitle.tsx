@@ -1,11 +1,11 @@
 import { useRecoilValue } from 'recoil';
 
 import { Box, Span } from 'components/Atoms';
-import { PickState } from 'states';
+import { pickState } from 'states/pick';
 import theme from 'styles/theme';
 
 export default function PickTitle() {
-  const pickCount = useRecoilValue(PickState);
+  const pickCount = useRecoilValue(pickState);
 
   return (
     <>
@@ -15,13 +15,17 @@ export default function PickTitle() {
         lineHeight="27px"
         fontWeight="500"
       >
-        <Span
-          display="inline-block"
-          marginRight="3px"
-          color={theme.colors.orange}
-        >
-          {pickCount.count}
-        </Span>
+        {pickCount.count !== 0 ? (
+          <Span
+            display="inline-block"
+            marginRight="3px"
+            color={theme.colors.orange}
+          >
+            {pickCount.count}
+          </Span>
+        ) : (
+          ''
+        )}
         PICK
       </Box>
     </>

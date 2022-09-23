@@ -4,7 +4,7 @@ import BlankArchiveListSection from './BlankArchiveListSection';
 import ListCard from './ListCard';
 
 import { Box } from 'components/Atoms';
-import { ListState, MyArchiveListState } from 'states';
+import { MyArchiveListState } from 'states';
 
 export default function ListSection() {
   const data = useRecoilValueLoadable(MyArchiveListState);
@@ -19,7 +19,7 @@ export default function ListSection() {
         <>
           <Box marginBottom="60px">
             {data.contents.contents.map((content, index) => (
-              <ListCard key={content?.id ?? index} content={content} />
+              <ListCard key={content?.api ?? index} content={content} />
             ))}
           </Box>
         </>
