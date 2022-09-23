@@ -4,34 +4,10 @@ import { Box } from 'components/Atoms';
 import PickHeart from 'components/Organisms/Pick/PickItem/PickHeart';
 import PickItemImage from 'components/Organisms/Pick/PickItem/PickItemImage';
 import PickItemInfo from 'components/Organisms/Pick/PickItem/PickItemInfo';
+import { PickPageContents } from 'states/pick';
 
 interface ItemProps {
-  content: PickPageContent;
-}
-
-interface PickPageContent {
-  additionalBadgeList: {
-    text: string;
-    typeBadge: boolean;
-  }[];
-  heart: {
-    heartClicked: boolean;
-    id: number;
-    link: string;
-  };
-  id: number;
-  presentationImage: {
-    url: string;
-    link: string;
-    backgroundText: string;
-    dimColor: string;
-    opacity: number;
-    dimTarget: boolean;
-  };
-  title: {
-    link: string;
-    text: string;
-  };
+  content: PickPageContents;
 }
 
 export default function PickItem({ content }: ItemProps) {
@@ -47,7 +23,7 @@ export default function PickItem({ content }: ItemProps) {
         }
       `}
     >
-      <PickHeart />
+      <PickHeart heart={content.heart} />
       <PickItemImage presentationImage={content.presentationImage} />
       <PickItemInfo
         title={content.title}
