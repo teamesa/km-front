@@ -64,7 +64,7 @@ export function FilterSelect({ filter: list }: { filter: SelectInterface }) {
   const [filterState, setfilterState] = useRecoilState(filter);
   const currValue = getFilterCurrValue(filterState, list);
   return (
-    <Box height="20px" marginBottom="20px" flex="0 0 50%">
+    <Box height="20px" marginBottom="20px" flex="0 0 33.333%">
       <CheckBox
         type="checkbox"
         id={list.value}

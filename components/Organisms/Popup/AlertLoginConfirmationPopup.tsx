@@ -1,4 +1,5 @@
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box, Button } from 'components/Atoms';
@@ -10,8 +11,14 @@ import theme from 'styles/theme';
 const AlertLoginConfirmationPopup = () => {
   const alertState = useRecoilValue(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
+  const router = useRouter();
 
-  const handleClosePopup = () => {
+  const handleConfirm = () => {
+    setPopupName(POPUP_NAME.NULL);
+    router.push('/mypage');
+  };
+
+  const handleCancel = () => {
     setPopupName(POPUP_NAME.NULL);
   };
 
@@ -38,11 +45,21 @@ const AlertLoginConfirmationPopup = () => {
         </Box>
         <Button
           height="50px"
-          width="100%"
+          width="50%"
           fontSize="16px"
-          borderRadius="0 0 12px 12px"
+          borderRadius="0 0 0 12px"
+          backgroundColor={theme.colors.grayEE}
+          onClick={handleCancel}
+        >
+          <Box color={theme.colors.black}>취소</Box>
+        </Button>
+        <Button
+          height="50px"
+          width="50%"
+          fontSize="16px"
+          borderRadius="0 0 12px 0"
           backgroundColor={theme.colors.black}
-          onClick={handleClosePopup}
+          onClick={handleConfirm}
         >
           <Box color={theme.colors.white}>확인</Box>
         </Button>

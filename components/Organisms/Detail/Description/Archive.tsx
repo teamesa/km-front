@@ -1,86 +1,211 @@
-import NavWish from 'assets/common/bottomTabNavigator/NavWish';
-import { Box, FlexBox, Span, Tag } from 'components/Atoms';
-import theme from 'styles/theme';
+import { css } from '@emotion/react';
+import Image from 'next/image';
+import { RefObject } from 'react';
 
+import DetailNoData from 'assets/detail/noData';
+import { Profile } from 'assets/mypage';
+import { Box, FlexBox, Span, Tag } from 'components/Atoms';
+import InnerHTML from 'components/Molecules/InnerHTML';
+import StarScope from 'components/Molecules/StarScope';
+import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
+import { ArchiveContents } from 'states/detail';
+import theme from 'styles/theme';
 interface ArchiveProps {
-  data: {
-    title: string;
-    star: number;
-    description: string;
-  }[];
+  data: ArchiveContents;
+  scrollRef: RefObject<HTMLDivElement>;
+  introYn: number;
 }
-export default function Archive({ data }: ArchiveProps) {
-  if (data.length === 0) {
-    return <Box> 아카이브 없다</Box>;
+export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
+  if (data.archives.length === 0) {
+    return (
+      <Box ref={scrollRef}>
+        <Box
+          paddingTop="100px"
+          margin="0 auto"
+          height="700px"
+          textAlign="center"
+        >
+          <DetailNoData />
+          <Box marginTop="20px" fontSize="13px" lineHeight="20px">
+            아카이브가 비어있습니다.
+            <br /> 코멘트를 기록해주세요.
+          </Box>
+          <Box width="100%" height="60px" />
+          <Box width="100%" height="var(--platformBottomArea)" />
+        </Box>
+      </Box>
+    );
   }
+
+  const makeAvgStarRating = () => {
+    const rating = data.avgStarRating * 20;
+    return `${rating + 1.5}%`;
+  };
+
+  const Start = () => {
+    return (
+      <Span width="21px" height="20px" paddingLeft="6px">
+        ★
+      </Span>
+    );
+  };
+
+  const StartRatingImage = () => {
+    return (
+      <Box
+        color={theme.colors.black}
+        position="relative"
+        width="max-content"
+        css={css`
+          unicode-bidi: bidi-override;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke-width: 1.3px;
+          -webkit-text-stroke-color: black;
+        `}
+      >
+        <Box
+          position="absolute"
+          zIndex="1"
+          overflow="hidden"
+          css={css`
+            -webkit-text-fill-color: black;
+          `}
+          width={makeAvgStarRating()}
+        >
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+        </Box>
+        <Box zIndex="0" padding="0">
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+        </Box>
+      </Box>
+    );
+  };
+
   return (
-    <Box color={theme.colors.black} fontSize="14px">
-      {data.map((item, index) => (
-        <Box key={index} paddingTop="24px">
-          <FlexBox alignItems="center">
-            <Box
-              // width="50px"
-              flex="0 0 50px"
-              height="50px"
-              backgroundColor={theme.colors.gray99}
-              borderRadius="100%"
-            />
-            <Box padding="8px 10px" flex="1 1 100%">
-              {item.title}
-              <FlexBox alignItems="center">
-                <Box>별다섯개</Box>
-                <Box paddingLeft="9px" paddingRight="11px">
-                  |
-                </Box>
-                <Box color={theme.colors.gray99} fontSize="11px">
-                  2022.04.02
+    <Box ref={scrollRef}>
+      {introYn === 2 ? <Box paddingTop="80px" /> : null}
+      <Box color={theme.colors.black} fontSize="22px" paddingTop="43px">
+        <FlexBox alignItems="center">
+          <StartRatingImage />
+          <Box paddingLeft="16px">{data.avgStarRating}</Box>
+          <Box color={theme.colors.grayAA}>
+            <Span color={theme.colors.grayBB} padding="0 5px">
+              /
+            </Span>
+            5
+          </Box>
+        </FlexBox>
+        <Box paddingTop="20px">
+          {data.archives.map((item, index) => (
+            <Box key={index}>
+              <Box
+                height="1px"
+                backgroundColor={theme.colors.grayEE}
+                marginBottom="24px"
+              />
+              <FlexBox
+                alignItems="center"
+                justifyContent="space-between"
+                marginBottom="24px"
+              >
+                <FlexBox>
+                  {item.userProfileUrl ? (
+                    <Box
+                      width="50px"
+                      height="50px"
+                      borderRadius="50%"
+                      overflow="hidden"
+                    >
+                      <Image
+                        src={item.userProfileUrl}
+                        width="50px"
+                        height="50px"
+                        alt=""
+                      />
+                    </Box>
+                  ) : (
+                    <Profile width="50px" height="50px" />
+                  )}
+                  <Box padding="8px 10px" fontSize="13px">
+                    <Box color={theme.colors.black}>{item.userName}</Box>
+
+                    <FlexBox alignItems="center">
+                      <StarScope
+                        currentStep={Math.round(item.starRating)}
+                        width="10.5px"
+                        height="10px"
+                        margin="0 2.5px"
+                      />
+                      <Box padding="0 10px" color={theme.colors.grayEE}>
+                        |
+                      </Box>
+                      <Box color={theme.colors.gray99} fontSize="11px">
+                        {item.updatedAt}
+                      </Box>
+                    </FlexBox>
+                  </Box>
+                </FlexBox>
+                <Box height="20px">
+                  <ArchiveHeart
+                    heart={item.heart}
+                    heartCount={item.likeCount}
+                  />
                 </Box>
               </FlexBox>
+              {item.photoUrls ? (
+                <Box marginBottom="15px">
+                  {item.photoUrls.map((photo, index) => (
+                    <Box key={index}>
+                      <Image
+                        src={photo}
+                        width="345px"
+                        height="345px"
+                        alt=""
+                        layout="intrinsic"
+                      />
+                    </Box>
+                  ))}
+                </Box>
+              ) : null}
+              {item.comment ? (
+                <Box
+                  fontSize="13px"
+                  lineHeight="1.54"
+                  textAlign="left"
+                  marginBottom="12px"
+                >
+                  <InnerHTML data={item.comment} />
+                </Box>
+              ) : null}
+              {item.cafe || item.food ? (
+                <Box
+                  backgroundColor={theme.colors.grayF8}
+                  padding="20px 15px"
+                  fontSize="12px"
+                  marginBottom="24px"
+                >
+                  {item.food ? <Box>다녀온 맛집 : {item.food}</Box> : null}
+                  {item.cafe ? (
+                    <Box paddingTop={item.food ? '10px' : '0'}>
+                      다녀온 카페 : {item.cafe}
+                    </Box>
+                  ) : null}
+                </Box>
+              ) : null}
             </Box>
-            <Box flex="0 0 50px " height="20px">
-              <Tag
-                display="flex !important"
-                alignItems="center"
-                padding="0px 10px !important"
-                margin="0px !important"
-                color={theme.colors.lime}
-                background={theme.colors.black}
-                boxShadow="0 0 8px 0 rgba(0, 0, 0, 0.08)"
-              >
-                <NavWish
-                  fill={theme.colors.lime}
-                  width="13px"
-                  height="12px"
-                  viewBox="3 4 23 22"
-                />
-                <Span marginLeft="4px">25</Span>
-              </Tag>
-            </Box>
-          </FlexBox>
-          <Box
-            fontSize="13px"
-            lineHeight="20px"
-            textAlign="left"
-            marginTop="20px"
-          >
-            {item.description}
-          </Box>
-          <Box
-            backgroundColor={theme.colors.grayF8}
-            padding="20px 15px"
-            fontSize="12px"
-            marginTop="12px"
-          >
-            <Box>다녀온 맛집 : 성수다락</Box>
-            <Box paddingTop="10px"> 다녀온 카페 : 대림창고</Box>
-          </Box>
-          <Box
-            marginTop="24px"
-            height="1px"
-            backgroundColor={theme.colors.grayEE}
-          />
+          ))}
         </Box>
-      ))}
+        <Box width="100%" height="60px" />
+        <Box width="100%" height="var(--platformBottomArea)" />
+      </Box>
     </Box>
   );
 }

@@ -5,12 +5,14 @@ import { PresentationlistItemAdditionalInfo } from 'states/list';
 import theme from 'styles/theme';
 interface AdditionalInfoProps {
   listItemAdditionalInfo: PresentationlistItemAdditionalInfo;
+  marginTop?: number;
 }
 export default function ItemAdditionalInfo(props: AdditionalInfoProps) {
   const listItemAdditionalInfo = props.listItemAdditionalInfo;
+  const marginTop = props.marginTop;
   return (
     <>
-      <FlexBox marginTop="15px">
+      <FlexBox marginTop={marginTop !== undefined ? `${marginTop}px` : '15px'}>
         {listItemAdditionalInfo.heartCount ? (
           <FlexBox alignItems="center" marginRight="10px" height="12px">
             <ListWish
