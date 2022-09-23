@@ -1,7 +1,18 @@
 import axios from 'axios';
-import { selector, atom, useRecoilCallback } from 'recoil';
+import {
+  selector,
+  atom,
+  useRecoilCallback,
+  atomFamily,
+  selectorFamily,
+} from 'recoil';
 
-import { ModuleData } from 'components/Organisms/Home/ModuleTypes';
+import { MonthlyFreeItemCardProps } from './../components/Organisms/Home/ModuleTypes';
+
+import {
+  ModuleData,
+  MonthlyFreeItemProps,
+} from 'components/Organisms/Home/ModuleTypes';
 
 export const getHomeInfo = async (): Promise<ModuleData[]> => {
   const _ = await axios({
@@ -11,8 +22,22 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
 
   return [
     {
+      moduleName: 'key-visual',
+      data: {
+        index: 0,
+        keyvisualDatas: [
+          {
+            photoUrl: 'fdasfsa',
+            upperTitle: '10월',
+            lowerTitle: '이달의 전시',
+          },
+        ],
+      },
+    },
+    {
       moduleName: 'swipe-item',
       data: {
+        index: 1,
         thumbnailPhotoUrl:
           'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/125415-0bea704056e58f6195dd80ef18b09d3a_VOCpostergiorgiko.jpg',
         photoUrls: [
@@ -33,6 +58,7 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
     {
       moduleName: 'swipe-item',
       data: {
+        index: 2,
         thumbnailPhotoUrl:
           'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-06-27/122816-KakaoTalk_20211024_201607908_02.jpg',
         photoUrls: [
@@ -55,6 +81,7 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
     {
       moduleName: 'monthly-free-item',
       data: {
+        index: 3,
         contents: [
           {
             id: 1099,
@@ -172,9 +199,61 @@ export const useResetHomeModulesFunction = () =>
       async () => {
         const homeModuleData = await getHomeInfo();
         set(homeModuleState, homeModuleData);
+        homeModuleData.forEach((_, index) =>
+          set(
+            homeModuleIndivisualStateFamily(index),
+            getFromModuledata(homeModuleData[index]),
+          ),
+        );
       },
     [],
   );
+
+export const getFromModuledata = ({ moduleName, data }: ModuleData) => {
+  switch (moduleName) {
+    case 'monthly-free-item':
+      const { contents } = data as MonthlyFreeItemProps;
+      return contents;
+    default:
+      return null;
+  }
+};
+
+export const useTurnPickstateFunction = (moduleId: number, itemId: number) =>
+  useRecoilCallback(
+    ({ set }) =>
+      async () => {
+        set(
+          homeModuleIndivisualStateFamily(moduleId),
+          (exHomeindivisualState) => {
+            const monthlyData =
+              exHomeindivisualState as MonthlyFreeItemCardProps[];
+            return monthlyData.map((it: MonthlyFreeItemCardProps) => {
+              if (it.heart.id === itemId) {
+                return {
+                  ...it,
+                  heart: { ...it.heart, heartClicked: !it.heart.heartClicked },
+                };
+              } else {
+                return it;
+              }
+            });
+          },
+        );
+      },
+    [],
+  );
+
+export const homeModuleIndivisualStateFamily = atomFamily({
+  key: 'home-module-indivisual',
+  default: selectorFamily({
+    key: 'home-module-indivisual/Default',
+    get:
+      (index: number) =>
+      ({ get }) =>
+        getFromModuledata(get(homeModuleState)[index]),
+  }),
+});
 
 export const homeModuleState = atom<ModuleData[]>({
   key: 'home-module',
