@@ -1,15 +1,15 @@
 import AlertState from './alertState';
-import { ArchiveWirteState } from './archiveWirte';
+import { ArchiveWriteState } from './archiveWirte';
 import { DetailState } from './detail';
 import ListState from './list';
 import MyArchiveListState from './myArchiveList';
 import PopupNameState from './popupName';
-import { searchRequest } from './search-request';
+import { searchRequest } from 'states/search-request';
 
 export {
   DetailState,
   ListState,
-  ArchiveWirteState,
+  ArchiveWriteState,
   searchRequest,
   MyArchiveListState,
   PopupNameState,

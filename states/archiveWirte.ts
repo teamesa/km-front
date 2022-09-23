@@ -60,7 +60,7 @@ export async function postArchiveWirte({ body }: { body: ArchiveWirteProps }) {
   return data;
 }
 
-export const ArchiveWirteState = atom<ArchiveWirteProps | undefined>({
-  key: 'ArchiveWirteState',
+export const ArchiveWriteState = atom<ArchiveWirteProps | undefined>({
+  key: 'ArchiveWriteState',
   default: undefined,
 });
