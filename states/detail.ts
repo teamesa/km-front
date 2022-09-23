@@ -7,6 +7,7 @@ export type TGetSummary = {
   detailImageUrl: string;
   feeType: string;
   homePageUrl: string;
+
   itemInfoAdditionalInfo: {
     archiveLink: {
       title: string;
