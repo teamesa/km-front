@@ -12,7 +12,7 @@ const MyPage: NextPage<UserProps> = ({ user }) => {
 
   useEffect(() => {
     setUserFirst(user);
-  }, []);
+  }, [user, setUserFirst]);
 
   if (user.isLogin) {
     return <MyPageHome />;

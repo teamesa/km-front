@@ -17,6 +17,7 @@ export default function ListOptionFilter() {
       textAlign="left"
       background={theme.colors.white}
       border={`1px solid ${theme.colors.grayDD}`}
+      borderRight="none"
       borderLeft="none"
       onClick={() => {
         onModal({
