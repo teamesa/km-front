@@ -3,12 +3,11 @@ import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
 import ListCard from 'components/Organisms/List/ListCard';
 import NoFilterList from 'components/Organisms/List/NoFilterList';
 import NoItemList from 'components/Organisms/List/NoItemList';
-// import PopupRouter from 'components/Organisms/Popup/PopupRouter';
-import { ListState } from 'states';
 import { setFilterState } from 'states/filter';
+import { listState } from 'states/list';
 
 export default function ListSection() {
-  const data = useRecoilValueLoadable(ListState);
+  const data = useRecoilValueLoadable(listState);
   const setFilter = useRecoilValue(setFilterState);
 
   switch (data.state) {
