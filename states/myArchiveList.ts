@@ -16,7 +16,7 @@ export type TPostList = {
 };
 
 export type MyArchivePageContents = {
-  id: number;
+  api: string;
   title: string;
   comment: string;
   places: string;
