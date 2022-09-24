@@ -47,7 +47,7 @@ export default function Navigator() {
   };
 
   const archiveLink = () => {
-    if (loginState.isLogin) {
+    if (!loginState.isLogin) {
       setAlertState(ALERT_MESSAGE.ALERT.LOGIN_CONFIRMATION);
       setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
       return null;
