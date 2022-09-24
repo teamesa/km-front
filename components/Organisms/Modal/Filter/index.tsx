@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Box, Button, FlexBox, Layout } from 'components/Atoms';
@@ -12,7 +11,7 @@ import {
   makeRequestFilterOptionBySearchFilterSelectGroup,
   setFilterState,
 } from 'states/filter';
-import list, { getList } from 'states/list';
+import { getList, listState } from 'states/list';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
@@ -22,7 +21,7 @@ export default function FilterModal() {
   const [searchRequestState, setSearchRequestState] =
     useRecoilState(searchRequest);
   const [filters, setFilters] = useRecoilState(filter);
-  const setPostList = useSetRecoilState(list);
+  const setPostList = useSetRecoilState(listState);
   const setFilter = useSetRecoilState(setFilterState);
   return (
     <ModalLayout>

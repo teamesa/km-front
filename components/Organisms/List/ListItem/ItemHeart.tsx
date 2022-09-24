@@ -5,8 +5,8 @@ import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import { Button } from 'components/Atoms';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, ListState, PopupNameState } from 'states';
-import { PresentationHeart } from 'states/list';
+import { AlertState, PopupNameState } from 'states';
+import { listState, PresentationHeart } from 'states/list';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
@@ -22,7 +22,7 @@ type PickStatus = {
 export default function ItemHeart(props: HeartProps) {
   const heart = props.heart;
   const optionalFunction = props.optionalFunction;
-  const setPickState = useSetRecoilState(ListState);
+  const setPickState = useSetRecoilState(listState);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
 

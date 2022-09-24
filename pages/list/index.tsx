@@ -1,18 +1,24 @@
 import { css } from '@emotion/react';
+import { useEffect } from 'react';
 
 import { Box, FlexBox, Layout, Tag } from 'components/Atoms';
 import ListFilter from 'components/Molecules/ListFilter';
 import ListCategory from 'components/Organisms/List/ListCategory';
 import ListSection from 'components/Organisms/List/ListSection';
 import { Z_INDEX } from 'constants/common';
+import { useResetListStateFunction } from 'states/list';
 import theme from 'styles/theme';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function List() {
+  const resetListState = useResetListStateFunction();
   useInitHeader({
     headerRight: 'search',
     headerLeft: 'disabled',
   });
+  useEffect(() => {
+    resetListState();
+  }, [resetListState]);
 
   return (
     <>

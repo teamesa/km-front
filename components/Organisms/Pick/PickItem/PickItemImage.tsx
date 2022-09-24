@@ -4,17 +4,11 @@ import { useRouter } from 'next/router';
 
 import noImage from 'assets/common/no_image_375x250.png';
 import { Box } from 'components/Atoms';
+import { PresentationPickImage } from 'states/pick';
 import theme from 'styles/theme';
 
 interface ImagePorps {
-  presentationImage: {
-    url: string;
-    link: string;
-    backgroundText: string;
-    dimColor: string;
-    opacity: number;
-    dimTarget: boolean;
-  };
+  presentationImage: PresentationPickImage;
 }
 
 export default function PickItemImage({ presentationImage }: ImagePorps) {

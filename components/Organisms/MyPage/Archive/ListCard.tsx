@@ -38,7 +38,6 @@ export default function Item(props: ItemProps) {
       padding="0px 0px 40px"
       onClick={() => {
         setArchiveId(apiArr[3]);
-        console.log(apiArr[3]);
         setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
       }}
       css={css`
@@ -51,10 +50,10 @@ export default function Item(props: ItemProps) {
           width: 1px;
           background: #ddd;
         }
-        &:nth-child(1) {
+        &:nth-of-type(1) {
           padding: 20px 0px 40px;
         }
-        &:nth-last-child(1):before {
+        &:nth-last-of-type(1):before {
           display: none;
         }
       `}

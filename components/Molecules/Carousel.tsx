@@ -1,125 +1,83 @@
 import { css } from '@emotion/react';
-import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { FlexBox, Box } from 'components/Atoms';
+import CarouselItem from 'components/Molecules/CarouselItem';
 import theme from 'styles/theme';
 
 export default function Carousel({
-  itemsPerSlide,
   imgUrlArr,
+  width,
+  height,
 }: {
-  itemsPerSlide: number;
   imgUrlArr: string[];
+  width: string;
+  height: string;
 }) {
-  const itemsRef = useRef<any>(null);
-  const scrollRef = useRef<any>(null);
+  const rootRef = useRef<any>();
+  const [nowIndex, setNowIndex] = useState<Number>(1);
 
-  // 현재 이미지 인덱스 값. 첫시작 : 1
-  const [numberOfIndicators, setNumberOfItems] = useState(1);
-  // 범위 계산하기
-
-  let indexScrollPositionArr: number[] = [];
-
-  const calculateIndicatorDimensions = useCallback(() => {
-    const itemWidth = Math.ceil(itemsRef.current.offsetWidth / itemsPerSlide);
-    let indexScrollPosition = 0;
-
-    for (let i = 0; i < itemsPerSlide; i++) {
-      indexScrollPositionArr.push(indexScrollPosition);
-      indexScrollPosition += itemWidth;
-    }
-    setNumberOfItems(numberOfIndicators);
-  }, [indexScrollPositionArr, itemsPerSlide, numberOfIndicators]);
-
-  // 화면 리사이즈되면 width 이런거 다시 계산
-  useEffect(() => {
-    window.addEventListener('resize', calculateIndicatorDimensions);
-    return () => {
-      window.removeEventListener('resize', calculateIndicatorDimensions);
-    };
-  }, [calculateIndicatorDimensions]);
-
-  useEffect(() => {
-    calculateIndicatorDimensions();
-  }, [calculateIndicatorDimensions]);
-
-  // scroll 이벤트 멈췄을때 scrollTop 이 어디 범위(인덱스에) 있는지 판단해서
-  // 인디케이터 useState 하기.
-
-  const handleIndicator = () => {
-    const index = indexScrollPositionArr.indexOf(
-      Math.ceil(scrollRef.current.scrollLeft),
-    );
-    if (index + 1 > 0) {
-      setNumberOfItems(index + 1);
-    }
+  const handleIndicator = (index: Number) => {
+    setNowIndex(index);
   };
-
   return (
-    <Box position="relative">
+    <Box width="fit-content" height="fit-content" position="relative">
       {imgUrlArr.length > 1 ? (
-        <Box
-          width="inherit"
-          height="fit-content"
+        <FlexBox
+          width="38px"
+          height="22px"
           position="absolute"
+          alignItems="center"
+          justifyContent="space-around"
           fontSize="14px"
           lineHeight="0.91px"
-          textAlign="right"
           letterSpacing="0.11px"
-          bottom="15px"
-          right="15px"
+          bottom="0px"
+          right="0px"
           zIndex="100"
-          color={theme.colors.white}
+          backgroundColor="black"
+          opacity="0.4"
         >
-          {numberOfIndicators} / {itemsPerSlide}
-        </Box>
+          <Box
+            width="fit-content"
+            height="fit-content"
+            marginRight="3.2px"
+            color={theme.colors.white}
+          >
+            <>{nowIndex}</>{' '}
+          </Box>
+          <Box
+            width="fit-content"
+            height="fit-content"
+            color={theme.colors.gray99}
+          >
+            {' '}
+            / {imgUrlArr.length}
+          </Box>
+        </FlexBox>
       ) : null}
       <Box
-        width="345px"
-        height="345px"
+        width={width}
+        height={height}
         overflowY="hidden"
         overflowX={imgUrlArr.length < 2 ? 'hidden' : 'scroll'}
-        onScroll={handleIndicator}
         css={css`
           scroll-snap-type: x mandatory;
         `}
-        ref={scrollRef}
+        ref={rootRef}
       >
-        <FlexBox
-          width="max-content"
-          height="345px"
-          flexDirection="row"
-          ref={itemsRef}
-        >
-          {imgUrlArr.length > 0 ? (
-            imgUrlArr.map((imgUrl, _index) => (
-              <Box
-                key={_index}
-                css={css`
-                  scroll-snap-align: start;
-                `}
-              >
-                <Image
-                  src={`${imgUrl}`}
-                  alt="image"
-                  width="345px"
-                  height="345px"
-                />
-              </Box>
-            ))
-          ) : (
-            <Box
-              width="345px"
-              height="345px"
-              margin="0 auto"
-              fontSize="19px"
-              textAlign="center"
-              color={theme.colors.gray77}
-            >
-              사진
-            </Box>
-          )}
+        <FlexBox width="max-content" height="inherit" flexDirection="row">
+          {imgUrlArr.map((imgUrl, _index) => (
+            <CarouselItem
+              itemOrder={_index}
+              key={_index}
+              imgUrl={imgUrl}
+              rootRef={rootRef}
+              handleIndicator={handleIndicator}
+              width={width}
+              height={height}
+            />
+          ))}
         </FlexBox>
       </Box>
     </Box>

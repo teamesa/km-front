@@ -48,7 +48,6 @@ export default function SwipeItemInfo({
         lineHeight={1.54}
         textAlign="left"
         color={theme.colors.black}
-        height="98px"
         css={css`
           overflow: hidden;
           text-overflow: ellipsis;
