@@ -33,17 +33,16 @@ export default function Navigator() {
     }
   }, []);
 
-  const clipboard = () => {
-    navigator.clipboard
-      .writeText(currentUrl)
-      .then(() => {
+  const clipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(currentUrl).then(() => {
         setAlertState(ALERT_MESSAGE.ALERT.COPY_TO_CLIPBOARD);
         setPopupName(POPUP_NAME.ALERT_CONFIRM);
-      })
-      .catch(() => {
-        setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-        setPopupName(POPUP_NAME.ALERT_CONFIRM);
       });
+    } catch (e) {
+      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+    }
   };
 
   const archiveLink = () => {
