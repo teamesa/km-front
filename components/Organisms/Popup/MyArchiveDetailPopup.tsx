@@ -6,6 +6,7 @@ import StarRating from 'assets/list/StarRating';
 import { Pointer, CloseBtn } from 'assets/mypage';
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
 import Carousel from 'components/Molecules/Carousel';
+import InnerHTML from 'components/Molecules/InnerHTML';
 import Popup from 'components/Molecules/Popup';
 import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
@@ -100,7 +101,7 @@ const MyArchiveDetailPopup = () => {
               <Box
                 height="88px"
                 margin="20px 5px"
-                overflowY="scroll"
+                overflowY="auto"
                 fontSize="12px"
                 textAlign="left"
                 lineHeight="18px"
@@ -116,7 +117,9 @@ const MyArchiveDetailPopup = () => {
                   }
                 `}
               >
-                <Box margin="0 10px">{data.contents.comment}</Box>
+                <Box width="inherit" height="fit-content" margin="0 10px">
+                  <InnerHTML data={data.contents.comment} />
+                </Box>
               </Box>
               <FlexBox
                 borderTop="solid 1px"
