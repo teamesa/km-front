@@ -8,12 +8,7 @@ export default function MyArchiveDetailHeaderInfo(
   props: MyArchiveDetailHeaderInfoProps,
 ) {
   return (
-    <Box
-      height="99px"
-      padding="20px 15px"
-      borderBottom="1px solid"
-      borderBottomColor={theme.colors.gray77}
-    >
+    <Box height="99px" padding="20px 15px">
       <FlexBox justifyContent="space-between">
         <Box fontSize="11px" display="flex" alignItems="center">
           <Tag

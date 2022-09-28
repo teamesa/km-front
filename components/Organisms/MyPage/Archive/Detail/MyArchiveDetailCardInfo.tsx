@@ -10,7 +10,7 @@ export default function MyArchiveDetailCardInfo(
   content: MyArchiveDetailInfoProps,
 ) {
   return (
-    <FlexBox borderTop="solid 1px" borderTopColor={theme.colors.gray99}>
+    <FlexBox>
       <Box width="172.5px" height="80px" background="#000" padding="20px 15px">
         <FlexBox alignItems="center">
           <Box display={content.food ? 'visible' : 'none'}>

@@ -6,6 +6,7 @@ import InnerHTML from 'components/Molecules/InnerHTML';
 import MyArchiveDetailHeaderInfo from 'components/Organisms/MyPage/Archive/Detail/MyArchiveDetailCardHeader';
 import MyArchiveDetailCardInfo from 'components/Organisms/MyPage/Archive/Detail/MyArchiveDetailCardInfo';
 import { MyArchiveDetailProps } from 'states/myArchiveDetail';
+import theme from 'styles/theme';
 
 export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
   return (
@@ -16,11 +17,20 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
         title={contents.title}
         archiveAdditionalInfos={contents.archiveAdditionalInfos}
       />
-      <Carousel
-        imgUrlArr={contents.photoUrls}
-        width={'345px'}
-        height={'345px'}
-      />
+      <Box
+        width="345px"
+        height="347px"
+        borderTop="solid 1px"
+        borderTopColor={theme.colors.gray99}
+        borderBottom="solid 1px"
+        borderBottomColor={theme.colors.gray99}
+      >
+        <Carousel
+          imgUrlArr={contents.photoUrls}
+          width={'345px'}
+          height={'345px'}
+        />
+      </Box>
       <Box
         height="88px"
         margin="20px 5px"
