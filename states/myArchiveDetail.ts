@@ -13,12 +13,23 @@ export interface MyArchiveDetailProps {
   photoUrls: string[];
   archiveAdditionalInfos: ArchiveDetailLinkInfos[];
 }
+export interface MyArchiveDetailHeaderInfoProps {
+  title: string;
+  typeBadge: PresentationBadge;
+  updatedAt: string;
+  archiveAdditionalInfos: ArchiveDetailLinkInfos[];
+}
 
-export interface PresentationBadge {
+export interface MyArchiveDetailInfoProps {
+  starRating: number;
+  food: string;
+  cafe: string;
+}
+interface PresentationBadge {
   text: string;
   typeBadge: boolean;
 }
-export interface ArchiveDetailLinkInfos {
+interface ArchiveDetailLinkInfos {
   title: string;
   link: string;
 }
