@@ -62,9 +62,15 @@ export default function Navigator() {
         `${decode}&title=${data?.title}&thumbnailImageUrl=${data?.listImageUrl}`,
       );
     }
-    return router.push(
-      `${decode}&id=${id}&title=${data?.title}&thumbnailImageUrl=${data?.listImageUrl}&checked=true`,
-    );
+    return router.push({
+      pathname: data?.itemInfoAdditionalInfo?.archiveLink.link,
+      query: {
+        id: id,
+        title: data?.title,
+        thumbnailImageUrl: data?.listImageUrl,
+        checked: true,
+      },
+    });
   };
 
   switch (state) {
