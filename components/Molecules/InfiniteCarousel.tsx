@@ -1,18 +1,27 @@
 import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
 
+import { Plus } from 'assets/archive/Plus';
 import { FlexBox, Box } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
+import InfiniteCarouselTitle from 'components/Organisms/Home/Module/KeyVisual/InfinitiCarouselTitle';
 import theme from 'styles/theme';
 
 export default function InfiniteCarousel({
-  imgUrlArr,
+  imgUrlList,
   width,
   height,
+  plusFunction,
 }: {
-  imgUrlArr: string[];
+  imgUrlList: {
+    photoUrl: string;
+    upperTitle: string;
+    lowerTitle: string;
+    link?: string;
+  }[];
   width: string;
   height: string;
+  plusFunction: () => {};
 }) {
   const rootRef = useRef<any>();
   const [nowIndex, setNowIndex] = useState<number>(-999);
@@ -22,14 +31,14 @@ export default function InfiniteCarousel({
   };
 
   const getPage = () => {
-    if (1 <= nowIndex && nowIndex <= imgUrlArr.length) {
+    if (1 <= nowIndex && nowIndex <= imgUrlList.length) {
       return nowIndex;
     } else if (nowIndex === -999) {
       return 1;
-    } else if (nowIndex > imgUrlArr.length) {
+    } else if (nowIndex > imgUrlList.length) {
       return 1;
     } else if (nowIndex === 0) {
-      return imgUrlArr.length;
+      return imgUrlList.length;
     }
   };
 
@@ -39,7 +48,7 @@ export default function InfiniteCarousel({
       return;
     }
 
-    const width = rootRef.current.scrollWidth / (imgUrlArr.length + 2);
+    const width = rootRef.current.scrollWidth / (imgUrlList.length + 2);
     const timeOutList: any = [];
 
     if (nowIndex === -999) {
@@ -47,7 +56,7 @@ export default function InfiniteCarousel({
         rootRef.current.style.scrollBehavior = 'unset';
         rootRef.current.scrollTo(width, 0);
       }, 50);
-    } else if (nowIndex === imgUrlArr.length + 1) {
+    } else if (nowIndex === imgUrlList.length + 1) {
       timeOutList.push(
         setTimeout(() => {
           rootRef.current.style.scrollBehavior = 'unset';
@@ -58,7 +67,7 @@ export default function InfiniteCarousel({
       timeOutList.push(
         setTimeout(() => {
           rootRef.current.style.scrollBehavior = 'unset';
-          rootRef.current.scrollTo(imgUrlArr.length * width, 0);
+          rootRef.current.scrollTo(imgUrlList.length * width, 0);
         }, 300),
       );
     } else {
@@ -74,49 +83,15 @@ export default function InfiniteCarousel({
         clearTimeout(timeOutId),
       );
     };
-  }, [nowIndex, rootRef, imgUrlArr]);
+  }, [nowIndex, rootRef, imgUrlList]);
 
   return (
     <Box position="relative">
-      {imgUrlArr.length > 1 ? (
-        <FlexBox
-          width="38px"
-          height="22px"
-          position="absolute"
-          alignItems="center"
-          justifyContent="space-around"
-          fontSize="14px"
-          lineHeight="0.91px"
-          letterSpacing="0.11px"
-          bottom="0px"
-          right="0px"
-          zIndex="100"
-          backgroundColor="black"
-          opacity="0.4"
-        >
-          <Box
-            width="fit-content"
-            height="fit-content"
-            marginRight="3.2px"
-            color={theme.colors.white}
-          >
-            <>{getPage()}</>{' '}
-          </Box>
-          <Box
-            width="fit-content"
-            height="fit-content"
-            color={theme.colors.gray99}
-          >
-            {' '}
-            / {imgUrlArr.length}
-          </Box>
-        </FlexBox>
-      ) : null}
       <Box
         width={width}
         height={height}
         overflowY="hidden"
-        overflowX={imgUrlArr.length < 2 ? 'hidden' : 'scroll'}
+        overflowX="scroll"
         css={css`
           scroll-behavior: unset;
           scroll-snap-type: x mandatory;
@@ -126,17 +101,17 @@ export default function InfiniteCarousel({
         <FlexBox height="inherit" width="fit-content" flexDirection="row">
           <CarouselItem
             itemOrder={-1}
-            imgUrl={imgUrlArr[imgUrlArr.length - 1]}
+            imgUrl={imgUrlList[imgUrlList.length - 1].photoUrl}
             rootRef={rootRef}
             handleIndicator={handleIndicator}
             width={width}
             height={height}
           />
-          {imgUrlArr.map((imgUrl, _index) => (
+          {imgUrlList.map((imgUrl, _index) => (
             <CarouselItem
               itemOrder={_index}
               key={_index}
-              imgUrl={imgUrl}
+              imgUrl={imgUrl.photoUrl}
               rootRef={rootRef}
               handleIndicator={handleIndicator}
               width={width}
@@ -144,14 +119,68 @@ export default function InfiniteCarousel({
             />
           ))}
           <CarouselItem
-            itemOrder={imgUrlArr.length}
-            imgUrl={imgUrlArr[0]}
+            itemOrder={imgUrlList.length}
+            imgUrl={imgUrlList[0].photoUrl}
             rootRef={rootRef}
             handleIndicator={handleIndicator}
             width={width}
             height={height}
           />
         </FlexBox>
+      </Box>
+      <Box
+        borderRadius="12px"
+        backgroundColor={theme.colors.black}
+        position="absolute"
+        bottom="15px"
+        right="15px"
+        fontSize="11px"
+        fontWeight={500}
+        lineHeight={0.91}
+        opacity={0.7}
+        padding={'5px 10px'}
+        color={theme.colors.white}
+      >
+        <Box display="inline-block" color={theme.colors.white}>
+          {getPage()}
+        </Box>
+        <Box
+          display="inline-block"
+          opacity={0.7}
+          color={theme.colors.white}
+          marginX="3px"
+        >
+          /
+        </Box>
+        <Box
+          display="inline-block"
+          opacity={0.7}
+          color={theme.colors.white}
+          marginRight="8px"
+        >
+          {imgUrlList.length}
+        </Box>
+        <Box
+          display="inline-block"
+          opacity={1}
+          position="relative"
+          top="0.5px"
+          onClick={plusFunction}
+        >
+          <Plus width="9px" height="9px" />
+        </Box>
+      </Box>
+      <Box position="absolute" bottom="60px">
+        {imgUrlList
+          .map(({ upperTitle, lowerTitle, link }, index) => (
+            <InfiniteCarouselTitle
+              key={`InfiniteCarouselTitle-${index}`}
+              upperTitle={upperTitle}
+              lowerTitle={lowerTitle}
+              link={link}
+            />
+          ))
+          .filter((_, index) => index + 1 === nowIndex)}
       </Box>
     </Box>
   );
