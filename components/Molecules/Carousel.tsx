@@ -15,13 +15,13 @@ export default function Carousel({
   height: string;
 }) {
   const rootRef = useRef<any>();
-  const [nowIndex, setNowIndex] = useState<Number>(1);
+  const [nowIndex, setNowIndex] = useState<number>(1);
 
-  const handleIndicator = (index: Number) => {
+  const handleIndicator = (index: number) => {
     setNowIndex(index);
   };
   return (
-    <Box width="fit-content" height="fit-content" position="relative">
+    <Box position="relative">
       {imgUrlArr.length > 1 ? (
         <FlexBox
           width="38px"
@@ -66,7 +66,7 @@ export default function Carousel({
         `}
         ref={rootRef}
       >
-        <FlexBox width="max-content" height="inherit" flexDirection="row">
+        <FlexBox height="inherit" width="fit-content" flexDirection="row">
           {imgUrlArr.map((imgUrl, _index) => (
             <CarouselItem
               itemOrder={_index}
