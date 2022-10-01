@@ -29,7 +29,7 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
           {
             photoUrl:
               'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-06-27/121430-ss.jpg',
-            upperTitle: '9월,이달의 전시',
+            upperTitle: '10월 ,이달의 전시',
             lowerTitle: '우연히 웨스 앤더슨',
           },
           {
