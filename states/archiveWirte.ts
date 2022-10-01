@@ -1,8 +1,7 @@
 import { AxiosResponse } from 'axios';
-import { atom, selector, selectorFamily } from 'recoil';
+import { atom } from 'recoil';
 
 import customAxios from 'utils/hooks/customAxios';
-
 export interface ArchiveWirteProps {
   itemId: number;
   starRating: number;
@@ -55,6 +54,15 @@ export async function postArchiveWirte({ body }: { body: ArchiveWirteProps }) {
     method: 'POST',
     url: `/api/archive`,
     data: body,
+  })) as AxiosResponse<ArchiveWirteProps>;
+
+  return data;
+}
+
+export async function getArchiveById({ itemId }: { itemId: number }) {
+  const { data } = (await axios({
+    method: 'GET',
+    url: `/api/archive/detail/${itemId}`,
   })) as AxiosResponse<ArchiveWirteProps>;
 
   return data;
