@@ -47,12 +47,22 @@ export default function Navigator() {
   };
 
   const archiveLink = () => {
-    if (loginState.isLogin) {
+    if (!loginState.isLogin) {
       setAlertState(ALERT_MESSAGE.ALERT.LOGIN_CONFIRMATION);
       setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
       return null;
     }
-    router.push({
+    const decode = decodeURIComponent(
+      data?.itemInfoAdditionalInfo?.archiveLink.link,
+    );
+    if (
+      data?.itemInfoAdditionalInfo?.archiveLink.title === '아카이브 수정하기'
+    ) {
+      return router.push(
+        `${decode}&title=${data?.title}&thumbnailImageUrl=${data?.listImageUrl}`,
+      );
+    }
+    return router.push({
       pathname: data?.itemInfoAdditionalInfo?.archiveLink.link,
       query: {
         id: id,
