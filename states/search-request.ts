@@ -18,18 +18,6 @@ export type filterOptionsInterface = {
   regionTypes: string[] | [];
 };
 
-export const makeEmtpyRequestOption = (
-  exPostFilter: SearchRequestInterface,
-): SearchRequestInterface => ({
-  ...exPostFilter,
-  filterOptions: {
-    ...exPostFilter.filterOptions,
-    feeTypes: [],
-    progressTypes: [],
-    regionTypes: [],
-  },
-});
-
 export const makeDefaultSearchRequest = (): SearchRequestInterface => ({
   filterOptions: {
     exhibitionType: 'ALL',
