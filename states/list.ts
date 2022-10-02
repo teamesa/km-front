@@ -3,6 +3,7 @@ import { atom, selector, useRecoilCallback } from 'recoil';
 
 import {
   makeDefaultSearchRequest,
+  searchRequest,
   SearchRequestInterface,
 } from 'states/search-request';
 import customAxios from 'utils/hooks/customAxios';
@@ -80,8 +81,9 @@ export const getList = async (post: SearchRequestInterface) => {
 };
 
 export const useResetListStateFunction = () =>
-  useRecoilCallback(({ set }) => async () => {
-    const listStateData = await getList(makeDefaultSearchRequest());
+  useRecoilCallback(({ snapshot, set }) => async () => {
+    const requestBody = await snapshot.getPromise(searchRequest);
+    const listStateData = await getList(requestBody);
     set(listState, listStateData);
   });
 
