@@ -15,7 +15,11 @@ const InfiniteCarouselTitle = ({
 }) => {
   const router = useRouter();
   return (
-    <Box paddingX="15px" onClick={link ? () => router.push(link) : () => {}}>
+    <Box
+      paddingX="15px"
+      onClick={link ? () => router.push(link) : () => {}}
+      zIndex={300}
+    >
       <Box
         width="100%"
         fontSize="30px"
