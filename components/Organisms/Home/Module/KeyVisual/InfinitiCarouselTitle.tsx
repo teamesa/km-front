@@ -17,7 +17,7 @@ const InfiniteCarouselTitle = ({
   return (
     <Box paddingX="15px" onClick={link ? () => router.push(link) : () => {}}>
       <Box
-        width="100vw"
+        width="100%"
         fontSize="30px"
         color={theme.colors.white}
         lineHeight={1.2}
@@ -40,7 +40,7 @@ const InfiniteCarouselTitle = ({
       </Box>
       <Box
         fontSize="30px"
-        width="100vw"
+        width="100%"
         color={theme.colors.white}
         lineHeight={1.2}
         textAlign="left"
