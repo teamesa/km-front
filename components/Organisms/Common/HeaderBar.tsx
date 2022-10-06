@@ -135,7 +135,7 @@ function HeaderBar() {
                     role="button"
                     width="30px"
                     height="30px"
-                    paddingLeft="10px"
+                    paddingLeft="6px"
                     onClick={() => {
                       router.push('/');
                     }}
