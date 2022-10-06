@@ -1,8 +1,8 @@
 export default function Search({
-  width = '18',
-  height = '18',
+  width = '19.436',
+  height = '19.312',
   fill = '#000',
-  viewBox = '0 0 18.964 18.964',
+  viewBox = '0 0 19.436 19.312',
 }) {
   return (
     <svg
@@ -11,22 +11,28 @@ export default function Search({
       height={height}
       viewBox={viewBox}
     >
-      <g data-name="*search">
-        <path
-          data-name="패스 421"
-          d="M7.988 1.038A6.95 6.95 0 0 1 12.9 12.9a6.95 6.95 0 0 1-9.826-9.826 6.9 6.9 0 0 1 4.914-2.036m0-1.038a7.988 7.988 0 1 0 5.648 2.34A7.963 7.963 0 0 0 7.988 0"
-          transform="translate(.05 .05)"
-          strokeWidth=".1px"
+      <g data-name="*search" transform="translate(.1 .1)">
+        <circle
+          data-name="타원 233"
+          cx="7.625"
+          cy="7.625"
+          r="7.625"
+          transform="translate(.5 .5)"
+          fill="none"
           stroke={fill}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.2px"
         />
         <path
-          data-name="선 1"
-          transform="translate(13.464 13.464)"
+          data-name="선 976"
+          transform="translate(13.561 13.473)"
           fill="none"
-          strokeLinecap="round"
-          strokeMiterlimit="10"
           stroke={fill}
-          d="m0 0 4.793 4.793"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.2px"
+          d="M4.927 4.891 0 0"
         />
       </g>
     </svg>
