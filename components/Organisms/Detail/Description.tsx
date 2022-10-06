@@ -75,7 +75,16 @@ export default function Description() {
                             <InnerHTML data={summary?.price} />
                           ) : null}
                         </Box>
-                        {isShowLink(summary?.ticketUrl, '티켓 구매하기')}
+                        <Button marginTop="8px">
+                          <Link href={summary?.ticketUrl}>
+                            <a target="_blank" rel="noreferrer">
+                              <Span color={theme.colors.gray99}>
+                                티켓 구매하기
+                                <Span paddingLeft="8px">{'>'}</Span>
+                              </Span>
+                            </a>
+                          </Link>
+                        </Button>
                       </Box>
                     }
                   />
@@ -91,11 +100,25 @@ export default function Description() {
                   title="시간"
                   description={
                     <Box>
-                      <Box>
-                        <InnerHTML data={summary?.time} />
-                      </Box>
-                      {isShowLink(summary?.homePageUrl, '홈페이지 이동')}
+                      <InnerHTML data={summary?.time} />
                     </Box>
+                  }
+                />
+              ) : null}
+              {summary?.homePageUrl ? (
+                <DescriptionInfo
+                  title="홈페이지"
+                  description={
+                    <Button>
+                      <Link href={summary?.homePageUrl}>
+                        <a target="_blank" rel="noreferrer">
+                          <Span>
+                            바로가기
+                            <Span paddingLeft="8px">{'>'}</Span>
+                          </Span>
+                        </a>
+                      </Link>
+                    </Button>
                   }
                 />
               ) : null}
