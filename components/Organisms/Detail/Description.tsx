@@ -21,24 +21,6 @@ export default function Description() {
   const archiveRef = createRef<HTMLDivElement>();
   const introduceRef = createRef<HTMLDivElement>();
 
-  const isShowLink = (link: string, title: string) => {
-    if (link) {
-      return (
-        <Button marginTop="8px">
-          <Link href={link}>
-            <a target="_blank" rel="noreferrer">
-              <Span color={theme.colors.gray99}>
-                {title}
-                <Span paddingLeft="8px">{'>'}</Span>
-              </Span>
-            </a>
-          </Link>
-        </Button>
-      );
-    }
-    return;
-  };
-
   switch (state) {
     case 'hasValue':
       return (
