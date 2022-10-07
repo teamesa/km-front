@@ -18,6 +18,7 @@ interface ArchiveProps {
 }
 export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
   const [checked, setChecked] = useState(false);
+
   const onClick = () => {
     setChecked(!checked);
   };
@@ -105,11 +106,7 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
           <Box fontSize="12px" color={theme.colors.gray77} paddingRight="10px">
             사진 아카이브만
           </Box>
-          <CheckBox
-            type="checkbox"
-            checked={checked ? true : false}
-            onClick={onClick}
-          />
+          <CheckBox type="checkbox" onChange={onClick} />
         </FlexBox>
       </FlexBox>
       <Box height="1px" backgroundColor={theme.colors.black} />
