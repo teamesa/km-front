@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { Box } from 'components/Atoms';
 import Carousel from 'components/Molecules/Carousel';
 import InnerHTML from 'components/Molecules/InnerHTML';
+import NoItemBox from 'components/Molecules/NoItemBox';
 import MyArchiveDetailHeaderInfo from 'components/Organisms/MyPage/Archive/Detail/MyArchiveDetailCardHeader';
 import MyArchiveDetailCardInfo from 'components/Organisms/MyPage/Archive/Detail/MyArchiveDetailCardInfo';
 import { MyArchiveDetailProps } from 'states/myArchiveDetail';
@@ -25,11 +26,15 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
         borderBottom="solid 1px"
         borderBottomColor={theme.colors.gray99}
       >
-        <Carousel
-          imgUrlArr={contents.photoUrls}
-          width={'345px'}
-          height={'345px'}
-        />
+        {contents.photoUrls.length === 0 ? (
+          <NoItemBox width="inherit" height="inherit" text="사진 " />
+        ) : (
+          <Carousel
+            imgUrlArr={contents.photoUrls}
+            width={'345px'}
+            height={'345px'}
+          />
+        )}
       </Box>
       <Box
         height="88px"
@@ -50,9 +55,13 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
           }
         `}
       >
-        <Box width="inherit" height="fit-content" margin="0 10px">
-          <InnerHTML data={contents.comment} />
-        </Box>
+        {contents.comment === '' ? (
+          <NoItemBox width="inherit" height="inherit" text="코멘트" />
+        ) : (
+          <Box width="inherit" height="fit-content" margin="0 10px">
+            <InnerHTML data={contents.comment} />
+          </Box>
+        )}
       </Box>
       <MyArchiveDetailCardInfo
         starRating={contents.starRating}
