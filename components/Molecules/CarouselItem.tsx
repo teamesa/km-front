@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import React, { useState } from 'react';
 
 import Box from 'components/Atoms/Box';
 import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
@@ -33,14 +32,18 @@ export default function CarouselItem({
     threshold: 0.9,
     onIntersect,
   });
+
   return (
     <Box
       css={css`
         scroll-snap-align: start;
       `}
+      width={width}
+      height={height}
+      position="relative"
       ref={setTarget}
     >
-      <Image src={`${imgUrl}`} alt="image" width={width} height={height} />
+      <Image src={imgUrl} alt="image" layout="fill" />
     </Box>
   );
 }
