@@ -3,8 +3,9 @@ import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
+import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { PopupNameState } from 'states';
+import { AlertState, PopupNameState } from 'states';
 import { MyArchiveDetailHeaderInfoProps } from 'states/myArchiveDetail';
 import theme from 'styles/theme';
 
@@ -12,13 +13,19 @@ export default function MyArchiveDetailHeaderInfo(
   props: MyArchiveDetailHeaderInfoProps,
 ) {
   const router = useRouter();
+  const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const handleClosePopup = () => {
     setPopupName(POPUP_NAME.NULL);
   };
-  const handleUpdateButton = () => {
+  const handleUpdateArchive = () => {
     handleClosePopup();
     router.push('/list');
+  };
+
+  const handleDeleteArchive = () => {
+    setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_DELETE_CONFIRM);
+    setPopupName(POPUP_NAME.ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM);
   };
 
   return (
@@ -45,7 +52,7 @@ export default function MyArchiveDetailHeaderInfo(
             borderBottom="1px solid"
             borderBottomColor={theme.colors.gray77}
             onClick={() => {
-              handleUpdateButton();
+              handleUpdateArchive();
             }}
           >
             수정
@@ -56,6 +63,9 @@ export default function MyArchiveDetailHeaderInfo(
             color={theme.colors.gray77}
             borderBottom="1px solid"
             borderBottomColor={theme.colors.gray77}
+            onClick={() => {
+              handleDeleteArchive();
+            }}
           >
             삭제
           </Button>
