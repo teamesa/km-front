@@ -1,12 +1,26 @@
 import { css } from '@emotion/react';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
 
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
+import { POPUP_NAME } from 'constants/popupName';
+import { PopupNameState } from 'states';
 import { MyArchiveDetailHeaderInfoProps } from 'states/myArchiveDetail';
 import theme from 'styles/theme';
 
 export default function MyArchiveDetailHeaderInfo(
   props: MyArchiveDetailHeaderInfoProps,
 ) {
+  const router = useRouter();
+  const setPopupName = useSetRecoilState(PopupNameState);
+  const handleClosePopup = () => {
+    setPopupName(POPUP_NAME.NULL);
+  };
+  const handleUpdateButton = () => {
+    handleClosePopup();
+    router.push('/list');
+  };
+
   return (
     <Box height="99px" padding="20px 15px">
       <FlexBox justifyContent="space-between">
@@ -30,6 +44,9 @@ export default function MyArchiveDetailHeaderInfo(
             marginRight="16px"
             borderBottom="1px solid"
             borderBottomColor={theme.colors.gray77}
+            onClick={() => {
+              handleUpdateButton();
+            }}
           >
             수정
           </Button>
