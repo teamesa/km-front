@@ -4,10 +4,10 @@ import BlankArchiveListSection from './BlankArchiveListSection';
 import ListCard from './ListCard';
 
 import { Box } from 'components/Atoms';
-import { MyArchiveListState } from 'states';
+import { myArchiveListState } from 'states/myArchiveList';
 
 export default function ListSection() {
-  const data = useRecoilValueLoadable(MyArchiveListState);
+  const data = useRecoilValueLoadable(myArchiveListState);
 
   switch (data.state) {
     case 'hasValue':
