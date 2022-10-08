@@ -10,6 +10,19 @@ import theme from 'styles/theme';
 export default function MyArchiveDetailCardInfo(
   contents: MyArchiveDetailInfoProps,
 ) {
+  const makeAvgStarRating = () => {
+    const rating = contents.starRating * 20;
+    return `${rating + 1.5}%`;
+  };
+
+  const Start = () => {
+    return (
+      <Span width="21px" height="20px" paddingLeft="6px">
+        ★
+      </Span>
+    );
+  };
+
   return (
     <FlexBox borderTop="solid 1px" borderTopColor={theme.colors.gray99}>
       {/* 다녀온곳 */}
@@ -68,43 +81,48 @@ export default function MyArchiveDetailCardInfo(
           </FlexBox>
         )}
       </Box>
-      {/* 별점 */}
       <FlexBox
         width="172.5px"
         height="80px"
         justifyContent="center"
         alignItems="center"
+        borderLeft="solid 1px"
+        borderColor={theme.colors.gray99}
       >
-        <StarRating
-          width="21.6px"
-          height="20.6px"
-          viewBox="0 0 10 10"
-          fill={theme.colors.orange}
-        />
-        <StarRating
-          width="21.6px"
-          height="20.6px"
-          viewBox="0 0 10 10"
-          fill={theme.colors.orange}
-        />
-        <StarRating
-          width="21.6px"
-          height="20.6px"
-          viewBox="0 0 10 10"
-          fill={theme.colors.orange}
-        />
-        <StarRating
-          width="21.6px"
-          height="20.6px"
-          viewBox="0 0 10 10"
-          fill={theme.colors.orange}
-        />
-        <StarRating
-          width="21.6px"
-          height="20.6px"
-          viewBox="0 0 10 10"
-          fill={theme.colors.orange}
-        />
+        <Box
+          color={theme.colors.black}
+          position="relative"
+          width="max-content"
+          css={css`
+            unicode-bidi: bidi-override;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke-width: 1.3px;
+            -webkit-text-stroke-color: orange;
+          `}
+        >
+          <Box
+            position="absolute"
+            zIndex="1"
+            overflow="hidden"
+            css={css`
+              -webkit-text-fill-color: orange;
+            `}
+            width={makeAvgStarRating()}
+          >
+            <Start />
+            <Start />
+            <Start />
+            <Start />
+            <Start />
+          </Box>
+          <Box zIndex="0" padding="0">
+            <Start />
+            <Start />
+            <Start />
+            <Start />
+            <Start />
+          </Box>
+        </Box>
       </FlexBox>
     </FlexBox>
   );
