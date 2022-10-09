@@ -10,9 +10,16 @@ import theme from 'styles/theme';
 
 export default function MyPageInfoFragment() {
   const data = useRecoilValueLoadable(myArchiveListState);
+  let itemCountingString = '';
+
+  if (data.contents.contents.length > 0) {
+    itemCountingString = `(${data.contents.contents.length})`;
+  } else {
+    itemCountingString = '';
+  }
 
   const MyPageNavigatorMetaInfo = [
-    { title: `MY 아카이브 (${data.contents.contents.length})` },
+    { title: `MY 아카이브 ${itemCountingString}` },
     { title: '설정' },
   ];
   const [isMyArchiveShowed, setMyArhiveShowedFlag] = useState<boolean>(true);
