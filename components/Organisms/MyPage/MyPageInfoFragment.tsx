@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react';
+import { useRecoilValueLoadable } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
 import { useResetMyArchiveListStateFunction } from 'states/myArchiveList';
+import { myArchiveListState } from 'states/myArchiveList';
 import theme from 'styles/theme';
 
-const MyPageNavigatorMetaInfo = [{ title: 'MY 아카이브' }, { title: '설정' }];
-
 export default function MyPageInfoFragment() {
+  const data = useRecoilValueLoadable(myArchiveListState);
+
+  const MyPageNavigatorMetaInfo = [
+    { title: `MY 아카이브 (${data.contents.contents.length})` },
+    { title: '설정' },
+  ];
   const [isMyArchiveShowed, setMyArhiveShowedFlag] = useState<boolean>(true);
   const clicked = isMyArchiveShowed ? 0 : 1;
 
@@ -17,8 +23,8 @@ export default function MyPageInfoFragment() {
     resetMyArchiveListState();
   }, [resetMyArchiveListState]);
 
-  const renderFragment = (title: string) => {
-    if (title === 'MY 아카이브') {
+  const renderFragment = (index: number) => {
+    if (index === 0) {
       setMyArhiveShowedFlag(true);
     } else {
       setMyArhiveShowedFlag(false);
@@ -50,7 +56,7 @@ export default function MyPageInfoFragment() {
               color={
                 clicked === index ? theme.colors.black : theme.colors.gray99
               }
-              onClick={() => renderFragment(title)}
+              onClick={() => renderFragment(index)}
             >
               {title}
             </Box>
