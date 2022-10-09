@@ -98,7 +98,11 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
   return (
     <Box ref={scrollRef}>
       {introYn === 2 ? <Box paddingTop="80px" /> : null}
-      <FlexBox paddingBottom="18px" justifyContent="space-between">
+      <FlexBox
+        paddingBottom="15px"
+        justifyContent="space-between"
+        paddingTop="30px"
+      >
         <Box fontSize="15px" color={theme.colors.black} fontWeight={500}>
           아카이브
         </Box>
