@@ -7,14 +7,12 @@ export type ModuleData = {
 
 export type KeyVisualProps = {
   index: number;
-  keyvisualDatas: [
-    {
-      photoUrl: string;
-      upperTitle: string;
-      lowerTitle: string;
-      link?: string;
-    },
-  ];
+  keyvisualDatas: {
+    photoUrl: string;
+    upperTitle: string;
+    lowerTitle: string;
+    link?: string;
+  }[];
 };
 
 export type SwipeItemProps = {

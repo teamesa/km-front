@@ -4,6 +4,7 @@ import { atom, selector, useRecoilCallback } from 'recoil';
 import {
   makeDefaultListRequest,
   ListRequestInterface,
+  listRequest,
 } from 'states/list-request';
 import customAxios from 'utils/hooks/customAxios';
 
@@ -80,8 +81,9 @@ export const getList = async (post: ListRequestInterface) => {
 };
 
 export const useResetListStateFunction = () =>
-  useRecoilCallback(({ set }) => async () => {
-    const listStateData = await getList(makeDefaultListRequest());
+  useRecoilCallback(({ snapshot, set }) => async () => {
+    const requestBody = await snapshot.getPromise(listRequest);
+    const listStateData = await getList(requestBody);
     set(listState, listStateData);
   });
 
