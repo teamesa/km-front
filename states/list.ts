@@ -2,9 +2,9 @@ import { AxiosResponse } from 'axios';
 import { atom, selector, useRecoilCallback } from 'recoil';
 
 import {
-  makeDefaultSearchRequest,
-  SearchRequestInterface,
-} from 'states/search-request';
+  makeDefaultListRequest,
+  ListRequestInterface,
+} from 'states/list-request';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TPostList = {
@@ -60,7 +60,7 @@ export type PresentationlistItemAdditionalInfo = {
   archiveCount: number | null;
 };
 
-export const getList = async (post: SearchRequestInterface) => {
+export const getList = async (post: ListRequestInterface) => {
   const searchSortType = post.searchSortType;
   const axios = customAxios();
   const { data } = (await axios({
@@ -81,7 +81,7 @@ export const getList = async (post: SearchRequestInterface) => {
 
 export const useResetListStateFunction = () =>
   useRecoilCallback(({ set }) => async () => {
-    const listStateData = await getList(makeDefaultSearchRequest());
+    const listStateData = await getList(makeDefaultListRequest());
     set(listState, listStateData);
   });
 
@@ -89,6 +89,6 @@ export const listState = atom<TPostList>({
   key: 'ListState',
   default: selector({
     key: 'ListState/default',
-    get: () => getList(makeDefaultSearchRequest()),
+    get: () => getList(makeDefaultListRequest()),
   }),
 });

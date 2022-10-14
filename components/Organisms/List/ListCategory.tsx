@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { Tag } from 'components/Atoms';
 import { getList, listState } from 'states/list';
-import { searchRequest } from 'states/search-request';
+import { listRequest } from 'states/list-request';
 import theme from 'styles/theme';
 
 export default function ListCategory({
@@ -11,20 +11,20 @@ export default function ListCategory({
 }: {
   data: { label: string; value: string }[];
 }) {
-  const [searchRequestBody, setSearchReques] = useRecoilState(searchRequest);
+  const [listRequestBody, setListRequest] = useRecoilState(listRequest);
   const setListData = useSetRecoilState(listState);
-  const filter = searchRequestBody.filterOptions.exhibitionType;
+  const filter = listRequestBody.filterOptions.exhibitionType;
 
   const setCategoryList = async (value: string) => {
-    const newSearchRequestBody = {
-      ...searchRequestBody,
+    const newListRequestBody = {
+      ...listRequestBody,
       filterOptions: {
-        ...searchRequestBody.filterOptions,
+        ...listRequestBody.filterOptions,
         exhibitionType: value,
       },
     };
-    setSearchReques(newSearchRequestBody);
-    const data = await getList(newSearchRequestBody);
+    setListRequest(newListRequestBody);
+    const data = await getList(newListRequestBody);
     setListData(data);
   };
 

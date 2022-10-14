@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Box, Button, FlexBox, Layout } from 'components/Atoms';
 import { FilterSelectGroup } from 'components/Organisms/Modal/Filter/FilterSelectGroup';
 import ModalLayout from 'components/Organisms/Modal/ModalLayout';
-import { searchRequest } from 'states';
+import { listRequest } from 'states';
 import {
   filter,
   filterType,
@@ -18,8 +18,7 @@ import { useModal } from 'utils/hooks/useModal';
 export default function FilterModal() {
   const { offModal } = useModal();
   const data = filterType;
-  const [searchRequestState, setSearchRequestState] =
-    useRecoilState(searchRequest);
+  const [listRequestState, setListhRequestState] = useRecoilState(listRequest);
   const [filters, setFilters] = useRecoilState(filter);
   const setPostList = useSetRecoilState(listState);
   const setFilter = useSetRecoilState(setFilterState);
@@ -39,14 +38,14 @@ export default function FilterModal() {
             border={`1px solid ${theme.colors.grayAA}`}
             onClick={async () => {
               const newFilter = makeEmtpyFilterOption();
-              const newSearchRequest =
+              const newListRequest =
                 makeRequestFilterOptionBySearchFilterSelectGroup(
                   newFilter,
-                  searchRequestState,
+                  listRequestState,
                 );
               setFilters(newFilter);
-              setSearchRequestState(newSearchRequest);
-              const data = await getList(newSearchRequest);
+              setListhRequestState(newListRequest);
+              const data = await getList(newListRequest);
               setPostList(data);
               setFilter(false);
               offModal();
@@ -63,13 +62,13 @@ export default function FilterModal() {
             fontWeight="500"
             backgroundColor={theme.colors.black}
             onClick={async () => {
-              const newSearchRequest =
+              const newListRequest =
                 makeRequestFilterOptionBySearchFilterSelectGroup(
                   filters,
-                  searchRequestState,
+                  listRequestState,
                 );
-              setSearchRequestState(newSearchRequest);
-              const data = await getList(newSearchRequest);
+              setListhRequestState(newListRequest);
+              const data = await getList(newListRequest);
               setPostList(data);
               setFilter(true);
               offModal();

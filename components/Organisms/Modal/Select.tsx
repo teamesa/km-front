@@ -4,24 +4,24 @@ import { Box, Button, FlexBox, Layout } from 'components/Atoms';
 import ModalLayout from 'components/Organisms/Modal/ModalLayout';
 import { SelectProps } from 'constants/type/modal';
 import { getList, listState } from 'states/list';
-import { searchRequest } from 'states/search-request';
+import { listRequest } from 'states/list-request';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
 export default function SelectModal({ payload }: { payload: SelectProps }) {
   const { offModal } = useModal();
   const data = payload?.data ?? [];
-  const [searchRequestBody, setSearchReques] = useRecoilState(searchRequest);
+  const [listRequestBody, setListRequest] = useRecoilState(listRequest);
   const setListData = useSetRecoilState(listState);
-  const sort = searchRequestBody.searchSortType;
+  const sort = listRequestBody.searchSortType;
 
   const setCategoryList = async (value: string) => {
-    const newSearchRequestBody = {
-      ...searchRequestBody,
+    const newListRequestBody = {
+      ...listRequestBody,
       searchSortType: value,
     };
-    setSearchReques(newSearchRequestBody);
-    const data = await getList(newSearchRequestBody);
+    setListRequest(newListRequestBody);
+    const data = await getList(newListRequestBody);
     setListData(data);
   };
 

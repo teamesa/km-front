@@ -4,12 +4,12 @@ import { DetailState } from './detail';
 import MyArchiveListState from './myArchiveList';
 import PopupNameState from './popupName';
 
-import { searchRequest } from 'states/search-request';
+import { listRequest } from 'states/list-request';
 
 export {
   DetailState,
   ArchiveWriteState,
-  searchRequest,
+  listRequest,
   MyArchiveListState,
   PopupNameState,
   AlertState,
