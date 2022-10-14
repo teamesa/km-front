@@ -12,4 +12,5 @@ export interface HeaderBarProps {
   headerRightAction?: () => void;
   frontTopTransparent?: boolean;
   transparent?: boolean;
+  isSearchType?: boolean;
 }
