@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { selectorFamily } from 'recoil';
+import { atom, selector, selectorFamily, useRecoilCallback } from 'recoil';
 
 import customAxios from 'utils/hooks/customAxios';
 
@@ -72,7 +72,7 @@ type TGetArchive = {
 
 const axios = customAxios();
 
-export async function getSummary({ itemId }: { itemId: number }) {
+export async function getSummary({ itemId }: { itemId?: number } = {}) {
   const { data } = (await axios({
     url: `/api/item/info/${itemId}`,
     method: 'GET',
@@ -80,11 +80,13 @@ export async function getSummary({ itemId }: { itemId: number }) {
 
   return data;
 }
-export async function getArchive({ itemId }: { itemId: number }) {
+export async function getArchive({ itemId }: { itemId?: number } = {}) {
+  const pathname = window?.location?.pathname;
+  const queryData = pathname.slice(1).split('/');
   const { data } = (await axios({
-    url: `/api/archive/${itemId}`,
+    url: `/api/archive/${itemId || Number(queryData[1])}`,
     method: 'GET',
-  })) as AxiosResponse<TGetArchive>;
+  })) as AxiosResponse;
 
   return data;
 }
@@ -98,7 +100,37 @@ export async function getIntroduction({ itemId }: { itemId: number }) {
   return data;
 }
 
-export const DetailState = selectorFamily({
+export const detailIntroductionState = selectorFamily({
+  key: 'DetailIntroductionState',
+  get: (itemId: number) => async () => {
+    const response = await getIntroduction({ itemId });
+    return response;
+  },
+});
+
+export const detailSummaryState = selectorFamily({
+  key: 'DetailSummaryState',
+  get: (itemId: number) => async () => {
+    const response = await getSummary({ itemId });
+    return response;
+  },
+});
+
+export const detailArchiveState = selectorFamily({
+  key: 'DetailArchivenState',
+  get: () => async () => {
+    const response = await getArchive();
+    return response;
+  },
+});
+
+export const useResetDetailArchiveFunction = () =>
+  useRecoilCallback(({ set }) => async () => {
+    const newStateData = await getArchive();
+    set(detailArchiveState, newStateData);
+  });
+
+export const detailState = selectorFamily({
   key: 'DetailState',
   get: (itemId: number) => async () => {
     const summary = await getSummary({ itemId: itemId });
