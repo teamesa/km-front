@@ -54,8 +54,6 @@ function HeaderBar() {
   const header = useRecoilValue(headerState);
   const resetHeader = useResetRecoilState(headerState);
 
-  console.log(header.isSearchType);
-
   useEffect(() => {
     resetHeader();
   }, [resetHeader]);
@@ -127,7 +125,7 @@ function HeaderBar() {
                   height="30px"
                   alignItems="center"
                   onClick={() => {
-                    router.push('/result');
+                    router.push('/search');
                   }}
                   css={css`
                     cursor: pointer;
@@ -209,7 +207,7 @@ function HeaderBar() {
                 height="20px"
                 alignItems="center"
                 onClick={() => {
-                  router.push('/result');
+                  router.push('/search');
                 }}
               >
                 <Image

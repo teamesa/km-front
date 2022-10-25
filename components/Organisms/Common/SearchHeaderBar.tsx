@@ -1,17 +1,40 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useRecoilValue } from 'recoil';
+import { useState } from 'react';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import ArrowLeft from 'assets/common/header/ArrowLeft';
 import Search from 'assets/common/header/Search';
 import { Box, Button, Input } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
+import { searchRequest } from 'states';
 import { headerState } from 'states/common';
+import { getSearchList, searchListState } from 'states/search';
 import theme from 'styles/theme';
+import useRefUtils from 'utils/hooks/useRefUtils';
 
 export default function HeaderBar() {
   const router = useRouter();
   const searchHeader = useRecoilValue(headerState);
+  const [searchRequestBody, setSearchRequest] = useRecoilState(searchRequest);
+  const setSearchData = useSetRecoilState(searchListState);
+  const { ref } = useRefUtils();
+  const [keyword, setKeyword] = useState<string>('');
+
+  const setSearchValue = async (value: string) => {
+    const newSearchRequest = {
+      ...searchRequestBody,
+      queryString: value,
+    };
+    setSearchRequest(newSearchRequest);
+    const data = await getSearchList(newSearchRequest);
+    setSearchData(data);
+    // console.log(data);
+  };
+
+  const onChangeData = (e: any) => {
+    setKeyword(e.target.value);
+  };
 
   return (
     <>
@@ -38,7 +61,9 @@ export default function HeaderBar() {
             height="30px"
             zIndex="1"
             onClick={() => {
-              router.back();
+              router.push('/search');
+
+              // console.log(searchRequestBody.queryString);
             }}
             css={css`
               cursor: pointer;
@@ -57,7 +82,9 @@ export default function HeaderBar() {
               height="40px"
               fontSize="13px"
               border={`1px solid ${theme.colors.grayDD}`}
+              onChange={onChangeData}
               type="search"
+              // ref={ref}
               placeholder="검색어를 입력해주세요"
             />
             <Button
@@ -67,7 +94,14 @@ export default function HeaderBar() {
               width="40px"
               height="40px"
               type="submit"
-              // onClick={router.push}
+              onClick={() => {
+                if (keyword !== '') {
+                  setSearchValue(keyword);
+                  router.push(
+                    `/search/result?${searchRequestBody.queryString}`,
+                  );
+                }
+              }}
             >
               <Search width="15" height="15" />
             </Button>

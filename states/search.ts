@@ -2,6 +2,11 @@ import { AxiosResponse } from 'axios';
 import { atom, selector, useRecoilCallback } from 'recoil';
 
 import {} from 'states/list-request';
+import {
+  makeDefaulSearchRequest,
+  searchRequest,
+  SearchRequestInterface,
+} from 'states/search-result-request';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TPostSearch = {
@@ -56,3 +61,60 @@ export type PresentationSearchItemAdditionalInfo = {
   grade: number | null;
   archiveCount: number | null;
 };
+
+// export const useTurnPickstateFunction = (itemId: number) =>
+//   useRecoilCallback(
+//     ({ set }) =>
+//       async () => {
+//         set(
+//           homeModuleIndivisualStateFamily(moduleId),
+//           (exHomeindivisualState) => {
+//             const monthlyData =
+//               exHomeindivisualState as MonthlyFreeItemCardProps[];
+//             return monthlyData.map((it: MonthlyFreeItemCardProps) => {
+//               if (it.heart.id === itemId) {
+//                 return {
+//                   ...it,
+//                   heart: { ...it.heart, heartClicked: !it.heart.heartClicked },
+//                 };
+//               } else {
+//                 return it;
+//               }
+//             });
+//           },
+//         );
+//       },
+//     [],
+//   );
+
+export const getSearchList = async (post: SearchRequestInterface) => {
+  const axios = customAxios();
+  const { data } = (await axios({
+    url: `/api/search`,
+    method: 'POST',
+    data: {
+      queryString: post.queryString,
+      requestPagingStatus: {
+        currentContentsCount: 0,
+        pageNumber: 0,
+        pageSize: 100,
+      },
+    },
+  })) as AxiosResponse<TPostSearch>;
+  return data;
+};
+
+export const useResetListStateFunction = () =>
+  useRecoilCallback(({ snapshot, set }) => async () => {
+    const requestBody = await snapshot.getPromise(searchRequest);
+    const searchStateData = await getSearchList(requestBody);
+    set(searchListState, searchStateData);
+  });
+
+export const searchListState = atom<TPostSearch>({
+  key: 'SearchListState',
+  default: selector({
+    key: 'SearchListState/default',
+    get: () => getSearchList(makeDefaulSearchRequest()),
+  }),
+});

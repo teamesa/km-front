@@ -40,7 +40,7 @@ export default function Container({ children }: { children: ReactNode }) {
             selectedIcon: <NavList fill={theme.colors.black} />,
             icon: <NavList />,
             pathName: 'LIST',
-            path: ['/list', '/search'],
+            path: ['/list', '/search/result'],
           },
 
           {

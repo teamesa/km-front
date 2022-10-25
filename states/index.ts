@@ -5,6 +5,7 @@ import MyArchiveListState from './myArchiveList';
 import PopupNameState from './popupName';
 
 import { listRequest } from 'states/list-request';
+import { searchRequest } from 'states/search-result-request';
 
 export {
   DetailState,
@@ -13,4 +14,5 @@ export {
   MyArchiveListState,
   PopupNameState,
   AlertState,
+  searchRequest,
 };
