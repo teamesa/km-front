@@ -8,7 +8,6 @@ import { myArchiveListState, TPostList } from 'states/myArchiveList';
 import { MyArchivePageContents } from 'states/myArchiveList';
 
 export default function ListSection(data: any) {
-  console.log(data);
   return (
     <>
       <Box marginBottom="60px">
