@@ -23,7 +23,7 @@ export default function Navigator() {
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const { id } = router.query;
-  const { contents, state } = useRecoilValueLoadable(DetailState(Number(id)));
+  const { contents, state } = useRecoilValueLoadable(DetailState);
   const data: TGetSummary = contents?.summary;
   const loginState = useRecoilValue(User);
 

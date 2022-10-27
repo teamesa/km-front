@@ -39,7 +39,7 @@ const headerLeftIcon = {
 };
 
 const headerRightIcon = {
-  search: <Search width="30" height="30" viewBox="-6 -6 30 30" />,
+  search: <Search width="18" height="18" />,
   close: <CloseBtn stroke="#000"></CloseBtn>,
   disabled: <></>,
 };
@@ -116,7 +116,7 @@ function HeaderBar() {
               <FlexBox
                 position="absolute"
                 top={header.headerRight === 'close' ? '10px' : '6px'}
-                right="10px"
+                right="20px"
               >
                 <Box
                   aria-label="오른쪽 버튼"
@@ -124,6 +124,7 @@ function HeaderBar() {
                   width="30px"
                   height="30px"
                   alignItems="center"
+                  padding="6px"
                   onClick={header.headerRightAction}
                 >
                   {headerRightIcon[header.headerRight ?? 'search']}
@@ -134,6 +135,7 @@ function HeaderBar() {
                     role="button"
                     width="30px"
                     height="30px"
+                    paddingLeft="6px"
                     onClick={() => {
                       router.push('/');
                     }}
