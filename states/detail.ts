@@ -42,7 +42,22 @@ type TGetIntroduction = {
   photo: string[] | [];
   summary: string | null;
 };
-
+export interface Archives {
+  id: number;
+  userProfileUrl: string;
+  userName: string;
+  updatedAt: string;
+  starRating: number;
+  likeCount: number;
+  heart: {
+    heartClicked: boolean;
+    link: string;
+  };
+  comment: string;
+  food: string;
+  cafe: string;
+  photoUrls: string[];
+}
 export interface ArchiveContents {
   responsePagingStatus: {
     nextPage: number;
@@ -53,22 +68,7 @@ export interface ArchiveContents {
     currentContentsCount: number;
   };
   avgStarRating: number;
-  archives: {
-    id: number;
-    userProfileUrl: string;
-    userName: string;
-    updatedAt: string;
-    starRating: number;
-    likeCount: number;
-    heart: {
-      heartClicked: boolean;
-      link: string;
-    };
-    comment: string;
-    food: string;
-    cafe: string;
-    photoUrls: string[];
-  }[];
+  archives: Archives[];
 }
 
 type TGetArchive = {

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { RefObject, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 
 import DetailNoData from 'assets/detail/noData';
 import { Profile } from 'assets/mypage';
@@ -9,7 +9,7 @@ import { CheckBox } from 'components/Atoms/CheckBox';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import StarScope from 'components/Molecules/StarScope';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
-import { ArchiveContents } from 'states/detail';
+import { ArchiveContents, Archives } from 'states/detail';
 import theme from 'styles/theme';
 interface ArchiveProps {
   data: ArchiveContents;
@@ -18,11 +18,21 @@ interface ArchiveProps {
 }
 export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
   const [checked, setChecked] = useState(false);
+  const [archiveData, setArchiveData] = useState<Archives[]>();
+
+  useEffect(() => {
+    setArchiveData(
+      checked
+        ? data.archives.filter((item) => item.photoUrls.length > 0)
+        : data.archives,
+    );
+  }, [checked, data]);
 
   const onClick = () => {
     setChecked(!checked);
   };
-  if (data.archives.length === 0) {
+
+  if (archiveData?.length === 0) {
     return (
       <Box ref={scrollRef}>
         <Box
@@ -126,7 +136,7 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
           </Box>
         </FlexBox>
         <Box paddingTop="20px">
-          {data.archives.map((item, index) => (
+          {archiveData?.map((item, index) => (
             <Box key={index}>
               <Box
                 height="1px"
