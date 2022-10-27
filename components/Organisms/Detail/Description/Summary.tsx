@@ -5,37 +5,35 @@ import { useRecoilValue } from 'recoil';
 import { Box, Button, Span, Tag } from 'components/Atoms';
 import DescriptionInfo from 'components/Molecules/DescriptionInfo';
 import InnerHTML from 'components/Molecules/InnerHTML';
-import { detailSummaryState } from 'states/detail';
+import { DetailState } from 'states';
 import theme from 'styles/theme';
 
 export default function Summary() {
-  const router = useRouter();
-  const { id } = router.query;
-  const summaryData = useRecoilValue(detailSummaryState(Number(id)));
-
+  const data = useRecoilValue(DetailState);
+  const { summary } = data;
   return (
     <Box>
-      <Tag border={`1px solid ${theme.colors.black}`}>{summaryData?.type}</Tag>
+      <Tag border={`1px solid ${theme.colors.black}`}>{summary?.type}</Tag>
       <Box marginTop="14px" fontSize="19px" fontWeight="500" lineHeight="26px">
-        {summaryData?.title}
+        {summary?.title}
       </Box>
       <Box marginTop="30px" marginBottom="60px">
-        <DescriptionInfo title="기간" description={summaryData?.term} />
-        <DescriptionInfo title="장소" description={summaryData?.place} />
-        {summaryData?.feeType === '유료' ? (
+        <DescriptionInfo title="기간" description={summary?.term} />
+        <DescriptionInfo title="장소" description={summary?.place} />
+        {summary?.feeType === '유료' ? (
           <>
             <DescriptionInfo
               title="입장료"
               description={
                 <Box>
-                  <Box>{summaryData?.feeType}</Box>
+                  <Box>{summary?.feeType}</Box>
                   <Box>
-                    {summaryData?.price ? (
-                      <InnerHTML data={summaryData?.price} />
+                    {summary?.price ? (
+                      <InnerHTML data={summary?.price} />
                     ) : null}
                   </Box>
                   <Button marginTop="8px">
-                    <Link href={summaryData?.ticketUrl}>
+                    <Link href={summary?.ticketUrl}>
                       <a target="_blank" rel="noreferrer">
                         <Span color={theme.colors.gray99}>
                           티켓 구매하기
@@ -49,24 +47,24 @@ export default function Summary() {
             />
           </>
         ) : (
-          <DescriptionInfo title="입장료" description={summaryData?.feeType} />
+          <DescriptionInfo title="입장료" description={summary?.feeType} />
         )}
-        {summaryData?.time ? (
+        {summary?.time ? (
           <DescriptionInfo
             title="시간"
             description={
               <Box>
-                <InnerHTML data={summaryData?.time} />
+                <InnerHTML data={summary?.time} />
               </Box>
             }
           />
         ) : null}
-        {summaryData?.homePageUrl ? (
+        {summary?.homePageUrl ? (
           <DescriptionInfo
             title="홈페이지"
             description={
               <Button>
-                <Link href={summaryData?.homePageUrl}>
+                <Link href={summary?.homePageUrl}>
                   <a target="_blank" rel="noreferrer">
                     <Span>
                       바로가기
