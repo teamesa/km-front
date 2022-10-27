@@ -1,32 +1,23 @@
-import { useRecoilValueLoadable } from 'recoil';
+import { Loadable, useRecoilValueLoadable } from 'recoil';
 
 import BlankArchiveListSection from './BlankArchiveListSection';
 import ListCard from './ListCard';
 
 import { Box } from 'components/Atoms';
-import { myArchiveListState } from 'states/myArchiveList';
+import { myArchiveListState, TPostList } from 'states/myArchiveList';
+import { MyArchivePageContents } from 'states/myArchiveList';
 
-export default function ListSection() {
-  const data = useRecoilValueLoadable(myArchiveListState);
-
-  switch (data.state) {
-    case 'hasValue':
-      if (data.contents.contents.length === 0) {
-        return <BlankArchiveListSection />;
-      }
-
-      return (
-        <>
-          <Box marginBottom="60px">
-            {data.contents.contents.map((content, index) => (
-              <ListCard key={content?.api ?? index} content={content} />
-            ))}
-          </Box>
-        </>
-      );
-    case 'loading':
-      return <div>Loading...</div>;
-    case 'hasError':
-      throw data.contents;
-  }
+export default function ListSection(data: any) {
+  console.log(data);
+  return (
+    <>
+      <Box marginBottom="60px">
+        {data?.contents?.contents?.map(
+          (content: MyArchivePageContents, index: number) => (
+            <ListCard key={content?.api ?? index} content={content} />
+          ),
+        )}
+      </Box>
+    </>
+  );
 }
