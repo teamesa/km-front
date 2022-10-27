@@ -1,6 +1,8 @@
 import { AxiosResponse } from 'axios';
-import { atom } from 'recoil';
+import { useRouter } from 'next/router';
+import { atom, selector, useRecoilCallback } from 'recoil';
 
+import { ArchiveSquareState } from 'states/archive-square';
 import customAxios from 'utils/hooks/customAxios';
 export interface ArchiveWirteProps {
   itemId: number;
@@ -10,10 +12,30 @@ export interface ArchiveWirteProps {
   placeInfos: {
     address: string;
     name: string;
-    placeType: 'FOOD' | 'CAFE';
+    placeType: string;
     roadAddress: string;
   }[];
   visibleAtItem: boolean;
+  food?: string;
+  cafe?: string;
+}
+
+interface ArchiveProps {
+  typeBadge: {
+    text: string;
+    typeBadge: true;
+  };
+  updatedAt: string;
+  title: string;
+  comment: string;
+  starRating: 5;
+  food: string;
+  cafe: string;
+  photoUrls: ArchiveSquareState;
+  archiveAdditionalInfos: {
+    title: string;
+    link: string;
+  }[];
 }
 
 interface TGetArchiveSearch {
@@ -59,16 +81,47 @@ export async function postArchiveWirte({ body }: { body: ArchiveWirteProps }) {
   return data;
 }
 
-export async function getArchiveById({ itemId }: { itemId: number }) {
+export async function getArchiveById({ itemId }: { itemId?: any } = {}) {
+  const search = window?.location?.search;
+  const queryParmas: any = {};
+
+  const queryData = search.slice(1).split('&');
+  queryData.forEach((data) => {
+    const [key, value] = data.split('=');
+    queryParmas[key] = decodeURIComponent(value);
+  });
+
   const { data } = (await axios({
     method: 'GET',
-    url: `/api/archive/detail/${itemId}`,
+    url: `/api/archive/detail/${itemId || queryParmas.id}`,
   })) as AxiosResponse<ArchiveWirteProps>;
 
   return data;
 }
 
-export const ArchiveWriteState = atom<ArchiveWirteProps | undefined>({
+export const archiveWriteState = atom({
   key: 'ArchiveWriteState',
-  default: undefined,
+  default: selector({
+    key: 'ArchiveWriteState/default',
+    get: () => {
+      const pathname = window?.location?.pathname;
+
+      if (pathname === '/archive/update') {
+        console.log('/archive/update', pathname);
+        return getArchiveById();
+      }
+
+      return undefined;
+    },
+  }),
 });
+
+export const useResetArchiveByIdStateFunction = () =>
+  useRecoilCallback(
+    ({ set }) =>
+      async () => {
+        const archiveByIdData = await getArchiveById();
+        set(archiveWriteState, archiveByIdData);
+      },
+    [],
+  );

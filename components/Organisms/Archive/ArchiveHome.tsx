@@ -1,7 +1,13 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
+import {
+  useSetRecoilState,
+  useRecoilValue,
+  useResetRecoilState,
+  useRecoilState,
+} from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import noImage from 'assets/common/no_image_375x500.png';
@@ -18,7 +24,6 @@ import AddressInput from 'components/Molecules/AddressInput';
 import ArchiveFileUploadForm from 'components/Organisms/Archive/ArchiveFileUploadForm';
 import Rating from 'components/Organisms/Archive/Rating';
 import SearchTitle from 'components/Organisms/Archive/SearchTitle';
-import PopupRouter from 'components/Organisms/Popup/PopupRouter';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, ArchiveWriteState, PopupNameState } from 'states';
@@ -31,12 +36,15 @@ import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
 export default function ArchiveHome() {
+  const pathname = window?.location?.pathname;
   const router = useRouter();
+  const axios = customAxios();
   const { id, title, checked } = router.query;
   const thumbnailImageUrl = String(router.query.thumbnailImageUrl);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const [archiveWrite, setArchiveWrite] = useRecoilState(ArchiveWriteState);
+  const resetArchiveWrite = useResetRecoilState(ArchiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
 
   const {
@@ -47,15 +55,15 @@ export default function ArchiveHome() {
   } = useForm<ArchiveWirteProps>({
     mode: 'onChange',
     defaultValues: {
-      ...archiveWrite,
-      starRating: 5,
       visibleAtItem: checked ? true : false,
-      photoUrls: [],
     },
   });
 
-  const onSubmit = async (data: ArchiveWirteProps) => {
-    const axios = customAxios();
+  useEffect(() => {
+    resetArchiveWrite();
+  }, [resetArchiveWrite]);
+
+  const onWriteSubmit = async (data: ArchiveWirteProps) => {
     const postData = {
       ...data,
       itemId: Number(data.itemId),
@@ -85,10 +93,40 @@ export default function ArchiveHome() {
     }
   };
 
+  const onUpdateSubmit = async (data: ArchiveWirteProps) => {
+    const postData = {
+      ...data,
+      itemId: Number(data.itemId),
+      starRating: archiveWrite?.starRating,
+      placeInfos: data.placeInfos.filter((item) =>
+        item === undefined ? null : item,
+      ),
+      photoUrls: archivePhotos
+        .filter(
+          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
+        )
+        .map((archivePhoto) => archivePhoto.pictureSrc)
+        .filter(isDefined),
+    };
+
+    // try {
+    //   await axios({
+    //     method: 'PUT',
+    //     url: `/api/archive`,
+    //     data: postData,
+    //   });
+    //   setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
+    //   setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
+    // } catch (error: any) {
+    //   setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
+    //   setPopupName(POPUP_NAME.ALERT_CONFIRM);
+    // }
+  };
+
   return (
     <>
       <Box>{title ? null : <SearchTitle />}</Box>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onWriteSubmit)}>
         <Box>
           {title ? (
             <FlexBox marginTop="48px" paddingBottom="20px">
@@ -108,7 +146,11 @@ export default function ArchiveHome() {
           <Box textAlign="center" fontSize="18px">
             <Box>이 문화생활, 어땠나요?</Box>
             <Box marginTop="16px">
-              <Rating name="starRating" control={control} />
+              <Rating
+                name="starRating"
+                control={control}
+                userRating={archiveWrite?.starRating ?? 5}
+              />
             </Box>
           </Box>
           <Box
@@ -129,6 +171,7 @@ export default function ArchiveHome() {
             lineHeight="18px"
             backgroundColor={theme.colors.grayF8}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
+            defaultValue={archiveWrite?.comment}
             {...register('comment')}
           />
           <ArchiveFileUploadForm />
@@ -141,7 +184,12 @@ export default function ArchiveHome() {
             </Box>
           </FlexBox>
           <Button type="button" marginTop="10px" width="100%">
-            <AddressInput name="placeInfos[0]" type="FOOD" control={control} />
+            <AddressInput
+              name="placeInfos[0]"
+              type="FOOD"
+              control={control}
+              defaultValue={archiveWrite?.food}
+            />
           </Button>
           <FlexBox marginTop="20px">
             <MapPoint />
@@ -150,7 +198,12 @@ export default function ArchiveHome() {
             </Box>
           </FlexBox>
           <Button type="button" marginTop="10px" width="100%">
-            <AddressInput name="placeInfos[1]" type="CAFE" control={control} />
+            <AddressInput
+              name="placeInfos[1]"
+              type="CAFE"
+              control={control}
+              defaultValue={archiveWrite?.cafe}
+            />
           </Button>
           <Box marginTop="30px" />
           <Box height="1px" backgroundColor={theme.colors.grayEE} />
@@ -186,16 +239,29 @@ export default function ArchiveHome() {
               </Button>
             </Box>
             <Box flex={1} paddingLeft="5px">
-              <Button
-                backgroundColor={theme.colors.black}
-                color={theme.colors.white}
-                width="100%"
-                height="50px"
-                onClick={handleSubmit(onSubmit)}
-                disabled={!errors}
-              >
-                등록
-              </Button>
+              {pathname === '/archive/update' ? (
+                <Button
+                  backgroundColor={theme.colors.black}
+                  color={theme.colors.white}
+                  width="100%"
+                  height="50px"
+                  onClick={handleSubmit(onUpdateSubmit)}
+                  disabled={!errors}
+                >
+                  수정
+                </Button>
+              ) : (
+                <Button
+                  backgroundColor={theme.colors.black}
+                  color={theme.colors.white}
+                  width="100%"
+                  height="50px"
+                  onClick={handleSubmit(onWriteSubmit)}
+                  disabled={!errors}
+                >
+                  등록
+                </Button>
+              )}
             </Box>
           </FlexBox>
         </Box>

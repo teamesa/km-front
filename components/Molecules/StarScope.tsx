@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import StarBlack from 'assets/archive/StarBlack';
 import StarWhite from 'assets/archive/StarWhite';
@@ -10,15 +10,21 @@ export default function StarScope({
   height,
   width,
   margin,
+  userRating,
 }: {
   onChange?: (e: number) => void;
   currentStep?: number;
   height?: string;
   width?: string;
   margin?: string;
+  userRating?: number;
 }) {
   const [rating, setRating] = useState(5);
   const [hover, setHover] = useState(0);
+
+  useEffect(() => {
+    setRating(userRating ?? 5);
+  }, [userRating]);
 
   return (
     <Box>
