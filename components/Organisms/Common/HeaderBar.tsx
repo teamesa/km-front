@@ -39,7 +39,7 @@ const headerLeftIcon = {
 };
 
 const headerRightIcon = {
-  search: <Search width="18" height="18" />,
+  search: <Search width="30" height="30" viewBox="-6 -6 30 30" />,
   close: <CloseBtn stroke="#000"></CloseBtn>,
   disabled: <></>,
 };
