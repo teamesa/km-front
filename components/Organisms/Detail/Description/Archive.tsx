@@ -1,14 +1,15 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { RefObject } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 
 import DetailNoData from 'assets/detail/noData';
 import { Profile } from 'assets/mypage';
 import { Box, FlexBox, Span, Tag } from 'components/Atoms';
+import { CheckBox } from 'components/Atoms/CheckBox';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import StarScope from 'components/Molecules/StarScope';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
-import { ArchiveContents } from 'states/detail';
+import { ArchiveContents, Archives } from 'states/detail';
 import theme from 'styles/theme';
 interface ArchiveProps {
   data: ArchiveContents;
@@ -16,7 +17,22 @@ interface ArchiveProps {
   introYn: number;
 }
 export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
-  if (data.archives.length === 0) {
+  const [checked, setChecked] = useState(false);
+  const [archiveData, setArchiveData] = useState<Archives[]>();
+
+  useEffect(() => {
+    setArchiveData(
+      checked
+        ? data.archives.filter((item) => item.photoUrls.length > 0)
+        : data.archives,
+    );
+  }, [checked, data]);
+
+  const onClick = () => {
+    setChecked(!checked);
+  };
+
+  if (archiveData?.length === 0) {
     return (
       <Box ref={scrollRef}>
         <Box
@@ -92,7 +108,23 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
   return (
     <Box ref={scrollRef}>
       {introYn === 2 ? <Box paddingTop="80px" /> : null}
-      <Box color={theme.colors.black} fontSize="22px" paddingTop="43px">
+      <FlexBox
+        paddingBottom="15px"
+        justifyContent="space-between"
+        paddingTop="30px"
+      >
+        <Box fontSize="15px" color={theme.colors.black} fontWeight={500}>
+          아카이브
+        </Box>
+        <FlexBox alignItems="center">
+          <Box fontSize="12px" color={theme.colors.gray77} paddingRight="10px">
+            사진 아카이브만
+          </Box>
+          <CheckBox type="checkbox" onChange={onClick} />
+        </FlexBox>
+      </FlexBox>
+      <Box height="1px" backgroundColor={theme.colors.black} />
+      <Box color={theme.colors.black} fontSize="22px" paddingTop="30px">
         <FlexBox alignItems="center">
           <StartRatingImage />
           <Box paddingLeft="16px">{data.avgStarRating}</Box>
@@ -104,7 +136,7 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
           </Box>
         </FlexBox>
         <Box paddingTop="20px">
-          {data.archives.map((item, index) => (
+          {archiveData?.map((item, index) => (
             <Box key={index}>
               <Box
                 height="1px"
