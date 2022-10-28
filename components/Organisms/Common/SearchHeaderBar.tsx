@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 
 import ArrowLeft from 'assets/common/header/ArrowLeft';
@@ -11,14 +11,12 @@ import { searchRequest } from 'states';
 import { headerState } from 'states/common';
 import { getSearchList, searchListState } from 'states/search';
 import theme from 'styles/theme';
-import useRefUtils from 'utils/hooks/useRefUtils';
 
 export default function HeaderBar() {
   const router = useRouter();
   const searchHeader = useRecoilValue(headerState);
   const [searchRequestBody, setSearchRequest] = useRecoilState(searchRequest);
   const setSearchData = useSetRecoilState(searchListState);
-  const { ref } = useRefUtils();
   const [keyword, setKeyword] = useState<string>('');
 
   const setSearchValue = async (value: string) => {
@@ -29,7 +27,6 @@ export default function HeaderBar() {
     setSearchRequest(newSearchRequest);
     const data = await getSearchList(newSearchRequest);
     setSearchData(data);
-    // console.log(data);
   };
 
   const onChangeData = (e: any) => {
@@ -61,9 +58,9 @@ export default function HeaderBar() {
             height="30px"
             zIndex="1"
             onClick={() => {
-              router.push('/search');
-
-              // console.log(searchRequestBody.queryString);
+              router.pathname === '/search/result'
+                ? router.push('/search')
+                : router.back();
             }}
             css={css`
               cursor: pointer;
@@ -84,7 +81,6 @@ export default function HeaderBar() {
               border={`1px solid ${theme.colors.grayDD}`}
               onChange={onChangeData}
               type="search"
-              // ref={ref}
               placeholder="검색어를 입력해주세요"
             />
             <Button

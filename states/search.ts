@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { atom, selector, useRecoilCallback } from 'recoil';
 
-import {} from 'states/list-request';
 import {
   makeDefaulSearchRequest,
   searchRequest,
@@ -62,31 +61,6 @@ export type PresentationSearchItemAdditionalInfo = {
   archiveCount: number | null;
 };
 
-// export const useTurnPickstateFunction = (itemId: number) =>
-//   useRecoilCallback(
-//     ({ set }) =>
-//       async () => {
-//         set(
-//           homeModuleIndivisualStateFamily(moduleId),
-//           (exHomeindivisualState) => {
-//             const monthlyData =
-//               exHomeindivisualState as MonthlyFreeItemCardProps[];
-//             return monthlyData.map((it: MonthlyFreeItemCardProps) => {
-//               if (it.heart.id === itemId) {
-//                 return {
-//                   ...it,
-//                   heart: { ...it.heart, heartClicked: !it.heart.heartClicked },
-//                 };
-//               } else {
-//                 return it;
-//               }
-//             });
-//           },
-//         );
-//       },
-//     [],
-//   );
-
 export const getSearchList = async (post: SearchRequestInterface) => {
   const axios = customAxios();
   const { data } = (await axios({
@@ -104,11 +78,33 @@ export const getSearchList = async (post: SearchRequestInterface) => {
   return data;
 };
 
-export const useResetListStateFunction = () =>
+export const SearchHeartPickFuction = (itemId: number) =>
+  useRecoilCallback(({ set }) => async () => {
+    set(searchListState, (newSearchListState) => {
+      const contents = newSearchListState.contents.map(
+        (it: SearchPageContents) => {
+          // console.log(it.eart.id);
+          // console.log(`itemId: ${itemId}`);
+          if (it.heart.id === itemId) {
+            return {
+              ...it,
+              heart: { ...it.heart, heartClicked: !it.heart.heartClicked },
+            };
+          } else {
+            return it;
+          }
+        },
+      );
+      // console.log(searchResultData);
+      return { ...newSearchListState, contents };
+    });
+  });
+
+export const useResetSearchStateFunction = () =>
   useRecoilCallback(({ snapshot, set }) => async () => {
     const requestBody = await snapshot.getPromise(searchRequest);
-    const searchStateData = await getSearchList(requestBody);
-    set(searchListState, searchStateData);
+    const searchListStateData = await getSearchList(requestBody);
+    set(searchListState, searchListStateData);
   });
 
 export const searchListState = atom<TPostSearch>({

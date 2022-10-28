@@ -1,12 +1,11 @@
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { useRecoilValueLoadable } from 'recoil';
 
-import NoSearchResult from 'components/Organisms/\bSearch/Result/NoSearchResult';
-import ListCard from 'components/Organisms/List/ListCard';
+import NoSearchResult from 'components/Organisms/Search/Result/NoSearchResult';
+import SearchResultCard from 'components/Organisms/Search/Result/SearchResultCard';
 import { searchListState } from 'states/search';
 
 export default function SearchResultSection() {
   const data = useRecoilValueLoadable(searchListState);
-  // const setSearchResult = useRecoilValue(searchListState);
 
   switch (data.state) {
     case 'hasValue':
@@ -16,7 +15,7 @@ export default function SearchResultSection() {
         return (
           <>
             {data.contents.contents.map((content, index) => (
-              <ListCard key={content?.id ?? index} content={content} />
+              <SearchResultCard key={content?.id ?? index} content={content} />
             ))}
           </>
         );
