@@ -93,9 +93,7 @@ export default function HeaderBar() {
               onClick={() => {
                 if (keyword !== '') {
                   setSearchValue(keyword);
-                  router.push(
-                    `/search/result?${searchRequestBody.queryString}`,
-                  );
+                  router.push(`/search/result?${keyword}`);
                 }
               }}
             >
