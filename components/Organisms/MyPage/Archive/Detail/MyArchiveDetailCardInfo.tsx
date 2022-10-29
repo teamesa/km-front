@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 
-import StarRating from 'assets/list/StarRating';
 import { Pointer } from 'assets/mypage';
 import { Box, FlexBox, Span } from 'components/Atoms';
 import NoItemBox from 'components/Molecules/NoItemBox';
