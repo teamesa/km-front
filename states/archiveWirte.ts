@@ -107,7 +107,6 @@ export const archiveWriteState = atom({
       const pathname = window?.location?.pathname;
 
       if (pathname === '/archive/update') {
-        console.log('/archive/update', pathname);
         return getArchiveById();
       }
 
