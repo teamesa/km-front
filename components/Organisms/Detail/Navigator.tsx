@@ -12,7 +12,7 @@ import NavigatorHeart from 'components/Organisms/Detail/NavigatorHeart';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { Z_INDEX } from 'constants/common';
 import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, DetailState, PopupNameState } from 'states';
+import { AlertState, detailState, PopupNameState } from 'states';
 import { TGetSummary } from 'states/detail';
 import { User } from 'states/user';
 import theme from 'styles/theme';
@@ -23,7 +23,7 @@ export default function Navigator() {
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const { id } = router.query;
-  const { contents, state } = useRecoilValueLoadable(DetailState);
+  const { contents, state } = useRecoilValueLoadable(detailState);
   const data: TGetSummary = contents?.summary;
   const loginState = useRecoilValue(User);
 

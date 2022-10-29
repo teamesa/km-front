@@ -26,7 +26,7 @@ import Rating from 'components/Organisms/Archive/Rating';
 import SearchTitle from 'components/Organisms/Archive/SearchTitle';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, ArchiveWriteState, PopupNameState } from 'states';
+import { AlertState, archiveWriteState, PopupNameState } from 'states';
 import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
@@ -43,8 +43,8 @@ export default function ArchiveHome() {
   const thumbnailImageUrl = String(router.query.thumbnailImageUrl);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const [archiveWrite, setArchiveWrite] = useRecoilState(ArchiveWriteState);
-  const resetArchiveWrite = useResetRecoilState(ArchiveWriteState);
+  const [archiveWrite, setArchiveWrite] = useRecoilState(archiveWriteState);
+  const resetArchiveWrite = useResetRecoilState(archiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
 
   const {
