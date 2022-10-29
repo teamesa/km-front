@@ -19,7 +19,7 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
         archiveAdditionalInfos={contents.archiveAdditionalInfos}
       />
       <Box
-        width="345px"
+        width="100%"
         height="347px"
         borderTop="solid 1px"
         borderTopColor={theme.colors.gray99}

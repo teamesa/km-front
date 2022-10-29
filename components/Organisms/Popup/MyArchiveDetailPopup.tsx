@@ -18,10 +18,6 @@ const MyArchiveDetailPopup = () => {
 
   switch (data.state) {
     case 'hasValue':
-      // if (data.contents. === 0) {
-      //   return <Box>데이터 불러오기 실패</Box>;
-      // }
-
       return (
         <Popup>
           <Box>
