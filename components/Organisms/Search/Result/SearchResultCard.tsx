@@ -1,16 +1,9 @@
-import { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-
 import { Box } from 'components/Atoms';
 import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditionalInfo';
 import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
 import ItemImage from 'components/Organisms/List/ListItem/ItemImage';
 import ItemInfo from 'components/Organisms/List/ListItem/ItemInfo';
-import {
-  SearchPageContents,
-  SearchHeartPickFuction,
-  searchListState,
-} from 'states/search';
+import { SearchPageContents, SearchHeartPickFuction } from 'states/search';
 
 interface ItemProps {
   content: SearchPageContents;

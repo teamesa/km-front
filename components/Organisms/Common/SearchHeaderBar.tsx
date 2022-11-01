@@ -1,36 +1,52 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useEffect, useRef, useState } from 'react';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
 
 import ArrowLeft from 'assets/common/header/ArrowLeft';
 import Search from 'assets/common/header/Search';
 import { Box, Button, Input } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
-import { searchRequest } from 'states';
 import { headerState } from 'states/common';
-import { getSearchList, searchListState } from 'states/search';
 import theme from 'styles/theme';
 
-export default function HeaderBar() {
+function SearchHeaderBar() {
   const router = useRouter();
   const searchHeader = useRecoilValue(headerState);
-  const [searchRequestBody, setSearchRequest] = useRecoilState(searchRequest);
-  const setSearchData = useSetRecoilState(searchListState);
-  const [keyword, setKeyword] = useState<string>('');
+  const inputRef = useRef<any>('');
+  // const [keyword, setKeyword] = useState('');
 
-  const setSearchValue = async (value: string) => {
-    const newSearchRequest = {
-      ...searchRequestBody,
-      queryString: value,
-    };
-    setSearchRequest(newSearchRequest);
-    const data = await getSearchList(newSearchRequest);
-    setSearchData(data);
+  // useEffect(() => {
+  //   if (router.query.keyword) {
+  //     inputRef.current.defaultValue = router.query.keyword;
+  //   }
+
+  //   console.log('inputRef.current.defaultValue', inputRef.current.defaultValue);
+  // }, [router.query.keyword]);
+
+  // useEffect(() => {
+  //   if (router?.query?.keyword && inputRef.current) {
+  //     inputRef.current.value = router.query.keyword;
+  //   } else if (inputRef.current) {
+  //     inputRef.current.value = '';
+  //   }
+  // }, [router.query.keyword]);
+
+  const handleOnClick = () => {
+    const keyword = inputRef.current.value;
+    if (keyword) {
+      router.push({
+        pathname: '/search/result',
+        query: { keyword: keyword },
+      });
+    }
   };
 
-  const onChangeData = (e: any) => {
-    setKeyword(e.target.value);
+  const handleOnKeyPress = (e: any) => {
+    if (e.key === 'Enter') {
+      handleOnClick();
+    }
   };
 
   return (
@@ -58,9 +74,7 @@ export default function HeaderBar() {
             height="30px"
             zIndex="1"
             onClick={() => {
-              router.pathname === '/search/result'
-                ? router.push('/search')
-                : router.back();
+              router.back();
             }}
             css={css`
               cursor: pointer;
@@ -79,10 +93,12 @@ export default function HeaderBar() {
               height="40px"
               fontSize="13px"
               border={`1px solid ${theme.colors.grayDD}`}
-              onChange={onChangeData}
-              type="search"
+              defaultValue={router.query.keyword}
               placeholder="검색어를 입력해주세요"
+              onKeyPress={handleOnKeyPress}
+              ref={inputRef}
             />
+
             <Button
               position="absolute"
               top="5px"
@@ -91,10 +107,7 @@ export default function HeaderBar() {
               height="40px"
               type="submit"
               onClick={() => {
-                if (keyword !== '') {
-                  setSearchValue(keyword);
-                  router.push(`/search/result?${keyword}`);
-                }
+                handleOnClick();
               }}
             >
               <Search width="15" height="15" />
@@ -107,3 +120,4 @@ export default function HeaderBar() {
     </>
   );
 }
+export default React.memo(SearchHeaderBar);

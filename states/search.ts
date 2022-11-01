@@ -3,7 +3,6 @@ import { atom, selector, useRecoilCallback } from 'recoil';
 
 import {
   makeDefaulSearchRequest,
-  searchRequest,
   SearchRequestInterface,
 } from 'states/search-result-request';
 import customAxios from 'utils/hooks/customAxios';
@@ -83,8 +82,6 @@ export const SearchHeartPickFuction = (itemId: number) =>
     set(searchListState, (newSearchListState) => {
       const contents = newSearchListState.contents.map(
         (it: SearchPageContents) => {
-          // console.log(it.eart.id);
-          // console.log(`itemId: ${itemId}`);
           if (it.heart.id === itemId) {
             return {
               ...it,
@@ -95,16 +92,8 @@ export const SearchHeartPickFuction = (itemId: number) =>
           }
         },
       );
-      // console.log(searchResultData);
       return { ...newSearchListState, contents };
     });
-  });
-
-export const useResetSearchStateFunction = () =>
-  useRecoilCallback(({ snapshot, set }) => async () => {
-    const requestBody = await snapshot.getPromise(searchRequest);
-    const searchListStateData = await getSearchList(requestBody);
-    set(searchListState, searchListStateData);
   });
 
 export const searchListState = atom<TPostSearch>({

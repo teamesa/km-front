@@ -1,12 +1,12 @@
-import { useRecoilValue } from 'recoil';
-
 import Alert from 'assets/error/Alert';
 import { Box, Span } from 'components/Atoms';
-import { searchRequest } from 'states';
 import theme from 'styles/theme';
 
-export default function NoSearchResult() {
-  const keyword = useRecoilValue(searchRequest);
+interface SearchKeyword {
+  keyword: string;
+}
+
+export default function NoSearchResult(keyword: SearchKeyword) {
   return (
     <Box
       position="fixed"
@@ -18,7 +18,7 @@ export default function NoSearchResult() {
     >
       <Alert width="40px" height="40px" />
       <Box margin="20px 0px 12px" fontSize="13px" lineHeight="20px">
-        <Span color={theme.colors.orange}>{`"${keyword.queryString}"`}</Span> 와
+        <Span color={theme.colors.orange}>{`"${keyword.keyword}"`}</Span> 와
         일치하는 검색 결과가 없습니다.
         <br />
         다른 검색어를 입력하시거나

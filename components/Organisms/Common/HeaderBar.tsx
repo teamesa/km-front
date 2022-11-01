@@ -116,7 +116,7 @@ function HeaderBar() {
               <FlexBox
                 position="absolute"
                 top={header.headerRight === 'close' ? '10px' : '6px'}
-                right="20px"
+                right="10px"
               >
                 <Box
                   aria-label="오른쪽 버튼"
