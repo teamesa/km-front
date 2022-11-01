@@ -6,10 +6,12 @@ export default function Rating({
   name,
   control,
   onChange,
+  userRating,
 }: {
   name: string;
   control: any;
   onChange?: (e: any) => void;
+  userRating: number;
 }) {
   return (
     <Controller
@@ -21,6 +23,7 @@ export default function Rating({
             onChange && onChange(e);
             _onChange(e);
           }}
+          userRating={userRating}
         />
       )}
     ></Controller>
