@@ -5,11 +5,11 @@ import { useRecoilValue } from 'recoil';
 import { Box, Button, Span, Tag } from 'components/Atoms';
 import DescriptionInfo from 'components/Molecules/DescriptionInfo';
 import InnerHTML from 'components/Molecules/InnerHTML';
-import { DetailState } from 'states';
+import { detailState } from 'states';
 import theme from 'styles/theme';
 
 export default function Summary() {
-  const data = useRecoilValue(DetailState);
+  const data = useRecoilValue(detailState);
   const { summary } = data;
   return (
     <Box>

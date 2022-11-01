@@ -49,7 +49,7 @@ export default function NavigatorHeart({
       })) as AxiosResponse<PickStatus>;
       if (axiosData.data.content !== undefined) {
         setClick(!click);
-        const fetchSummary = await getSummary({ itemId: Number(id) });
+        const fetchSummary = await getSummary(Number(id));
         setHeartState(fetchSummary.itemInfoAdditionalInfo.heartCount);
       }
     } catch (error) {
