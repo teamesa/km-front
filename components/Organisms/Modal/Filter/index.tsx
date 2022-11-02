@@ -3,7 +3,6 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Box, Button, FlexBox, Layout } from 'components/Atoms';
 import { FilterSelectGroup } from 'components/Organisms/Modal/Filter/FilterSelectGroup';
 import ModalLayout from 'components/Organisms/Modal/ModalLayout';
-import { listRequest } from 'states';
 import {
   filter,
   filterType,
@@ -12,6 +11,7 @@ import {
   setFilterState,
 } from 'states/filter';
 import { getList, listState } from 'states/list';
+import { listRequest } from 'states/list-request';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
