@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 
 import { Box, Button, FlexBox, Input } from 'components/Atoms';
@@ -10,14 +10,23 @@ export default function AddressInput({
   type,
   control,
   onChange,
+  defaultValue,
 }: {
   name: string;
   type: string;
   control: any;
+  defaultValue?: string;
   onChange?: (e: any) => void;
 }) {
   const { onModal } = useModal();
-  const [placeAddress, setPlaceAddress] = useState('');
+  const [placeAddress, setPlaceAddress] = useState(defaultValue ?? '');
+
+  useEffect(() => {
+    setPlaceAddress(defaultValue ?? '');
+    return () => {
+      setPlaceAddress('');
+    };
+  }, [defaultValue]);
 
   return (
     <Controller
