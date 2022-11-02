@@ -202,6 +202,7 @@ export default function ArchiveHome() {
           <FlexBox marginTop="30px" justifyContent="space-between">
             <Box flex={1}>
               <Button
+                type="button"
                 border={`1px solid ${theme.colors.grayAA}`}
                 backgroundColor={theme.colors.white}
                 color={theme.colors.black}
