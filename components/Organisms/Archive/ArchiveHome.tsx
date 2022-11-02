@@ -95,32 +95,7 @@ export default function ArchiveHome() {
   };
 
   const onUpdateSubmit = async (data: ArchiveWirteProps) => {
-    const postData = {
-      ...data,
-      itemId: Number(data.itemId),
-      placeInfos: data.placeInfos.filter((item) =>
-        item === undefined ? null : item,
-      ),
-      photoUrls: archivePhotos
-        .filter(
-          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
-        )
-        .map((archivePhoto) => archivePhoto.pictureSrc)
-        .filter(isDefined),
-    };
-    setArchiveWrite(postData);
-    // try {
-    //   await axios({
-    //     method: 'PUT',
-    //     url: `/api/archive`,
-    //     data: postData,
-    //   });
-    //   setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-    //   setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
-    // } catch (error: any) {
-    //   setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-    //   setPopupName(POPUP_NAME.ALERT_CONFIRM);
-    // }
+    //TODO 아카이브 수정하기 api
   };
 
   return (
