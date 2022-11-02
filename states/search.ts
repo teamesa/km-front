@@ -1,10 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { atom, selector, useRecoilCallback } from 'recoil';
 
-import {
-  makeDefaulSearchRequest,
-  SearchRequestInterface,
-} from 'states/search-result-request';
+import { SearchRequestInterface } from 'states/search-result-request';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TPostSearch = {
@@ -100,6 +97,16 @@ export const searchListState = atom<TPostSearch>({
   key: 'SearchListState',
   default: selector({
     key: 'SearchListState/default',
-    get: () => getSearchList(makeDefaulSearchRequest()),
+    get: () => ({
+      responsePagingStatus: {
+        nextPage: -1,
+        currentPage: 0,
+        pageSize: 0,
+        hasNext: false,
+        totalContentsCount: 0,
+        currentContentsCount: 0,
+      },
+      contents: [],
+    }),
   }),
 });

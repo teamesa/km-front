@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -11,30 +11,16 @@ import { Z_INDEX } from 'constants/common';
 import { headerState } from 'states/common';
 import theme from 'styles/theme';
 
-function SearchHeaderBar() {
+export default function SearchHeaderBar() {
   const router = useRouter();
   const searchHeader = useRecoilValue(headerState);
-  const inputRef = useRef<any>('');
-  // const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState('');
 
-  // useEffect(() => {
-  //   if (router.query.keyword) {
-  //     inputRef.current.defaultValue = router.query.keyword;
-  //   }
-
-  //   console.log('inputRef.current.defaultValue', inputRef.current.defaultValue);
-  // }, [router.query.keyword]);
-
-  // useEffect(() => {
-  //   if (router?.query?.keyword && inputRef.current) {
-  //     inputRef.current.value = router.query.keyword;
-  //   } else if (inputRef.current) {
-  //     inputRef.current.value = '';
-  //   }
-  // }, [router.query.keyword]);
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(e.target.value);
+  };
 
   const handleOnClick = () => {
-    const keyword = inputRef.current.value;
     if (keyword) {
       router.push({
         pathname: '/search/result',
@@ -43,11 +29,21 @@ function SearchHeaderBar() {
     }
   };
 
-  const handleOnKeyPress = (e: any) => {
+  const handleOnKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleOnClick();
     }
   };
+
+  useEffect(() => {
+    if (router?.query?.keyword) {
+      if (typeof router.query.keyword === 'string') {
+        setKeyword(router.query.keyword);
+      }
+    } else {
+      setKeyword('');
+    }
+  }, [router.query.keyword]);
 
   return (
     <>
@@ -93,10 +89,10 @@ function SearchHeaderBar() {
               height="40px"
               fontSize="13px"
               border={`1px solid ${theme.colors.grayDD}`}
-              defaultValue={router.query.keyword}
+              defaultValue={keyword}
               placeholder="검색어를 입력해주세요"
+              onChange={onChange}
               onKeyPress={handleOnKeyPress}
-              ref={inputRef}
             />
 
             <Button
@@ -120,4 +116,3 @@ function SearchHeaderBar() {
     </>
   );
 }
-export default React.memo(SearchHeaderBar);

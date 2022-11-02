@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import {
-  useRecoilState,
   useRecoilValue,
   useRecoilValueLoadable,
   useSetRecoilState,
@@ -14,7 +13,6 @@ import { getSearchList, searchListState } from 'states/search';
 
 export default function SearchResultSection() {
   const router = useRouter();
-  // const [searchRequestBody, setSearchRequest] = useRecoilState(searchRequest);
   const searchRequestBody = useRecoilValue(searchRequest);
   const setSearchData = useSetRecoilState(searchListState);
   const data = useRecoilValueLoadable(searchListState);
@@ -26,13 +24,10 @@ export default function SearchResultSection() {
         ...searchRequestBody,
         queryString: value,
       };
-      // console.log('value', value);
-      // console.log('searchRequestBody', newSearchRequest);
       const data = await getSearchList(newSearchRequest);
       setSearchData(data);
     };
     if (router?.query?.keyword) {
-      //console.log('router.query.keyword', router.query.keyword);
       setSearchValue(query);
     }
   }, [query, router.query, searchRequestBody, setSearchData]);
