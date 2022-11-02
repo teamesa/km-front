@@ -125,7 +125,11 @@ function HeaderBar() {
                   height="30px"
                   alignItems="center"
                   onClick={() => {
-                    router.push('/search');
+                    if (header.headerRightAction) {
+                      header.headerRightAction();
+                    } else {
+                      router.push('/search');
+                    }
                   }}
                   css={css`
                     cursor: pointer;
