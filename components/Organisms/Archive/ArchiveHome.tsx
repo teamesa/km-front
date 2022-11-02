@@ -55,6 +55,7 @@ export default function ArchiveHome() {
   } = useForm<ArchiveWirteProps>({
     mode: 'onChange',
     defaultValues: {
+      starRating: archiveWrite?.starRating ? archiveWrite.starRating : 5,
       visibleAtItem: checked ? true : false,
     },
   });
@@ -94,7 +95,32 @@ export default function ArchiveHome() {
   };
 
   const onUpdateSubmit = async (data: ArchiveWirteProps) => {
-    //TODO 아카이브 수정하기 api
+    const postData = {
+      ...data,
+      itemId: Number(data.itemId),
+      placeInfos: data.placeInfos.filter((item) =>
+        item === undefined ? null : item,
+      ),
+      photoUrls: archivePhotos
+        .filter(
+          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
+        )
+        .map((archivePhoto) => archivePhoto.pictureSrc)
+        .filter(isDefined),
+    };
+    setArchiveWrite(postData);
+    // try {
+    //   await axios({
+    //     method: 'PUT',
+    //     url: `/api/archive`,
+    //     data: postData,
+    //   });
+    //   setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
+    //   setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
+    // } catch (error: any) {
+    //   setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
+    //   setPopupName(POPUP_NAME.ALERT_CONFIRM);
+    // }
   };
 
   return (
@@ -208,7 +234,7 @@ export default function ArchiveHome() {
                 color={theme.colors.black}
                 width="100%"
                 height="50px"
-                onClick={() => router.push('/')}
+                onClick={() => router.back()}
               >
                 취소
               </Button>
