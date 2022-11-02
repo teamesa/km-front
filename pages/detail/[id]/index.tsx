@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import { useEffect } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import Description from 'components/Organisms/Detail/Description';
