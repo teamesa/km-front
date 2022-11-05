@@ -87,6 +87,18 @@ export async function getSummary(itemId?: number) {
 
   return data;
 }
+
+export const summaryState = atom({
+  key: 'SummaryState',
+  default: selector({ key: 'SummaryState/default', get: () => getSummary() }),
+});
+
+export const useResetSummaryFunction = () =>
+  useRecoilCallback(({ set }) => async () => {
+    const newSummary = await getSummary();
+    set(summaryState, newSummary);
+  });
+
 export async function getArchive(itemId?: number) {
   const queryData = query();
   const { data } = (await axios({
@@ -109,7 +121,6 @@ export async function getIntroduction(itemId?: number) {
 
 export const useResetDetailArchiveFunction = () =>
   useRecoilCallback(({ set }) => async () => {
-    const summary = await getSummary();
     const introduction = await getIntroduction();
     const archive = await getArchive();
     const tabViewData =
@@ -118,7 +129,6 @@ export const useResetDetailArchiveFunction = () =>
         : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
 
     const newStateData = {
-      summary,
       tabViewData,
     };
     set(detailState, newStateData);
@@ -129,7 +139,6 @@ export const detailState = atom({
   default: selector({
     key: 'DetailState/default',
     get: async () => {
-      const summary = await getSummary();
       const introduction = await getIntroduction();
       const archive = await getArchive();
       const tabViewData =
@@ -138,7 +147,6 @@ export const detailState = atom({
           : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
 
       return {
-        summary,
         tabViewData,
       };
     },

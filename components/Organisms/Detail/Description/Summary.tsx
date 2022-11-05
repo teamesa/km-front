@@ -1,16 +1,15 @@
-import { useRouter } from 'next/dist/client/router';
 import Link from 'next/link';
 import { useRecoilValue } from 'recoil';
 
 import { Box, Button, Span, Tag } from 'components/Atoms';
 import DescriptionInfo from 'components/Molecules/DescriptionInfo';
 import InnerHTML from 'components/Molecules/InnerHTML';
-import { detailState } from 'states';
+import { summaryState } from 'states/detail';
 import theme from 'styles/theme';
 
 export default function Summary() {
-  const data = useRecoilValue(detailState);
-  const { summary } = data;
+  const summary = useRecoilValue(summaryState);
+
   return (
     <Box>
       <Tag border={`1px solid ${theme.colors.black}`}>{summary?.type}</Tag>
