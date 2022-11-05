@@ -55,6 +55,7 @@ export default function ArchiveHome() {
   } = useForm<ArchiveWirteProps>({
     mode: 'onChange',
     defaultValues: {
+      starRating: archiveWrite?.starRating ? archiveWrite.starRating : 5,
       visibleAtItem: checked ? true : false,
     },
   });
@@ -202,12 +203,13 @@ export default function ArchiveHome() {
           <FlexBox marginTop="30px" justifyContent="space-between">
             <Box flex={1}>
               <Button
+                type="button"
                 border={`1px solid ${theme.colors.grayAA}`}
                 backgroundColor={theme.colors.white}
                 color={theme.colors.black}
                 width="100%"
                 height="50px"
-                onClick={() => router.push('/')}
+                onClick={() => router.back()}
               >
                 취소
               </Button>
