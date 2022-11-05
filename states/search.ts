@@ -4,6 +4,25 @@ import { atom, selector, useRecoilCallback } from 'recoil';
 import { SearchRequestInterface } from 'states/search-result-request';
 import customAxios from 'utils/hooks/customAxios';
 
+interface TGetSearchList {
+  contents: {
+    id: number;
+    link: string;
+    searchedTextLocationEnd: number;
+    searchedTextLocationStart: number;
+    title: string;
+  }[];
+  responsePagingStatus: {
+    currentContentsCount: number;
+    currentPage: number;
+    hasNext: boolean;
+    nextPage: number;
+    pageSize: number;
+    query: string;
+    totalContentsCount: number;
+  };
+}
+
 export type TPostSearch = {
   responsePagingStatus: {
     nextPage: number;
@@ -57,8 +76,8 @@ export type PresentationSearchItemAdditionalInfo = {
   archiveCount: number | null;
 };
 
+const axios = customAxios();
 export const getSearchList = async (post: SearchRequestInterface) => {
-  const axios = customAxios();
   const { data } = (await axios({
     url: `/api/search`,
     method: 'POST',
@@ -92,6 +111,18 @@ export const SearchHeartPickFuction = (itemId: number) =>
       return { ...newSearchListState, contents };
     });
   });
+
+export async function getSearchTitle({ query }: { query: string }) {
+  const { data } = (await axios({
+    url: `/api/search/auto-complete`,
+    method: 'GET',
+    params: {
+      query,
+    },
+  })) as AxiosResponse<TGetSearchList>;
+
+  return data;
+}
 
 export const searchListState = atom<TPostSearch>({
   key: 'SearchListState',
