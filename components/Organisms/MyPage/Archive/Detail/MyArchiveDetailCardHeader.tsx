@@ -1,26 +1,45 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, PopupNameState } from 'states';
-import { MyArchiveDetailHeaderInfoProps } from 'states/myArchiveDetail';
+import { AlertState, DetailState, PopupNameState } from 'states';
+import { TGetSummary } from 'states/detail';
+import {
+  MyArchiveDetailProps,
+  MyArchiveDetailHeaderInfoProps,
+  ClickedArchiveId,
+} from 'states/myArchiveDetail';
 import theme from 'styles/theme';
 
 export default function MyArchiveDetailHeaderInfo(
   props: MyArchiveDetailHeaderInfoProps,
 ) {
   const router = useRouter();
+  const id = useRecoilValue(ClickedArchiveId);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const handleClosePopup = () => {
     setPopupName(POPUP_NAME.NULL);
   };
+
   const handleUpdateArchive = () => {
     handleClosePopup();
-    router.push('/list');
+    archiveLink();
+  };
+
+  const archiveLink = () => {
+    return router.push({
+      pathname: `/archive/update`,
+      query: {
+        id: id,
+        title: props?.title,
+        thumbnailImageUrl: '',
+        checked: true,
+      },
+    });
   };
 
   const handleDeleteArchive = () => {
