@@ -5,7 +5,7 @@ import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, DetailState, PopupNameState } from 'states';
+import { AlertState, PopupNameState } from 'states';
 import { TGetSummary } from 'states/detail';
 import {
   MyArchiveDetailProps,
