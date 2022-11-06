@@ -4,11 +4,16 @@ import { useSetRecoilState } from 'recoil';
 
 import LoginPage from 'components/Organisms/MyPage/LoginPage';
 import MyPageHome from 'components/Organisms/MyPage/MyPageHome';
+import { useResetMyArchiveListStateFunction } from 'states/myArchiveList';
 import { User } from 'states/user';
 import { useUserProps, UserProps } from 'utils/authentication/useUser';
 
 const MyPage: NextPage<UserProps> = ({ user }) => {
   const setUserFirst = useSetRecoilState(User);
+  const resetMyArchiveListState = useResetMyArchiveListStateFunction();
+  useEffect(() => {
+    resetMyArchiveListState();
+  }, [resetMyArchiveListState]);
 
   useEffect(() => {
     setUserFirst(user);

@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { ChangeEvent } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 
@@ -173,6 +174,10 @@ export default function InputArchiveSquare() {
         multiple={true}
         backgroundColor="transparent"
         onChange={(e) => uploadArchivePicture(e)}
+        css={css`
+          position: relative;
+          z-index: 2;
+        `}
       />
       <Box
         width="20px"

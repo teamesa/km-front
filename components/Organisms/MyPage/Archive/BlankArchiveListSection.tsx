@@ -1,5 +1,5 @@
 import Alert from 'assets/error/Alert';
-import { Box, FlexBox } from 'components/Atoms';
+import { Box } from 'components/Atoms';
 
 export default function BlankArchiveListSection() {
   return (

@@ -7,4 +7,5 @@ export const POPUP_NAME = {
   ALERT_MOVE_MyARCHIVE_PAGE: 'AlertMoveMyArchivePage',
   ARCHIVE_WRITE_CONFIRM: 'ArchiveWirteConfirm',
   OVERFLOW_PICTURE: 'ArchivePictureOverflowPopup',
+  ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM: 'AlertArchiveDeletePopup',
 };

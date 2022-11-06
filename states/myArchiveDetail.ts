@@ -1,15 +1,8 @@
 import { AxiosResponse } from 'axios';
-import {
-  atom,
-  GetRecoilValue,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from 'recoil';
+import { atom, selector } from 'recoil';
 
 import customAxios from 'utils/hooks/customAxios';
 export interface MyArchiveDetailProps {
-  length: number;
   typeBadge: PresentationBadge;
   updatedAt: string;
   title: string;
@@ -20,12 +13,23 @@ export interface MyArchiveDetailProps {
   photoUrls: string[];
   archiveAdditionalInfos: ArchiveDetailLinkInfos[];
 }
+export interface MyArchiveDetailHeaderInfoProps {
+  title: string;
+  typeBadge: PresentationBadge;
+  updatedAt: string;
+  archiveAdditionalInfos: ArchiveDetailLinkInfos[];
+}
 
-export interface PresentationBadge {
+export interface MyArchiveDetailInfoProps {
+  starRating: number;
+  food: string;
+  cafe: string;
+}
+interface PresentationBadge {
   text: string;
   typeBadge: boolean;
 }
-export interface ArchiveDetailLinkInfos {
+interface ArchiveDetailLinkInfos {
   title: string;
   link: string;
 }
@@ -44,17 +48,6 @@ export const getMyArchiveDetail = async (archiveId: string) => {
 
   return data;
 };
-
-// export default atom<MyArchiveDetailProps>({
-//   key: 'MyArchiveDetailState',
-//   default: selector({
-//     key: 'MyArchiveDetailState/default',
-//     get: ({ get }) => {
-//       const archiveId = get(ClickedArchiveId);
-//       getMyArchiveDetail(archiveId);
-//     },
-//   }),
-// });
 
 export const myArchiveDetailInfoState = selector({
   key: 'myArchiveDetailInfoState',

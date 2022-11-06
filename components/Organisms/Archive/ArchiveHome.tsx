@@ -39,7 +39,7 @@ export default function ArchiveHome() {
   const pathname = window?.location?.pathname;
   const router = useRouter();
   const axios = customAxios();
-  const { id, title, checked } = router.query;
+  const { id, title, checked, exhibitionId } = router.query;
   const thumbnailImageUrl = String(router.query.thumbnailImageUrl);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
@@ -55,6 +55,7 @@ export default function ArchiveHome() {
   } = useForm<ArchiveWirteProps>({
     mode: 'onChange',
     defaultValues: {
+      starRating: archiveWrite?.starRating ? archiveWrite.starRating : 5,
       visibleAtItem: checked ? true : false,
     },
   });
@@ -94,7 +95,34 @@ export default function ArchiveHome() {
   };
 
   const onUpdateSubmit = async (data: ArchiveWirteProps) => {
-    //TODO 아카이브 수정하기 api
+    const postData = {
+      ...data,
+      itemId: Number(exhibitionId),
+      placeInfos: data.placeInfos.filter((item) =>
+        item === undefined ? null : item,
+      ),
+      visibleAtItem: data.visibleAtItem,
+      photoUrls: archivePhotos
+        .filter(
+          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
+        )
+        .map((archivePhoto) => archivePhoto.pictureSrc)
+        .filter(isDefined),
+    };
+    console.log('data', data);
+    setArchiveWrite(postData);
+    try {
+      await axios({
+        method: 'PUT',
+        url: `/api/archive`,
+        data: postData,
+      });
+      setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
+      setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
+    } catch (error: any) {
+      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+    }
   };
 
   return (
@@ -185,11 +213,7 @@ export default function ArchiveHome() {
           <FlexBox>
             <RadioLabel>
               <FlexBox>
-                <CheckBox
-                  type="checkbox"
-                  checked={checked ? true : false}
-                  {...register('visibleAtItem')}
-                />
+                <CheckBox type="checkbox" {...register('visibleAtItem')} />
                 <Box margin="3px 10px" fontSize="12px">
                   다른 사람도 보여주기
                 </Box>
@@ -202,12 +226,13 @@ export default function ArchiveHome() {
           <FlexBox marginTop="30px" justifyContent="space-between">
             <Box flex={1}>
               <Button
+                type="button"
                 border={`1px solid ${theme.colors.grayAA}`}
                 backgroundColor={theme.colors.white}
                 color={theme.colors.black}
                 width="100%"
                 height="50px"
-                onClick={() => router.push('/')}
+                onClick={() => router.back()}
               >
                 취소
               </Button>

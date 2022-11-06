@@ -13,7 +13,7 @@ export default function ListCategory({
 }) {
   const [listRequestBody, setListRequest] = useRecoilState(listRequest);
   const setListData = useSetRecoilState(listState);
-  const filter = listRequestBody.filterOptions.exhibitionType;
+  const filter = listRequestBody?.filterOptions?.exhibitionType;
 
   const setCategoryList = async (value: string) => {
     const newListRequestBody = {
