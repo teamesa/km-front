@@ -16,6 +16,10 @@ export const ALERT_MESSAGE = {
       code: 'ALT-003',
       message: '아카이브를 등록하시겠습니까?',
     },
+    ARCHIVE_DELETE_CONFIRM: {
+      code: 'ALT-004',
+      message: '삭제 하시겠습니까?',
+    },
     SAVED_SUCCESS: {
       code: 'ALT-009',
       message: '저장되었습니다.',
