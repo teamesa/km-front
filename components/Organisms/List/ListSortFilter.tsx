@@ -2,7 +2,7 @@ import { useRecoilValue } from 'recoil';
 
 import ArrowDown from 'assets/list/ArrowDown';
 import { Box, Button } from 'components/Atoms';
-import { searchRequest } from 'states/search-request';
+import { listRequest } from 'states/list-request';
 import theme from 'styles/theme';
 import { useModal } from 'utils/hooks/useModal';
 
@@ -15,7 +15,7 @@ const sortType = [
 
 export default function ListSortFilter() {
   const { onModal } = useModal();
-  const targetText = useRecoilValue(searchRequest);
+  const targetText = useRecoilValue(listRequest);
   const getSortText = sortType.map((item) => {
     if (targetText.searchSortType === item.value) {
       const sortText = item.label;

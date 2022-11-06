@@ -14,8 +14,9 @@ export interface HeaderBarProps {
   /** header 왼쪽 버튼의 액션을 설정합니다.(기본 : 뒤로가기) */
   title?: string;
   headerLeftAction?: () => void;
-  /** header 오른쪽 버튼의 액션을 설정합니다. (기본 : 없음)*/
+  /** header 오른쪽 버튼의 액션을 설정합니다. (기본 : 서치 페이지로 이동)*/
   headerRightAction?: () => void;
   frontTopTransparent?: boolean;
   transparent?: boolean;
+  isSearchType?: boolean;
 }

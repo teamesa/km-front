@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
+import { useRecoilValue } from 'recoil';
 
 import { Box, FlexBox } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
+import { headerState } from 'states/common';
 import useRefUtils from 'utils/hooks/useRefUtils';
 
 interface BottomTabItemProps {
@@ -40,8 +42,10 @@ export default function BottomTabNavigator({
     return item.path?.some((path) => router.pathname === path);
   });
   const { ref } = useRefUtils();
+  const isSearchType = useRecoilValue(headerState);
 
-  if (isShow)
+  // search 페이지 에서도 하단 바 노출
+  if (isShow || isSearchType.isSearchType)
     return (
       <>
         <Box
