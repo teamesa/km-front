@@ -10,15 +10,6 @@ import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
 import { ClickedArchiveId } from 'states/myArchiveDetail';
 import { MyArchivePageContents } from 'states/myArchiveList';
-// const af = styled.li`
-//   &:before {
-//     content: '·';
-//     font-size: 20px;
-//     vertical-align: middle;
-//     line-height: 20px;
-//     padding-right: 5px;
-//   }
-// `;
 
 type ItemProps = {
   content: MyArchivePageContents;
@@ -28,16 +19,14 @@ export default function Item(props: ItemProps) {
   const content = props.content;
   const setPopupName = useSetRecoilState(PopupNameState);
   const setArchiveId = useSetRecoilState(ClickedArchiveId);
-  // 아카이브id 값 만들기
-  // ex) /api/archive/596 => ["","api","archive","596"]
-  const apiArr = content.api.split('/');
 
+  const apiArr = content.api.split('/');
   return (
     <FlexBox
       position="relative"
       padding="0px 0px 40px"
       onClick={() => {
-        setArchiveId(apiArr[3]);
+        setArchiveId(apiArr[4]);
         setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
       }}
       css={css`

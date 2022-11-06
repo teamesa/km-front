@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { atom, selector } from 'recoil';
+import { atom, selector, useRecoilCallback } from 'recoil';
 
 import customAxios from 'utils/hooks/customAxios';
 
@@ -47,7 +47,13 @@ export const getList = async () => {
   return data;
 };
 
-export default atom({
+export const useResetMyArchiveListStateFunction = () =>
+  useRecoilCallback(({ set }) => async () => {
+    const listStateData = await getList();
+    set(myArchiveListState, listStateData);
+  });
+
+export const myArchiveListState = atom({
   key: 'MyArchiveListState',
   default: selector({
     key: 'MyArchiveListState/default',

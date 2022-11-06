@@ -1,5 +1,6 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+import AlertArchiveDeletePopup from 'components/Organisms/Popup/AlertArchiveDeletePopup';
 import AlertCancelConfirmPopup from 'components/Organisms/Popup/AlertCancelConfirmPopup';
 import AlertSuccessPopup from 'components/Organisms/Popup/AlertConfirmPopup';
 import AlertLoginConfirmationPopup from 'components/Organisms/Popup/AlertLoginConfirmationPopup';
@@ -36,6 +37,8 @@ const PopupRouter = () => {
       return <ArchiveWirteConfirmPopup />;
     case POPUP_NAME.OVERFLOW_PICTURE:
       return <ArchivePictureOverflowPopup />;
+    case POPUP_NAME.ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM:
+      return <AlertArchiveDeletePopup />;
     default:
       return null;
   }
