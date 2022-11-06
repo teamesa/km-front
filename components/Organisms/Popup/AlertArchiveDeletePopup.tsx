@@ -7,10 +7,7 @@ import { Box, Button } from 'components/Atoms';
 import Popup from 'components/Molecules/Popup';
 import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
-import {
-  ClickedArchiveId,
-  myArchiveDeleteResponse,
-} from 'states/myArchiveDetail';
+import { ClickedArchiveId } from 'states/myArchiveDetail';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
