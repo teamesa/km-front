@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export type SearchRequestInterface = {
+export type ListRequestInterface = {
   filterOptions: filterOptionsInterface;
   queryString: '';
   requestPagingStatus: {
@@ -18,7 +18,19 @@ export type filterOptionsInterface = {
   regionTypes: string[] | [];
 };
 
-export const makeDefaultSearchRequest = (): SearchRequestInterface => ({
+export const makeEmtpyRequestOption = (
+  exPostFilter: ListRequestInterface,
+): ListRequestInterface => ({
+  ...exPostFilter,
+  filterOptions: {
+    ...exPostFilter.filterOptions,
+    feeTypes: [],
+    progressTypes: [],
+    regionTypes: [],
+  },
+});
+
+export const makeDefaultListRequest = (): ListRequestInterface => ({
   filterOptions: {
     exhibitionType: 'ALL',
     feeTypes: [],
@@ -34,7 +46,7 @@ export const makeDefaultSearchRequest = (): SearchRequestInterface => ({
   searchSortType: 'ENROLL_DESC',
 });
 
-export const searchRequest = atom<SearchRequestInterface>({
-  key: 'SearchRequest',
-  default: makeDefaultSearchRequest(),
+export const listRequest = atom<ListRequestInterface>({
+  key: 'listRequest',
+  default: makeDefaultListRequest(),
 });

@@ -4,7 +4,7 @@ import { detailState } from './detail';
 import MyArchiveListState from './myArchiveList';
 import PopupNameState from './popupName';
 
-import { searchRequest } from 'states/search-request';
+import { searchRequest } from 'states/search-result-request';
 
 export {
   detailState,
