@@ -32,7 +32,7 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
     setChecked(!checked);
   };
 
-  if (archiveData?.length === 0) {
+  if (data.archives.length === 0) {
     return (
       <Box ref={scrollRef}>
         <Box
