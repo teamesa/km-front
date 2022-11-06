@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { Search } from 'assets/archive/Search';
-import { Box, Button, FlexBox, Input } from 'components/Atoms';
+import { Box, Button, FlexBox, Input, Span } from 'components/Atoms';
 import { getArchiveSearch } from 'states/archiveWirte';
 import theme from 'styles/theme';
 
@@ -38,7 +38,12 @@ export default function SearchTitle() {
   }, [keyword]);
 
   return (
-    <Box fontSize="13px" marginTop="40px" paddingBottom="30px">
+    <Box
+      fontSize="13px"
+      marginTop="40px"
+      paddingBottom="30px"
+      position="relative"
+    >
       다녀온 문화생활을 검색해주세요.
       <FlexBox
         marginTop="10px"
@@ -52,27 +57,28 @@ export default function SearchTitle() {
           value={keyword}
           onChange={onChangeData}
         />
-        <Button height="17px">
+        <Button paddingTop="1px">
           <Search />
         </Button>
       </FlexBox>
       {keyItems?.length > 0 && keyword && (
         <Box
           zIndex="3"
-          width="345px"
           height="120px"
           overflowY="scroll"
           backgroundColor={theme.colors.white}
           position="absolute"
-          top="155px"
+          top="70px"
+          width="100%"
           border={`solid 1px ${theme.colors.black}`}
-          padding="12px 15px"
+          padding="0 15px"
         >
           <Box>
             {keyItems.map((search) => (
               <Box key={search.id}>
-                <Box paddingTop="23px">
+                <Box padding="12px 0">
                   <Button
+                    type="button"
                     onClick={() => {
                       setKeyword(search.title);
                       router.push({
@@ -80,11 +86,22 @@ export default function SearchTitle() {
                         query: {
                           id: search.id,
                           title: search?.title,
+                          thumbnailImageUrl: null,
                         },
                       });
                     }}
                   >
-                    {search.title}
+                    {search.title.substring(
+                      0,
+                      search.searchedTextLocationStart - 1,
+                    )}
+                    <Span color={theme.colors.orange}>
+                      {search.title.substring(
+                        search.searchedTextLocationStart,
+                        search.searchedTextLocationEnd,
+                      )}
+                    </Span>
+                    {search.title.substring(search.searchedTextLocationEnd)}
                   </Button>
                 </Box>
               </Box>
