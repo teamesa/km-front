@@ -55,8 +55,8 @@ export default function ArchiveHome() {
   } = useForm<ArchiveWirteProps>({
     mode: 'onChange',
     defaultValues: {
-      starRating: archiveWrite?.starRating ?? 5,
-      visibleAtItem: checked ? true : archiveWrite?.visibleAtItem,
+      starRating: archiveWrite?.starRating ? archiveWrite.starRating : 5,
+      visibleAtItem: checked ? true : false,
     },
   });
 

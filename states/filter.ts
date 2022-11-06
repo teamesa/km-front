@@ -1,6 +1,6 @@
 import { atom, selector } from 'recoil';
 
-import { searchRequest, SearchRequestInterface } from 'states/search-request';
+import { listRequest, ListRequestInterface } from 'states/list-request';
 
 export interface SearchFilterSelectGroup {
   feeTypes: SelectInterface[] | [];
@@ -123,11 +123,11 @@ const filterByStatus = (filterArray: SelectInterface[]): string[] =>
 
 export const makeRequestFilterOptionBySearchFilterSelectGroup = (
   selectGroup: SearchFilterSelectGroup,
-  searchRequest: SearchRequestInterface,
-): SearchRequestInterface => ({
-  ...searchRequest,
+  listRequest: ListRequestInterface,
+): ListRequestInterface => ({
+  ...listRequest,
   filterOptions: {
-    exhibitionType: searchRequest.filterOptions.exhibitionType,
+    exhibitionType: listRequest.filterOptions.exhibitionType,
     feeTypes: filterByStatus(selectGroup.feeTypes),
     progressTypes: filterByStatus(selectGroup.progressTypes),
     regionTypes: filterByStatus(selectGroup.regionTypes),
@@ -151,7 +151,7 @@ const makeFilterStringToSelectInterface = (
 
 export const makeRequestToFilters = ({
   filterOptions: { feeTypes, regionTypes, progressTypes },
-}: SearchRequestInterface): SearchFilterSelectGroup => ({
+}: ListRequestInterface): SearchFilterSelectGroup => ({
   feeTypes: feeTypes.map(makeFilterStringToSelectInterface),
   regionTypes: regionTypes.map(makeFilterStringToSelectInterface),
   progressTypes: progressTypes.map(makeFilterStringToSelectInterface),
@@ -161,7 +161,7 @@ export const filter = atom<SearchFilterSelectGroup>({
   key: 'searchFilter',
   default: selector({
     key: 'searchFilter/default',
-    get: async ({ get }) => makeRequestToFilters(get(searchRequest)),
+    get: async ({ get }) => makeRequestToFilters(get(listRequest)),
   }),
 });
 
