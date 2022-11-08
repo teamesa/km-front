@@ -1,42 +1,22 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 
-import { Box, Button } from 'components/Atoms';
-import { getSearchTitle } from 'states/search';
+import { Box, Button, Span } from 'components/Atoms';
 import theme from 'styles/theme';
 
-interface AutoContents {
-  id: number;
-  link: string;
-  searchedTextLocationEnd: number;
-  searchedTextLocationStart: number;
-  title: string;
-}
-
 export default function SearchTitle({
+  keyItems,
   keyword,
-  change,
 }: {
+  keyItems: {
+    id: number;
+    link: string;
+    searchedTextLocationEnd: number;
+    searchedTextLocationStart: number;
+    title: string;
+  }[];
   keyword: string;
-  change: boolean;
 }) {
   const router = useRouter();
-  const [keyItems, setKeyItems] = useState<AutoContents[]>([]);
-
-  useEffect(() => {
-    const debounce = setTimeout(() => {
-      if (keyword && change) {
-        const updateData = async () => {
-          const searchData = await getSearchTitle({ query: keyword });
-          setKeyItems(searchData.contents);
-        };
-        updateData();
-      }
-    }, 200);
-    return () => {
-      clearTimeout(debounce);
-    };
-  }, [change, keyword]);
 
   return (
     <>
@@ -61,7 +41,17 @@ export default function SearchTitle({
                       router.push(search.link);
                     }}
                   >
-                    {search.title}
+                    {search.title.substring(
+                      0,
+                      search.searchedTextLocationStart - 1,
+                    )}
+                    <Span color={theme.colors.orange}>
+                      {search.title.substring(
+                        search.searchedTextLocationStart,
+                        search.searchedTextLocationEnd,
+                      )}
+                    </Span>
+                    {search.title.substring(search.searchedTextLocationEnd)}
                   </Button>
                 </Box>
               </Box>

@@ -117,7 +117,7 @@ export async function getSearchTitle({ query }: { query: string }) {
     url: `/api/search/auto-complete`,
     method: 'GET',
     params: {
-      query,
+      query: encodeURIComponent(query),
     },
   })) as AxiosResponse<TGetSearchList>;
 

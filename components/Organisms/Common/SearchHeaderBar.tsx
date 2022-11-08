@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 
@@ -10,17 +10,31 @@ import { Box, Button, Input } from 'components/Atoms';
 import SearchTitle from 'components/Organisms/Search/SearchTitle';
 import { Z_INDEX } from 'constants/common';
 import { headerState } from 'states/common';
+import { getSearchTitle } from 'states/search';
 import theme from 'styles/theme';
+
+interface AutoContents {
+  id: number;
+  link: string;
+  searchedTextLocationEnd: number;
+  searchedTextLocationStart: number;
+  title: string;
+}
 
 export default function SearchHeaderBar() {
   const router = useRouter();
   const searchHeader = useRecoilValue(headerState);
   const [keyword, setKeyword] = useState('');
-  const [change, setChange] = useState(false);
+  const [keyItems, setKeyItems] = useState<AutoContents[]>([]);
+  const inputRef = useRef<any>();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
-    setChange(true);
+    debounceOnChange();
+
+    if (!inputRef?.current?.value) {
+      setKeyItems([]);
+    }
   };
 
   const handleOnClick = () => {
@@ -38,7 +52,25 @@ export default function SearchHeaderBar() {
     }
   };
 
+  const debounceOnChange = () => {
+    const debounce = setTimeout(() => {
+      if (inputRef?.current?.value) {
+        const updateData = async () => {
+          const searchData = await getSearchTitle({
+            query: inputRef?.current?.value,
+          });
+          setKeyItems(searchData.contents);
+        };
+        updateData();
+      }
+    }, 200);
+    return () => {
+      clearTimeout(debounce);
+    };
+  };
+
   useEffect(() => {
+    setKeyItems([]);
     if (router?.query?.keyword) {
       if (typeof router.query.keyword === 'string') {
         setKeyword(router.query.keyword);
@@ -97,6 +129,8 @@ export default function SearchHeaderBar() {
                 placeholder="검색어를 입력해주세요"
                 onChange={onChange}
                 onKeyPress={handleOnKeyPress}
+                type="search"
+                ref={inputRef}
               />
               <Button
                 position="absolute"
@@ -113,7 +147,7 @@ export default function SearchHeaderBar() {
               </Button>
             </Box>
           </Box>
-          <SearchTitle keyword={keyword} change={change} />
+          <SearchTitle keyItems={keyItems} keyword={keyword} />
         </Box>
       ) : (
         ''
