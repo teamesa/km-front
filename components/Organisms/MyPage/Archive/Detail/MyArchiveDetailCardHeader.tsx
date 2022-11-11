@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
@@ -31,15 +32,8 @@ export default function MyArchiveDetailHeaderInfo(
   };
 
   const archiveLink = () => {
-    return router.push({
-      pathname: `/archive/update`,
-      query: {
-        id: id,
-        title: props?.title,
-        thumbnailImageUrl: '',
-        checked: true,
-      },
-    });
+    const decode = decodeURIComponent(`/archive/update?id=${id}`);
+    return router.push(`${decode}&exhibitionId=${id}`);
   };
 
   const handleDeleteArchive = () => {
