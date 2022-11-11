@@ -47,7 +47,7 @@ export default function ArchiveHome() {
     mode: 'onChange',
     defaultValues: {
       starRating: archiveWrite?.starRating ?? 5,
-      visibleAtItem: checked ? true : archiveWrite?.visibleAtItem ?? false,
+      visibleAtItem: checked ? true : archiveWrite!.visibleAtItem ?? false,
     },
   });
 
