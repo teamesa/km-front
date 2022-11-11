@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 
+import { SearchClose } from 'assets/archive/SearchClose';
 import noImage from 'assets/common/no_image_375x500.png';
 import { Box, Button, Input } from 'components/Atoms';
 import FlexBox from 'components/Atoms/FlexBox';
@@ -42,7 +43,7 @@ export default function ArchiveTitle({
             height="64px"
             objectFit="cover"
           />
-          <Box fontSize="13px" margin="10px 15px">
+          <Box fontSize="13px" margin="10px 30px 17px 15px">
             {exhibitionTitle}
           </Box>
           <Button
@@ -50,8 +51,11 @@ export default function ArchiveTitle({
             onClick={() => {
               router.back();
             }}
+            width="10px"
+            height="10px"
+            paddingTop="10px"
           >
-            임시버튼
+            <SearchClose />
           </Button>
         </FlexBox>
       )}

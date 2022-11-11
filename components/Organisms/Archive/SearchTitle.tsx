@@ -58,7 +58,7 @@ export default function SearchTitle() {
           value={keyword}
           onChange={onChangeData}
         />
-        <Button paddingTop="1px">
+        <Button paddingTop="1px" type="button">
           <Search />
         </Button>
       </FlexBox>
@@ -73,9 +73,6 @@ export default function SearchTitle() {
           width="100%"
           border={`solid 1px ${theme.colors.black}`}
           padding="0 15px"
-          css={css`
-            word-break: break-all;
-          `}
         >
           <Box>
             {keyItems.map((search) => (
@@ -92,6 +89,10 @@ export default function SearchTitle() {
                         },
                       });
                     }}
+                    textAlign="inherit"
+                    css={css`
+                      word-break: break-all;
+                    `}
                   >
                     {search.title.substring(
                       0,
