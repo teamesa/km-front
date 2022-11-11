@@ -16,18 +16,18 @@ export default function ArchiveTitle({
   control: any;
 }) {
   const router = useRouter();
-  const { id } = router.query;
+  const { id, exhibitionId } = router.query;
   const [summaryData, setSummaryData] = useState<TGetSummary>();
   const listImage = summaryData?.listImageUrl;
   const exhibitionTitle = summaryData?.title;
 
   useEffect(() => {
     async function getData() {
-      const data = await getSummary({ itemId: Number(id) });
+      const data = await getSummary({ itemId: Number(exhibitionId ?? id) });
       setSummaryData(data);
     }
     getData();
-  }, [id]);
+  }, [exhibitionId, id]);
 
   return (
     <Controller
