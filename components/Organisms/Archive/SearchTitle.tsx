@@ -85,8 +85,6 @@ export default function SearchTitle() {
                         pathname: '/archive',
                         query: {
                           id: search.id,
-                          title: search?.title,
-                          thumbnailImageUrl: null,
                         },
                       });
                     }}

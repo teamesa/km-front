@@ -61,8 +61,6 @@ export default function Navigator() {
       pathname: data?.itemInfoAdditionalInfo?.archiveLink.link,
       query: {
         id: id,
-        title: data?.title,
-        thumbnailImageUrl: data?.listImageUrl,
         checked: true,
       },
     });
