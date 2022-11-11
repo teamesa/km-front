@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   useSetRecoilState,
@@ -37,6 +37,7 @@ export default function ArchiveHome() {
   const [archiveWrite, setArchiveWrite] = useRecoilState(archiveWriteState);
   const resetArchiveWrite = useResetRecoilState(archiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
+  const [visible, setVisible] = useState<boolean | undefined>(false);
 
   const {
     register,
@@ -47,13 +48,14 @@ export default function ArchiveHome() {
     mode: 'onChange',
     defaultValues: {
       starRating: archiveWrite?.starRating ?? 5,
-      visibleAtItem: checked ? true : archiveWrite!.visibleAtItem ?? false,
+      visibleAtItem: checked ? true : visible ?? false,
     },
   });
 
   useEffect(() => {
     resetArchiveWrite();
-  }, [resetArchiveWrite]);
+    setVisible(archiveWrite?.visibleAtItem);
+  }, [archiveWrite?.visibleAtItem, resetArchiveWrite]);
 
   const onWriteSubmit = async (data: ArchiveWirteProps) => {
     if (!id) return alert('전시회 title 입력이 필요');
@@ -193,7 +195,11 @@ export default function ArchiveHome() {
           <FlexBox>
             <RadioLabel>
               <FlexBox>
-                <CheckBox type="checkbox" {...register('visibleAtItem')} />
+                <CheckBox
+                  type="checkbox"
+                  {...register('visibleAtItem')}
+                  defaultChecked={archiveWrite?.visibleAtItem}
+                />
                 <Box margin="3px 10px" fontSize="12px">
                   다른 사람도 보여주기
                 </Box>
