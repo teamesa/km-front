@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -72,6 +73,9 @@ export default function SearchTitle() {
           width="100%"
           border={`solid 1px ${theme.colors.black}`}
           padding="0 15px"
+          css={css`
+            word-break: break-all;
+          `}
         >
           <Box>
             {keyItems.map((search) => (
