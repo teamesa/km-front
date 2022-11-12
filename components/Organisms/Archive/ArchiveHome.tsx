@@ -94,6 +94,11 @@ export default function ArchiveHome() {
     }
   };
 
+  const onCancel = () => {
+    setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
+    setPopupName(POPUP_NAME.ALERT_Archive_CANCEL_CONFIRM);
+  };
+
   const onUpdateSubmit = async (data: ArchiveWirteProps) => {
     const postData = {
       ...data,
@@ -109,7 +114,6 @@ export default function ArchiveHome() {
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
     };
-    console.log('data', data);
     setArchiveWrite(postData);
     try {
       await axios({
@@ -232,7 +236,7 @@ export default function ArchiveHome() {
                 color={theme.colors.black}
                 width="100%"
                 height="50px"
-                onClick={() => router.back()}
+                onClick={onCancel}
               >
                 취소
               </Button>
