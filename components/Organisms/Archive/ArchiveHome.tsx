@@ -1,6 +1,5 @@
-import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   useSetRecoilState,
@@ -10,18 +9,11 @@ import {
 } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
-import noImage from 'assets/common/no_image_375x500.png';
-import {
-  Box,
-  Button,
-  FlexBox,
-  Input,
-  RadioLabel,
-  TextArea,
-} from 'components/Atoms';
+import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
 import ArchiveFileUploadForm from 'components/Organisms/Archive/ArchiveFileUploadForm';
+import ArchiveTitle from 'components/Organisms/Archive/ArchiveTitle';
 import Rating from 'components/Organisms/Archive/Rating';
 import SearchTitle from 'components/Organisms/Archive/SearchTitle';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
@@ -39,13 +31,13 @@ export default function ArchiveHome() {
   const pathname = window?.location?.pathname;
   const router = useRouter();
   const axios = customAxios();
-  const { id, title, checked, exhibitionId } = router.query;
-  const thumbnailImageUrl = String(router.query.thumbnailImageUrl);
+  const { id, checked, exhibitionId } = router.query;
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const [archiveWrite, setArchiveWrite] = useRecoilState(archiveWriteState);
   const resetArchiveWrite = useResetRecoilState(archiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
+  const [visible, setVisible] = useState<boolean | undefined>(false);
 
   const {
     register,
@@ -55,16 +47,18 @@ export default function ArchiveHome() {
   } = useForm<ArchiveWirteProps>({
     mode: 'onChange',
     defaultValues: {
-      starRating: archiveWrite?.starRating ? archiveWrite.starRating : 5,
-      visibleAtItem: checked ? true : false,
+      starRating: archiveWrite?.starRating ?? 5,
+      visibleAtItem: checked ? true : visible ?? false,
     },
   });
 
   useEffect(() => {
     resetArchiveWrite();
-  }, [resetArchiveWrite]);
+    setVisible(archiveWrite?.visibleAtItem);
+  }, [archiveWrite?.visibleAtItem, resetArchiveWrite]);
 
   const onWriteSubmit = async (data: ArchiveWirteProps) => {
+    if (!id) return alert('전시회 title 입력이 필요');
     const postData = {
       ...data,
       itemId: Number(data.itemId),
@@ -109,7 +103,6 @@ export default function ArchiveHome() {
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
     };
-    console.log('data', data);
     setArchiveWrite(postData);
     try {
       await axios({
@@ -127,24 +120,13 @@ export default function ArchiveHome() {
 
   return (
     <>
-      <Box>{title ? null : <SearchTitle />}</Box>
       <form onSubmit={handleSubmit(onWriteSubmit)}>
         <Box>
-          {title ? (
-            <FlexBox marginTop="48px" paddingBottom="20px">
-              <Image
-                src={thumbnailImageUrl ? thumbnailImageUrl : noImage}
-                alt="image"
-                width="64px"
-                height="64px"
-                objectFit="cover"
-              />
-              <Box fontSize="13px" margin="10px 15px">
-                {title}
-              </Box>
-              <Input hidden value={id} {...register('itemId')} />
-            </FlexBox>
-          ) : null}
+          {id ? (
+            <ArchiveTitle name="itemId" control={control} />
+          ) : (
+            <SearchTitle />
+          )}
           <Box textAlign="center" fontSize="18px">
             <Box>이 문화생활, 어땠나요?</Box>
             <Box marginTop="16px">
@@ -213,7 +195,11 @@ export default function ArchiveHome() {
           <FlexBox>
             <RadioLabel>
               <FlexBox>
-                <CheckBox type="checkbox" {...register('visibleAtItem')} />
+                <CheckBox
+                  type="checkbox"
+                  {...register('visibleAtItem')}
+                  defaultChecked={archiveWrite?.visibleAtItem}
+                />
                 <Box margin="3px 10px" fontSize="12px">
                   다른 사람도 보여주기
                 </Box>
