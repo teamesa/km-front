@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box, Button } from 'components/Atoms';
@@ -6,13 +7,13 @@ import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import theme from 'styles/theme';
 
-/** TODO: 취소 및 확인 누른 후 액션에 대한 정의필요 */
-
-const AlertCancelConfirmPopup = () => {
+const AlertArchiveCancelConfirmPopup = () => {
+  const router = useRouter();
   const alertState = useRecoilValue(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
 
   const handleConfirm = () => {
+    router.back();
     setPopupName(POPUP_NAME.NULL);
   };
 
@@ -63,4 +64,4 @@ const AlertCancelConfirmPopup = () => {
   );
 };
 
-export default AlertCancelConfirmPopup;
+export default AlertArchiveCancelConfirmPopup;

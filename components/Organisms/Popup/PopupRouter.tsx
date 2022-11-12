@@ -1,7 +1,7 @@
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
+import AlertArchiveCancelConfirmPopup from 'components/Organisms/Popup/AlertArchiveCancelConfirmPopup';
 import AlertArchiveDeletePopup from 'components/Organisms/Popup/AlertArchiveDeletePopup';
-import AlertCancelConfirmPopup from 'components/Organisms/Popup/AlertCancelConfirmPopup';
 import AlertSuccessPopup from 'components/Organisms/Popup/AlertConfirmPopup';
 import AlertLoginConfirmationPopup from 'components/Organisms/Popup/AlertLoginConfirmationPopup';
 import AlertMoveToMyArchivePopup from 'components/Organisms/Popup/AlertMoveToMyArchivePopup';
@@ -25,8 +25,8 @@ const PopupRouter = () => {
   switch (popupName) {
     case POPUP_NAME.ALERT_CONFIRM:
       return <AlertSuccessPopup />;
-    case POPUP_NAME.ALERT_CANCEL_CONFIRM:
-      return <AlertCancelConfirmPopup />;
+    case POPUP_NAME.ALERT_Archive_CANCEL_CONFIRM:
+      return <AlertArchiveCancelConfirmPopup />;
     case POPUP_NAME.ALERT_LOGIN_CONFIRMATION:
       return <AlertLoginConfirmationPopup />;
     case POPUP_NAME.POPUP_ARCHIVE_DETAIL:
