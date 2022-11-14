@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 
 import { Box, Button, Span } from 'components/Atoms';
@@ -43,7 +44,7 @@ export default function SearchTitle({
                   >
                     {search.title.substring(
                       0,
-                      search.searchedTextLocationStart - 1,
+                      search.searchedTextLocationStart,
                     )}
                     <Span color={theme.colors.orange}>
                       {search.title.substring(
