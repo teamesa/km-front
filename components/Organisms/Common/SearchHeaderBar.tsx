@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import ArrowLeft from 'assets/common/header/ArrowLeft';
 import Search from 'assets/common/header/Search';
@@ -10,7 +10,7 @@ import { Box, Button, Input } from 'components/Atoms';
 import SearchTitle from 'components/Organisms/Search/SearchTitle';
 import { Z_INDEX } from 'constants/common';
 import { headerState } from 'states/common';
-import { getSearchTitle } from 'states/search';
+import { getSearchTitle, recentKeywords } from 'states/search';
 import theme from 'styles/theme';
 
 interface AutoContents {
@@ -27,6 +27,8 @@ export default function SearchHeaderBar() {
   const [keyword, setKeyword] = useState('');
   const [keyItems, setKeyItems] = useState<AutoContents[]>([]);
   const inputRef = useRef<any>();
+  const [localStorageKeywords, setlocalStorageKeywords] =
+    useRecoilState(recentKeywords);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
@@ -39,9 +41,23 @@ export default function SearchHeaderBar() {
 
   const handleOnClick = () => {
     if (keyword) {
+      const recentKeywords = localStorageKeywords.slice(0, 5);
+      const containedKeywordIndex = recentKeywords.findIndex(
+        (it) => it === keyword,
+      );
+      if (containedKeywordIndex < 0) {
+        setlocalStorageKeywords([keyword, ...recentKeywords.slice(0, 4)]);
+      } else {
+        setlocalStorageKeywords([
+          keyword,
+          ...recentKeywords.slice(0, containedKeywordIndex),
+          ...recentKeywords.slice(containedKeywordIndex + 1, 5),
+        ]);
+      }
+
       router.push({
         pathname: '/search/result',
-        query: { keyword: keyword },
+        query: { keyword },
       });
     }
   };
@@ -57,7 +73,7 @@ export default function SearchHeaderBar() {
       if (inputRef?.current?.value) {
         const updateData = async () => {
           const searchData = await getSearchTitle({
-            query: inputRef?.current?.value,
+            query: inputRef.current.value,
           });
           setKeyItems(searchData.contents);
         };
