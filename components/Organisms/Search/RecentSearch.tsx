@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useRecoilState } from 'recoil';
 
-import { DeleteBtn } from 'assets/search/deleteBtn';
+import { DeleteBtn } from 'assets/search/DeleteBtn';
 import { Box, FlexBox } from 'components/Atoms';
 import { recentKeywords } from 'states/search';
 import theme from 'styles/theme';

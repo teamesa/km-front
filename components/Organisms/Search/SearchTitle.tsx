@@ -38,6 +38,12 @@ export default function SearchTitle({
                 <Box paddingTop="23px">
                   <Button
                     textAlign="left"
+                    width="100%"
+                    css={css`
+                      white-space: nowrap;
+                      overflow: hidden;
+                      text-overflow: ellipsis;
+                    `}
                     onClick={() => {
                       router.push(search.link);
                     }}
