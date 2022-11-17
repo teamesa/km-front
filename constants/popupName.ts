@@ -1,7 +1,7 @@
 export const POPUP_NAME = {
   NULL: null,
   ALERT_CONFIRM: 'AlertConfirm',
-  ALERT_Archive_CANCEL_CONFIRM: 'AlertArchiveCancelConfirmPopup',
+  ALERT_ARCHIVE_CANCEL_CONFIRM: 'AlertArchiveCancelConfirmPopup',
   ALERT_LOGIN_CONFIRMATION: 'AlertLoginConfirmationPopup',
   POPUP_ARCHIVE_DETAIL: 'MyArchiveDetailPopup',
   ALERT_MOVE_MyARCHIVE_PAGE: 'AlertMoveMyArchivePage',

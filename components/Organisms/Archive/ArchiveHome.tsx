@@ -96,7 +96,7 @@ export default function ArchiveHome() {
 
   const onCancel = () => {
     setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
-    setPopupName(POPUP_NAME.ALERT_Archive_CANCEL_CONFIRM);
+    setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
   };
 
   const onUpdateSubmit = async (data: ArchiveWirteProps) => {
