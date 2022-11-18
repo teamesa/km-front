@@ -19,7 +19,6 @@ export default function Item(props: ItemProps) {
   const content = props.content;
   const setPopupName = useSetRecoilState(PopupNameState);
   const setArchiveId = useSetRecoilState(ClickedArchiveId);
-
   const apiArr = content.api.split('/');
   return (
     <FlexBox

@@ -11,6 +11,7 @@ import { TGetSummary } from 'states/detail';
 import {
   MyArchiveDetailProps,
   MyArchiveDetailHeaderInfoProps,
+  ClickedItemId,
   ClickedArchiveId,
 } from 'states/myArchiveDetail';
 import theme from 'styles/theme';
@@ -19,7 +20,8 @@ export default function MyArchiveDetailHeaderInfo(
   props: MyArchiveDetailHeaderInfoProps,
 ) {
   const router = useRouter();
-  const id = useRecoilValue(ClickedArchiveId);
+  const archiveId = useRecoilValue(ClickedArchiveId);
+  const itemId = useRecoilValue(ClickedItemId);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const handleClosePopup = () => {
@@ -32,8 +34,8 @@ export default function MyArchiveDetailHeaderInfo(
   };
 
   const archiveLink = () => {
-    const decode = decodeURIComponent(`/archive/update?id=${id}`);
-    return router.push(`${decode}&exhibitionId=${id}`);
+    const decode = decodeURIComponent(`/archive/update?id=${archiveId}`);
+    return router.push(`${decode}&exhibitionId=${itemId}`);
   };
 
   const handleDeleteArchive = () => {
