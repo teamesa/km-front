@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import React from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import ArrowLeft from 'assets/common/header/ArrowLeft';
 import Search from 'assets/common/header/Search';
@@ -10,8 +10,9 @@ import { Box, Button, Input } from 'components/Atoms';
 import SearchTitle from 'components/Organisms/Search/SearchTitle';
 import { Z_INDEX } from 'constants/common';
 import { headerState } from 'states/common';
-import { getSearchTitle, recentKeywords } from 'states/search';
+import { getSearchTitle } from 'states/search';
 import theme from 'styles/theme';
+import useSetLocalstorageKeywords from 'utils/hooks/useSetLocalstorageKeywords';
 
 interface AutoContents {
   id: number;
@@ -22,13 +23,12 @@ interface AutoContents {
 }
 
 export default function SearchHeaderBar() {
+  const { makeLocalStorageKeywords } = useSetLocalstorageKeywords();
   const router = useRouter();
   const searchHeader = useRecoilValue(headerState);
   const [keyword, setKeyword] = useState('');
   const [keyItems, setKeyItems] = useState<AutoContents[]>([]);
   const inputRef = useRef<any>();
-  const [localStorageKeywords, setlocalStorageKeywords] =
-    useRecoilState(recentKeywords);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
@@ -69,22 +69,6 @@ export default function SearchHeaderBar() {
     return () => {
       clearTimeout(debounce);
     };
-  };
-
-  const makeLocalStorageKeywords = (keyword: string) => {
-    const recentKeywords = localStorageKeywords.slice(0, 5);
-    const containedKeywordIndex = recentKeywords.findIndex(
-      (it) => it === keyword,
-    );
-    if (containedKeywordIndex < 0) {
-      setlocalStorageKeywords([keyword, ...recentKeywords.slice(0, 4)]);
-    } else {
-      setlocalStorageKeywords([
-        keyword,
-        ...recentKeywords.slice(0, containedKeywordIndex),
-        ...recentKeywords.slice(containedKeywordIndex + 1, 5),
-      ]);
-    }
   };
 
   useEffect(() => {
@@ -165,11 +149,7 @@ export default function SearchHeaderBar() {
               </Button>
             </Box>
           </Box>
-          <SearchTitle
-            keyItems={keyItems}
-            keyword={keyword}
-            makeLocalStorageKeywords={makeLocalStorageKeywords}
-          />
+          <SearchTitle keyItems={keyItems} keyword={keyword} />
         </Box>
       ) : (
         ''

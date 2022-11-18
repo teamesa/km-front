@@ -1,8 +1,9 @@
 import { AxiosResponse } from 'axios';
-import { atom, AtomEffect, selector, useRecoilCallback } from 'recoil';
+import { atom, selector, useRecoilCallback } from 'recoil';
 
 import { SearchRequestInterface } from 'states/search-result-request';
 import customAxios from 'utils/hooks/customAxios';
+import localStorageEffect from 'utils/hooks/useLocalStorageUitls';
 
 interface TGetSearchList {
   contents: {
@@ -141,26 +142,6 @@ export const searchListState = atom<TPostSearch>({
     }),
   }),
 });
-
-const store = typeof window !== 'undefined' ? window.localStorage : null;
-
-const localStorageEffect: <T>(key: string) => AtomEffect<T> =
-  (key: string) =>
-  ({ setSelf, onSet }) => {
-    if (store) {
-      const savedValue = localStorage.getItem(key);
-      if (savedValue != null) {
-        setSelf(JSON.parse(savedValue)); //아통 만들기
-      }
-
-      //로컬스토리지에 셋팅
-      onSet((newValue, _, isReset) => {
-        isReset
-          ? localStorage.removeItem(key)
-          : localStorage.setItem(key, JSON.stringify(newValue));
-      });
-    }
-  };
 
 export const recentKeywords = atom<string[]>({
   key: 'RecentKeywords',

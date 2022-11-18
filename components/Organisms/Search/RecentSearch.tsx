@@ -6,9 +6,11 @@ import { DeleteBtn } from 'assets/search/DeleteBtn';
 import { Box } from 'components/Atoms';
 import { recentKeywords } from 'states/search';
 import theme from 'styles/theme';
+import useSetLocalstorageKeywords from 'utils/hooks/useSetLocalstorageKeywords';
 
 export default function RecentSearch() {
   const router = useRouter();
+  const { makeLocalStorageKeywords } = useSetLocalstorageKeywords();
   const [localStorageKeywords, setlocalStorageKeywords] =
     useRecoilState(recentKeywords);
 
@@ -60,6 +62,7 @@ export default function RecentSearch() {
                 text-overflow: ellipsis;
               `}
               onClick={() => {
+                makeLocalStorageKeywords(keyword);
                 router.push({
                   pathname: '/search/result',
                   query: { keyword },

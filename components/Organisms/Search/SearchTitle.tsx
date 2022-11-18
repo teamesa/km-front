@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 
 import { Box, Button, Span } from 'components/Atoms';
 import theme from 'styles/theme';
+import useSetLocalstorageKeywords from 'utils/hooks/useSetLocalstorageKeywords';
 
 export default function SearchTitle({
   keyItems,
   keyword,
-  makeLocalStorageKeywords,
 }: {
   keyItems: {
     id: number;
@@ -17,9 +17,9 @@ export default function SearchTitle({
     title: string;
   }[];
   keyword: string;
-  makeLocalStorageKeywords: Function;
 }) {
   const router = useRouter();
+  const { makeLocalStorageKeywords } = useSetLocalstorageKeywords();
 
   return (
     <>
