@@ -33,7 +33,6 @@ export default function SearchHeaderBar() {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);
     debounceOnChange();
-
     if (!inputRef?.current?.value) {
       setKeyItems([]);
     }
@@ -41,20 +40,7 @@ export default function SearchHeaderBar() {
 
   const handleOnClick = () => {
     if (keyword) {
-      const recentKeywords = localStorageKeywords.slice(0, 5);
-      const containedKeywordIndex = recentKeywords.findIndex(
-        (it) => it === keyword,
-      );
-      if (containedKeywordIndex < 0) {
-        setlocalStorageKeywords([keyword, ...recentKeywords.slice(0, 4)]);
-      } else {
-        setlocalStorageKeywords([
-          keyword,
-          ...recentKeywords.slice(0, containedKeywordIndex),
-          ...recentKeywords.slice(containedKeywordIndex + 1, 5),
-        ]);
-      }
-
+      makeLocalStorageKeywords(keyword);
       router.push({
         pathname: '/search/result',
         query: { keyword },
@@ -85,7 +71,27 @@ export default function SearchHeaderBar() {
     };
   };
 
+  const makeLocalStorageKeywords = (keyword: string) => {
+    const recentKeywords = localStorageKeywords.slice(0, 5);
+    const containedKeywordIndex = recentKeywords.findIndex(
+      (it) => it === keyword,
+    );
+    if (containedKeywordIndex < 0) {
+      setlocalStorageKeywords([keyword, ...recentKeywords.slice(0, 4)]);
+    } else {
+      setlocalStorageKeywords([
+        keyword,
+        ...recentKeywords.slice(0, containedKeywordIndex),
+        ...recentKeywords.slice(containedKeywordIndex + 1, 5),
+      ]);
+    }
+  };
+
   useEffect(() => {
+    console.log('hi');
+    if (inputRef?.current?.value) {
+      inputRef.current.value = '';
+    }
     setKeyItems([]);
     if (router?.query?.keyword) {
       if (typeof router.query.keyword === 'string') {
@@ -163,7 +169,11 @@ export default function SearchHeaderBar() {
               </Button>
             </Box>
           </Box>
-          <SearchTitle keyItems={keyItems} keyword={keyword} />
+          <SearchTitle
+            keyItems={keyItems}
+            keyword={keyword}
+            makeLocalStorageKeywords={makeLocalStorageKeywords}
+          />
         </Box>
       ) : (
         ''

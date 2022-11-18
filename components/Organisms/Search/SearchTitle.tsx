@@ -7,6 +7,7 @@ import theme from 'styles/theme';
 export default function SearchTitle({
   keyItems,
   keyword,
+  makeLocalStorageKeywords,
 }: {
   keyItems: {
     id: number;
@@ -16,6 +17,7 @@ export default function SearchTitle({
     title: string;
   }[];
   keyword: string;
+  makeLocalStorageKeywords: Function;
 }) {
   const router = useRouter();
 
@@ -45,6 +47,7 @@ export default function SearchTitle({
                       text-overflow: ellipsis;
                     `}
                     onClick={() => {
+                      makeLocalStorageKeywords(search.title);
                       router.push(search.link);
                     }}
                   >
