@@ -1,5 +1,4 @@
 import { AxiosResponse } from 'axios';
-import { useRouter } from 'next/router';
 import { atom, selector, useRecoilCallback } from 'recoil';
 
 import { ArchiveSquareState } from 'states/archive-square';

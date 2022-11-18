@@ -90,8 +90,12 @@ export default function SearchTitle() {
                       });
                     }}
                     textAlign="inherit"
+                    display="inline-block"
+                    overflow="hidden"
+                    width="80vw"
                     css={css`
-                      word-break: break-all;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
                     `}
                   >
                     {search.title.substring(
