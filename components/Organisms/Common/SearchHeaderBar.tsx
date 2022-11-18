@@ -88,10 +88,6 @@ export default function SearchHeaderBar() {
   };
 
   useEffect(() => {
-    console.log('hi');
-    if (inputRef?.current?.value) {
-      inputRef.current.value = '';
-    }
     setKeyItems([]);
     if (router?.query?.keyword) {
       if (typeof router.query.keyword === 'string') {
