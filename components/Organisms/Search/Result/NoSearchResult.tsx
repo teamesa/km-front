@@ -17,7 +17,7 @@ export default function NoSearchResult(keyword: SearchKeyword) {
       fontSize="0"
     >
       <Alert width="40px" height="40px" />
-      <Box margin="20px 0px 12px" fontSize="13px" lineHeight="20px">
+      <Box margin="20px 30px 12px" fontSize="13px" lineHeight="20px">
         <Span color={theme.colors.orange}>{`"${keyword.keyword}"`}</Span> 와
         일치하는 검색 결과가 없습니다.
         <br />
