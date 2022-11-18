@@ -8,7 +8,7 @@ const localStorageEffect: <T>(key: string) => AtomEffect<T> =
     if (store) {
       const savedValue = localStorage.getItem(key);
       if (savedValue != null) {
-        setSelf(JSON.parse(savedValue)); //아통 만들기
+        setSelf(JSON.parse(savedValue)); //아톰 만들기
       }
 
       //로컬스토리지에 셋팅
