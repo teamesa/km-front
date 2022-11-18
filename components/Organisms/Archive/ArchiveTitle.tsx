@@ -35,17 +35,23 @@ export default function ArchiveTitle({
       name={name}
       control={control}
       render={() => (
-        <FlexBox marginTop="48px" paddingBottom="20px">
-          <Image
-            src={listImage ? listImage : noImage}
-            alt="image"
-            width="64px"
-            height="64px"
-            objectFit="cover"
-          />
-          <Box fontSize="13px" margin="10px 30px 17px 15px">
-            {exhibitionTitle}
-          </Box>
+        <FlexBox
+          marginTop="48px"
+          paddingBottom="20px"
+          justifyContent="space-between"
+        >
+          <FlexBox>
+            <Image
+              src={listImage ? listImage : noImage}
+              alt="image"
+              width="64px"
+              height="64px"
+              objectFit="cover"
+            />
+            <Box fontSize="13px" margin="10px 30px 17px 15px">
+              {exhibitionTitle}
+            </Box>
+          </FlexBox>
           <Button
             type="button"
             onClick={() => {
