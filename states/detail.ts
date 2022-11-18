@@ -78,7 +78,7 @@ const query = () => {
   return queryData;
 };
 
-export async function getSummary(itemId?: number) {
+export async function getSummary({ itemId }: { itemId?: number } = {}) {
   const queryData = query();
   const { data } = (await axios({
     url: `/api/item/info/${itemId || Number(queryData[1])}`,

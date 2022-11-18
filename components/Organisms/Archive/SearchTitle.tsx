@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -57,7 +58,7 @@ export default function SearchTitle() {
           value={keyword}
           onChange={onChangeData}
         />
-        <Button paddingTop="1px">
+        <Button paddingTop="1px" type="button">
           <Search />
         </Button>
       </FlexBox>
@@ -85,11 +86,17 @@ export default function SearchTitle() {
                         pathname: '/archive',
                         query: {
                           id: search.id,
-                          title: search?.title,
-                          thumbnailImageUrl: null,
                         },
                       });
                     }}
+                    textAlign="inherit"
+                    display="inline-block"
+                    overflow="hidden"
+                    width="80vw"
+                    css={css`
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                    `}
                   >
                     {search.title.substring(
                       0,

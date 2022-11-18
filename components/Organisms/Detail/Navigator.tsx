@@ -53,16 +53,12 @@ export default function Navigator() {
     if (
       data?.itemInfoAdditionalInfo?.archiveLink.title === '아카이브 수정하기'
     ) {
-      return router.push(
-        `${decode}&title=${data?.title}&thumbnailImageUrl=${data?.listImageUrl}&exhibitionId=${id}`,
-      );
+      return router.push(`${decode}&exhibitionId=${id}`);
     }
     return router.push({
       pathname: data?.itemInfoAdditionalInfo?.archiveLink.link,
       query: {
         id: id,
-        title: data?.title,
-        thumbnailImageUrl: data?.listImageUrl,
         checked: true,
       },
     });

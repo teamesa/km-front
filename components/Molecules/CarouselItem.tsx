@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 
 import Box from 'components/Atoms/Box';
+import CarouselDim from 'components/Molecules/CarouselDim';
 import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
 
 export default function CarouselItem({
@@ -11,6 +12,7 @@ export default function CarouselItem({
   handleIndicator,
   width,
   height,
+  dimOption,
 }: {
   itemOrder: number;
   imgUrl: string;
@@ -18,6 +20,7 @@ export default function CarouselItem({
   handleIndicator: Function;
   width: string;
   height: string;
+  dimOption?: boolean;
 }) {
   const onIntersect: IntersectionObserverCallback = (entries) => {
     entries.forEach((entry) => {
@@ -44,6 +47,7 @@ export default function CarouselItem({
       ref={setTarget}
     >
       <Image src={imgUrl} alt="image" layout="fill" />
+      {dimOption ? <CarouselDim height={height} /> : <></>}
     </Box>
   );
 }
