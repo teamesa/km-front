@@ -32,26 +32,32 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
     setChecked(!checked);
   };
 
-  if (data.archives.length === 0) {
+  const archiveTitle = () => {
     return (
-      <Box ref={scrollRef}>
-        <Box
-          paddingTop="100px"
-          margin="0 auto"
-          height="700px"
-          textAlign="center"
+      <Box paddingTop="80px">
+        <FlexBox
+          paddingBottom="15px"
+          justifyContent="space-between"
+          paddingTop="30px"
         >
-          <DetailNoData />
-          <Box marginTop="20px" fontSize="13px" lineHeight="20px">
-            아카이브가 비어있습니다.
-            <br /> 코멘트를 기록해주세요.
+          <Box fontSize="15px" color={theme.colors.black} fontWeight={500}>
+            아카이브
           </Box>
-          <Box width="100%" height="60px" />
-          <Box width="100%" height="var(--platformBottomArea)" />
-        </Box>
+          <FlexBox alignItems="center">
+            <Box
+              fontSize="12px"
+              color={theme.colors.gray77}
+              paddingRight="10px"
+            >
+              사진 아카이브만
+            </Box>
+            <CheckBox type="checkbox" onChange={onClick} />
+          </FlexBox>
+        </FlexBox>
+        <Box height="1px" backgroundColor={theme.colors.black} />
       </Box>
     );
-  }
+  };
 
   const makeAvgStarRating = () => {
     const rating = data.avgStarRating * 20;
@@ -105,25 +111,31 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
     );
   };
 
+  if (data.archives.length === 0) {
+    return (
+      <Box ref={scrollRef}>
+        {introYn === 2 ? archiveTitle() : null}
+        <Box
+          paddingTop="80px"
+          margin="0 auto"
+          height="700px"
+          textAlign="center"
+        >
+          <DetailNoData />
+          <Box marginTop="20px" fontSize="13px" lineHeight="20px">
+            아카이브가 비어있습니다.
+            <br /> 코멘트를 기록해주세요.
+          </Box>
+          <Box width="100%" height="60px" />
+          <Box width="100%" height="var(--platformBottomArea)" />
+        </Box>
+      </Box>
+    );
+  }
+
   return (
     <Box ref={scrollRef}>
-      {introYn === 2 ? <Box paddingTop="80px" /> : null}
-      <FlexBox
-        paddingBottom="15px"
-        justifyContent="space-between"
-        paddingTop="30px"
-      >
-        <Box fontSize="15px" color={theme.colors.black} fontWeight={500}>
-          아카이브
-        </Box>
-        <FlexBox alignItems="center">
-          <Box fontSize="12px" color={theme.colors.gray77} paddingRight="10px">
-            사진 아카이브만
-          </Box>
-          <CheckBox type="checkbox" onChange={onClick} />
-        </FlexBox>
-      </FlexBox>
-      <Box height="1px" backgroundColor={theme.colors.black} />
+      {introYn === 2 ? archiveTitle() : null}
       <Box color={theme.colors.black} fontSize="22px" paddingTop="30px">
         <FlexBox alignItems="center">
           <StartRatingImage />
