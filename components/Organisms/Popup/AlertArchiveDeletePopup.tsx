@@ -1,28 +1,17 @@
-import axios from 'axios';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box, Button } from 'components/Atoms';
 import Popup from 'components/Molecules/Popup';
-import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import { ClickedArchiveId } from 'states/myArchiveDetail';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
-/** TODO: 취소 및 확인 누른 후 액션에 대한 정의필요 */
-
 const AlertArchiveDeletePopup = () => {
   const setAlertState = useRecoilValue(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const clickedArchiveIdState = useRecoilValue(ClickedArchiveId);
-
-  const [response, setResponse] = useState('');
-  const [readStatus, writeStatus] = useState('');
-
-  const router = useRouter();
 
   const deleteArchiveAxios = async () => {
     const axios = customAxios();
