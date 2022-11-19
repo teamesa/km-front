@@ -135,11 +135,6 @@ export default function SearchHeaderBar() {
                 onKeyPress={handleOnKeyPress}
                 type="search"
                 ref={inputRef}
-                css={css`
-                  appearance: none;
-                  -webkit-appearance: none;
-                  -moz-appearance: none;
-                `}
               />
               <Button
                 position="absolute"
