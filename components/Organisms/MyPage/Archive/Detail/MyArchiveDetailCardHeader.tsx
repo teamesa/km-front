@@ -43,8 +43,9 @@ export default function MyArchiveDetailHeaderInfo(
   };
 
   const handleDeleteArchive = () => {
-    setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_DELETE_CONFIRM);
+    console.log('삭제 클릭됏어요');
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM);
+    setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_DELETE_CONFIRM);
   };
 
   return (
