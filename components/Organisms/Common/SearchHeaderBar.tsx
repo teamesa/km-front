@@ -126,13 +126,20 @@ export default function SearchHeaderBar() {
                 padding="0px 45px 0px 15px"
                 height="40px"
                 fontSize="13px"
+                backgroundColor={theme.colors.white}
                 border={`1px solid ${theme.colors.grayDD}`}
+                borderRadius="0"
                 value={keyword}
                 placeholder="검색어를 입력해주세요"
                 onChange={onChange}
                 onKeyPress={handleOnKeyPress}
                 type="search"
                 ref={inputRef}
+                css={css`
+                  appearance: none;
+                  -webkit-appearance: none;
+                  -moz-appearance: none;
+                `}
               />
               <Button
                 position="absolute"
