@@ -10,12 +10,12 @@ import {
 
 export default function ModuleResolver({ moduleName, data }: ModuleData) {
   switch (moduleName) {
-    case 'key-visual':
-      const { index: keyVisualIndex, keyvisualDatas } = data as KeyVisualProps;
+    case 'KEY_VISUAL':
+      const { index: keyVisualIndex, keyVisualDatas } = data as KeyVisualProps;
       return (
-        <KeyVisual index={keyVisualIndex} keyvisualDatas={keyvisualDatas} />
+        <KeyVisual index={keyVisualIndex} keyVisualDatas={keyVisualDatas} />
       );
-    case 'swipe-item':
+    case 'SWIPE_ITEM':
       const {
         index: SwipeItemIndex,
         thumbnailPhotoUrl,
@@ -34,7 +34,7 @@ export default function ModuleResolver({ moduleName, data }: ModuleData) {
           keywords={keywords}
         />
       );
-    case 'monthly-free-item':
+    case 'MONTHLY_FREE_ITEM':
       const {
         index: MonthlyFreeItemIndex,
         topTitle,
@@ -49,5 +49,7 @@ export default function ModuleResolver({ moduleName, data }: ModuleData) {
           contents={contents}
         />
       );
+    default:
+      return <div>error</div>;
   }
 }
