@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { Box } from 'components/Atoms';
+import CarouselDim from 'components/Molecules/CarouselDim';
 import theme from 'styles/theme';
 
 const HomeListCard = ({
@@ -25,6 +26,7 @@ const HomeListCard = ({
       marginBottom="15px"
     >
       <Image src={photoUrl} alt="image" layout="fill" />
+      <CarouselDim height={'500px'} />
       <Box position="absolute" bottom="60px">
         <Box paddingX="15px">
           <Box

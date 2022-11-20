@@ -106,6 +106,7 @@ export default function InfiniteCarousel({
             handleIndicator={handleIndicator}
             width={width}
             height={height}
+            dimOption={true}
           />
           {imgUrlList.map((imgUrl, _index) => (
             <CarouselItem
@@ -116,6 +117,7 @@ export default function InfiniteCarousel({
               handleIndicator={handleIndicator}
               width={width}
               height={height}
+              dimOption={true}
             />
           ))}
           <CarouselItem
@@ -125,6 +127,7 @@ export default function InfiniteCarousel({
             handleIndicator={handleIndicator}
             width={width}
             height={height}
+            dimOption={true}
           />
         </FlexBox>
       </Box>
@@ -139,6 +142,7 @@ export default function InfiniteCarousel({
         lineHeight={0.91}
         opacity={0.7}
         padding={'5px 10px'}
+        zIndex={300}
         color={theme.colors.white}
       >
         <Box display="inline-block" color={theme.colors.white}>
