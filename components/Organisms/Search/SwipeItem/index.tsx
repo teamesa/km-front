@@ -6,30 +6,6 @@ import SwipeItemImage from 'components/Organisms/Search/SwipeItem/SwipeItemImage
 import SwipeItemInfo from 'components/Organisms/Search/SwipeItem/SwipeItemInfo';
 import { PickRankingState } from 'states';
 
-interface ItemProps {
-  content: PickPageContent;
-}
-
-interface PickPageContent {
-  additionalBadgeList: {
-    text: string;
-    typeBadge: boolean;
-  }[];
-  id: number;
-  presentationImage: {
-    url: string;
-    link: string;
-    backgroundText: string;
-    dimColor: string;
-    opacity: number;
-    dimTarget: boolean;
-  };
-  title: {
-    link: string;
-    text: string;
-  };
-}
-
 export default function SwipeItem() {
   const data = useRecoilValue(PickRankingState);
   return (
