@@ -32,6 +32,7 @@ export default function RecentSearch() {
         최근 검색어
       </Box>
       <Box
+        display={localStorageKeywords?.length > 0 ? '' : 'none'}
         position="absolute"
         top="0px"
         right="15px"
