@@ -12,7 +12,7 @@ export default function Archive() {
     headerLeft: 'default',
     title: '아카이브 기록하기',
     headerRight: 'disabled',
-    headerLeftAction: () => router.push('/list'),
+    headerLeftAction: () => router.push('/mypage'),
   });
 
   return (
