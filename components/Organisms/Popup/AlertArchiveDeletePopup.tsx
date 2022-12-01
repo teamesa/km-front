@@ -15,28 +15,26 @@ const AlertArchiveDeletePopup = () => {
   const setAlertState = useSetRecoilState(AlertState);
   const clickedArchiveIdState = useRecoilValue(ClickedArchiveId);
 
-  const deleteArchiveAxios = async () => {
+  const handleDeleteRequest = async () => {
     const axios = customAxios();
-    const { data } = await axios({
-      url: `/api/archive/${clickedArchiveIdState.toString()}`,
-      method: 'DELETE',
-    });
 
-    return data;
-  };
+    try {
+      let response = await axios({
+        url: `/api/archive/${clickedArchiveIdState.toString()}`,
+        method: 'DELETE',
+      });
 
-  const handleDeleteAxios = () => {
-    deleteArchiveAxios()
-      .then(() => {
-        setPopupName(POPUP_NAME.NULL);
-      })
-      .catch(() => {
+      if (response.data.archiveId !== clickedArchiveIdState) {
         setPopupName(POPUP_NAME.ALERT_CONFIRM);
         setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-      })
-      .finally(() => {
-        router.push('/mypage');
-      });
+      }
+      setPopupName(POPUP_NAME.NULL);
+    } catch (err) {
+      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
+    }
+
+    return router.push('/mypage');
   };
 
   const handleCancel = () => {
@@ -77,7 +75,7 @@ const AlertArchiveDeletePopup = () => {
           fontSize="16px"
           borderRadius="0 0 12px 0"
           backgroundColor={theme.colors.black}
-          onClick={handleDeleteAxios}
+          onClick={handleDeleteRequest}
         >
           <Box color={theme.colors.white}>확인</Box>
         </Button>
