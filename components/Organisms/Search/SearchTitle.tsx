@@ -41,6 +41,7 @@ export default function SearchTitle({
                   <Button
                     textAlign="left"
                     width="100%"
+                    fontSize="15px"
                     css={css`
                       white-space: nowrap;
                       overflow: hidden;
