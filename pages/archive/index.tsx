@@ -1,28 +1,15 @@
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import ArchiveHome from 'components/Organisms/Archive/ArchiveHome';
-import { ALERT_MESSAGE } from 'constants/alertMessage';
-import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, PopupNameState } from 'states';
-import { User } from 'states/user';
+import ArchiveLogin from 'components/Organisms/Archive/ArchiveLogin';
 import theme from 'styles/theme';
+import { UserProps, useUserProps } from 'utils/authentication/useUser';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
-export default function Archive() {
+const Archive: NextPage<UserProps> = ({ user }) => {
   const router = useRouter();
-  const loginState = useRecoilValue(User);
-  const setAlertState = useSetRecoilState(AlertState);
-  const setPopupName = useSetRecoilState(PopupNameState);
-
-  useEffect(() => {
-    if (loginState.isLogin) {
-      setAlertState(ALERT_MESSAGE.ALERT.LOGIN_CONFIRMATION);
-      setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
-    }
-  }, [loginState, loginState.isLogin, router, setAlertState, setPopupName]);
 
   useInitHeader({
     headerLeft: 'default',
@@ -31,10 +18,16 @@ export default function Archive() {
     headerLeftAction: () => router.push('/mypage'),
   });
 
+  if (!user.isLogin) {
+    return <ArchiveLogin />;
+  }
   return (
     <Box padding="0 15px" background={theme.colors.white}>
       <ArchiveHome />
       <Box height="60px" />
     </Box>
   );
-}
+};
+
+export const getServerSideProps = useUserProps;
+export default Archive;
