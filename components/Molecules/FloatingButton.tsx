@@ -1,16 +1,10 @@
 import { css } from '@emotion/react';
 import router from 'next/router';
-import React from 'react';
 
 import { Folder } from 'assets/mypage/Folder';
 import { Box } from 'components/Atoms';
 
 export default function FloatingButton() {
-  const archiveLink = () => {
-    const decode = decodeURIComponent(`/archive`);
-    return router.push(`${decode}`);
-  };
-
   return (
     <Box
       display="block"
@@ -20,7 +14,7 @@ export default function FloatingButton() {
       bottom="80px"
       marginBottom="var(--platformBottomArea)"
       right="15px"
-      onClick={archiveLink}
+      onClick={() => router.push('/archive')}
     >
       <Box position="absolute" zIndex="1000">
         <Folder />
