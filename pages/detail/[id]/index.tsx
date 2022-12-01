@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
@@ -16,7 +17,12 @@ import { UserProps, useUserProps } from 'utils/authentication/useUser';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const Detail: NextPage<UserProps> = ({ user }) => {
-  useInitHeader({ headerLeft: 'default', headerEnd: 'home' });
+  const router = useRouter();
+  useInitHeader({
+    headerLeft: 'default',
+    headerEnd: 'home',
+    headerLeftAction: () => router.back(),
+  });
   const setUserFirst = useSetRecoilState(User);
   const resetArchiveState = useResetDetailArchiveFunction();
   const resetPickState = useResetSummaryFunction();
