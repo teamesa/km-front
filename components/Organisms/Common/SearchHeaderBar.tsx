@@ -77,10 +77,12 @@ export default function SearchHeaderBar() {
       if (typeof router.query.keyword === 'string') {
         setKeyword(router.query.keyword);
       }
-    } else {
+    }
+    // 검색 페이지 진입시 Input값 제거
+    else if (router.pathname === '/search') {
       setKeyword('');
     }
-  }, [router.query.keyword]);
+  }, [router.pathname, router.query.keyword]);
 
   return (
     <>
