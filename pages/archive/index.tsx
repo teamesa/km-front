@@ -18,7 +18,7 @@ export default function Archive() {
   const setPopupName = useSetRecoilState(PopupNameState);
 
   useEffect(() => {
-    if (!loginState.isLogin) {
+    if (loginState.isLogin) {
       setAlertState(ALERT_MESSAGE.ALERT.LOGIN_CONFIRMATION);
       setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
     }
