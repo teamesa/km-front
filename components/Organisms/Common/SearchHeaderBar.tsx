@@ -77,10 +77,11 @@ export default function SearchHeaderBar() {
       if (typeof router.query.keyword === 'string') {
         setKeyword(router.query.keyword);
       }
-    } else {
+    } else if (router.pathname === '/search') {
+      /** 검색 페이지 진입시 Input값 제거 */
       setKeyword('');
     }
-  }, [router.query.keyword]);
+  }, [router.pathname, router.query.keyword]);
 
   return (
     <>
@@ -126,7 +127,9 @@ export default function SearchHeaderBar() {
                 padding="0px 45px 0px 15px"
                 height="40px"
                 fontSize="13px"
+                backgroundColor={theme.colors.white}
                 border={`1px solid ${theme.colors.grayDD}`}
+                borderRadius="0"
                 value={keyword}
                 placeholder="검색어를 입력해주세요"
                 onChange={onChange}
