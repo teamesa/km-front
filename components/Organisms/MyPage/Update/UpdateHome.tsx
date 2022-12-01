@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
@@ -11,10 +12,12 @@ import { useInitHeader } from 'utils/hooks/useInitHeader';
 export default function UpdateHome({
   user: { id, name, phoneNumber, birthdate, gender, email },
 }: UserProps) {
+  const router = useRouter();
   useInitHeader({
     headerLeft: 'default',
     headerRight: 'search',
     title: '회원정보 수정',
+    headerLeftAction: () => router.back(),
   });
   const setModifiedUserInfo = useSetRecoilState(UserModifyInfo);
 

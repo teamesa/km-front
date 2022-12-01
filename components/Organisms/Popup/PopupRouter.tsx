@@ -25,7 +25,7 @@ const PopupRouter = () => {
   switch (popupName) {
     case POPUP_NAME.ALERT_CONFIRM:
       return <AlertSuccessPopup />;
-    case POPUP_NAME.ALERT_Archive_CANCEL_CONFIRM:
+    case POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM:
       return <AlertArchiveCancelConfirmPopup />;
     case POPUP_NAME.ALERT_LOGIN_CONFIRMATION:
       return <AlertLoginConfirmationPopup />;
