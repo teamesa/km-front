@@ -14,7 +14,7 @@ export default function InfiniteCarousel({
   plusFunction,
 }: {
   imgUrlList: {
-    photoUrl: string;
+    keyVisualPhotoUrl: string;
     upperTitle: string;
     lowerTitle: string;
     link?: string;
@@ -101,7 +101,7 @@ export default function InfiniteCarousel({
         <FlexBox height="inherit" width="fit-content" flexDirection="row">
           <CarouselItem
             itemOrder={-1}
-            imgUrl={imgUrlList[imgUrlList.length - 1].photoUrl}
+            imgUrl={imgUrlList[imgUrlList.length - 1].keyVisualPhotoUrl}
             rootRef={rootRef}
             handleIndicator={handleIndicator}
             width={width}
@@ -112,7 +112,7 @@ export default function InfiniteCarousel({
             <CarouselItem
               itemOrder={_index}
               key={_index}
-              imgUrl={imgUrl.photoUrl}
+              imgUrl={imgUrl.keyVisualPhotoUrl}
               rootRef={rootRef}
               handleIndicator={handleIndicator}
               width={width}
@@ -122,7 +122,7 @@ export default function InfiniteCarousel({
           ))}
           <CarouselItem
             itemOrder={imgUrlList.length}
-            imgUrl={imgUrlList[0].photoUrl}
+            imgUrl={imgUrlList[0].keyVisualPhotoUrl}
             rootRef={rootRef}
             handleIndicator={handleIndicator}
             width={width}

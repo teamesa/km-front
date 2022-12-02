@@ -21,6 +21,7 @@ export default function SwipeItemInfo({
   keywords: string[];
 }) {
   const router = useRouter();
+  const filteredContent = contentText.replace(/<[^>]*>?/g, '');
   return (
     <Box paddingTop="20px" width="300px" paddingX="15px">
       <Box
@@ -59,7 +60,7 @@ export default function SwipeItemInfo({
           router.push(contentLink);
         }}
       >
-        {contentText}
+        {filteredContent}
       </Box>
       <Box marginTop="20px" display="flex">
         {keywords.map((keyword) => (
