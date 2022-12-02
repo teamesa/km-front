@@ -108,41 +108,75 @@ app.prepare().then(() => {
   });
 
   server.get('/naver/callback', async (req, res) => {
-    // 토큰을 발급받으려면 query string으로 넘겨야 할 정보들이다.
     const code = req.query.code;
     const state = req.query.state;
     const { redirect } = req.cookies;
     res.clearCookie('redirect');
 
-    // 로그인 API를 사용해 access token을 발급받는다.
     const client_id = process.env.NAVER_CLIENT_ID;
     const client_secret = process.env.NAVER_SECRET_KEY;
     const env_redirect_uri = process.env.NAVER_REDIRECT_URI;
 
     const naver_api_url = `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&response_type=code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=${env_redirect_uri}&code=${code}&state=${state}`;
 
-    const result = await axios({
-      method: 'GET',
-      url: naver_api_url,
-      headers: {
-        'X-Naver-Client-Id': client_id,
-        'X-Naver-Client-Secret': client_secret,
-      },
-    });
+    try {
+      const result = await axios({
+        method: 'GET',
+        url: naver_api_url,
+        headers: {
+          'X-Naver-Client-Id': client_id,
+          'X-Naver-Client-Secret': client_secret,
+        },
+      });
 
-    const token = result.data.access_token;
+      const token = result.data.access_token;
 
-    const info_options = {
-      url: 'https://openapi.naver.com/v1/nid/me',
-      headers: { Authorization: 'Bearer ' + token },
-    };
+      const info_options = {
+        url: 'https://openapi.naver.com/v1/nid/me',
+        headers: { Authorization: 'Bearer ' + token },
+      };
 
-    const info_result = await axios(info_options);
+      const info_result = await axios(info_options);
 
-    console.log(info_result?.data?.response);
-    console.log(redirect);
+      const naverUserData = info_result?.data?.response ?? {};
 
-    res.redirect(redirect);
+      const newUser = {
+        providerId: naverUserData.id,
+        provider: 'naver',
+        email: naverUserData.email,
+        profileImage: naverUserData.profile_image,
+        gender: naverUserData.gender,
+        birthday: naverUserData.birthday,
+        birthYear: naverUserData.birthYear,
+        phoneNumber: naverUserData.mobile,
+      };
+
+      const request = await axios({
+        url: `${process.env.BACK_URL}/api/authentication`,
+        method: 'POST',
+        data: newUser,
+      });
+
+      if (!request?.data) {
+        res.redirect('/mypage');
+      }
+
+      if (request?.data?.accessToken) {
+        res.cookie('kilometer_session', request.data.accessToken);
+      }
+
+      if (!request?.data?.firstJoined) {
+        if (!redirect) {
+          res.redirect('/mypage');
+        }
+        res.redirect(redirect);
+      } else {
+        res.redirect('/welcome');
+      }
+    } catch (_) {
+      console.log(_);
+      res.redirect('/mypage');
+    }
   });
 
   server.get('/api/logout', (req, res) => {

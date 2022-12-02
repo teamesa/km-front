@@ -13,7 +13,7 @@ const AlertArchiveAskPopup = () => {
   const router = useRouter();
 
   const handleClosePopup = () => {
-    router.push(`/mypage?redirect=${router.pathname}`);
+    router.push(`/mypage?redirect=${router.asPath}`);
     setPopupName(POPUP_NAME.NULL);
   };
 
