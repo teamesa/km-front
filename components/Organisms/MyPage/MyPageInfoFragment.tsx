@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
 
 import { Box } from 'components/Atoms';
+import FloatingButton from 'components/Molecules/FloatingButton';
 import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
 import { useResetMyArchiveListStateFunction } from 'states/myArchiveList';
@@ -61,7 +62,10 @@ export default function MyPageInfoFragment() {
             </Box>
           </Box>
           {isMyArchiveShowed ? (
-            <ListSection contents={contents} />
+            <>
+              <ListSection contents={contents} />
+              <FloatingButton />
+            </>
           ) : (
             <ConfigurationFragment />
           )}
