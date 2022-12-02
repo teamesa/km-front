@@ -98,14 +98,51 @@ app.prepare().then(() => {
   server.use(express.urlencoded({ extended: true }));
 
   server.get('/api/login', (req, res) => {
+    const client_id = process.env.NAVER_CLIENT_ID;
+    const env_redirect_uri = process.env.NAVER_REDIRECT_URI;
     res.clearCookie('kilometer_session');
-    const serverUrl = process.env.BACK_URL;
-    const frontDomain = process.env.FRONT_URL;
-    const redirectUrl = '/mypage';
+    res.cookie('redirect', req.query.redirect ?? '/mypage');
 
-    const finalRedirected = `${serverUrl}/oauth2/authorization/naver?redirect_uri=${frontDomain}/api/login/sucess?redirect_uri=${redirectUrl}`;
-    console.log(finalRedirected);
+    const finalRedirected = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${client_id}&redirect_uri=${env_redirect_uri}&state=test`;
     res.redirect(finalRedirected);
+  });
+
+  server.get('/naver/callback', async (req, res) => {
+    // 토큰을 발급받으려면 query string으로 넘겨야 할 정보들이다.
+    const code = req.query.code;
+    const state = req.query.state;
+    const { redirect } = req.cookies;
+    res.clearCookie('redirect');
+
+    // 로그인 API를 사용해 access token을 발급받는다.
+    const client_id = process.env.NAVER_CLIENT_ID;
+    const client_secret = process.env.NAVER_SECRET_KEY;
+    const env_redirect_uri = process.env.NAVER_REDIRECT_URI;
+
+    const naver_api_url = `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&response_type=code&client_id=${client_id}&client_secret=${client_secret}&redirect_uri=${env_redirect_uri}&code=${code}&state=${state}`;
+
+    const result = await axios({
+      method: 'GET',
+      url: naver_api_url,
+      headers: {
+        'X-Naver-Client-Id': client_id,
+        'X-Naver-Client-Secret': client_secret,
+      },
+    });
+
+    const token = result.data.access_token;
+
+    const info_options = {
+      url: 'https://openapi.naver.com/v1/nid/me',
+      headers: { Authorization: 'Bearer ' + token },
+    };
+
+    const info_result = await axios(info_options);
+
+    console.log(info_result?.data?.response);
+    console.log(redirect);
+
+    res.redirect(redirect);
   });
 
   server.get('/api/logout', (req, res) => {

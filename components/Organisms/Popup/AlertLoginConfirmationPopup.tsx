@@ -15,7 +15,7 @@ const AlertLoginConfirmationPopup = () => {
 
   const handleConfirm = () => {
     setPopupName(POPUP_NAME.NULL);
-    router.push('/mypage');
+    router.push(`/mypage?redirect=${router.pathname}`);
   };
 
   const handleCancel = () => {
