@@ -46,7 +46,11 @@ export default function LoginPage() {
         >
           SNS 계정으로 간편하게
         </Box>
-        <Button onClick={() => router.replace('/api/login')}>
+        <Button
+          onClick={() =>
+            router.replace(`/api/login?redirect=${router.query.redirect ?? ''}`)
+          }
+        >
           <MyPageImageAsset
             height="50px"
             width="100%"
