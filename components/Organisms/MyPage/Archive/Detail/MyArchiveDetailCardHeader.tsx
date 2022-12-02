@@ -7,9 +7,7 @@ import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
-import { TGetSummary } from 'states/detail';
 import {
-  MyArchiveDetailProps,
   MyArchiveDetailHeaderInfoProps,
   ClickedItemId,
   ClickedArchiveId,
@@ -39,8 +37,8 @@ export default function MyArchiveDetailHeaderInfo(
   };
 
   const handleDeleteArchive = () => {
-    setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_DELETE_CONFIRM);
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM);
+    setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_DELETE_CONFIRM);
   };
 
   return (
