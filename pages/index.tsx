@@ -25,6 +25,7 @@ const Home: NextPage = () => {
             <ModuleResolver
               moduleName={moduleName}
               data={data}
+              index={index}
               key={`${moduleName}-${index}`}
             />
           ))}
