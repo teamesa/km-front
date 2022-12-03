@@ -8,25 +8,21 @@ import {
   SwipeItemProps,
 } from 'components/Organisms/Home/ModuleTypes';
 
-export default function ModuleResolver({ moduleName, data }: ModuleData) {
+export default function ModuleResolver({
+  moduleName,
+  index,
+  data,
+}: ModuleData) {
   switch (moduleName) {
     case 'KEY_VISUAL':
-      const { index: keyVisualIndex, keyVisualDatas } = data as KeyVisualProps;
-      return (
-        <KeyVisual index={keyVisualIndex} keyVisualDatas={keyVisualDatas} />
-      );
+      const { keyVisualDatas } = data as KeyVisualProps;
+      return <KeyVisual index={index} keyVisualDatas={keyVisualDatas} />;
     case 'SWIPE_ITEM':
-      const {
-        index: SwipeItemIndex,
-        thumbnailPhotoUrl,
-        photoUrls,
-        title,
-        content,
-        keywords,
-      } = data as SwipeItemProps;
+      const { thumbnailPhotoUrl, photoUrls, title, content, keywords } =
+        data as SwipeItemProps;
       return (
         <SwipeItem
-          index={SwipeItemIndex}
+          index={index}
           thumbnailPhotoUrl={thumbnailPhotoUrl}
           photoUrls={photoUrls}
           title={title}
@@ -35,15 +31,10 @@ export default function ModuleResolver({ moduleName, data }: ModuleData) {
         />
       );
     case 'MONTHLY_FREE_ITEM':
-      const {
-        index: MonthlyFreeItemIndex,
-        topTitle,
-        bottomTitle,
-        contents,
-      } = data as MonthlyFreeItemProps;
+      const { topTitle, bottomTitle, contents } = data as MonthlyFreeItemProps;
       return (
         <MonthlyFreeItem
-          index={MonthlyFreeItemIndex}
+          index={index}
           topTitle={topTitle}
           bottomTitle={bottomTitle}
           contents={contents}

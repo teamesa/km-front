@@ -6,6 +6,7 @@ export type ModuleResponse = {
 
 export type ModuleData = {
   moduleName: moduleNames;
+  index: number;
   data: KeyVisualProps | SwipeItemProps | MonthlyFreeItemProps;
 };
 
