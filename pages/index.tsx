@@ -4,6 +4,7 @@ import { useRecoilValueLoadable } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import Footer from 'components/Organisms/Home/Footer';
+import NowArchiveItem from 'components/Organisms/Home/Module/NowArchiveItem';
 import ModuleResolver from 'components/Organisms/Home/ModuleResolver';
 import { useResetHomeModulesFunction, homeModuleState } from 'states/home';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
@@ -28,6 +29,7 @@ const Home: NextPage = () => {
               key={`${moduleName}-${index}`}
             />
           ))}
+          <NowArchiveItem index={0} contents={[]} />
           <Footer />
         </Box>
       );
