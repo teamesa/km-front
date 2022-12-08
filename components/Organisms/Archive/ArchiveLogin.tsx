@@ -33,7 +33,7 @@ export default function ArchiveLogin() {
         lineHeight="40px"
         background={theme.colors.black}
         onClick={() => {
-          router.push('/mypage');
+          router.push(`/mypage?redirect=${router.asPath}`);
         }}
       >
         로그인 하기

@@ -75,7 +75,7 @@ export default function UpdateButton() {
         }
       }
 
-      router.push('/mypage');
+      router.push(`/mypage?redirect=${router.asPath}`);
     }
   };
 

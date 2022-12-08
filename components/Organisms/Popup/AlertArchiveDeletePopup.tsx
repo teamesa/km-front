@@ -34,7 +34,7 @@ const AlertArchiveDeletePopup = () => {
       setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
     }
 
-    return router.push('/mypage');
+    return router.push(`/mypage?redirect=${router.asPath}`);
   };
 
   const handleCancel = () => {

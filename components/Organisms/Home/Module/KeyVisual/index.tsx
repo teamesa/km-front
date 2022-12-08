@@ -7,7 +7,7 @@ import InfiniteCarousel from 'components/Molecules/InfiniteCarousel';
 import { KeyVisualProps } from 'components/Organisms/Home/ModuleTypes';
 import { headerState } from 'states/common';
 import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
-export default function KeyVisual({ keyvisualDatas, index }: KeyVisualProps) {
+export default function KeyVisual({ keyVisualDatas, index }: KeyVisualProps) {
   const router = useRouter();
   const setHeaderState = useSetRecoilState(headerState);
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
@@ -24,7 +24,7 @@ export default function KeyVisual({ keyvisualDatas, index }: KeyVisualProps) {
   return (
     <Box position="relative" width="100%" height="500px">
       <InfiniteCarousel
-        imgUrlList={keyvisualDatas}
+        imgUrlList={keyVisualDatas}
         width="100vw"
         height="500px"
         plusFunction={() => router.push('/home-list')}
