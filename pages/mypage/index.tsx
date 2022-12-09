@@ -10,10 +10,6 @@ import { useUserProps, UserProps } from 'utils/authentication/useUser';
 
 const MyPage: NextPage<UserProps> = ({ user }) => {
   const setUserFirst = useSetRecoilState(User);
-  const resetMyArchiveListState = useResetMyArchiveListStateFunction();
-  useEffect(() => {
-    resetMyArchiveListState();
-  }, [resetMyArchiveListState]);
 
   useEffect(() => {
     setUserFirst(user);
