@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { RefObject, useEffect, useState } from 'react';
 
 import DetailNoData from 'assets/detail/noData';
+import Alert from 'assets/error/Alert';
 import { Profile } from 'assets/mypage';
 import { Box, FlexBox, Span, Tag } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
@@ -148,6 +149,14 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
           </Box>
         </FlexBox>
         <Box paddingTop="20px">
+          {archiveData?.length === 0 && (
+            <Box padding="80px 0" textAlign="center">
+              <Alert width="40px" height="40px" />
+              <Box paddingTop="20px" fontSize="13px">
+                등록된 사진 아카이브가 없습니다.
+              </Box>
+            </Box>
+          )}
           {archiveData?.map((item, index) => (
             <Box key={index}>
               <Box
