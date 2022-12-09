@@ -32,8 +32,12 @@ export default function MyArchiveDetailHeaderInfo(
   };
 
   const archiveLink = () => {
-    const decode = decodeURIComponent(`/archive/update?id=${archiveId}`);
-    return router.push(`${decode}&exhibitionId=${itemId}`);
+    return router.push({
+      pathname: `/archive/update`,
+      query: {
+        id: id
+      },
+    });
   };
 
   const handleDeleteArchive = () => {
