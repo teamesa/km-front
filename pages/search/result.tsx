@@ -10,7 +10,7 @@ export default function SearchResult() {
   });
 
   return (
-    <Layout padding="0px 15px !important" margin="20px 0px 120px">
+    <Layout padding="20px 15px 60px !important">
       <SearchResultSection />
     </Layout>
   );
