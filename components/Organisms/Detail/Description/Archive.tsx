@@ -5,7 +5,7 @@ import { RefObject, useEffect, useState } from 'react';
 import DetailNoData from 'assets/detail/noData';
 import Alert from 'assets/error/Alert';
 import { Profile } from 'assets/mypage';
-import { Box, FlexBox, Span, Tag } from 'components/Atoms';
+import { Box, FlexBox, Span } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import StarScope from 'components/Molecules/StarScope';
@@ -31,33 +31,6 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
 
   const onClick = () => {
     setChecked(!checked);
-  };
-
-  const archiveTitle = () => {
-    return (
-      <Box paddingTop="80px">
-        <FlexBox
-          paddingBottom="15px"
-          justifyContent="space-between"
-          paddingTop="30px"
-        >
-          <Box fontSize="15px" color={theme.colors.black} fontWeight={500}>
-            아카이브
-          </Box>
-          <FlexBox alignItems="center">
-            <Box
-              fontSize="12px"
-              color={theme.colors.gray77}
-              paddingRight="10px"
-            >
-              사진 아카이브만
-            </Box>
-            <CheckBox type="checkbox" onChange={onClick} />
-          </FlexBox>
-        </FlexBox>
-        <Box height="1px" backgroundColor={theme.colors.black} />
-      </Box>
-    );
   };
 
   const makeAvgStarRating = () => {
@@ -112,6 +85,67 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
     );
   };
 
+  const StarAvg = () => {
+    return (
+      <FlexBox alignItems="center">
+        <StartRatingImage />
+        <Box paddingLeft="10px">{data.avgStarRating}</Box>
+        <Box color={theme.colors.grayAA}>
+          <Span color={theme.colors.grayBB} padding="0 5px">
+            /
+          </Span>
+          5
+        </Box>
+      </FlexBox>
+    );
+  };
+
+  const archiveTitle = () => {
+    return (
+      <Box paddingTop="80px">
+        <FlexBox
+          paddingBottom="15px"
+          justifyContent="space-between"
+          paddingTop="30px"
+        >
+          <Box fontSize="15px" color={theme.colors.black} fontWeight={500}>
+            아카이브
+          </Box>
+          <FlexBox alignItems="center">
+            <Box
+              fontSize="12px"
+              color={theme.colors.gray77}
+              paddingRight="10px"
+            >
+              사진 아카이브만
+            </Box>
+            <CheckBox type="checkbox" onChange={onClick} />
+          </FlexBox>
+        </FlexBox>
+        <Box height="1px" backgroundColor={theme.colors.black} />
+      </Box>
+    );
+  };
+  const archiveOnlyTitle = () => {
+    return (
+      <Box paddingTop="32px" fontSize="22px">
+        <FlexBox justifyContent="space-between">
+          <StarAvg />
+          <FlexBox alignItems="center">
+            <Box
+              fontSize="12px"
+              color={theme.colors.gray77}
+              paddingRight="10px"
+            >
+              사진 아카이브만
+            </Box>
+            <CheckBox type="checkbox" onChange={onClick} />
+          </FlexBox>
+        </FlexBox>
+      </Box>
+    );
+  };
+
   if (data.archives.length === 0) {
     return (
       <Box ref={scrollRef}>
@@ -136,18 +170,13 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
 
   return (
     <Box ref={scrollRef}>
-      {introYn === 2 ? archiveTitle() : null}
-      <Box color={theme.colors.black} fontSize="22px" paddingTop="30px">
-        <FlexBox alignItems="center">
-          <StartRatingImage />
-          <Box paddingLeft="16px">{data.avgStarRating}</Box>
-          <Box color={theme.colors.grayAA}>
-            <Span color={theme.colors.grayBB} padding="0 5px">
-              /
-            </Span>
-            5
-          </Box>
-        </FlexBox>
+      {introYn === 2 ? archiveTitle() : archiveOnlyTitle()}
+      <Box
+        color={theme.colors.black}
+        fontSize="22px"
+        paddingTop={introYn === 2 ? '30px' : 0}
+      >
+        {introYn === 2 ? <StarAvg /> : null}
         <Box paddingTop="20px">
           {archiveData?.length === 0 && (
             <Box padding="80px 0" textAlign="center">
