@@ -18,7 +18,7 @@ export default function MyArchiveDetailHeaderInfo(
   props: MyArchiveDetailHeaderInfoProps,
 ) {
   const router = useRouter();
-  const exibitionId = useRecoilValue(ClickedArchiveId);
+  const archiveId = useRecoilValue(ClickedArchiveId);
   const itemId = useRecoilValue(ClickedItemId);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
@@ -35,8 +35,8 @@ export default function MyArchiveDetailHeaderInfo(
     return router.push({
       pathname: `/archive/update`,
       query: {
-        id: itemId,
-        exibitionId: exibitionId,
+        id: archiveId,
+        exhibitionId: itemId,
       },
     });
   };
