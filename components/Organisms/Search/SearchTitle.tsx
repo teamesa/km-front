@@ -8,6 +8,7 @@ import useSetLocalstorageKeywords from 'utils/hooks/useSetLocalstorageKeywords';
 export default function SearchTitle({
   keyItems,
   keyword,
+  checkDebounce,
 }: {
   keyItems: {
     id: number;
@@ -17,13 +18,14 @@ export default function SearchTitle({
     title: string;
   }[];
   keyword: string;
+  checkDebounce: boolean;
 }) {
   const router = useRouter();
   const { makeLocalStorageKeywords } = useSetLocalstorageKeywords();
 
   return (
     <>
-      {keyItems?.length > 0 && keyword && (
+      {keyItems?.length > 0 && keyword && checkDebounce && (
         <Box
           zIndex="3"
           width="100%"

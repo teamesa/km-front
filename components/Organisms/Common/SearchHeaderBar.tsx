@@ -29,8 +29,10 @@ export default function SearchHeaderBar() {
   const [keyword, setKeyword] = useState('');
   const [keyItems, setKeyItems] = useState<AutoContents[]>([]);
   const inputRef = useRef<any>();
+  const [checkDebounce, setCheckDebounce] = useState(true);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckDebounce(true);
     setKeyword(e.target.value);
     debounceOnChange();
     if (!inputRef?.current?.value) {
@@ -41,6 +43,7 @@ export default function SearchHeaderBar() {
   const handleOnClick = () => {
     if (keyword) {
       makeLocalStorageKeywords(keyword);
+      setCheckDebounce(false);
       router.push({
         pathname: '/search/result',
         query: { keyword },
@@ -72,7 +75,6 @@ export default function SearchHeaderBar() {
   };
 
   useEffect(() => {
-    setKeyItems([]);
     if (router?.query?.keyword) {
       if (typeof router.query.keyword === 'string') {
         setKeyword(router.query.keyword);
@@ -152,7 +154,11 @@ export default function SearchHeaderBar() {
               </Button>
             </Box>
           </Box>
-          <SearchTitle keyItems={keyItems} keyword={keyword} />
+          <SearchTitle
+            keyItems={keyItems}
+            keyword={keyword}
+            checkDebounce={checkDebounce}
+          />
         </Box>
       ) : (
         ''
