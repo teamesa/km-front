@@ -12,6 +12,7 @@ export interface MyArchiveDetailProps {
   cafe: string;
   photoUrls: string[];
   archiveAdditionalInfos: ArchiveDetailLinkInfos[];
+  itemId: string;
 }
 export interface MyArchiveDetailHeaderInfoProps {
   title: string;
@@ -37,6 +38,11 @@ interface ArchiveDetailLinkInfos {
 export const ClickedArchiveId = atom<string>({
   key: 'ClickedArchiveId',
   default: '578',
+});
+
+export const ClickedItemId = atom<string>({
+  key: 'ClickedItemId',
+  default: '',
 });
 
 export const getMyArchiveDetail = async (archiveId: string) => {
