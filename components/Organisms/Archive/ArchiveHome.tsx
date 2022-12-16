@@ -37,7 +37,7 @@ export default function ArchiveHome() {
   const [archiveWrite, setArchiveWrite] = useRecoilState(archiveWriteState);
   const resetArchiveWrite = useResetRecoilState(archiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
-  const [visible, setVisible] = useState<boolean | undefined>(false);
+  const queryChecked = checked ? true : archiveWrite?.visibleAtItem;
 
   const {
     register,
@@ -48,13 +48,12 @@ export default function ArchiveHome() {
     mode: 'onChange',
     defaultValues: {
       starRating: archiveWrite?.starRating ?? 5,
-      visibleAtItem: checked ? true : visible ?? false,
+      visibleAtItem: archiveWrite?.visibleAtItem,
     },
   });
 
   useEffect(() => {
     resetArchiveWrite();
-    setVisible(archiveWrite?.visibleAtItem);
   }, [archiveWrite?.visibleAtItem, resetArchiveWrite]);
 
   const onWriteSubmit = async (data: ArchiveWirteProps) => {
@@ -203,7 +202,7 @@ export default function ArchiveHome() {
                 <CheckBox
                   type="checkbox"
                   {...register('visibleAtItem')}
-                  defaultChecked={archiveWrite?.visibleAtItem}
+                  defaultChecked={queryChecked}
                 />
                 <Box margin="3px 10px" fontSize="12px">
                   다른 사람도 보여주기
