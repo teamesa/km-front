@@ -184,8 +184,6 @@ function HeaderBar() {
               onClick={() => {
                 if (header.headerLeftAction) {
                   header.headerLeftAction();
-                } else {
-                  router.back();
                 }
               }}
               css={css`

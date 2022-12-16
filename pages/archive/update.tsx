@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { Box, Layout } from 'components/Atoms';
@@ -7,11 +8,14 @@ import theme from 'styles/theme';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function Archive() {
+  const router = useRouter();
   const resetArchiveByIdState = useResetArchiveByIdStateFunction();
+
   useInitHeader({
     headerLeft: 'default',
     title: '아카이브 수정하기',
     headerRight: 'disabled',
+    headerLeftAction: () => router.back(),
   });
 
   useEffect(() => {

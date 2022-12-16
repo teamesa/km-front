@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
@@ -8,6 +9,7 @@ import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import {
   MyArchiveDetailHeaderInfoProps,
+  ClickedItemId,
   ClickedArchiveId,
 } from 'states/myArchiveDetail';
 import theme from 'styles/theme';
@@ -16,7 +18,8 @@ export default function MyArchiveDetailHeaderInfo(
   props: MyArchiveDetailHeaderInfoProps,
 ) {
   const router = useRouter();
-  const id = useRecoilValue(ClickedArchiveId);
+  const archiveId = useRecoilValue(ClickedArchiveId);
+  const itemId = useRecoilValue(ClickedItemId);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const handleClosePopup = () => {
@@ -32,10 +35,8 @@ export default function MyArchiveDetailHeaderInfo(
     return router.push({
       pathname: `/archive/update`,
       query: {
-        id: id,
-        title: props?.title,
-        thumbnailImageUrl: '',
-        checked: true,
+        id: archiveId,
+        exhibitionId: itemId,
       },
     });
   };
