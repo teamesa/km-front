@@ -1,13 +1,16 @@
 import { css } from '@emotion/react';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import SwipeItemImage from 'components/Organisms/Search/SwipeItem/SwipeItemImage';
 import SwipeItemInfo from 'components/Organisms/Search/SwipeItem/SwipeItemInfo';
-import { PickRankingState } from 'states';
+import { pickMostState } from 'states/pickRanking';
 
 export default function SwipeItem() {
-  const data = useRecoilValue(PickRankingState);
+  const pickMost = useRecoilValueLoadable(pickMostState);
+
+  if (pickMost.state !== 'hasValue') return <></>;
+
   return (
     <Box
       overflowX="auto"
@@ -25,7 +28,7 @@ export default function SwipeItem() {
           float: left;
         `}
       >
-        {data.content.map((content, index) => (
+        {pickMost.contents.contents.map((content, index) => (
           <Box
             key={content.id ?? index}
             flex="0 0 auto"
