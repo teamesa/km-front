@@ -28,7 +28,12 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
           borderBottomColor={theme.colors.gray99}
         >
           {contents.photoUrls.length === 0 ? (
-            <NoItemBox width="inherit" height="inherit" text="사진 " />
+            <NoItemBox
+              width="inherit"
+              height="inherit"
+              text="사진"
+              textColor="gray"
+            />
           ) : (
             <Carousel
               imgUrlArr={contents.photoUrls}
@@ -74,7 +79,12 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
             `}
           >
             {contents.comment === '' ? (
-              <NoItemBox width="inherit" height="inherit" text="코멘트" />
+              <NoItemBox
+                width="inherit"
+                height="inherit"
+                text="코멘트"
+                textColor="white"
+              />
             ) : (
               <Box
                 width="305px"
