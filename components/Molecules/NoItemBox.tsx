@@ -1,14 +1,15 @@
 import FlexBox from 'components/Atoms/FlexBox';
-import theme from 'styles/theme';
 
 export default function NoItemBox({
   width,
   height,
   text = '',
+  textColor = '',
 }: {
   width: string;
   height: string;
   text?: string;
+  textColor: string;
 }) {
   return (
     <FlexBox
@@ -18,7 +19,7 @@ export default function NoItemBox({
       justifyContent="center"
       fontSize="19px"
       textAlign="center"
-      color={theme.colors.gray77}
+      color={textColor}
     >
       {text}
     </FlexBox>

@@ -27,7 +27,12 @@ export default function MyArchiveDetailCardInfo(
       {/* 다녀온곳 */}
       <Box width="172.5px" height="80px">
         {contents.cafe === '' && contents.food === '' ? (
-          <NoItemBox width="inherit" height="inherit" text="다녀온 곳" />
+          <NoItemBox
+            width="inherit"
+            height="inherit"
+            text="다녀온 곳"
+            textColor={theme.colors.gray77}
+          />
         ) : (
           <FlexBox
             width="inherit"
