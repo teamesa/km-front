@@ -20,17 +20,15 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
       />
       <Box position="relative">
         <Box
-          width="100%"
-          height="347px"
+          width="345px"
+          height="345px"
           borderTop="solid 1px"
           borderTopColor={theme.colors.gray99}
-          borderBottom="solid 1px"
-          borderBottomColor={theme.colors.gray99}
         >
           {contents.photoUrls.length === 0 ? (
             <NoItemBox
               width="inherit"
-              height="inherit"
+              height="335px"
               text="사진"
               textColor={theme.colors.gray77}
             />
