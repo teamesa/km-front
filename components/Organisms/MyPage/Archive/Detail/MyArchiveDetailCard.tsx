@@ -54,9 +54,10 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
             opacity={0.4}
           ></Box>
           <Box
-            width="288px"
-            height="118px"
+            width="305px"
+            height="88px"
             marginRight="15px"
+            marginLeft="25px"
             overflowY="auto"
             lineHeight="18px"
             zIndex="1000"
@@ -65,10 +66,10 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
                 display: block;
                 width: 2px;
                 height: 100%;
-                background: white;
+                background: gray;
               }
               ::-webkit-scrollbar-thumb {
-                background: gray;
+                background: white;
               }
             `}
           >
@@ -76,7 +77,7 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
               <NoItemBox width="inherit" height="inherit" text="코멘트" />
             ) : (
               <Box
-                width="inherit"
+                width="305px"
                 height="118px"
                 paddingRight="15px"
                 fontSize="12px"
