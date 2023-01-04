@@ -11,7 +11,7 @@ import theme from 'styles/theme';
 
 export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
   return (
-    <Box background="#fff" width="345px" margin="15px">
+    <Box background={theme.colors.white} width="345px" margin="15px">
       <MyArchiveDetailHeaderInfo
         updatedAt={contents.updatedAt}
         typeBadge={contents.typeBadge}
@@ -31,6 +31,7 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
               height="335px"
               text="사진"
               textColor={theme.colors.gray77}
+              backgroundColor={theme.colors.grayF2}
             />
           ) : (
             <Carousel
@@ -86,7 +87,7 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
             ) : (
               <Box
                 width="305px"
-                height="118px"
+                maxHeight="118px"
                 paddingRight="15px"
                 fontSize="12px"
                 textAlign="left"

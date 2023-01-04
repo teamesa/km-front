@@ -5,11 +5,13 @@ export default function NoItemBox({
   height,
   text = '',
   textColor = '',
+  backgroundColor = '',
 }: {
   width: string;
   height: string;
   text?: string;
-  textColor: string;
+  textColor?: string;
+  backgroundColor?: string;
 }) {
   return (
     <FlexBox
@@ -20,6 +22,7 @@ export default function NoItemBox({
       fontSize="19px"
       textAlign="center"
       color={textColor}
+      backgroundColor={backgroundColor}
     >
       {text}
     </FlexBox>
