@@ -12,6 +12,12 @@ export default function GlobalStyles() {
   return (
     <Global
       styles={css`
+        #__next,
+        body,
+        html {
+          width: 100%;
+          height: 100%;
+        }
         body {
           font-family: -apple-system, SpoqaHanSansNeo, sans-serif !important;
         }

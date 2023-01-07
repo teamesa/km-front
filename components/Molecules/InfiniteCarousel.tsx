@@ -90,6 +90,7 @@ export default function InfiniteCarousel({
       <Box
         width={width}
         height={height}
+        maxWidth={theme.view.webView}
         overflowY="hidden"
         overflowX="scroll"
         css={css`

@@ -46,7 +46,7 @@ export default function UpdateHome({
   );
 
   return (
-    <Box paddingX="15px">
+    <Box padding="0px 15px 40px">
       <UpdateInputSet type="name" labelText="닉네임" />
       <UpdateInputSet type="phoneNumber" labelText="휴대폰번호" />
       <UpdateInputSet type="birthDay" labelText="생일" />

@@ -72,6 +72,7 @@ export default function Navigator() {
       bottom="0px"
       position="fixed"
       padding="0 15px"
+      maxWidth={theme.view.webView}
     >
       <FlexBox height="60px" alignItems="center" justifyContent="space-between">
         <FlexBox>

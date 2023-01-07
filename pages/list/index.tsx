@@ -52,7 +52,7 @@ export default function List() {
           <ListFilter />
         </FlexBox>
       </Box>
-      <Layout padding="0px 15px !important" marginBottom="120px">
+      <Layout padding="0px 15px 80px !important">
         <ListSection />
       </Layout>
     </>

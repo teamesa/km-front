@@ -15,11 +15,7 @@ export default function MyPickPage() {
   return (
     <>
       <PickTitle />
-      <FlexBox
-        padding="0px 12.5px !important"
-        flexWrap="wrap"
-        marginBottom="120px"
-      >
+      <FlexBox padding="0px 12.5px 120px !important" flexWrap="wrap">
         <PickSection />
       </FlexBox>
     </>
