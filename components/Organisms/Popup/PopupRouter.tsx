@@ -31,7 +31,7 @@ const PopupRouter = () => {
       return <AlertLoginConfirmationPopup />;
     case POPUP_NAME.POPUP_ARCHIVE_DETAIL:
       return <MyArchiveDetailPopup />;
-    case POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE:
+    case POPUP_NAME.ALERT_MOVE_MYARCHIVE_PAGE:
       return <AlertMoveToMyArchivePopup />;
     case POPUP_NAME.ARCHIVE_WRITE_CONFIRM:
       return <ArchiveWirteConfirmPopup />;

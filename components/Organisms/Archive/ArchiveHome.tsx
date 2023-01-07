@@ -1,12 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  useSetRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-  useRecoilState,
-} from 'recoil';
+import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
@@ -23,7 +18,10 @@ import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
 } from 'states/archive-square';
-import { ArchiveWirteProps } from 'states/archiveWirte';
+import {
+  ArchiveWirteProps,
+  useResetArchiveStateFunction,
+} from 'states/archiveWirte';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
@@ -35,7 +33,7 @@ export default function ArchiveHome() {
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const [archiveWrite, setArchiveWrite] = useRecoilState(archiveWriteState);
-  const resetArchiveWrite = useResetRecoilState(archiveWriteState);
+  const resetArchiveWrite = useResetArchiveStateFunction();
   const archivePhotos = useRecoilValue(ArchiveSquareState);
   const queryChecked = checked ? true : archiveWrite?.visibleAtItem;
 
@@ -54,13 +52,21 @@ export default function ArchiveHome() {
 
   useEffect(() => {
     resetArchiveWrite();
-  }, [archiveWrite?.visibleAtItem, resetArchiveWrite]);
+    return () => {
+      setArchiveWrite(undefined);
+    };
+  }, [resetArchiveWrite, setArchiveWrite]);
 
   const onWriteSubmit = async (data: ArchiveWirteProps) => {
-    if (!id) return alert('전시회 title 입력이 필요');
+    if (!id) {
+      setAlertState(ALERT_MESSAGE.ALERT.SEARCH_ARCHIVE_TITLE);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+      return null;
+    }
+
     const postData = {
       ...data,
-      itemId: Number(data.itemId),
+      itemId: Number(id),
       placeInfos: data.placeInfos.filter((item) =>
         item === undefined ? null : item,
       ),
@@ -72,7 +78,6 @@ export default function ArchiveHome() {
         .filter(isDefined),
     };
     setArchiveWrite(postData);
-
     try {
       await axios({
         method: 'POST',
@@ -80,7 +85,7 @@ export default function ArchiveHome() {
         data: postData,
       });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-      setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
+      setPopupName(POPUP_NAME.ALERT_MOVE_MYARCHIVE_PAGE);
     } catch (error: any) {
       setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
       setPopupName(POPUP_NAME.ALERT_CONFIRM);
@@ -115,13 +120,12 @@ export default function ArchiveHome() {
         data: postData,
       });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-      setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
+      setPopupName(POPUP_NAME.ALERT_MOVE_MYARCHIVE_PAGE);
     } catch (error: any) {
       setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
       setPopupName(POPUP_NAME.ALERT_CONFIRM);
     }
   };
-
   return (
     <>
       <form onSubmit={handleSubmit(onWriteSubmit)}>
@@ -241,6 +245,7 @@ export default function ArchiveHome() {
                 </Button>
               ) : (
                 <Button
+                  type="button"
                   backgroundColor={theme.colors.black}
                   color={theme.colors.white}
                   width="100%"

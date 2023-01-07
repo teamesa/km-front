@@ -114,6 +114,15 @@ export const archiveWriteState = atom({
   }),
 });
 
+export const useResetArchiveStateFunction = () =>
+  useRecoilCallback(
+    ({ set }) =>
+      () => {
+        set(archiveWriteState, undefined);
+      },
+    [],
+  );
+
 export const useResetArchiveByIdStateFunction = () =>
   useRecoilCallback(
     ({ set }) =>
