@@ -27,7 +27,13 @@ function BottomTabItem({ data }: { data: BottomTabItemProps }) {
       onClick={() => router.push(data.path?.[0] ?? '')}
     >
       <Box marginBottom="2px">{isSelected ? data.selectedIcon : data.icon}</Box>
-      <Box fontSize="9px">{data.pathName}</Box>
+      <Box fontSize="9px">
+        {isSelected ? (
+          <Box fontWeight={500}>{data.pathName}</Box>
+        ) : (
+          data.pathName
+        )}
+      </Box>
     </FlexBox>
   );
 }
