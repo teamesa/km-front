@@ -96,6 +96,7 @@ export default function SearchHeaderBar() {
             `}
             top="0px"
             width="100%"
+            maxWidth={theme.view.webView}
             background={theme.colors.white}
             zIndex={Z_INDEX.SKY}
           >

@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { Box, FlexBox } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
 import { headerState } from 'states/common';
+import theme from 'styles/theme';
 import useRefUtils from 'utils/hooks/useRefUtils';
 
 interface BottomTabItemProps {
@@ -59,6 +60,7 @@ export default function BottomTabNavigator({
           backgroundColor="#f8f8f8"
           bottom="0px"
           width="100%"
+          maxWidth={theme.view.webView}
           position="fixed"
           ref={ref}
         >

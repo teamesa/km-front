@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import Box from 'components/Atoms/Box';
 import CarouselDim from 'components/Molecules/CarouselDim';
+import theme from 'styles/theme';
 import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
 
 export default function CarouselItem({
@@ -42,6 +43,7 @@ export default function CarouselItem({
         scroll-snap-align: start;
       `}
       width={width}
+      maxWidth={theme.view.webView}
       height={height}
       position="relative"
       ref={setTarget}

@@ -19,6 +19,12 @@ export default function Container({ children }: { children: ReactNode }) {
 
   return (
     <Box
+      position="relative"
+      width="100%"
+      maxWidth={theme.view.webView}
+      minHeight="100%"
+      margin="0 auto"
+      boxShadow="0 0 20px rgb(0 0 0 / 5%);"
       style={
         modalOut || PopupState
           ? { position: 'fixed', inset: '0', touchAction: 'none' }

@@ -15,6 +15,9 @@ const theme = {
     gray33: '#333',
     grayAA: '#aaaaaa',
   },
+  view: {
+    webView: '480px',
+  },
 };
 
 export type Theme = typeof theme;
