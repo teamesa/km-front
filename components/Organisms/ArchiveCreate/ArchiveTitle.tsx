@@ -7,6 +7,7 @@ import { SearchClose } from 'assets/archive/SearchClose';
 import noImage from 'assets/common/no_image_375x500.png';
 import { Box, Button, Input } from 'components/Atoms';
 import FlexBox from 'components/Atoms/FlexBox';
+import { TGetSummary, getSummary } from 'states/detail';
 
 export default function ArchiveTitle({
   name,
@@ -16,12 +17,18 @@ export default function ArchiveTitle({
   control: any;
 }) {
   const router = useRouter();
-  const { exhibitionId, checked } = router.query;
-  const listImage = noImage;
+  const { exhibitionId } = router.query;
+  const [summaryData, setSummaryData] = useState<TGetSummary>();
+  const listImage = summaryData?.listImageUrl;
+  const exhibitionTitle = summaryData?.title;
 
   useEffect(() => {
-    // TODO api 수정 _ async,await
-  }, []);
+    async function getData() {
+      const data = await getSummary({ itemId: Number(exhibitionId) });
+      setSummaryData(data);
+    }
+    getData();
+  }, [exhibitionId]);
 
   return (
     <Controller
@@ -42,10 +49,10 @@ export default function ArchiveTitle({
               objectFit="cover"
             />
             <Box fontSize="13px" margin="10px 30px 17px 15px">
-              TODO : 전시회 title
+              {exhibitionTitle}
             </Box>
           </FlexBox>
-          {checked || exhibitionId ? null : (
+          {exhibitionId ? null : (
             <Button
               type="button"
               onClick={() => {

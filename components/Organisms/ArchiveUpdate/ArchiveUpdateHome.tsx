@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   useSetRecoilState,
@@ -12,10 +12,9 @@ import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
-import ArchiveFileUploadForm from 'components/Organisms/Archive/ArchiveFileUploadForm';
-import ArchiveTitle from 'components/Organisms/Archive/ArchiveTitle';
-import Rating from 'components/Organisms/ArchiveCreate/Rating';
-import SearchTitle from 'components/Organisms/ArchiveCreate/SearchTitle';
+import Rating from 'components/Molecules/Rating';
+import ArchiveFileUploadForm from 'components/Organisms/ArchiveFileUploadForm';
+import ArchiveTitle from 'components/Organisms/ArchiveUpdate/ArchiveTitle';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, archiveWriteState, PopupNameState } from 'states';
@@ -27,17 +26,15 @@ import { ArchiveWirteProps } from 'states/archiveWirte';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
-export default function ArchiveHome() {
-  const pathname = window?.location?.pathname;
+export default function ArchiveUpdateHome() {
   const router = useRouter();
   const axios = customAxios();
-  const { id, checked, exhibitionId } = router.query;
+  const { id } = router.query;
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const [archiveWrite, setArchiveWrite] = useRecoilState(archiveWriteState);
   const resetArchiveWrite = useResetRecoilState(archiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
-  const [visible, setVisible] = useState<boolean | undefined>(false);
 
   const {
     register,
@@ -48,55 +45,24 @@ export default function ArchiveHome() {
     mode: 'onChange',
     defaultValues: {
       starRating: archiveWrite?.starRating ?? 5,
-      visibleAtItem: checked ? true : visible ?? false,
+      visibleAtItem: archiveWrite?.visibleAtItem ?? false,
     },
   });
 
   useEffect(() => {
     resetArchiveWrite();
-    setVisible(archiveWrite?.visibleAtItem);
-  }, [archiveWrite?.visibleAtItem, resetArchiveWrite]);
-
-  const onWriteSubmit = async (data: ArchiveWirteProps) => {
-    if (!id) return alert('전시회 title 입력이 필요');
-    const postData = {
-      ...data,
-      itemId: Number(data.itemId),
-      placeInfos: data.placeInfos.filter((item) =>
-        item === undefined ? null : item,
-      ),
-      photoUrls: archivePhotos
-        .filter(
-          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
-        )
-        .map((archivePhoto) => archivePhoto.pictureSrc)
-        .filter(isDefined),
-    };
-    setArchiveWrite(postData);
-
-    try {
-      await axios({
-        method: 'POST',
-        url: `/api/archive`,
-        data: postData,
-      });
-      setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-      setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
-    } catch (error: any) {
-      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM);
-    }
-  };
+  }, [resetArchiveWrite]);
 
   const onCancel = () => {
     setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
   };
 
+  // TODO api 되는지 확인필요
   const onUpdateSubmit = async (data: ArchiveWirteProps) => {
     const postData = {
       ...data,
-      itemId: Number(exhibitionId),
+      itemId: Number(id),
       placeInfos: data.placeInfos.filter((item) =>
         item === undefined ? null : item,
       ),
@@ -125,13 +91,9 @@ export default function ArchiveHome() {
 
   return (
     <>
-      <form onSubmit={handleSubmit(onWriteSubmit)}>
+      <form onSubmit={handleSubmit(onUpdateSubmit)}>
         <Box>
-          {id ? (
-            <ArchiveTitle name="itemId" control={control} />
-          ) : (
-            <SearchTitle />
-          )}
+          <ArchiveTitle name="itemId" control={control} />
           <Box textAlign="center" fontSize="18px">
             <Box>이 문화생활, 어땠나요?</Box>
             <Box marginTop="16px">
@@ -200,11 +162,7 @@ export default function ArchiveHome() {
           <FlexBox>
             <RadioLabel>
               <FlexBox>
-                <CheckBox
-                  type="checkbox"
-                  {...register('visibleAtItem')}
-                  defaultChecked={archiveWrite?.visibleAtItem}
-                />
+                <CheckBox type="checkbox" {...register('visibleAtItem')} />
                 <Box margin="3px 10px" fontSize="12px">
                   다른 사람도 보여주기
                 </Box>
@@ -229,29 +187,16 @@ export default function ArchiveHome() {
               </Button>
             </Box>
             <Box flex={1} paddingLeft="5px">
-              {pathname === '/archive/update' ? (
-                <Button
-                  backgroundColor={theme.colors.black}
-                  color={theme.colors.white}
-                  width="100%"
-                  height="50px"
-                  onClick={handleSubmit(onUpdateSubmit)}
-                  disabled={!errors}
-                >
-                  수정
-                </Button>
-              ) : (
-                <Button
-                  backgroundColor={theme.colors.black}
-                  color={theme.colors.white}
-                  width="100%"
-                  height="50px"
-                  onClick={handleSubmit(onWriteSubmit)}
-                  disabled={!errors}
-                >
-                  등록
-                </Button>
-              )}
+              <Button
+                backgroundColor={theme.colors.black}
+                color={theme.colors.white}
+                width="100%"
+                height="50px"
+                onClick={handleSubmit(onUpdateSubmit)}
+                disabled={!errors}
+              >
+                수정
+              </Button>
             </Box>
           </FlexBox>
         </Box>
