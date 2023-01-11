@@ -10,12 +10,18 @@ import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 const Archive: NextPage<UserProps> = ({ user }) => {
   const router = useRouter();
+  const { checked, exhibitionId } = router.query;
 
   useInitHeader({
     headerLeft: 'default',
     title: '아카이브 기록하기',
     headerRight: 'disabled',
-    headerLeftAction: () => router.push('/mypage'),
+    headerLeftAction: () => {
+      if (checked || exhibitionId) {
+        return router.back();
+      }
+      return router.push('/mypage');
+    },
   });
 
   if (!user.isLogin) {

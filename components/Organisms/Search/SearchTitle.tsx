@@ -33,6 +33,8 @@ export default function SearchTitle({
           position="fixed"
           top="52px"
           padding="12px 15px"
+          maxWidth={theme.view.webView}
+          margin="0 auto"
         >
           <Box>
             {keyItems.map((search) => (

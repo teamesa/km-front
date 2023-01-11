@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   switch (data.state) {
     case 'hasValue':
       return (
-        <Box marginBottom="120px">
+        <Box paddingBottom="120px">
           {data.contents.map(({ moduleName, data }, index) => (
             <ModuleResolver
               moduleName={moduleName}

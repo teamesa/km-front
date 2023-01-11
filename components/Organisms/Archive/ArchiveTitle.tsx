@@ -17,7 +17,7 @@ export default function ArchiveTitle({
   control: any;
 }) {
   const router = useRouter();
-  const { id, exhibitionId } = router.query;
+  const { id, checked, exhibitionId } = router.query;
   const [summaryData, setSummaryData] = useState<TGetSummary>();
   const listImage = summaryData?.listImageUrl;
   const exhibitionTitle = summaryData?.title;
@@ -52,17 +52,19 @@ export default function ArchiveTitle({
               {exhibitionTitle}
             </Box>
           </FlexBox>
-          <Button
-            type="button"
-            onClick={() => {
-              router.back();
-            }}
-            width="10px"
-            height="10px"
-            paddingTop="10px"
-          >
-            <SearchClose />
-          </Button>
+          {checked || exhibitionId ? null : (
+            <Button
+              type="button"
+              onClick={() => {
+                router.back();
+              }}
+              width="10px"
+              height="10px"
+              paddingTop="10px"
+            >
+              <SearchClose />
+            </Button>
+          )}
         </FlexBox>
       )}
     ></Controller>
