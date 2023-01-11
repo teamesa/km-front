@@ -13,7 +13,7 @@ import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
 import ArchiveFileUploadForm from 'components/Organisms/Archive/ArchiveFileUploadForm';
-import ArchiveTitle from 'components/Organisms/Archive/ArchiveTitle';
+import ArchiveTitle from 'components/Organisms/ArchiveCreate/ArchiveTitle';
 import Rating from 'components/Organisms/ArchiveCreate/Rating';
 import SearchTitle from 'components/Organisms/ArchiveCreate/SearchTitle';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
@@ -27,11 +27,10 @@ import { ArchiveWirteProps } from 'states/archiveWirte';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
-export default function ArchiveHome() {
-  const pathname = window?.location?.pathname;
+export default function ArchiveCreateHome() {
   const router = useRouter();
   const axios = customAxios();
-  const { id, checked, exhibitionId } = router.query;
+  const { exhibitionId, checked } = router.query;
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const [archiveWrite, setArchiveWrite] = useRecoilState(archiveWriteState);
@@ -47,21 +46,23 @@ export default function ArchiveHome() {
   } = useForm<ArchiveWirteProps>({
     mode: 'onChange',
     defaultValues: {
-      starRating: archiveWrite?.starRating ?? 5,
-      visibleAtItem: checked ? true : visible ?? false,
+      starRating: 5,
+      visibleAtItem: checked ? true : false,
     },
   });
 
   useEffect(() => {
     resetArchiveWrite();
-    setVisible(archiveWrite?.visibleAtItem);
-  }, [archiveWrite?.visibleAtItem, resetArchiveWrite]);
+    return () => {
+      setArchiveWrite(undefined);
+    };
+  }, [resetArchiveWrite, setArchiveWrite]);
 
-  const onWriteSubmit = async (data: ArchiveWirteProps) => {
-    if (!id) return alert('전시회 title 입력이 필요');
+  const onCreateSubmit = async (data: ArchiveWirteProps) => {
+    if (!exhibitionId) return alert('전시회 title 입력이 필요');
     const postData = {
       ...data,
-      itemId: Number(data.itemId),
+      itemId: Number(exhibitionId),
       placeInfos: data.placeInfos.filter((item) =>
         item === undefined ? null : item,
       ),
@@ -93,41 +94,11 @@ export default function ArchiveHome() {
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
   };
 
-  const onUpdateSubmit = async (data: ArchiveWirteProps) => {
-    const postData = {
-      ...data,
-      itemId: Number(exhibitionId),
-      placeInfos: data.placeInfos.filter((item) =>
-        item === undefined ? null : item,
-      ),
-      visibleAtItem: data.visibleAtItem,
-      photoUrls: archivePhotos
-        .filter(
-          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
-        )
-        .map((archivePhoto) => archivePhoto.pictureSrc)
-        .filter(isDefined),
-    };
-    setArchiveWrite(postData);
-    try {
-      await axios({
-        method: 'PUT',
-        url: `/api/archive`,
-        data: postData,
-      });
-      setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-      setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
-    } catch (error: any) {
-      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM);
-    }
-  };
-
   return (
     <>
-      <form onSubmit={handleSubmit(onWriteSubmit)}>
+      <form onSubmit={handleSubmit(onCreateSubmit)}>
         <Box>
-          {id ? (
+          {exhibitionId ? (
             <ArchiveTitle name="itemId" control={control} />
           ) : (
             <SearchTitle />
@@ -229,29 +200,16 @@ export default function ArchiveHome() {
               </Button>
             </Box>
             <Box flex={1} paddingLeft="5px">
-              {pathname === '/archive/update' ? (
-                <Button
-                  backgroundColor={theme.colors.black}
-                  color={theme.colors.white}
-                  width="100%"
-                  height="50px"
-                  onClick={handleSubmit(onUpdateSubmit)}
-                  disabled={!errors}
-                >
-                  수정
-                </Button>
-              ) : (
-                <Button
-                  backgroundColor={theme.colors.black}
-                  color={theme.colors.white}
-                  width="100%"
-                  height="50px"
-                  onClick={handleSubmit(onWriteSubmit)}
-                  disabled={!errors}
-                >
-                  등록
-                </Button>
-              )}
+              <Button
+                backgroundColor={theme.colors.black}
+                color={theme.colors.white}
+                width="100%"
+                height="50px"
+                onClick={handleSubmit(onCreateSubmit)}
+                disabled={!errors}
+              >
+                등록
+              </Button>
             </Box>
           </FlexBox>
         </Box>
