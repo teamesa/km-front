@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { useRecoilValueLoadable } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import SwipeItemImage from 'components/Organisms/Search/SwipeItem/SwipeItemImage';
