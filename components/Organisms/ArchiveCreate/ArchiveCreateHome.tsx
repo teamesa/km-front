@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
@@ -29,6 +29,7 @@ export default function ArchiveCreateHome() {
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
+  const resetArchivePhotos = useResetRecoilState(ArchiveSquareState);
 
   const {
     register,
@@ -75,6 +76,7 @@ export default function ArchiveCreateHome() {
       });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
       setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
+      resetArchivePhotos();
     } catch (error: any) {
       setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
       setPopupName(POPUP_NAME.ALERT_CONFIRM);
