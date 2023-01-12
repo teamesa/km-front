@@ -33,7 +33,6 @@ export default function ArchiveUpdateHome() {
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const [archiveWrite, setArchiveWrite] = useRecoilState(archiveWriteState);
-  const resetArchiveWrite = useResetRecoilState(archiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
 
   const {
@@ -45,13 +44,15 @@ export default function ArchiveUpdateHome() {
     mode: 'onChange',
     defaultValues: {
       starRating: archiveWrite?.starRating ?? 5,
-      visibleAtItem: archiveWrite?.visibleAtItem ?? false,
+      visibleAtItem: archiveWrite?.visibleAtItem,
     },
   });
 
   useEffect(() => {
-    resetArchiveWrite();
-  }, [resetArchiveWrite]);
+    return () => {
+      setArchiveWrite(undefined);
+    };
+  }, [setArchiveWrite]);
 
   const onCancel = () => {
     setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
@@ -82,7 +83,7 @@ export default function ArchiveUpdateHome() {
         data: postData,
       });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-      setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
     } catch (error: any) {
       setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
       setPopupName(POPUP_NAME.ALERT_CONFIRM);
@@ -162,7 +163,11 @@ export default function ArchiveUpdateHome() {
           <FlexBox>
             <RadioLabel>
               <FlexBox>
-                <CheckBox type="checkbox" {...register('visibleAtItem')} />
+                <CheckBox
+                  type="checkbox"
+                  {...register('visibleAtItem')}
+                  defaultChecked={archiveWrite?.visibleAtItem}
+                />
                 <Box margin="3px 10px" fontSize="12px">
                   다른 사람도 보여주기
                 </Box>

@@ -1,12 +1,7 @@
+import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  useSetRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-  useRecoilState,
-} from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
@@ -18,7 +13,7 @@ import SearchTitle from 'components/Organisms/ArchiveCreate/SearchTitle';
 import ArchiveFileUploadForm from 'components/Organisms/ArchiveFileUploadForm';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, archiveWriteState, PopupNameState } from 'states';
+import { AlertState, PopupNameState } from 'states';
 import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
@@ -33,10 +28,7 @@ export default function ArchiveCreateHome() {
   const { exhibitionId, checked } = router.query;
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const [archiveWrite, setArchiveWrite] = useRecoilState(archiveWriteState);
-  const resetArchiveWrite = useResetRecoilState(archiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
-  const [visible, setVisible] = useState<boolean | undefined>(false);
 
   const {
     register,
@@ -51,15 +43,17 @@ export default function ArchiveCreateHome() {
     },
   });
 
-  useEffect(() => {
-    resetArchiveWrite();
-    return () => {
-      setArchiveWrite(undefined);
-    };
-  }, [resetArchiveWrite, setArchiveWrite]);
+  const onCancel = () => {
+    setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
+    setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
+  };
 
   const onCreateSubmit = async (data: ArchiveWirteProps) => {
-    if (!exhibitionId) return alert('전시회 title 입력이 필요');
+    if (!exhibitionId) {
+      setAlertState(ALERT_MESSAGE.ALERT.SEARCH_ARCHIVE_TITLE);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+      return null;
+    }
     const postData = {
       ...data,
       itemId: Number(exhibitionId),
@@ -73,8 +67,6 @@ export default function ArchiveCreateHome() {
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
     };
-    setArchiveWrite(postData);
-
     try {
       await axios({
         method: 'POST',
@@ -82,16 +74,11 @@ export default function ArchiveCreateHome() {
         data: postData,
       });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-      setPopupName(POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
     } catch (error: any) {
       setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
       setPopupName(POPUP_NAME.ALERT_CONFIRM);
     }
-  };
-
-  const onCancel = () => {
-    setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
-    setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
   };
 
   return (
@@ -106,11 +93,7 @@ export default function ArchiveCreateHome() {
           <Box textAlign="center" fontSize="18px">
             <Box>이 문화생활, 어땠나요?</Box>
             <Box marginTop="16px">
-              <Rating
-                name="starRating"
-                control={control}
-                userRating={archiveWrite?.starRating ?? 5}
-              />
+              <Rating name="starRating" control={control} userRating={5} />
             </Box>
           </Box>
           <Box
@@ -131,7 +114,6 @@ export default function ArchiveCreateHome() {
             lineHeight="18px"
             backgroundColor={theme.colors.grayF8}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
-            defaultValue={archiveWrite?.comment}
             {...register('comment')}
           />
           <ArchiveFileUploadForm />
@@ -144,12 +126,7 @@ export default function ArchiveCreateHome() {
             </Box>
           </FlexBox>
           <Button type="button" marginTop="10px" width="100%">
-            <AddressInput
-              name="placeInfos[0]"
-              type="FOOD"
-              control={control}
-              defaultValue={archiveWrite?.food}
-            />
+            <AddressInput name="placeInfos[0]" type="FOOD" control={control} />
           </Button>
           <FlexBox marginTop="20px">
             <MapPoint />
@@ -158,12 +135,7 @@ export default function ArchiveCreateHome() {
             </Box>
           </FlexBox>
           <Button type="button" marginTop="10px" width="100%">
-            <AddressInput
-              name="placeInfos[1]"
-              type="CAFE"
-              control={control}
-              defaultValue={archiveWrite?.cafe}
-            />
+            <AddressInput name="placeInfos[1]" type="CAFE" control={control} />
           </Button>
           <Box marginTop="30px" />
           <Box height="1px" backgroundColor={theme.colors.grayEE} />
@@ -171,11 +143,7 @@ export default function ArchiveCreateHome() {
           <FlexBox>
             <RadioLabel>
               <FlexBox>
-                <CheckBox
-                  type="checkbox"
-                  {...register('visibleAtItem')}
-                  defaultChecked={archiveWrite?.visibleAtItem}
-                />
+                <CheckBox type="checkbox" {...register('visibleAtItem')} />
                 <Box margin="3px 10px" fontSize="12px">
                   다른 사람도 보여주기
                 </Box>
