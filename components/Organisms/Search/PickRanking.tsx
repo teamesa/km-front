@@ -9,8 +9,6 @@ import { pickMostState } from 'states/pickRanking';
 export default function PickRanking() {
   const pickMost = useRecoilValueLoadable(pickMostState);
 
-  console.log(pickMost.state);
-
   if (
     pickMost.state !== 'hasValue' ||
     pickMost?.contents?.contents?.length === 0
