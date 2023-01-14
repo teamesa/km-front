@@ -13,10 +13,10 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
   return (
     <Box background="#fff" width="345px" height="652px" margin="15px">
       <MyArchiveDetailHeaderInfo
-        updatedAt={contents.updatedAt}
+        updatedAt={contents?.updatedAt}
         typeBadge={contents.typeBadge}
         title={contents.title}
-        archiveAdditionalInfos={contents.archiveAdditionalInfos}
+        archiveAdditionalInfos={contents?.archiveAdditionalInfos}
       />
       <Box
         width="100%"
@@ -26,11 +26,11 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
         borderBottom="solid 1px"
         borderBottomColor={theme.colors.gray99}
       >
-        {contents.photoUrls.length === 0 ? (
+        {contents?.photoUrls.length === 0 ? (
           <NoItemBox width="inherit" height="inherit" text="사진 " />
         ) : (
           <Carousel
-            imgUrlArr={contents.photoUrls}
+            imgUrlArr={contents?.photoUrls}
             width={'345px'}
             height={'345px'}
           />
@@ -59,14 +59,14 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
           <NoItemBox width="inherit" height="inherit" text="코멘트" />
         ) : (
           <Box width="inherit" height="fit-content" margin="0 10px">
-            <InnerHTML data={contents.comment} />
+            <InnerHTML data={contents?.comment} />
           </Box>
         )}
       </Box>
       <MyArchiveDetailCardInfo
-        starRating={contents.starRating}
-        food={contents.food}
-        cafe={contents.cafe}
+        starRating={contents?.starRating}
+        food={contents?.food}
+        cafe={contents?.cafe}
       />
     </Box>
   );

@@ -1,56 +1,86 @@
-import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
+import { AxiosResponse } from 'axios';
+import { useEffect, useState } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { CloseBtn } from 'assets/mypage';
 import { Box, Button } from 'components/Atoms';
 import Popup from 'components/Molecules/Popup';
 import MyArchiveDetailCard from 'components/Organisms/MyPage/Archive/Detail/MyArchiveDetailCard';
+import { data } from 'components/Organisms/Search/data';
 import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
 import {
   ClickedItemId,
-  myArchiveDetailInfoState,
+  ClickedArchiveId,
+  MyArchiveDetailProps,
 } from 'states/myArchiveDetail';
+import customAxios from 'utils/hooks/customAxios';
 
 const MyArchiveDetailPopup = () => {
-  const data = useRecoilValueLoadable(myArchiveDetailInfoState);
+  // const data = useRecoilValueLoadable(myArchiveDetailInfoState);
   const setItemId = useSetRecoilState(ClickedItemId);
   const setPopupName = useSetRecoilState(PopupNameState);
+  const archiveId = useRecoilValue(ClickedArchiveId);
+
   const handleClosePopup = () => {
     setPopupName(POPUP_NAME.NULL);
   };
 
-  switch (data.state) {
-    case 'hasValue':
-      setItemId(data.contents.itemId.toString());
+  const [archiveData, setArchiveData] = useState<MyArchiveDetailProps>();
 
-      return (
-        <Popup>
-          <Box>
-            <Box marginLeft="172.5px">
-              <Button onClick={handleClosePopup}>
-                <CloseBtn />
-              </Button>
-            </Box>
-            <MyArchiveDetailCard
-              typeBadge={data.contents.typeBadge}
-              updatedAt={data.contents.updatedAt}
-              title={data.contents.title}
-              comment={data.contents.comment}
-              starRating={data.contents.starRating}
-              food={data.contents.food}
-              cafe={data.contents.cafe}
-              photoUrls={data.contents.photoUrls}
-              archiveAdditionalInfos={data.contents.archiveAdditionalInfos}
-              itemId={data.contents.itemId}
-            />
+  useEffect(() => {
+    async function getArchiveDetailData() {
+      const axios = customAxios();
+      const url = `/api/archive/detail/${archiveId}`;
+      const axiosData = (await axios({
+        url,
+        method: 'GET',
+      })) as AxiosResponse<MyArchiveDetailProps>;
+
+      setArchiveData(axiosData.data);
+      setItemId(axiosData.data.itemId.toString());
+    }
+
+    getArchiveDetailData();
+  }, [archiveId, setItemId]);
+
+  if (archiveData) {
+    return (
+      <Popup>
+        <Box>
+          <Box marginLeft="172.5px">
+            <Button onClick={handleClosePopup}>
+              <CloseBtn />
+            </Button>
           </Box>
-        </Popup>
-      );
-
-    case 'loading':
-      return <div>Loading...</div>;
-    case 'hasError':
-      throw data.contents;
+          <MyArchiveDetailCard
+            typeBadge={archiveData.typeBadge}
+            updatedAt={archiveData.updatedAt}
+            title={archiveData.title}
+            comment={archiveData.comment}
+            starRating={archiveData.starRating}
+            food={archiveData.food}
+            cafe={archiveData.cafe}
+            photoUrls={archiveData.photoUrls}
+            archiveAdditionalInfos={archiveData.archiveAdditionalInfos}
+            itemId={archiveData.itemId}
+          />
+        </Box>
+      </Popup>
+    );
+  } else {
+    return (
+      <Popup>
+        <Box>
+          <Box marginLeft="172.5px">
+            <Button onClick={handleClosePopup}>
+              <CloseBtn />
+            </Button>
+          </Box>
+        </Box>
+      </Popup>
+    );
   }
 };
+
 export default MyArchiveDetailPopup;
