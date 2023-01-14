@@ -2,9 +2,9 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import AlertArchiveCancelConfirmPopup from 'components/Organisms/Popup/AlertArchiveCancelConfirmPopup';
 import AlertArchiveDeletePopup from 'components/Organisms/Popup/AlertArchiveDeletePopup';
+import AlertConfirmBackPopup from 'components/Organisms/Popup/AlertConfirmBackPopup';
 import AlertSuccessPopup from 'components/Organisms/Popup/AlertConfirmPopup';
 import AlertLoginConfirmationPopup from 'components/Organisms/Popup/AlertLoginConfirmationPopup';
-import AlertMoveToMyArchivePopup from 'components/Organisms/Popup/AlertMoveToMyArchivePopup';
 import ArchivePictureOverflowPopup from 'components/Organisms/Popup/ArchivePictureOverflowPopup';
 import ArchiveWirteConfirmPopup from 'components/Organisms/Popup/ArchiveWirteConfirmPopup';
 import MyArchiveDetailPopup from 'components/Organisms/Popup/MyArchiveDetailPopup';
@@ -31,8 +31,8 @@ const PopupRouter = () => {
       return <AlertLoginConfirmationPopup />;
     case POPUP_NAME.POPUP_ARCHIVE_DETAIL:
       return <MyArchiveDetailPopup />;
-    case POPUP_NAME.ALERT_MOVE_MyARCHIVE_PAGE:
-      return <AlertMoveToMyArchivePopup />;
+    case POPUP_NAME.ALERT_CONFIRM_BACK:
+      return <AlertConfirmBackPopup />;
     case POPUP_NAME.ARCHIVE_WRITE_CONFIRM:
       return <ArchiveWirteConfirmPopup />;
     case POPUP_NAME.OVERFLOW_PICTURE:

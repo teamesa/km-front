@@ -13,6 +13,7 @@ import {
 } from 'states/archive-square';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
+
 export default function InputArchiveSquare() {
   const [archiveSquares, setArchiveSquareState] =
     useRecoilState(ArchiveSquareState);
@@ -177,6 +178,7 @@ export default function InputArchiveSquare() {
         css={css`
           position: relative;
           z-index: 2;
+          cursor: pointer;
         `}
       />
       <Box

@@ -28,11 +28,15 @@ export const ALERT_MESSAGE = {
       code: 'ALT-013',
       message: '사진은 3개까지 등록할 수 있습니다.',
     },
+    SEARCH_ARCHIVE_TITLE: {
+      code: 'ALT-012',
+      message: '검색을 통해 문화생활을 선택해주세요',
+    },
   },
   ERROR: {
     ARCHIVE_REGISTRATION_QUESTION: {
       code: 'ERROR-001',
-      message: '알수없는 에러가 발생했습니다.',
+      message: '시스템 오류가 발생했습니다. 잠시 후 다시 시도해주세요.',
     },
   },
 };
