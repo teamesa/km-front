@@ -8,11 +8,6 @@ import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function MyPageHome() {
   useInitHeader({ headerLeft: 'disabled' });
-  const data = [
-    { title: 'MY 아카이브', contents: [] },
-    { title: '설정', contents: [] },
-  ];
-
   const resetMyArchiveListState = useResetMyArchiveListStateFunction();
 
   useEffect(() => {
