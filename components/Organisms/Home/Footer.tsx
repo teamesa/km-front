@@ -12,14 +12,14 @@ export default function Footer() {
     <Box
       width="100%"
       height="231px"
+      marginTop="100px"
       paddingTop="30px"
       paddingX="15px"
-      borderTop="1px solid #ccc"
+      borderTop={`1px solid ${theme.colors.grayCC}`}
     >
       <Box marginBottom="20px">
         <Image src={Logo} alt="image" width="136px" height="20px" />
       </Box>
-
       <Box
         color={theme.colors.gray33}
         fontSize="12px"
@@ -40,14 +40,14 @@ export default function Footer() {
         <Box
           color={theme.colors.gray77}
           paddingRight="20px"
-          borderRight="1px solid #ccc"
+          borderRight={`1px solid ${theme.colors.grayCC}`}
         >
           킬로미터소개
         </Box>
         <Box
           color={theme.colors.gray77}
           paddingX="20px"
-          borderRight="1px solid #ccc"
+          borderRight={`1px solid ${theme.colors.grayCC}`}
           onClick={() => router.push('/info?type=service')}
         >
           이용약관
@@ -62,7 +62,7 @@ export default function Footer() {
       </Box>
       <Box
         padding="12px"
-        border="1px solid #ccc"
+        border={`1px solid ${theme.colors.grayCC}`}
         width="44px"
         height="44px"
         borderRadius="50%"

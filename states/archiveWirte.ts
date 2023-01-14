@@ -19,24 +19,6 @@ export interface ArchiveWirteProps {
   cafe?: string;
 }
 
-interface ArchiveProps {
-  typeBadge: {
-    text: string;
-    typeBadge: true;
-  };
-  updatedAt: string;
-  title: string;
-  comment: string;
-  starRating: 5;
-  food: string;
-  cafe: string;
-  photoUrls: ArchiveSquareState;
-  archiveAdditionalInfos: {
-    title: string;
-    link: string;
-  }[];
-}
-
 interface TGetArchiveSearch {
   contents: {
     id: number;
