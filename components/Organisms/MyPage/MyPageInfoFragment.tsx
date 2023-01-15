@@ -64,8 +64,11 @@ export default function MyPageInfoFragment() {
           </Box>
           {isMyArchiveShowed ? (
             <>
-              {contents.contents.length === 0 ? (
-                <BlankArchiveListSection />
+              {contents?.contents?.length === 0 ? (
+                <>
+                  <BlankArchiveListSection />
+                  <FloatingButton />
+                </>
               ) : (
                 <>
                   <ListSection contents={contents} />

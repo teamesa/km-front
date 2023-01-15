@@ -5,7 +5,7 @@ import MyArchiveListFragment from 'components/Organisms/MyPage/Archive/MyArchive
 import { MyArchivePageContents } from 'states/myArchiveList';
 
 export default function ListSection(data: any) {
-  if (data.contents.length === 0) {
+  if (data?.contents?.length === 0) {
     return <MyArchiveListFragment />;
   } else {
     return (
