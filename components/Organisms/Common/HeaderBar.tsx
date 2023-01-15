@@ -19,7 +19,7 @@ import theme from 'styles/theme';
 
 const headerLeftIcon = {
   default: <ArrowLeft width="30" height="30" viewBox="-10 -6 30 30" />,
-  logo: <Image src={Logo} alt="image" width="136px" height="20px" />,
+  logo: <Image src={Logo} alt="image" width="106px" height="18px" />,
   disabled: <></>,
   privacy: (
     <Box fontSize="16px" fontWeight={500} lineHeight={1.5}>
@@ -192,7 +192,7 @@ function HeaderBar() {
                 cursor: pointer;
               `}
             >
-              <Image src={WhiteLogo} alt="image" width="136px" height="20px" />
+              <Image src={WhiteLogo} alt="image" width="106px" height="18px" />
             </Box>
             <Box
               textAlign="center"

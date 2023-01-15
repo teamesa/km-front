@@ -18,7 +18,7 @@ export default function Footer() {
       borderTop={`1px solid ${theme.colors.grayCC}`}
     >
       <Box marginBottom="20px">
-        <Image src={Logo} alt="image" width="136px" height="20px" />
+        <Image src={Logo} alt="image" width="97px" height="16px" />
       </Box>
       <Box
         color={theme.colors.gray33}

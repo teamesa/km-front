@@ -32,7 +32,9 @@ export default function LoginPage() {
             <br />
             킬로미터
           </Box>
-          <MyPageImageAsset width="173px" height="50px" type="logo" />
+          <Box paddingTop="15px">
+            <MyPageImageAsset width="122px" height="20px" type="logo" />
+          </Box>
         </Box>
       </Box>
       <Box>
