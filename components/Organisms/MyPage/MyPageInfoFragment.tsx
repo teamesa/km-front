@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
 
@@ -36,7 +37,15 @@ export default function MyPageInfoFragment() {
             background={theme.colors.white}
             zIndex={2}
           >
-            <Box height="45px" overflow="auto" display="flex" zIndex={2}>
+            <Box
+              height="45px"
+              overflow="auto"
+              display="flex"
+              zIndex={2}
+              css={css`
+                cursor: pointer;
+              `}
+            >
               {MyPageNavigatorMetaInfo.map(({ title }, index) => (
                 <Box
                   key={title}

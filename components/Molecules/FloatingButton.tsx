@@ -17,6 +17,9 @@ export default function FloatingButton() {
       maxWidth={theme.view.webView}
       zIndex="100"
       onClick={() => router.push('/archive')}
+      css={css`
+        cursor: pointer;
+      `}
     >
       <Box
         position="absolute"
