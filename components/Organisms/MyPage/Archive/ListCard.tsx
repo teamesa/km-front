@@ -19,15 +19,12 @@ export default function Item(props: ItemProps) {
   const content = props.content;
   const setPopupName = useSetRecoilState(PopupNameState);
   const setArchiveId = useSetRecoilState(ClickedArchiveId);
+  // const setItemId = useSetRecoilState(ClickedItemId);
   const apiArr = content.api.split('/');
   return (
     <FlexBox
       position="relative"
       padding="0px 0px 40px"
-      onClick={() => {
-        setArchiveId(apiArr[4]);
-        setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
-      }}
       css={css`
         &:before {
           content: '';
@@ -47,9 +44,30 @@ export default function Item(props: ItemProps) {
       `}
     >
       <Box flex={0.3} width="75px" height="75px">
-        <ItemImage imageUrl={content.listImageUrl} />
+        <Box
+          width="fit-content"
+          height="fit-content"
+          onClick={() => {
+            setArchiveId(apiArr[4]);
+          }}
+          css={css`
+            cursor: pointer;
+          `}
+        >
+          <ItemImage imageUrl={content.listImageUrl} />
+        </Box>
       </Box>
-      <Box marginLeft="20px" flex={1}>
+      <Box
+        marginLeft="20px"
+        flex={1}
+        onClick={() => {
+          setArchiveId(apiArr[4]);
+          setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
+        }}
+        css={css`
+          cursor: pointer;
+        `}
+      >
         <ItemInfo
           typeBadge={content.typeBadge}
           presentationTitle={content.title}
