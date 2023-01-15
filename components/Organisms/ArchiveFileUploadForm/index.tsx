@@ -1,7 +1,7 @@
 import { useRecoilValue } from 'recoil';
 
 import { Box } from 'components/Atoms';
-import ArchiveSquare from 'components/Organisms/Archive/ArchiveFileUploadForm/ArchiveSquare';
+import ArchiveSquare from 'components/Organisms/ArchiveFileUploadForm/ArchiveSquare';
 import { ArchiveSquareState } from 'states/archive-square';
 
 export default function ArchiveFileUploadForm() {

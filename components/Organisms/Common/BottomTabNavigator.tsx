@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 
-import { Box, FlexBox } from 'components/Atoms';
+import { Box, Button, FlexBox } from 'components/Atoms';
 import { Z_INDEX } from 'constants/common';
 import { headerState } from 'states/common';
+import theme from 'styles/theme';
 import useRefUtils from 'utils/hooks/useRefUtils';
 
 interface BottomTabItemProps {
@@ -18,17 +19,26 @@ function BottomTabItem({ data }: { data: BottomTabItemProps }) {
   const isSelected = data.path?.some((path) => router.pathname === path);
 
   return (
-    <FlexBox
-      role="tab"
+    <Box
       flex={1}
-      flexDirection="column"
-      alignItems="center"
-      justifyContent="center"
+      textAlign="center"
       onClick={() => router.push(data.path?.[0] ?? '')}
     >
-      <Box marginBottom="2px">{isSelected ? data.selectedIcon : data.icon}</Box>
-      <Box fontSize="9px">{data.pathName}</Box>
-    </FlexBox>
+      <Button role="tab">
+        <FlexBox flexDirection="column">
+          <Box marginBottom="2px">
+            {isSelected ? data.selectedIcon : data.icon}
+          </Box>
+          <Box fontSize="9px">
+            {isSelected ? (
+              <Box fontWeight={500}>{data.pathName}</Box>
+            ) : (
+              data.pathName
+            )}
+          </Box>
+        </FlexBox>
+      </Button>
+    </Box>
   );
 }
 
@@ -53,6 +63,7 @@ export default function BottomTabNavigator({
           backgroundColor="#f8f8f8"
           bottom="0px"
           width="100%"
+          maxWidth={theme.view.webView}
           position="fixed"
           ref={ref}
         >

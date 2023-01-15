@@ -4,11 +4,12 @@ import Box from 'components/Atoms/Box';
 
 const CarouselDim = ({ height }: { height: string }) => (
   <Box
-    width="100vw"
     height="230px"
     top="270px"
     opacity={0.4}
     position="absolute"
+    left="0"
+    right="0"
     css={css`
       top: calc(${height} - 230px);
       background-image: linear-gradient(

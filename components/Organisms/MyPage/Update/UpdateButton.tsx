@@ -84,7 +84,6 @@ export default function UpdateButton() {
   return (
     <Box
       marginTop="60px"
-      marginBottom="80px"
       backgroundColor={theme.colors.black}
       color={theme.colors.white}
       paddingY="15px"

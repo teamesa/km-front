@@ -53,12 +53,12 @@ export default function Navigator() {
     if (
       data?.itemInfoAdditionalInfo?.archiveLink.title === '아카이브 수정하기'
     ) {
-      return router.push(`${decode}&exhibitionId=${id}`);
+      return router.push(decode);
     }
     return router.push({
       pathname: data?.itemInfoAdditionalInfo?.archiveLink.link,
       query: {
-        id: id,
+        exhibitionId: id,
         checked: true,
       },
     });
@@ -72,6 +72,7 @@ export default function Navigator() {
       bottom="0px"
       position="fixed"
       padding="0 15px"
+      maxWidth={theme.view.webView}
     >
       <FlexBox height="60px" alignItems="center" justifyContent="space-between">
         <FlexBox>

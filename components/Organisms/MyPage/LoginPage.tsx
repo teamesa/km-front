@@ -58,13 +58,6 @@ export default function LoginPage() {
             marginBottom="10px"
           />
         </Button>
-        <Button
-          onClick={() =>
-            alert('현재 애플은 미지원입니다. 네이버 로그인을 이용해주세요')
-          }
-        >
-          <MyPageImageAsset width="100%" height="50px" type="apple" />
-        </Button>
       </Box>
     </Box>
   );

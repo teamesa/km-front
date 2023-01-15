@@ -10,8 +10,10 @@ export default styled.div<PopupProps>`
   position: fixed;
   top: 0;
   width: 100%;
+  max-width: 480px;
   height: 100vh;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background-color: rgb(0, 0, 0, 0.7);
   z-index: ${Z_INDEX.LOADING};
 `;

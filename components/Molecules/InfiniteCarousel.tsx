@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { useEffect, useRef, useState } from 'react';
 
 import { Plus } from 'assets/archive/Plus';
-import { FlexBox, Box } from 'components/Atoms';
+import { FlexBox, Box, Button } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
 import InfiniteCarouselTitle from 'components/Organisms/Home/Module/KeyVisual/InfinitiCarouselTitle';
 import theme from 'styles/theme';
@@ -90,6 +90,7 @@ export default function InfiniteCarousel({
       <Box
         width={width}
         height={height}
+        maxWidth={theme.view.webView}
         overflowY="hidden"
         overflowX="scroll"
         css={css`
@@ -131,7 +132,7 @@ export default function InfiniteCarousel({
           />
         </FlexBox>
       </Box>
-      <Box
+      <Button
         borderRadius="12px"
         backgroundColor={theme.colors.black}
         position="absolute"
@@ -173,7 +174,7 @@ export default function InfiniteCarousel({
         >
           <Plus width="9px" height="9px" />
         </Box>
-      </Box>
+      </Button>
       <Box position="absolute" bottom="60px">
         {imgUrlList
           .map(({ upperTitle, lowerTitle, link }, index) => (
