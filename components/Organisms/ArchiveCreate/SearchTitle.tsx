@@ -85,7 +85,7 @@ export default function SearchTitle() {
                       router.push({
                         pathname: '/archive',
                         query: {
-                          id: search.id,
+                          exhibitionId: search.id,
                         },
                       });
                     }}
