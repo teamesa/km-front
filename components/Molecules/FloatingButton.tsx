@@ -13,6 +13,7 @@ export default function FloatingButton() {
       left="0"
       right="0"
       margin="0 auto"
+      marginBottom="var(--platformBottomArea)"
       maxWidth={theme.view.webView}
       zIndex="100"
       onClick={() => router.push('/archive')}
