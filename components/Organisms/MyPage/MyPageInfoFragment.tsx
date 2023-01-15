@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react';
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { useState } from 'react';
+import { useRecoilValueLoadable } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import FloatingButton from 'components/Molecules/FloatingButton';
 import BlankArchiveListSection from 'components/Organisms/MyPage/Archive/BlankArchiveListSection';
 import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
-import { useResetMyArchiveListStateFunction } from 'states/myArchiveList';
 import { myArchiveListState } from 'states/myArchiveList';
 import theme from 'styles/theme';
 
@@ -16,14 +15,14 @@ export default function MyPageInfoFragment() {
     { title: `${contents?.title ?? ''}` },
     { title: '설정' },
   ];
-  const [isMyArchiveShowed, setMyArhiveShowedFlag] = useState<boolean>(true);
+  const [isMyArchiveShowed, setMyArchiveShowedFlag] = useState<boolean>(true);
   const clicked = isMyArchiveShowed ? 0 : 1;
 
   const renderFragment = (index: number) => {
     if (index === 0) {
-      setMyArhiveShowedFlag(true);
+      setMyArchiveShowedFlag(true);
     } else {
-      setMyArhiveShowedFlag(false);
+      setMyArchiveShowedFlag(false);
     }
   };
 
