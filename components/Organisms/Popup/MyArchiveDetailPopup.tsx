@@ -6,11 +6,14 @@ import Popup from 'components/Molecules/Popup';
 import MyArchiveDetailCard from 'components/Organisms/MyPage/Archive/Detail/MyArchiveDetailCard';
 import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
-import { myArchiveDetailInfoState } from 'states/myArchiveDetail';
+import {
+  ClickedItemId,
+  myArchiveDetailInfoState,
+} from 'states/myArchiveDetail';
 
 const MyArchiveDetailPopup = () => {
   const data = useRecoilValueLoadable(myArchiveDetailInfoState);
-
+  const setItemId = useSetRecoilState(ClickedItemId);
   const setPopupName = useSetRecoilState(PopupNameState);
   const handleClosePopup = () => {
     setPopupName(POPUP_NAME.NULL);
@@ -18,6 +21,8 @@ const MyArchiveDetailPopup = () => {
 
   switch (data.state) {
     case 'hasValue':
+      setItemId(data.contents.itemId.toString());
+
       return (
         <Popup>
           <Box>
@@ -36,6 +41,7 @@ const MyArchiveDetailPopup = () => {
               cafe={data.contents.cafe}
               photoUrls={data.contents.photoUrls}
               archiveAdditionalInfos={data.contents.archiveAdditionalInfos}
+              itemId={data.contents.itemId}
             />
           </Box>
         </Popup>

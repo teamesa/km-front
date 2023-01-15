@@ -46,20 +46,17 @@ export default function LoginPage() {
         >
           SNS 계정으로 간편하게
         </Box>
-        <Button onClick={() => router.replace('/api/login')}>
+        <Button
+          onClick={() =>
+            router.replace(`/api/login?redirect=${router.query.redirect ?? ''}`)
+          }
+        >
           <MyPageImageAsset
             height="50px"
             width="100%"
             type="naver"
             marginBottom="10px"
           />
-        </Button>
-        <Button
-          onClick={() =>
-            alert('현재 애플은 미지원입니다. 네이버 로그인을 이용해주세요')
-          }
-        >
-          <MyPageImageAsset width="100%" height="50px" type="apple" />
         </Button>
       </Box>
     </Box>

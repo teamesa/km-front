@@ -4,6 +4,7 @@ import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
 import noImage from 'assets/common/no_image_375x500.png';
 import { Box } from 'components/Atoms';
 import { summaryState } from 'states/detail';
+import theme from 'styles/theme';
 
 export default function ExhibitionImagesSection() {
   const data = useRecoilValue(summaryState);
@@ -16,6 +17,7 @@ export default function ExhibitionImagesSection() {
       width="100%"
       height="100%"
       maxHeight="450px"
+      maxWidth={theme.view.webView}
     >
       <Image
         src={detailImageUrl ? detailImageUrl : noImage}

@@ -14,6 +14,10 @@ const theme = {
     gray77: '#777',
     gray33: '#333',
     grayAA: '#aaaaaa',
+    grayCC: '#ccc',
+  },
+  view: {
+    webView: '480px',
   },
 };
 

@@ -7,13 +7,13 @@ import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import theme from 'styles/theme';
 
-const AlertArchiveAskPopup = () => {
+const AlertConfirmBackPopup = () => {
   const alertState = useRecoilValue(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const router = useRouter();
 
   const handleClosePopup = () => {
-    router.push('/mypage');
+    router.back();
     setPopupName(POPUP_NAME.NULL);
   };
 
@@ -50,4 +50,4 @@ const AlertArchiveAskPopup = () => {
   );
 };
 
-export default AlertArchiveAskPopup;
+export default AlertConfirmBackPopup;

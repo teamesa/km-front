@@ -8,25 +8,21 @@ import {
   SwipeItemProps,
 } from 'components/Organisms/Home/ModuleTypes';
 
-export default function ModuleResolver({ moduleName, data }: ModuleData) {
+export default function ModuleResolver({
+  moduleName,
+  index,
+  data,
+}: ModuleData) {
   switch (moduleName) {
-    case 'key-visual':
-      const { index: keyVisualIndex, keyvisualDatas } = data as KeyVisualProps;
-      return (
-        <KeyVisual index={keyVisualIndex} keyvisualDatas={keyvisualDatas} />
-      );
-    case 'swipe-item':
-      const {
-        index: SwipeItemIndex,
-        thumbnailPhotoUrl,
-        photoUrls,
-        title,
-        content,
-        keywords,
-      } = data as SwipeItemProps;
+    case 'KEY_VISUAL':
+      const { keyVisualDatas } = data as KeyVisualProps;
+      return <KeyVisual index={index} keyVisualDatas={keyVisualDatas} />;
+    case 'SWIPE_ITEM':
+      const { thumbnailPhotoUrl, photoUrls, title, content, keywords } =
+        data as SwipeItemProps;
       return (
         <SwipeItem
-          index={SwipeItemIndex}
+          index={index}
           thumbnailPhotoUrl={thumbnailPhotoUrl}
           photoUrls={photoUrls}
           title={title}
@@ -34,20 +30,17 @@ export default function ModuleResolver({ moduleName, data }: ModuleData) {
           keywords={keywords}
         />
       );
-    case 'monthly-free-item':
-      const {
-        index: MonthlyFreeItemIndex,
-        topTitle,
-        bottomTitle,
-        contents,
-      } = data as MonthlyFreeItemProps;
+    case 'MONTHLY_FREE_ITEM':
+      const { topTitle, bottomTitle, contents } = data as MonthlyFreeItemProps;
       return (
         <MonthlyFreeItem
-          index={MonthlyFreeItemIndex}
+          index={index}
           topTitle={topTitle}
           bottomTitle={bottomTitle}
           contents={contents}
         />
       );
+    default:
+      return <div>error</div>;
   }
 }

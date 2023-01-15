@@ -22,9 +22,8 @@ const Pick: NextPage<UserProps> = ({ user }) => {
 
   if (user.isLogin) {
     return <MyPickPage />;
-  } else {
-    return <PickLogin />;
   }
+  return <PickLogin />;
 };
 
 export const getServerSideProps = useUserProps;

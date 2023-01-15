@@ -31,8 +31,8 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
         ) : (
           <Carousel
             imgUrlArr={contents.photoUrls}
-            width={'345px'}
-            height={'345px'}
+            width="345px"
+            height="345px"
           />
         )}
       </Box>

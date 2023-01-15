@@ -1,14 +1,19 @@
-export type moduleNames = 'key-visual' | 'swipe-item' | 'monthly-free-item';
+export type moduleNames = 'KEY_VISUAL' | 'SWIPE_ITEM' | 'MONTHLY_FREE_ITEM';
+
+export type ModuleResponse = {
+  modules: ModuleData[];
+};
 
 export type ModuleData = {
   moduleName: moduleNames;
+  index: number;
   data: KeyVisualProps | SwipeItemProps | MonthlyFreeItemProps;
 };
 
 export type KeyVisualProps = {
   index: number;
-  keyvisualDatas: {
-    photoUrl: string;
+  keyVisualDatas: {
+    keyVisualPhotoUrl: string;
     upperTitle: string;
     lowerTitle: string;
     link?: string;

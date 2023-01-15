@@ -4,7 +4,7 @@ import Alert from 'assets/error/Alert';
 import { Box, Button } from 'components/Atoms';
 import theme from 'styles/theme';
 
-export default function ArchiveLogin() {
+export default function NoLoginPage() {
   const router = useRouter();
   return (
     <Box
@@ -33,7 +33,7 @@ export default function ArchiveLogin() {
         lineHeight="40px"
         background={theme.colors.black}
         onClick={() => {
-          router.push('/mypage');
+          router.push(`/mypage?redirect=${router.asPath}`);
         }}
       >
         로그인 하기

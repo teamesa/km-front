@@ -80,6 +80,7 @@ function HeaderBar() {
             `}
             top="0px"
             width="100%"
+            maxWidth={theme.view.webView}
             background={theme.colors.white}
             zIndex={Z_INDEX.SKY}
           >
@@ -169,6 +170,7 @@ function HeaderBar() {
           `}
           top="0px"
           width="100%"
+          maxWidth={theme.view.webView}
           backgroundColor="rgba(0,0,0,0)"
           zIndex={Z_INDEX.SKY}
         >
@@ -184,8 +186,6 @@ function HeaderBar() {
               onClick={() => {
                 if (header.headerLeftAction) {
                   header.headerLeftAction();
-                } else {
-                  router.back();
                 }
               }}
               css={css`
