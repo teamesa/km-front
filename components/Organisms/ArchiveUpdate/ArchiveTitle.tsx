@@ -1,13 +1,11 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Controller } from 'react-hook-form';
 
-import { SearchClose } from 'assets/archive/SearchClose';
 import noImage from 'assets/common/no_image_375x500.png';
 import { Box, Button, Input } from 'components/Atoms';
 import FlexBox from 'components/Atoms/FlexBox';
-import { getSummary, TGetSummary } from 'states/detail';
 
 export default function ArchiveTitle({
   name,
@@ -17,18 +15,12 @@ export default function ArchiveTitle({
   control: any;
 }) {
   const router = useRouter();
-  const { id, checked, exhibitionId } = router.query;
-  const [summaryData, setSummaryData] = useState<TGetSummary>();
-  const listImage = summaryData?.listImageUrl;
-  const exhibitionTitle = summaryData?.title;
+  const { id } = router.query;
+  const listImage = noImage;
 
   useEffect(() => {
-    async function getData() {
-      const data = await getSummary({ itemId: Number(exhibitionId ?? id) });
-      setSummaryData(data);
-    }
-    getData();
-  }, [exhibitionId, id]);
+    // TODO api 수정 _ async,await
+  }, []);
 
   return (
     <Controller
@@ -49,22 +41,9 @@ export default function ArchiveTitle({
               objectFit="cover"
             />
             <Box fontSize="13px" margin="10px 30px 17px 15px">
-              {exhibitionTitle}
+              TODO / 아카이브 id: {id}
             </Box>
           </FlexBox>
-          {checked || exhibitionId ? null : (
-            <Button
-              type="button"
-              onClick={() => {
-                router.back();
-              }}
-              width="10px"
-              height="10px"
-              paddingTop="10px"
-            >
-              <SearchClose />
-            </Button>
-          )}
         </FlexBox>
       )}
     ></Controller>

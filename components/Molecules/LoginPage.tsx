@@ -4,7 +4,7 @@ import Alert from 'assets/error/Alert';
 import { Box, Button } from 'components/Atoms';
 import theme from 'styles/theme';
 
-export default function ArchiveLogin() {
+export default function NoLoginPage() {
   const router = useRouter();
   return (
     <Box
