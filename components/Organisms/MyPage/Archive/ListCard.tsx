@@ -15,12 +15,12 @@ type ItemProps = {
   content: MyArchivePageContents;
 };
 
-export default function Item(props: ItemProps) {
+export default function ListCard(props: ItemProps) {
   const content = props.content;
   const setPopupName = useSetRecoilState(PopupNameState);
   const setArchiveId = useSetRecoilState(ClickedArchiveId);
-  // const setItemId = useSetRecoilState(ClickedItemId);
   const apiArr = content.api.split('/');
+
   return (
     <FlexBox
       position="relative"
