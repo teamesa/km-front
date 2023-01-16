@@ -52,35 +52,6 @@ export default function Carousel({
               {imgUrlArr.length}
             </Box>
           </FlexBox>
-          {/* <Box
-            width="fit-content"
-            height="fit-content"
-            marginRight="3.2px"
-            lineHeight="10px"
-            fontSize="11px"
-            color={theme.colors.white}
-          >
-            {nowIndex}
-          </Box>
-          <Box
-            width="fit-content"
-            height="fit-content"
-            marginRight="3.2px"
-            lineHeight="10px"
-            fontSize="11px"
-            color={theme.colors.white}
-          >
-            /
-          </Box>
-          <Box
-            width="fit-content"
-            height="fit-content"
-            lineHeight="10px"
-            fontSize="11px"
-            color={theme.colors.gray99}
-          >
-            {imgUrlArr.length}
-          </Box> */}
         </FlexBox>
       ) : null}
       <Box
