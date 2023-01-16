@@ -7,7 +7,7 @@ import { useInitHeader } from 'utils/hooks/useInitHeader';
 export default function HomeList() {
   const router = useRouter();
   useInitHeader({
-    headerLeft: '전체보기',
+    headerLeft: 'allShow',
     headerRight: 'close',
     headerRightAction: () => router.back(),
   });
