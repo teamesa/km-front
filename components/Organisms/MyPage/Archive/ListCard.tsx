@@ -19,7 +19,8 @@ export default function Item(props: ItemProps) {
   const content = props.content;
   const setPopupName = useSetRecoilState(PopupNameState);
   const setArchiveId = useSetRecoilState(ClickedArchiveId);
-  // const setItemId = useSetRecoilState(ClickedItemId);
+  //TODO: API 업데이트 되면 itemId  연결하기.
+  // const itemId = content.item.id; (예상)
   const apiArr = content.api.split('/');
   return (
     <FlexBox
@@ -47,9 +48,8 @@ export default function Item(props: ItemProps) {
         <Box
           width="fit-content"
           height="fit-content"
-          onClick={() => {
-            setArchiveId(apiArr[4]);
-          }}
+          //TODO: API 업데이트 되면 itemId  연결하기.
+          // onClick={() => router.push('/detail/{itemId}')}
           css={css`
             cursor: pointer;
           `}
