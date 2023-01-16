@@ -6,7 +6,6 @@ import { CloseBtn } from 'assets/mypage';
 import { Box, Button } from 'components/Atoms';
 import Popup from 'components/Molecules/Popup';
 import MyArchiveDetailCard from 'components/Organisms/MyPage/Archive/Detail/MyArchiveDetailCard';
-import { data } from 'components/Organisms/Search/data';
 import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
 import {
@@ -17,7 +16,6 @@ import {
 import customAxios from 'utils/hooks/customAxios';
 
 const MyArchiveDetailPopup = () => {
-  // const data = useRecoilValueLoadable(myArchiveDetailInfoState);
   const setItemId = useSetRecoilState(ClickedItemId);
   const setPopupName = useSetRecoilState(PopupNameState);
   const archiveId = useRecoilValue(ClickedArchiveId);
