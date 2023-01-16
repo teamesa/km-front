@@ -5,10 +5,14 @@ import { MyArchivePageContents } from 'states/myArchiveList';
 
 export default function ListSection(data: any) {
   return (
-    <Box paddingBottom="120px" marginBottom="var(--platformBottomArea)">
+    <Box
+      paddingBottom="120px"
+      marginBottom="var(--platformBottomArea)"
+      paddingTop="20px"
+    >
       {data?.contents?.contents?.map(
         (content: MyArchivePageContents, index: number) => (
-          <ListCard key={content?.api ?? index} content={content} />
+          <ListCard content={content} key={index} />
         ),
       )}
     </Box>

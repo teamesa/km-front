@@ -35,9 +35,7 @@ export default function ListCard(props: ItemProps) {
           width: 1px;
           background: #ddd;
         }
-        &:nth-of-type(1) {
-          padding: 20px 0px 40px;
-        }
+
         &:nth-last-of-type(1):before {
           display: none;
         }
