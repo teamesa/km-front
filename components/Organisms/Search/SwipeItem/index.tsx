@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useRecoilValue } from 'recoil';
 
-import { Box } from 'components/Atoms';
+import { Box, FlexBox } from 'components/Atoms';
 import SwipeItemImage from 'components/Organisms/Search/SwipeItem/SwipeItemImage';
 import SwipeItemInfo from 'components/Organisms/Search/SwipeItem/SwipeItemInfo';
 import { PickRankingState } from 'states';
@@ -16,8 +16,7 @@ export default function SwipeItem() {
         scroll-snap-type: x mandatory;
       `}
     >
-      <Box
-        display="flex"
+      <FlexBox
         flexDirection="row"
         minWidth="100%"
         padding="0px 15px"
@@ -39,7 +38,7 @@ export default function SwipeItem() {
             />
           </Box>
         ))}
-      </Box>
+      </FlexBox>
     </Box>
   );
 }

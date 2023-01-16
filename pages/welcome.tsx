@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { MyPageImageAsset } from 'assets/mypage';
-import { Box, Button, Span } from 'components/Atoms';
+import { Box, Button, FlexBox, Span } from 'components/Atoms';
 import theme from 'styles/theme';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 
@@ -41,8 +41,8 @@ export default function Welcome() {
           >
             문화생활 플랫폼
           </Span>
-          <Box display="flex">
-            <MyPageImageAsset width="103px" height="30px" type="logo" />
+          <FlexBox alignItems="baseline">
+            <MyPageImageAsset width="122px" height="20px" type="logo" />
             <Box
               fontSize="22px"
               fontWeight={500}
@@ -53,7 +53,7 @@ export default function Welcome() {
             >
               에 오신걸
             </Box>
-          </Box>
+          </FlexBox>
           <Box
             fontSize="22px"
             fontWeight={500}
