@@ -3,18 +3,15 @@ import { Box, FlexBox, Span, Tag } from 'components/Atoms';
 import { PresentationBadge } from 'states/myArchiveList';
 import theme from 'styles/theme';
 
-type InfoProps = {
+export default function ItemInfo({
+  typeBadge,
+  updatedAt,
+  isMultiImages,
+}: {
   typeBadge: PresentationBadge;
-  presentationTitle: string;
   updatedAt: string;
   isMultiImages: boolean;
-};
-
-export default function ItemInfo(props: InfoProps) {
-  const typeBadge = props.typeBadge;
-  const updatedAt = props.updatedAt;
-  const isMultiImages = props.isMultiImages;
-
+}) {
   return (
     <FlexBox justifyContent="space-between">
       <Box fontSize="11px" display="flex" alignItems="center">
