@@ -8,7 +8,7 @@ export default function PickRanking() {
   const pickMost = useRecoilValueLoadable(pickMostState);
 
   if (
-    pickMost.state !== 'hasValue' ||
+    pickMost?.state !== 'hasValue' ||
     pickMost?.contents?.contents?.length === 0
   )
     return <></>;
