@@ -34,13 +34,16 @@ export default function Info() {
       </Box>
     );
   } else if (type === 'service') {
-    <Box borderTop="1px solid #f3f3f3" paddingTop="30px" paddingX="15px">
-      <ServiceTerms />
-    </Box>;
+    return (
+      <Box borderTop="1px solid #f3f3f3" paddingTop="30px" paddingX="15px">
+        <ServiceTerms />
+      </Box>
+    );
+  } else {
+    return (
+      <Box borderTop="1px solid #f3f3f3" paddingTop="30px" paddingX="15px">
+        <Introdeuce />
+      </Box>
+    );
   }
-  return (
-    <Box borderTop="1px solid #f3f3f3" paddingTop="30px" paddingX="15px">
-      <Introdeuce />
-    </Box>
-  );
 }
