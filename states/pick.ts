@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { atom, selector, useRecoilCallback } from 'recoil';
 
-export type TPoistPick = {
+export type TPostPick = {
   responsePagingStatus: {
     nextPage: number;
     currentPage: number;
@@ -66,7 +66,7 @@ export const getPick = async () => {
         pageSize: 100,
       },
     },
-  })) as AxiosResponse<TPoistPick>;
+  })) as AxiosResponse<TPostPick>;
   return data;
 };
 
@@ -80,7 +80,7 @@ export const useResetPickStateFunction = () =>
     [],
   );
 
-export const pickState = atom<TPoistPick>({
+export const pickState = atom<TPostPick>({
   key: 'PickState',
   default: selector({
     key: 'PickState/default',
