@@ -4,7 +4,7 @@ import { ChangeEvent } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Profile } from 'assets/mypage';
-import { Box, Input } from 'components/Atoms';
+import { Box, FlexBox, Input } from 'components/Atoms';
 import { loadingState } from 'states/loading';
 import { User } from 'states/user';
 import theme from 'styles/theme';
@@ -38,7 +38,7 @@ export default function MyPageUserInfo() {
   };
   return (
     <Box width="100%" height="70px" marginBottom="20px">
-      <Box display="flex">
+      <FlexBox>
         <Box width="70px" height="70px" position="relative">
           <Box width="70px" height="70px" borderRadius="50%" overflow="hidden">
             {imageUrl ? (
@@ -86,7 +86,7 @@ export default function MyPageUserInfo() {
         >
           {name}
         </Box>
-      </Box>
+      </FlexBox>
     </Box>
   );
 }

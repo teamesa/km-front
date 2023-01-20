@@ -22,6 +22,7 @@ export default function LoginPage() {
         <Box width="100%">
           <Box
             paddingTop="40px"
+            paddingBottom="15px"
             fontSize="22px"
             fontWeight={500}
             lineHeight={1.45}
@@ -32,7 +33,7 @@ export default function LoginPage() {
             <br />
             킬로미터
           </Box>
-          <MyPageImageAsset width="173px" height="50px" type="logo" />
+          <MyPageImageAsset width="122px" height="20px" type="logo" />
         </Box>
       </Box>
       <Box>

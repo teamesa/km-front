@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { useState } from 'react';
+import { useRecoilValueLoadable } from 'recoil';
 
-import { Box } from 'components/Atoms';
+import { Box, FlexBox } from 'components/Atoms';
 import FloatingButton from 'components/Molecules/FloatingButton';
 import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
-import { useResetMyArchiveListStateFunction } from 'states/myArchiveList';
 import { myArchiveListState } from 'states/myArchiveList';
 import theme from 'styles/theme';
 
@@ -36,12 +35,11 @@ export default function MyPageInfoFragment() {
             background={theme.colors.white}
             zIndex={2}
           >
-            <Box height="45px" overflow="auto" display="flex" zIndex={2}>
+            <FlexBox height="45px" overflow="auto" zIndex={2}>
               {MyPageNavigatorMetaInfo.map(({ title }, index) => (
-                <Box
+                <FlexBox
                   key={title}
                   flex="1"
-                  display="flex"
                   alignItems="center"
                   justifyContent="center"
                   fontSize="17px"
@@ -57,9 +55,9 @@ export default function MyPageInfoFragment() {
                   onClick={() => renderFragment(index)}
                 >
                   {title}
-                </Box>
+                </FlexBox>
               ))}
-            </Box>
+            </FlexBox>
           </Box>
           {isMyArchiveShowed ? (
             <>

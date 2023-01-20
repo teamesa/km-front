@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { Box } from 'components/Atoms';
+import { Box, FlexBox } from 'components/Atoms';
 import MainSwipeImage from 'components/Organisms/Home/Module/SwipeItem/MainSwipeImage';
 import SubSwipeImage from 'components/Organisms/Home/Module/SwipeItem/SubSwipeImage';
 import theme from 'styles/theme';
@@ -24,7 +24,7 @@ export default function UnbalencedSwiper({
         scroll-snap-type: x mandatory;
       `}
     >
-      <Box display="flex" width="max-content" flexDirection="row">
+      <FlexBox width="max-content" flexDirection="row">
         <MainSwipeImage src={thumbnailPhotoUrl} />
         {photoUrls.map((subUrl, index) => (
           <SubSwipeImage
@@ -35,7 +35,7 @@ export default function UnbalencedSwiper({
             )}-${index}`}
           />
         ))}
-      </Box>
+      </FlexBox>
     </Box>
   );
 }

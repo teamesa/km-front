@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import Logo from 'assets/common/header/logo.png';
 import Instagram from 'assets/home/instagram.png';
-import { Box } from 'components/Atoms';
+import { Box, Button, FlexBox, Input, Span } from 'components/Atoms';
 import theme from 'styles/theme';
 
 export default function Footer() {
@@ -28,38 +28,49 @@ export default function Footer() {
         marginBottom="30px"
       >
         문의사항이 있으실 경우
-        <br /> kilometerservice@gmail.com 로 연락주세요.
+        <br />
+        <FlexBox alignItems="baseline">
+          <Span width="184px">
+            <Input
+              readOnly
+              type="email"
+              placeholder="Enter Mail"
+              value="kilometerservice@gmail.com"
+            />
+          </Span>
+          <Span>로 연락주세요.</Span>
+        </FlexBox>
       </Box>
-      <Box
-        display="flex"
+      <FlexBox
         fontSize="12px"
         lineHeight={1.5}
         textAlign="left"
         marginBottom="30px"
       >
-        <Box
+        <Button
           color={theme.colors.gray77}
           paddingRight="20px"
           borderRight={`1px solid ${theme.colors.grayCC}`}
+          onClick={() => router.push('/info?type=introduce')}
         >
           킬로미터소개
-        </Box>
-        <Box
+        </Button>
+        <Button
           color={theme.colors.gray77}
           paddingX="20px"
           borderRight={`1px solid ${theme.colors.grayCC}`}
           onClick={() => router.push('/info?type=service')}
         >
           이용약관
-        </Box>
-        <Box
+        </Button>
+        <Button
           color={theme.colors.gray77}
           paddingLeft="20px"
           onClick={() => router.push('/info?type=privacy')}
         >
           개인정보처리방침
-        </Box>
-      </Box>
+        </Button>
+      </FlexBox>
       <Box
         padding="12px"
         border={`1px solid ${theme.colors.grayCC}`}
