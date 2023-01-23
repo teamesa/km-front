@@ -19,12 +19,11 @@ const MyArchiveDetailPopup = () => {
   const setItemId = useSetRecoilState(ClickedItemId);
   const setPopupName = useSetRecoilState(PopupNameState);
   const archiveId = useRecoilValue(ClickedArchiveId);
+  const [archiveData, setArchiveData] = useState<MyArchiveDetailProps>();
 
   const handleClosePopup = () => {
     setPopupName(POPUP_NAME.NULL);
   };
-
-  const [archiveData, setArchiveData] = useState<MyArchiveDetailProps>();
 
   useEffect(() => {
     async function getArchiveDetailData() {
