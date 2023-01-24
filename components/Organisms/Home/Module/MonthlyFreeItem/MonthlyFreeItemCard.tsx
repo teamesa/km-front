@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { Box, FlexBox, Tag } from 'components/Atoms';
 import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditionalInfo';
 import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
-import { useTurnPickstateFunction } from 'states/home';
+import { useTurnPickStateFunction } from 'states/home';
 import theme from 'styles/theme';
 
 export default function MonthlyFreeItemCard({
@@ -43,7 +43,7 @@ export default function MonthlyFreeItemCard({
   };
 }) {
   const router = useRouter();
-  const turnPickState = useTurnPickstateFunction(moduleIndex, itemId);
+  const turnPickState = useTurnPickStateFunction(moduleIndex, itemId);
 
   return (
     <FlexBox width="100%" height="120px" marginBottom="10px">
