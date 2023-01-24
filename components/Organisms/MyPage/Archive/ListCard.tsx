@@ -103,13 +103,15 @@ export default function Item(props: ItemProps) {
         >
           {content.comment}
         </Box>
-        <Box marginTop="11px" display={content.places ? 'block' : 'none'}>
-          <FlexBox alignItems="center">
-            <Pointer width="11px" height="15px" />
-            <Span marginLeft="10px" fontSize="12px" lineHeight="18px">
-              {content.places}
-            </Span>
-          </FlexBox>
+        <Box marginTop="11px" display="block">
+          {content.places ? (
+            <FlexBox alignItems="center">
+              <Pointer width="11px" height="15px" />
+              <Span marginLeft="10px" fontSize="12px" lineHeight="18px">
+                {content.places}
+              </Span>
+            </FlexBox>
+          ) : null}
         </Box>
       </Box>
     </FlexBox>
