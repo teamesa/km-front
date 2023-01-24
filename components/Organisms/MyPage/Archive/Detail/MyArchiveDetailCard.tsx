@@ -56,7 +56,7 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
             height="118px"
             backgroundColor={theme.colors.black}
             opacity={0.4}
-          ></Box>
+          />
           <Box
             width="305px"
             height="88px"
