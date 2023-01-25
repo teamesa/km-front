@@ -25,7 +25,7 @@ export default function ListCard(props: ItemProps) {
   const apiArr = content.api.split('/');
 
   return (
-    <Box
+    <FlexBox
       position="relative"
       padding="0px 0px 40px"
       css={css`
@@ -43,82 +43,78 @@ export default function ListCard(props: ItemProps) {
         }
       `}
     >
-      <Button width="100%">
-        <FlexBox justifyContent="flex-start">
-          <Box
-            flex={0.3}
-            onClick={() => {
-              setArchiveId(apiArr[4]);
-            }}
-          >
-            <Box width="75px" height="75px" position="relative">
-              <Image
-                src={!content.listImageUrl ? noImage : content.listImageUrl}
-                alt="image"
-                layout="fill"
-                objectFit="cover"
-                width="75px"
-                height="75px"
-              />
-            </Box>
+      <Box flex={0.3}>
+        <Button
+          onClick={() => {
+            //TODO: API 업데이트 되면 itemId  연결하기.
+            //setItemId();
+          }}
+        >
+          <Box width="75px" height="75px" position="relative">
+            <Image
+              src={!content.listImageUrl ? noImage : content.listImageUrl}
+              alt="image"
+              layout="fill"
+              objectFit="cover"
+              width="75px"
+              height="75px"
+            />
           </Box>
+        </Button>
+      </Box>
+      <Button marginLeft="20px">
+        <Box
+          flex={1}
+          textAlign="left"
+          onClick={() => {
+            setArchiveId(apiArr[4]);
+            setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
+          }}
+        >
+          <ItemInfo
+            typeBadge={content.typeBadge}
+            updatedAt={content.updatedAt}
+            isMultiImages={content.existArchiveImages}
+          />
           <Box
-            marginLeft="20px"
-            flex={1}
-            textAlign="left"
-            onClick={() => {
-              setArchiveId(apiArr[4]);
-              setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
-            }}
+            fontSize="13px"
+            marginTop="10px"
+            lineHeight="20px"
+            fontWeight="Bold"
+            overflow="hidden"
+            display="-webkit-box"
             css={css`
-              cursor: pointer;
+              text-overflow: ellipsis;
+              -webkit-line-clamp: 1;
+              -webkit-box-orient: vertical;
             `}
           >
-            <ItemInfo
-              typeBadge={content.typeBadge}
-              updatedAt={content.updatedAt}
-              isMultiImages={content.existArchiveImages}
-            />
-            <Box
-              fontSize="13px"
-              marginTop="10px"
-              lineHeight="20px"
-              fontWeight="Bold"
-              overflow="hidden"
-              display="-webkit-box"
-              css={css`
-                text-overflow: ellipsis;
-                -webkit-line-clamp: 1;
-                -webkit-box-orient: vertical;
-              `}
-            >
-              {content.title}
-            </Box>
-            <Box
-              marginTop="6px"
-              fontSize="12px"
-              lineHeight="18px"
-              overflow="hidden"
-              display="-webkit-box"
-              css={css`
-                text-overflow: ellipsis;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-              `}
-            >
-              {content.comment}
-            </Box>
-            <Box marginTop="11px" display={content.places ? 'block' : 'none'}>
-              <FlexBox alignItems="center">
-                <Pointer width="11px" height="15px" />
-                <Span marginLeft="10px" fontSize="12px" lineHeight="18px">
-                  {content.places}
-                </Span>
-              </FlexBox>
-            </Box>
+            {content.title}
           </Box>
-        </FlexBox>
+          <Box
+            marginTop="6px"
+            fontSize="12px"
+            lineHeight="18px"
+            overflow="hidden"
+            display="-webkit-box"
+            css={css`
+              text-overflow: ellipsis;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+            `}
+          >
+            {content.comment}
+          </Box>
+          <Box marginTop="11px" display={content.places ? 'block' : 'none'}>
+            <FlexBox alignItems="center">
+              <Pointer width="11px" height="15px" />
+              <Span marginLeft="10px" fontSize="12px" lineHeight="18px">
+                {content.places}
+              </Span>
+            </FlexBox>
+          </Box>
+        </Box>
       </Button>
-    </Box>
+    </FlexBox>
   );
 }
