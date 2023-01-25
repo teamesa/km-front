@@ -46,7 +46,7 @@ export default function MyArchiveDetailHeaderInfo(
   };
 
   return (
-    <Box height="99px" padding="20px 15px">
+    <Box height="94px" padding="20px 17px">
       <FlexBox justifyContent="space-between">
         <FlexBox fontSize="11px" alignItems="center">
           <Tag
@@ -65,7 +65,7 @@ export default function MyArchiveDetailHeaderInfo(
             fontSize="12px"
             lineHeight="16px"
             color={theme.colors.gray77}
-            marginRight="16px"
+            marginRight="20px"
             borderBottom="1px solid"
             borderBottomColor={theme.colors.gray77}
             onClick={() => {
@@ -90,8 +90,8 @@ export default function MyArchiveDetailHeaderInfo(
       </FlexBox>
       <Box
         fontSize="15px"
-        marginTop="20px"
-        lineHeight="22px"
+        marginTop="15px"
+        lineHeight="17px"
         fontWeight="Bold"
         overflow="hidden"
         display="-webkit-box"

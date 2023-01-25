@@ -27,7 +27,13 @@ export default function MyArchiveDetailCardInfo(
       {/* 다녀온곳 */}
       <Box width="172.5px" height="80px">
         {contents.cafe === '' && contents.food === '' ? (
-          <NoItemBox width="inherit" height="inherit" text="다녀온 곳" />
+          <NoItemBox
+            width="inherit"
+            height="inherit"
+            text="다녀온 곳"
+            textColor={theme.colors.gray77}
+            backgroundColor={theme.colors.white}
+          />
         ) : (
           <FlexBox
             width="inherit"
@@ -39,7 +45,7 @@ export default function MyArchiveDetailCardInfo(
           >
             <Box display={contents.food ? 'flex' : 'none'} alignItems="center">
               <Box display={contents.food ? 'block' : 'none'}>
-                <Pointer color="#fff" />
+                <Pointer color={theme.colors.white} />
               </Box>
               <Span
                 marginLeft="10px"
@@ -47,7 +53,7 @@ export default function MyArchiveDetailCardInfo(
                 lineHeight="18px"
                 display="-webkit-box"
                 overflow="hidden"
-                color="#fff"
+                color={theme.colors.white}
                 css={css`
                   text-overflow: ellipsis;
                   -webkit-line-clamp: 1;
@@ -59,7 +65,7 @@ export default function MyArchiveDetailCardInfo(
             </Box>
             <Box display={contents.cafe ? 'flex' : 'none'} alignItems="center">
               <Box display={contents.cafe ? 'block' : 'none'}>
-                <Pointer color="#fff" />
+                <Pointer color={theme.colors.white} />
               </Box>
               <Box
                 marginLeft="10px"
@@ -67,7 +73,7 @@ export default function MyArchiveDetailCardInfo(
                 lineHeight="18px"
                 overflow="hidden"
                 display="-webkit-box"
-                color="#fff"
+                color={theme.colors.white}
                 css={css`
                   text-overflow: ellipsis;
                   -webkit-line-clamp: 1;
