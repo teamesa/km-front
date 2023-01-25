@@ -6,7 +6,8 @@ export interface HeaderBarProps {
     | 'disabled'
     | 'privacy'
     | 'service'
-    | '전체보기';
+    | 'allShow'
+    | 'introduce';
   /** header 오른쪽 부분을 설정합니다. (기본 : 찾기) */
   headerRight?: 'disabled' | 'search' | 'close';
   /** header 끝 부분을 설정합니다. (기본 : 없음) */

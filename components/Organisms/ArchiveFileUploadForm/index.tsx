@@ -1,15 +1,14 @@
 import { useRecoilValue } from 'recoil';
 
-import { Box } from 'components/Atoms';
-import ArchiveSquare from 'components/Organisms/Archive/ArchiveFileUploadForm/ArchiveSquare';
+import { FlexBox } from 'components/Atoms';
+import ArchiveSquare from 'components/Organisms/ArchiveFileUploadForm/ArchiveSquare';
 import { ArchiveSquareState } from 'states/archive-square';
 
 export default function ArchiveFileUploadForm() {
   const squareMap = useRecoilValue(ArchiveSquareState);
   return (
-    <Box
+    <FlexBox
       marginTop="20px"
-      display="flex"
       minWidth="345px"
       height="111px"
       flexDirection="row"
@@ -18,6 +17,6 @@ export default function ArchiveFileUploadForm() {
       {squareMap.map((it, index) => (
         <ArchiveSquare key={index} square={it} />
       ))}
-    </Box>
+    </FlexBox>
   );
 }

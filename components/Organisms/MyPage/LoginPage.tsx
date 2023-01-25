@@ -22,6 +22,7 @@ export default function LoginPage() {
         <Box width="100%">
           <Box
             paddingTop="40px"
+            paddingBottom="15px"
             fontSize="22px"
             fontWeight={500}
             lineHeight={1.45}
@@ -32,7 +33,7 @@ export default function LoginPage() {
             <br />
             킬로미터
           </Box>
-          <MyPageImageAsset width="173px" height="50px" type="logo" />
+          <MyPageImageAsset width="122px" height="20px" type="logo" />
         </Box>
       </Box>
       <Box>
@@ -57,13 +58,6 @@ export default function LoginPage() {
             type="naver"
             marginBottom="10px"
           />
-        </Button>
-        <Button
-          onClick={() =>
-            alert('현재 애플은 미지원입니다. 네이버 로그인을 이용해주세요')
-          }
-        >
-          <MyPageImageAsset width="100%" height="50px" type="apple" />
         </Button>
       </Box>
     </Box>

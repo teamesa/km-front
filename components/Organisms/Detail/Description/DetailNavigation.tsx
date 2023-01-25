@@ -1,7 +1,7 @@
 import { RefObject } from 'react';
 import { useRecoilValue } from 'recoil';
 
-import { Box } from 'components/Atoms';
+import { Box, FlexBox } from 'components/Atoms';
 import { DetailNavigationState } from 'states/detail-navigation';
 import theme from 'styles/theme';
 
@@ -34,12 +34,11 @@ export function DetailNavigation({
       background={theme.colors.white}
       zIndex={2}
     >
-      <Box height="45px" overflow="auto" display="flex" zIndex={2}>
+      <FlexBox height="45px" overflow="auto" zIndex={2}>
         {deatailMetaInfo.map(({ title }, index) => (
-          <Box
+          <FlexBox
             key={index}
             flex="1"
-            display="flex"
             alignItems="center"
             justifyContent="center"
             fontSize="17px"
@@ -53,9 +52,9 @@ export function DetailNavigation({
             onClick={() => scrollToTarget(title)}
           >
             {title}
-          </Box>
+          </FlexBox>
         ))}
-      </Box>
+      </FlexBox>
     </Box>
   );
 }

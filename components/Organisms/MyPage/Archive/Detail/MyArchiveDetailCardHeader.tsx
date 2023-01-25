@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
@@ -49,7 +48,7 @@ export default function MyArchiveDetailHeaderInfo(
   return (
     <Box height="99px" padding="20px 15px">
       <FlexBox justifyContent="space-between">
-        <Box fontSize="11px" display="flex" alignItems="center">
+        <FlexBox fontSize="11px" alignItems="center">
           <Tag
             backgroundColor={theme.colors.white}
             color={theme.colors.black}
@@ -60,7 +59,7 @@ export default function MyArchiveDetailHeaderInfo(
           <Span marginLeft="5px" color={theme.colors.gray99}>
             {props.updatedAt}
           </Span>
-        </Box>
+        </FlexBox>
         <Box>
           <Button
             fontSize="12px"

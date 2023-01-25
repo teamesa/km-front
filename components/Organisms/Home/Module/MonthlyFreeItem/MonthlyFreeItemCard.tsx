@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { Box, Tag } from 'components/Atoms';
+import { Box, FlexBox, Tag } from 'components/Atoms';
 import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditionalInfo';
 import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
 import { useTurnPickstateFunction } from 'states/home';
@@ -46,7 +46,7 @@ export default function MonthlyFreeItemCard({
   const turnPickState = useTurnPickstateFunction(moduleIndex, itemId);
 
   return (
-    <Box width="100%" height="120px" display="flex" marginBottom="10px">
+    <FlexBox width="100%" height="120px" marginBottom="10px">
       <Box
         width="90px"
         onClick={() => {
@@ -94,6 +94,6 @@ export default function MonthlyFreeItemCard({
       <Box width="20px" marginTop="9px" position="relative">
         <ItemHeart heart={heart} optionalFunction={turnPickState} />
       </Box>
-    </Box>
+    </FlexBox>
   );
 }

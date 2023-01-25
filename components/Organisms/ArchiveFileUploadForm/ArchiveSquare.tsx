@@ -1,7 +1,7 @@
-import EmptyArchiveSquare from 'components/Organisms/Archive/ArchiveFileUploadForm/EmptyArchiveSquare';
-import InputArchiveSquare from 'components/Organisms/Archive/ArchiveFileUploadForm/InputArchiveSquare';
-import LoadingArchiveSquare from 'components/Organisms/Archive/ArchiveFileUploadForm/LoadingArchiveSquare';
-import PhotoArchiveSquare from 'components/Organisms/Archive/ArchiveFileUploadForm/PhotoArchiveSquare';
+import EmptyArchiveSquare from 'components/Organisms/ArchiveFileUploadForm/EmptyArchiveSquare';
+import InputArchiveSquare from 'components/Organisms/ArchiveFileUploadForm/InputArchiveSquare';
+import LoadingArchiveSquare from 'components/Organisms/ArchiveFileUploadForm/LoadingArchiveSquare';
+import PhotoArchiveSquare from 'components/Organisms/ArchiveFileUploadForm/PhotoArchiveSquare';
 import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
