@@ -64,8 +64,8 @@ const MyArchiveDetailPopup = () => {
           >
             <MyArchiveDetailHeaderInfo
               updatedAt={archiveData?.updatedAt}
-              typeBadge={archiveData.typeBadge}
-              title={archiveData.title}
+              typeBadge={archiveData?.typeBadge}
+              title={archiveData?.title}
               archiveAdditionalInfos={archiveData?.archiveAdditionalInfos}
             />
             <Box
@@ -74,7 +74,7 @@ const MyArchiveDetailPopup = () => {
               borderTop={`1px solid ${theme.colors.gray99}`}
               borderBottom={`1px solid ${theme.colors.gray99}`}
             >
-              {archiveData?.photoUrls.length === 0 ? (
+              {archiveData?.photoUrls?.length === 0 ? (
                 <NoItemBox width="inherit" height="inherit" text="사진 " />
               ) : (
                 <Carousel

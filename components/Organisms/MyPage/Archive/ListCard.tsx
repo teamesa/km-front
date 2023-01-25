@@ -22,7 +22,7 @@ export default function ListCard(props: ItemProps) {
   const setArchiveId = useSetRecoilState(ClickedArchiveId);
   //TODO: API 업데이트 되면 itemId  연결하기.
   // const itemId = content.item.id; (예상)
-  const apiArr = content.api.split('/');
+  const apiArr = content?.api.split('/');
 
   return (
     <FlexBox
@@ -52,7 +52,7 @@ export default function ListCard(props: ItemProps) {
         >
           <Box width="75px" height="75px" position="relative">
             <Image
-              src={!content.listImageUrl ? noImage : content.listImageUrl}
+              src={!content?.listImageUrl ? noImage : content.listImageUrl}
               alt="image"
               layout="fill"
               objectFit="cover"
@@ -72,9 +72,9 @@ export default function ListCard(props: ItemProps) {
           }}
         >
           <ItemInfo
-            typeBadge={content.typeBadge}
-            updatedAt={content.updatedAt}
-            isMultiImages={content.existArchiveImages}
+            typeBadge={content?.typeBadge}
+            updatedAt={content?.updatedAt}
+            isMultiImages={content?.existArchiveImages}
           />
           <Box
             fontSize="13px"
@@ -105,11 +105,11 @@ export default function ListCard(props: ItemProps) {
           >
             {content.comment}
           </Box>
-          <Box marginTop="11px" display={content.places ? 'block' : 'none'}>
+          <Box marginTop="11px" display={content?.places ? 'block' : 'none'}>
             <FlexBox alignItems="center">
               <Pointer width="11px" height="15px" />
               <Span marginLeft="10px" fontSize="12px" lineHeight="18px">
-                {content.places}
+                {content?.places}
               </Span>
             </FlexBox>
           </Box>

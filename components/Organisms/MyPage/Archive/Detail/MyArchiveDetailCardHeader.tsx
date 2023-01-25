@@ -14,13 +14,14 @@ import {
 import theme from 'styles/theme';
 
 export default function MyArchiveDetailHeaderInfo(
-  props: MyArchiveDetailHeaderInfoProps | undefined,
+  contents: MyArchiveDetailHeaderInfoProps,
 ) {
   const router = useRouter();
   const archiveId = useRecoilValue(ClickedArchiveId);
   const itemId = useRecoilValue(ClickedItemId);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
+
   const handleClosePopup = () => {
     setPopupName(POPUP_NAME.NULL);
   };
@@ -54,10 +55,10 @@ export default function MyArchiveDetailHeaderInfo(
             color={theme.colors.black}
             border="1px solid"
           >
-            {props?.typeBadge.text}
+            {contents?.typeBadge?.text}
           </Tag>
           <Span marginLeft="5px" color={theme.colors.gray99}>
-            {props?.updatedAt}
+            {contents?.updatedAt}
           </Span>
         </FlexBox>
         <Box>
@@ -101,7 +102,7 @@ export default function MyArchiveDetailHeaderInfo(
           -webkit-box-orient: vertical;
         `}
       >
-        {props?.title}
+        {contents?.title}
       </Box>
     </Box>
   );

@@ -16,7 +16,7 @@ export default function ItemInfo({
     <FlexBox justifyContent="space-between">
       <FlexBox fontSize="11px" alignItems="center">
         <Tag backgroundColor={theme.colors.black} color={theme.colors.lime}>
-          {typeBadge.text}
+          {typeBadge?.text}
         </Tag>
         <Span marginLeft="5px" color={theme.colors.gray99}>
           {updatedAt}

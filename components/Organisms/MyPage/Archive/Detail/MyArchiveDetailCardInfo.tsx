@@ -10,7 +10,7 @@ export default function MyArchiveDetailCardInfo(
   contents: MyArchiveDetailInfoProps,
 ) {
   const makeAvgStarRating = () => {
-    const rating = contents.starRating * 20;
+    const rating = contents?.starRating * 20;
     return `${rating + 1.5}%`;
   };
 
@@ -26,7 +26,7 @@ export default function MyArchiveDetailCardInfo(
     <FlexBox borderTop="solid 1px" borderTopColor={theme.colors.gray99}>
       {/* 다녀온곳 */}
       <Box width="172.5px" height="80px">
-        {contents.cafe === '' && contents.food === '' ? (
+        {contents?.cafe === '' && contents?.food === '' ? (
           <NoItemBox
             width="inherit"
             height="inherit"
@@ -43,8 +43,8 @@ export default function MyArchiveDetailCardInfo(
             flexDirection="column"
             justifyContent="center"
           >
-            <Box display={contents.food ? 'flex' : 'none'} alignItems="center">
-              <Box display={contents.food ? 'block' : 'none'}>
+            <Box display={contents?.food ? 'flex' : 'none'} alignItems="center">
+              <Box display={contents?.food ? 'block' : 'none'}>
                 <Pointer color={theme.colors.white} />
               </Box>
               <Span
@@ -60,11 +60,11 @@ export default function MyArchiveDetailCardInfo(
                   -webkit-box-orient: vertical;
                 `}
               >
-                {contents.food}
+                {contents?.food}
               </Span>
             </Box>
-            <Box display={contents.cafe ? 'flex' : 'none'} alignItems="center">
-              <Box display={contents.cafe ? 'block' : 'none'}>
+            <Box display={contents?.cafe ? 'flex' : 'none'} alignItems="center">
+              <Box display={contents?.cafe ? 'block' : 'none'}>
                 <Pointer color={theme.colors.white} />
               </Box>
               <Box
@@ -80,7 +80,7 @@ export default function MyArchiveDetailCardInfo(
                   -webkit-box-orient: vertical;
                 `}
               >
-                {contents.cafe}
+                {contents?.cafe}
               </Box>
             </Box>
           </FlexBox>

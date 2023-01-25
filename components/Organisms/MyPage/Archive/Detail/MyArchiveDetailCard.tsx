@@ -13,10 +13,10 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
   return (
     <Box background={theme.colors.white} width="345px" margin="15px">
       <MyArchiveDetailHeaderInfo
-        updatedAt={contents.updatedAt}
-        typeBadge={contents.typeBadge}
-        title={contents.title}
-        archiveAdditionalInfos={contents.archiveAdditionalInfos}
+        updatedAt={contents?.updatedAt}
+        typeBadge={contents?.typeBadge}
+        title={contents?.title}
+        archiveAdditionalInfos={contents?.archiveAdditionalInfos}
       />
       <Box position="relative">
         <Box
@@ -25,7 +25,7 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
           borderTop="solid 1px"
           borderTopColor={theme.colors.gray99}
         >
-          {contents.photoUrls.length === 0 ? (
+          {contents?.photoUrls?.length === 0 ? (
             <NoItemBox
               width="inherit"
               height="335px"
@@ -35,7 +35,7 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
             />
           ) : (
             <Carousel
-              imgUrlArr={contents.photoUrls}
+              imgUrlArr={contents?.photoUrls}
               width={'345px'}
               height={'345px'}
             />
@@ -100,9 +100,9 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
         </FlexBox>
       </Box>
       <MyArchiveDetailCardInfo
-        starRating={contents.starRating}
-        food={contents.food}
-        cafe={contents.cafe}
+        starRating={contents?.starRating}
+        food={contents?.food}
+        cafe={contents?.cafe}
       />
     </Box>
   );
