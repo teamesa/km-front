@@ -41,9 +41,9 @@ export default function SelectModal({ payload }: { payload: SelectProps }) {
                   });
                 setCategoryList(item.value);
                 offModal();
-                // setTimeout(() => {
-                //   setCategoryList(item.value);
-                // }, 700);
+                setTimeout(() => {
+                  setCategoryList(item.value);
+                }, 700);
               }}
             >
               <FlexBox>
