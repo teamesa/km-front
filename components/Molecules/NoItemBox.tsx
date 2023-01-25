@@ -7,8 +7,8 @@ export default function NoItemBox({
   textColor = '',
   backgroundColor = '',
 }: {
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   text?: string;
   textColor?: string;
   backgroundColor?: string;

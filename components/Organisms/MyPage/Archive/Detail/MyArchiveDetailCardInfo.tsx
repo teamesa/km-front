@@ -43,46 +43,50 @@ export default function MyArchiveDetailCardInfo(
             flexDirection="column"
             justifyContent="center"
           >
-            <Box display={contents?.food ? 'flex' : 'none'} alignItems="center">
-              <Box display={contents?.food ? 'block' : 'none'}>
-                <Pointer color={theme.colors.white} />
+            {contents?.food ? (
+              <Box display="flex" alignItems="center">
+                <Box display="block">
+                  <Pointer color={theme.colors.white} />
+                </Box>
+                <Span
+                  marginLeft="10px"
+                  fontSize="12px"
+                  lineHeight="18px"
+                  display="-webkit-box"
+                  overflow="hidden"
+                  color={theme.colors.white}
+                  css={css`
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                  `}
+                >
+                  {contents?.food}
+                </Span>
               </Box>
-              <Span
-                marginLeft="10px"
-                fontSize="12px"
-                lineHeight="18px"
-                display="-webkit-box"
-                overflow="hidden"
-                color={theme.colors.white}
-                css={css`
-                  text-overflow: ellipsis;
-                  -webkit-line-clamp: 1;
-                  -webkit-box-orient: vertical;
-                `}
-              >
-                {contents?.food}
-              </Span>
-            </Box>
-            <Box display={contents?.cafe ? 'flex' : 'none'} alignItems="center">
-              <Box display={contents?.cafe ? 'block' : 'none'}>
-                <Pointer color={theme.colors.white} />
+            ) : null}
+            {contents?.cafe ? (
+              <Box display="flex" alignItems="center">
+                <Box display="block">
+                  <Pointer color={theme.colors.white} />
+                </Box>
+                <Span
+                  marginLeft="10px"
+                  fontSize="12px"
+                  lineHeight="18px"
+                  display="-webkit-box"
+                  overflow="hidden"
+                  color={theme.colors.white}
+                  css={css`
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                  `}
+                >
+                  {contents?.cafe}
+                </Span>
               </Box>
-              <Box
-                marginLeft="10px"
-                fontSize="12px"
-                lineHeight="18px"
-                overflow="hidden"
-                display="-webkit-box"
-                color={theme.colors.white}
-                css={css`
-                  text-overflow: ellipsis;
-                  -webkit-line-clamp: 1;
-                  -webkit-box-orient: vertical;
-                `}
-              >
-                {contents?.cafe}
-              </Box>
-            </Box>
+            ) : null}
           </FlexBox>
         )}
       </Box>

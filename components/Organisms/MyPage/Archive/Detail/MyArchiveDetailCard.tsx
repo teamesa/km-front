@@ -77,7 +77,7 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
               }
             `}
           >
-            {contents.comment === '' ? (
+            {contents?.comment === '' ? (
               <NoItemBox
                 width="inherit"
                 height="inherit"
@@ -93,7 +93,7 @@ export default function MyArchiveDetailCard(contents: MyArchiveDetailProps) {
                 textAlign="left"
                 color={theme.colors.white}
               >
-                <InnerHTML data={contents.comment} />
+                <InnerHTML data={contents?.comment} />
               </Box>
             )}
           </Box>
