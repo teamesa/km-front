@@ -14,7 +14,7 @@ import {
 import theme from 'styles/theme';
 
 export default function MyArchiveDetailHeaderInfo(
-  props: MyArchiveDetailHeaderInfoProps,
+  props: MyArchiveDetailHeaderInfoProps | undefined,
 ) {
   const router = useRouter();
   const archiveId = useRecoilValue(ClickedArchiveId);
@@ -54,10 +54,10 @@ export default function MyArchiveDetailHeaderInfo(
             color={theme.colors.black}
             border="1px solid"
           >
-            {props.typeBadge.text}
+            {props?.typeBadge.text}
           </Tag>
           <Span marginLeft="5px" color={theme.colors.gray99}>
-            {props.updatedAt}
+            {props?.updatedAt}
           </Span>
         </FlexBox>
         <Box>
@@ -101,7 +101,7 @@ export default function MyArchiveDetailHeaderInfo(
           -webkit-box-orient: vertical;
         `}
       >
-        {props.title}
+        {props?.title}
       </Box>
     </Box>
   );

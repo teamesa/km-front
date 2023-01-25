@@ -37,7 +37,7 @@ interface ArchiveDetailLinkInfos {
 
 export const ClickedArchiveId = atom<string>({
   key: 'ClickedArchiveId',
-  default: '578',
+  default: '',
 });
 
 export const ClickedItemId = atom<string>({
