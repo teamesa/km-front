@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { CloseBtn } from 'assets/mypage';
-import { Box, Button } from 'components/Atoms';
+import { Box, Button, FlexBox } from 'components/Atoms';
+import { Loader } from 'components/Atoms/Loader';
 import Carousel from 'components/Molecules/Carousel';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import NoItemBox from 'components/Molecules/NoItemBox';
@@ -32,6 +33,7 @@ const MyArchiveDetailPopup = () => {
   };
 
   useEffect(() => {
+    //TODO: api 분리
     async function getArchiveDetailData() {
       const axios = customAxios();
       const url = `/api/archive/detail/${archiveId}`;
@@ -121,9 +123,22 @@ const MyArchiveDetailPopup = () => {
   } else {
     return (
       <Popup>
-        <Button onClick={handleClosePopup} marginLeft="172.5px">
-          <CloseBtn />
-        </Button>
+        <Box>
+          <Button onClick={handleClosePopup} marginLeft="172.5px">
+            <CloseBtn />
+          </Button>
+          <FlexBox
+            background={theme.colors.white}
+            width="345px"
+            height="652px"
+            margin="15px"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {/* TODO: 데이터로딩시간에 따른 로딩화면 덜그럭거림 해결하기 */}
+            <Loader />
+          </FlexBox>
+        </Box>
       </Popup>
     );
   }
