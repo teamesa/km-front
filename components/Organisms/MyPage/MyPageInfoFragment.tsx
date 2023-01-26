@@ -1,11 +1,6 @@
-<<<<<<< HEAD
+import { css } from '@emotion/react';
 import { useState } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
-=======
-import { css } from '@emotion/react';
-import { useEffect, useState } from 'react';
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
->>>>>>> b8cb827c8fcfe855f736687ae611e435d567f58a
 
 import { Box, FlexBox } from 'components/Atoms';
 import FloatingButton from 'components/Molecules/FloatingButton';
@@ -41,10 +36,9 @@ export default function MyPageInfoFragment() {
             background={theme.colors.white}
             zIndex={2}
           >
-            <Box
+            <FlexBox
               height="45px"
               overflow="auto"
-              display="flex"
               zIndex={2}
               css={css`
                 cursor: pointer;
