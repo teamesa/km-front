@@ -23,7 +23,6 @@ import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
 const MyArchiveDetailPopup = () => {
-  const setItemId = useSetRecoilState(ClickedItemId);
   const setPopupName = useSetRecoilState(PopupNameState);
   const archiveId = useRecoilValue(ClickedArchiveId);
   const [archiveData, setArchiveData] = useState<MyArchiveDetailProps>();
@@ -43,11 +42,10 @@ const MyArchiveDetailPopup = () => {
       })) as AxiosResponse<MyArchiveDetailProps>;
 
       setArchiveData(axiosData.data);
-      setItemId(axiosData.data.itemId.toString());
     }
 
     getArchiveDetailData();
-  }, [archiveId, setItemId]);
+  }, [archiveId]);
 
   if (archiveData) {
     return (
