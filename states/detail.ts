@@ -2,6 +2,7 @@ import { AxiosResponse } from 'axios';
 import { atom, selector, useRecoilCallback } from 'recoil';
 
 import customAxios from 'utils/hooks/customAxios';
+import { customKmAxios } from 'utils/hooks/customKmAxios';
 
 export type TGetSummary = {
   detailImageUrl: string;
@@ -80,7 +81,7 @@ const query = () => {
 
 export async function getSummary({ itemId }: { itemId?: number } = {}) {
   const queryData = query();
-  const { data } = (await axios({
+  const { data } = (await customKmAxios({
     url: `/api/item/info/${itemId || Number(queryData[1])}`,
     method: 'GET',
   })) as AxiosResponse<TGetSummary>;
