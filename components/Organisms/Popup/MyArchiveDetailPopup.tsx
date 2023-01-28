@@ -54,60 +54,92 @@ const MyArchiveDetailPopup = () => {
           <Button onClick={handleClosePopup} marginLeft="172.5px">
             <CloseBtn />
           </Button>
-          <Box
-            background={theme.colors.white}
-            width="345px"
-            height="652px"
-            margin="15px"
-          >
+          <Box background={theme.colors.white} width="345px" margin="15px">
             <MyArchiveDetailHeaderInfo
               title={archiveData?.item?.title}
               updatedAt={archiveData?.updatedAt}
               typeBadge={archiveData?.item?.typeBadge}
               archiveActionButton={archiveData?.archiveActionButton}
             />
-            <Box
-              width="100%"
-              height="347px"
-              borderTop={`1px solid ${theme.colors.gray99}`}
-              borderBottom={`1px solid ${theme.colors.gray99}`}
-            >
-              {archiveData?.photoUrls?.length === 0 ? (
-                <NoItemBox width="inherit" height="inherit" text="사진 " />
-              ) : (
-                <Carousel
-                  imgUrlArr={archiveData?.photoUrls}
-                  width="345px"
-                  height="345px"
+            <Box position="relative">
+              <Box
+                width="345px"
+                height="345px"
+                borderTop={`1px solid ${theme.colors.gray99}`}
+              >
+                {archiveData?.photoUrls?.length === 0 ? (
+                  <NoItemBox
+                    width="inherit"
+                    height="335px"
+                    text="사진"
+                    textColor={theme.colors.gray77}
+                    backgroundColor={theme.colors.grayF2}
+                  />
+                ) : (
+                  <Carousel
+                    imgUrlArr={archiveData?.photoUrls}
+                    width={'345px'}
+                    height={'345px'}
+                  />
+                )}
+              </Box>
+              <FlexBox
+                width="100%"
+                height="118px"
+                position="absolute"
+                bottom="10px"
+                justifyContent="center"
+                alignItems="center"
+              >
+                {/* dim */}
+                <Box
+                  position="absolute"
+                  width="325px"
+                  height="118px"
+                  backgroundColor={theme.colors.black}
+                  opacity={0.4}
                 />
-              )}
-            </Box>
-            <Box
-              height="88px"
-              margin="20px 5px"
-              overflowY="auto"
-              fontSize="12px"
-              textAlign="left"
-              lineHeight="18px"
-              css={css`
-                ::-webkit-scrollbar {
-                  display: block;
-                  width: 2px;
-                  height: 100%;
-                  background: gray;
-                }
-                ::-webkit-scrollbar-thumb {
-                  background: ${theme.colors.black};
-                }
-              `}
-            >
-              {archiveData?.comment === '' ? (
-                <NoItemBox width="inherit" height="inherit" text="코멘트" />
-              ) : (
-                <Box width="inherit" height="fit-content" margin="0 10px">
-                  <InnerHTML data={archiveData?.comment} />
+                <Box
+                  width="305px"
+                  height="88px"
+                  marginRight="15px"
+                  marginLeft="25px"
+                  overflowY="auto"
+                  lineHeight="18px"
+                  zIndex="1000"
+                  css={css`
+                    ::-webkit-scrollbar {
+                      display: block;
+                      width: 2px;
+                      height: 100%;
+                      background: gray;
+                    }
+                    ::-webkit-scrollbar-thumb {
+                      background: white;
+                    }
+                  `}
+                >
+                  {archiveData?.comment === '' ? (
+                    <NoItemBox
+                      width="inherit"
+                      height="inherit"
+                      text="코멘트"
+                      textColor={theme.colors.white}
+                    />
+                  ) : (
+                    <Box
+                      width="305px"
+                      maxHeight="118px"
+                      paddingRight="15px"
+                      fontSize="12px"
+                      textAlign="left"
+                      color={theme.colors.white}
+                    >
+                      <InnerHTML data={archiveData?.comment} />
+                    </Box>
+                  )}
                 </Box>
-              )}
+              </FlexBox>
             </Box>
             <MyArchiveDetailCardInfo
               starRating={archiveData?.starRating}
