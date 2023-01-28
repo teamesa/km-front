@@ -26,18 +26,14 @@ export default function MyArchiveDetailHeaderInfo(
     setPopupName(POPUP_NAME.NULL);
   };
 
-  const handleUpdateArchive = () => {
+  const handleUpdateArchive = (updateUrl: string) => {
     handleClosePopup();
-    archiveLink();
+    archiveLink(updateUrl);
   };
 
-  const archiveLink = () => {
+  const archiveLink = (updateUrl: string) => {
     return router.push({
-      pathname: `/archive/update`,
-      query: {
-        id: archiveId,
-        exhibitionId: itemId,
-      },
+      pathname: updateUrl,
     });
   };
 
@@ -70,7 +66,7 @@ export default function MyArchiveDetailHeaderInfo(
             borderBottom="1px solid"
             borderBottomColor={theme.colors.gray77}
             onClick={() => {
-              handleUpdateArchive();
+              handleUpdateArchive(contents.archiveActionButton[0].link);
             }}
           >
             수정

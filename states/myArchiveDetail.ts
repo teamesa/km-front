@@ -3,29 +3,35 @@ import { atom, selector } from 'recoil';
 
 import customAxios from 'utils/hooks/customAxios';
 export interface MyArchiveDetailProps {
-  typeBadge: PresentationBadge;
   updatedAt: string;
-  title: string;
   comment: string;
   starRating: number;
   food: string;
   cafe: string;
   photoUrls: string[];
-  archiveAdditionalInfos: ArchiveDetailLinkInfos[];
-  itemId: string;
-}
-export interface MyArchiveDetailHeaderInfoProps {
-  title: string;
-  typeBadge: PresentationBadge;
-  updatedAt: string;
-  archiveAdditionalInfos: ArchiveDetailLinkInfos[];
+  archiveActionButton: ArchiveDetailLinkInfos[];
+  item: ProductionItemInfo;
+  visibleAtItem: boolean;
 }
 
+export interface ProductionItemInfo {
+  id: number;
+  imageUrl: string;
+  title: string;
+  typeBadge: PresentationBadge;
+}
 export interface MyArchiveDetailInfoProps {
   starRating: number;
   food: string;
   cafe: string;
 }
+export interface MyArchiveDetailHeaderInfoProps {
+  title: string;
+  updatedAt: string;
+  typeBadge: PresentationBadge;
+  archiveActionButton: ArchiveDetailLinkInfos[];
+}
+
 interface PresentationBadge {
   text: string;
   typeBadge: boolean;

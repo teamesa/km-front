@@ -61,10 +61,10 @@ const MyArchiveDetailPopup = () => {
             margin="15px"
           >
             <MyArchiveDetailHeaderInfo
+              title={archiveData?.item?.title}
               updatedAt={archiveData?.updatedAt}
-              typeBadge={archiveData?.typeBadge}
-              title={archiveData?.title}
-              archiveAdditionalInfos={archiveData?.archiveAdditionalInfos}
+              typeBadge={archiveData?.item?.typeBadge}
+              archiveActionButton={archiveData?.archiveActionButton}
             />
             <Box
               width="100%"
