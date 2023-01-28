@@ -23,7 +23,6 @@ export default function HomeList() {
 
   switch (homeListInfo.state) {
     case 'hasValue':
-      console.log(homeListInfo);
       return (
         <Box borderTop="1px solid #f3f3f3">
           {homeListInfo?.contents?.data?.keyVisualDatas?.map(
