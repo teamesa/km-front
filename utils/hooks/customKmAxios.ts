@@ -8,11 +8,12 @@ const axiosConfig: AxiosRequestConfig = {
 const customKmAxios: AxiosInstance = axios.create(axiosConfig);
 customKmAxios.interceptors.response.use(
   (res) => {
-    console.log('res', res);
+    if (res.data.code !== 200) {
+      return Promise.reject(res.data);
+    }
     return res;
   },
   (err) => {
-    console.log('err', err);
     throw err;
   },
 );
