@@ -148,28 +148,6 @@ export default function MyArchiveDetailCardInfo(
             -webkit-text-stroke-color: orange;
           `}
         >
-          {/* <Box
-            position="absolute"
-            zIndex="1"
-            overflow="hidden"
-            css={css`
-              -webkit-text-fill-color: orange;
-            `}
-            width={makeAvgStarRating()}
-          >
-            <Start />
-            <Start />
-            <Start />
-            <Start />
-            <Start />
-          </Box>
-          <Box zIndex="0" padding="0">
-            <Start />
-            <Start />
-            <Start />
-            <Start />
-            <Start />
-          </Box> */}
           <StartRatingImage />
         </Box>
       </FlexBox>
