@@ -8,10 +8,10 @@ import {
 } from 'recoil';
 
 import {
+  HomeListProps,
   ModuleResponse,
   MonthlyFreeItemCardProps,
-} from './../components/Organisms/Home/ModuleTypes';
-
+} from 'components/Organisms/Home/ModuleTypes';
 import {
   ModuleData,
   MonthlyFreeItemProps,
@@ -30,6 +30,32 @@ export const getHomeInfo = async (): Promise<ModuleData[]> => {
   }
 };
 
+const getSwipeItemInfo = async (): Promise<HomeListProps> => {
+  try {
+    const response = (await axios({
+      url: `/api/home/key-visual`,
+      method: 'GET',
+    })) as AxiosResponse<HomeListProps>;
+
+    return response.data;
+  } catch (e) {
+    return {
+      data: { keyVisualDatas: [] },
+      moduleName: 'KEY_VISUAL',
+      index: 0,
+    };
+  }
+};
+
+export const useResetSwipeItemListFunction = () =>
+  useRecoilCallback(
+    ({ set }) =>
+      async () => {
+        const homeListInfo = await getSwipeItemInfo();
+        set(homeListState, homeListInfo);
+      },
+    [],
+  );
 export const useResetHomeModulesFunction = () =>
   useRecoilCallback(
     ({ set }) =>
@@ -38,15 +64,15 @@ export const useResetHomeModulesFunction = () =>
         set(homeModuleState, homeModuleData);
         homeModuleData.forEach((_, index) =>
           set(
-            homeModuleIndivisualStateFamily(index),
-            getFromModuledata(homeModuleData[index]),
+            homeModuleIndividualStateFamily(index),
+            getFromModuleData(homeModuleData[index]),
           ),
         );
       },
     [],
   );
 
-export const getFromModuledata = ({ moduleName, data }: ModuleData) => {
+const getFromModuleData = ({ moduleName, data }: ModuleData) => {
   switch (moduleName) {
     case 'MONTHLY_FREE_ITEM':
       const { contents } = data as MonthlyFreeItemProps;
@@ -56,12 +82,12 @@ export const getFromModuledata = ({ moduleName, data }: ModuleData) => {
   }
 };
 
-export const useTurnPickstateFunction = (moduleId: number, itemId: number) =>
+export const useTurnPickStateFunction = (moduleId: number, itemId: number) =>
   useRecoilCallback(
     ({ set }) =>
       async () => {
         set(
-          homeModuleIndivisualStateFamily(moduleId),
+          homeModuleIndividualStateFamily(moduleId),
           (exHomeindivisualState) => {
             const monthlyData =
               exHomeindivisualState as MonthlyFreeItemCardProps[];
@@ -81,17 +107,24 @@ export const useTurnPickstateFunction = (moduleId: number, itemId: number) =>
     [],
   );
 
-export const homeModuleIndivisualStateFamily = atomFamily({
-  key: 'home-module-indivisual',
+export const homeModuleIndividualStateFamily = atomFamily({
+  key: 'home-module-individual',
   default: selectorFamily({
-    key: 'home-module-indivisual/Default',
+    key: 'home-module-individual/Default',
     get:
       (index: number) =>
       ({ get }) =>
-        getFromModuledata(get(homeModuleState)[index]),
+        getFromModuleData(get(homeModuleState)[index]),
   }),
 });
 
+export const homeListState = atom<HomeListProps>({
+  key: 'home-list',
+  default: selector({
+    key: 'home-list/default',
+    get: async () => getSwipeItemInfo(),
+  }),
+});
 export const homeModuleState = atom<ModuleData[]>({
   key: 'home-module',
   default: selector({

@@ -10,15 +10,54 @@ export default function MyArchiveDetailCardInfo(
   contents: MyArchiveDetailInfoProps,
 ) {
   const makeAvgStarRating = () => {
-    const rating = contents.starRating * 20;
+    const rating = contents?.starRating * 20;
     return `${rating + 1.5}%`;
   };
 
   const Start = () => {
     return (
-      <Span width="21px" height="20px" paddingLeft="6px">
+      <Span width="25px" height="25px" paddingLeft="15px">
         ★
       </Span>
+    );
+  };
+
+  const StartRatingImage = () => {
+    return (
+      <Box
+        color={theme.colors.orange}
+        position="relative"
+        width="max-content"
+        css={css`
+          unicode-bidi: bidi-override;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke-width: 1.5px;
+          -webkit-text-stroke-color: #ff6200;
+        `}
+      >
+        <Box
+          position="absolute"
+          zIndex="1"
+          overflow="hidden"
+          css={css`
+            -webkit-text-fill-color: #ff6200;
+          `}
+          width={makeAvgStarRating()}
+        >
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+        </Box>
+        <Box zIndex="0" padding="0">
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+        </Box>
+      </Box>
     );
   };
 
@@ -26,8 +65,14 @@ export default function MyArchiveDetailCardInfo(
     <FlexBox borderTop="solid 1px" borderTopColor={theme.colors.gray99}>
       {/* 다녀온곳 */}
       <Box width="172.5px" height="80px">
-        {contents.cafe === '' && contents.food === '' ? (
-          <NoItemBox width="inherit" height="inherit" text="다녀온 곳" />
+        {contents?.cafe === '' && contents?.food === '' ? (
+          <NoItemBox
+            width="inherit"
+            height="inherit"
+            text="다녀온 곳"
+            textColor={theme.colors.gray77}
+            backgroundColor={theme.colors.white}
+          />
         ) : (
           <FlexBox
             width="inherit"
@@ -37,46 +82,50 @@ export default function MyArchiveDetailCardInfo(
             flexDirection="column"
             justifyContent="center"
           >
-            <Box display={contents.food ? 'flex' : 'none'} alignItems="center">
-              <Box display={contents.food ? 'block' : 'none'}>
-                <Pointer color="#fff" />
+            {contents?.food ? (
+              <Box display="flex" alignItems="center">
+                <Box display="block">
+                  <Pointer color={theme.colors.white} />
+                </Box>
+                <Span
+                  marginLeft="10px"
+                  fontSize="12px"
+                  lineHeight="18px"
+                  display="-webkit-box"
+                  overflow="hidden"
+                  color={theme.colors.white}
+                  css={css`
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                  `}
+                >
+                  {contents?.food}
+                </Span>
               </Box>
-              <Span
-                marginLeft="10px"
-                fontSize="12px"
-                lineHeight="18px"
-                display="-webkit-box"
-                overflow="hidden"
-                color="#fff"
-                css={css`
-                  text-overflow: ellipsis;
-                  -webkit-line-clamp: 1;
-                  -webkit-box-orient: vertical;
-                `}
-              >
-                {contents.food}
-              </Span>
-            </Box>
-            <Box display={contents.cafe ? 'flex' : 'none'} alignItems="center">
-              <Box display={contents.cafe ? 'block' : 'none'}>
-                <Pointer color="#fff" />
+            ) : null}
+            {contents?.cafe ? (
+              <Box display="flex" alignItems="center">
+                <Box display="block">
+                  <Pointer color={theme.colors.white} />
+                </Box>
+                <Span
+                  marginLeft="10px"
+                  fontSize="12px"
+                  lineHeight="18px"
+                  display="-webkit-box"
+                  overflow="hidden"
+                  color={theme.colors.white}
+                  css={css`
+                    text-overflow: ellipsis;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                  `}
+                >
+                  {contents?.cafe}
+                </Span>
               </Box>
-              <Box
-                marginLeft="10px"
-                fontSize="12px"
-                lineHeight="18px"
-                overflow="hidden"
-                display="-webkit-box"
-                color="#fff"
-                css={css`
-                  text-overflow: ellipsis;
-                  -webkit-line-clamp: 1;
-                  -webkit-box-orient: vertical;
-                `}
-              >
-                {contents.cafe}
-              </Box>
-            </Box>
+            ) : null}
           </FlexBox>
         )}
       </Box>
@@ -99,28 +148,7 @@ export default function MyArchiveDetailCardInfo(
             -webkit-text-stroke-color: orange;
           `}
         >
-          <Box
-            position="absolute"
-            zIndex="1"
-            overflow="hidden"
-            css={css`
-              -webkit-text-fill-color: orange;
-            `}
-            width={makeAvgStarRating()}
-          >
-            <Start />
-            <Start />
-            <Start />
-            <Start />
-            <Start />
-          </Box>
-          <Box zIndex="0" padding="0">
-            <Start />
-            <Start />
-            <Start />
-            <Start />
-            <Start />
-          </Box>
+          <StartRatingImage />
         </Box>
       </FlexBox>
     </FlexBox>

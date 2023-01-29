@@ -40,7 +40,7 @@ const InfiniteCarouselTitle = ({
           }
         `}
       >
-        {upperTitle}
+        {upperTitle !== '' ? upperTitle : <br />}
       </Box>
       <Box
         fontSize="30px"
@@ -62,7 +62,7 @@ const InfiniteCarouselTitle = ({
           }
         `}
       >
-        {lowerTitle}
+        {lowerTitle !== '' ? lowerTitle : <br />}
       </Box>
     </Box>
   );

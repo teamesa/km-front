@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
 
-import { FlexBox, Box } from 'components/Atoms';
+import { FlexBox, Box, Span } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
 import theme from 'styles/theme';
 
@@ -29,31 +29,29 @@ export default function Carousel({
           position="absolute"
           alignItems="center"
           justifyContent="space-around"
-          fontSize="14px"
-          lineHeight="0.91px"
-          letterSpacing="0.11px"
-          bottom="0px"
+          top="0px"
           right="0px"
           zIndex="100"
-          backgroundColor="black"
+          backgroundColor={theme.colors.black}
           opacity="0.4"
         >
-          <Box
-            width="fit-content"
-            height="fit-content"
-            marginRight="3.2px"
+          <FlexBox
+            alignItems="center"
+            width="24px"
+            fontSize="11px"
             color={theme.colors.white}
+            justifyContent="space-around"
           >
-            <>{nowIndex}</>{' '}
-          </Box>
-          <Box
-            width="fit-content"
-            height="fit-content"
-            color={theme.colors.gray99}
-          >
-            {' '}
-            / {imgUrlArr.length}
-          </Box>
+            <Box fontSize="11px" color={theme.colors.white}>
+              {nowIndex}
+            </Box>
+            <Box fontSize="11px" color={theme.colors.white}>
+              /
+            </Box>
+            <Box fontSize="11px" color={theme.colors.white}>
+              {imgUrlArr.length}
+            </Box>
+          </FlexBox>
         </FlexBox>
       ) : null}
       <Box
