@@ -43,7 +43,7 @@ export default function ListCard(props: ItemProps) {
         }
       `}
     >
-      <Box flex={0.3}>
+      <Box>
         <Button
           onClick={() => {
             //TODO: API 업데이트 되면 itemId  연결하기.
@@ -62,14 +62,19 @@ export default function ListCard(props: ItemProps) {
           </Box>
         </Button>
       </Box>
-      <Button marginLeft="20px">
+      <Box
+        width="100%"
+        textAlign="left"
+        onClick={() => {
+          setArchiveId(apiArr[4]);
+          setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
+        }}
+      >
         <Box
-          flex={1}
-          textAlign="left"
-          onClick={() => {
-            setArchiveId(apiArr[4]);
-            setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
-          }}
+          marginLeft="20px"
+          css={css`
+            cursor: pointer;
+          `}
         >
           <ItemInfo
             typeBadge={content?.typeBadge}
@@ -114,7 +119,7 @@ export default function ListCard(props: ItemProps) {
             </FlexBox>
           </Box>
         </Box>
-      </Button>
+      </Box>
     </FlexBox>
   );
 }
