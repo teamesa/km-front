@@ -1,17 +1,13 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  useSetRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-  useRecoilState,
-} from 'recoil';
+import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
+import CheckForbiddenWords from 'components/Molecules/CheckForbiddenWords';
 import Rating from 'components/Molecules/Rating';
 import ArchiveFileUploadForm from 'components/Organisms/ArchiveFileUploadForm';
 import ArchiveTitle from 'components/Organisms/ArchiveUpdate/ArchiveTitle';
@@ -76,6 +72,14 @@ export default function ArchiveUpdateHome() {
         .filter(isDefined),
     };
     setArchiveWrite(postData);
+
+    if (CheckForbiddenWords(postData.comment)) {
+      setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
+      // TODO
+      setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
+      return null;
+    }
+
     try {
       await axios({
         method: 'PUT',
