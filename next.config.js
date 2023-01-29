@@ -8,6 +8,9 @@ const nextConfig = {
       'ssl.pstatic.net',
     ],
   },
+  experimental: {
+    scrollRestoration: true,
+  },
 };
 
 module.exports = nextConfig;
