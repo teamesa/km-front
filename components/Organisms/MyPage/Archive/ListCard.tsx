@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
+import router from 'next/router';
 import { useSetRecoilState } from 'recoil';
 
 import ItemInfo from './ItemInfo';
@@ -44,12 +45,7 @@ export default function ListCard(props: ItemProps) {
       `}
     >
       <Box>
-        <Button
-          onClick={() => {
-            //TODO: API 업데이트 되면 itemId  연결하기.
-            //setItemId();
-          }}
-        >
+        <Button onClick={() => router.push(`/detail/${apiArr[4]}`)}>
           <Box width="75px" height="75px" position="relative">
             <Image
               src={!content?.listImageUrl ? noImage : content.listImageUrl}
