@@ -16,9 +16,48 @@ export default function MyArchiveDetailCardInfo(
 
   const Start = () => {
     return (
-      <Span width="21px" height="20px" paddingLeft="6px">
+      <Span width="25px" height="25px" paddingLeft="15px">
         ★
       </Span>
+    );
+  };
+
+  const StartRatingImage = () => {
+    return (
+      <Box
+        color={theme.colors.orange}
+        position="relative"
+        width="max-content"
+        css={css`
+          unicode-bidi: bidi-override;
+          -webkit-text-fill-color: transparent;
+          -webkit-text-stroke-width: 1.5px;
+          -webkit-text-stroke-color: #ff6200;
+        `}
+      >
+        <Box
+          position="absolute"
+          zIndex="1"
+          overflow="hidden"
+          css={css`
+            -webkit-text-fill-color: #ff6200;
+          `}
+          width={makeAvgStarRating()}
+        >
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+        </Box>
+        <Box zIndex="0" padding="0">
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+          <Start />
+        </Box>
+      </Box>
     );
   };
 
@@ -109,7 +148,7 @@ export default function MyArchiveDetailCardInfo(
             -webkit-text-stroke-color: orange;
           `}
         >
-          <Box
+          {/* <Box
             position="absolute"
             zIndex="1"
             overflow="hidden"
@@ -130,7 +169,8 @@ export default function MyArchiveDetailCardInfo(
             <Start />
             <Start />
             <Start />
-          </Box>
+          </Box> */}
+          <StartRatingImage />
         </Box>
       </FlexBox>
     </FlexBox>
