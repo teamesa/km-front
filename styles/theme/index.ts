@@ -8,6 +8,7 @@ const theme = {
     grayEE: '#eeeeee',
     grayDD: '#dddddd',
     grayBB: '#bbbbbb',
+    grayF2: '#F2F2F2',
     grayF8: '#f8f8f8',
     grayF9: '#f9f9f9',
     grayE9: '#e9e9e9',
