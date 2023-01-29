@@ -33,8 +33,8 @@ export const ALERT_MESSAGE = {
       message: '검색을 통해 문화생활을 선택해주세요',
     },
     FORBIDDEN_WORD: {
-      code: 'ALT-019',
-      message: '금칙어를 작성할 수 없습니다.',
+      code: 'ALT-018',
+      message: '입력하신 내용에 금지 단어가 포함되어 저장할 수 없습니다.',
     },
   },
   ERROR: {
