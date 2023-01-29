@@ -16,9 +16,9 @@ export default function MyArchiveDetailCardInfo(
 
   const Start = () => {
     return (
-      <Span width="25px" height="25px" paddingLeft="15px">
+      <Box fontSize="23px" margin="0 3.5px">
         ★
-      </Span>
+      </Box>
     );
   };
 
@@ -28,19 +28,23 @@ export default function MyArchiveDetailCardInfo(
         color={theme.colors.orange}
         position="relative"
         width="max-content"
+        opacity="0.3px"
         css={css`
           unicode-bidi: bidi-override;
           -webkit-text-fill-color: transparent;
-          -webkit-text-stroke-width: 1.5px;
-          -webkit-text-stroke-color: #ff6200;
+          -webkit-text-stroke-width: 0.3px;
+          -webkit-text-stroke-color: #000;
         `}
       >
         <Box
+          display="flex"
+          flexDirection="row"
           position="absolute"
           zIndex="1"
           overflow="hidden"
           css={css`
             -webkit-text-fill-color: #ff6200;
+            -webkit-text-stroke-color: #ff6200;
           `}
           width={makeAvgStarRating()}
         >
@@ -50,7 +54,7 @@ export default function MyArchiveDetailCardInfo(
           <Start />
           <Start />
         </Box>
-        <Box zIndex="0" padding="0">
+        <Box display="flex" flexDirection="row" zIndex="0" padding="0">
           <Start />
           <Start />
           <Start />
