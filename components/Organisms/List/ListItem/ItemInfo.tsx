@@ -35,7 +35,7 @@ export default function ItemInfo(props: InfoProps) {
       </Box>
       <Box
         fontSize="15px"
-        lineHeight="18px"
+        lineHeight="22px"
         fontWeight="500"
         css={css`
           cursor: pointer;
