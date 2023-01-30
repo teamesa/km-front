@@ -47,7 +47,7 @@ export default function SwipeItemImage({ presentationImage }: ImagePorps) {
               top="calc(50% - 16px)"
               left="calc(50% - 30px)"
               color={theme.colors.white}
-              fontSize="26px"
+              fontSize="22px"
               lineHeight="32px"
               zIndex="2"
             >

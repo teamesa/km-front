@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 
-import { Box } from 'components/Atoms';
+import { Box, FlexBox } from 'components/Atoms';
 import SwipeItemKeyword from 'components/Organisms/Home/Module/SwipeItem/SwipeItemKeyword';
 import theme from 'styles/theme';
 
@@ -62,11 +62,11 @@ export default function SwipeItemInfo({
       >
         {filteredContent}
       </Box>
-      <Box marginTop="20px" display="flex">
+      <FlexBox marginTop="20px">
         {keywords.map((keyword) => (
           <SwipeItemKeyword key={keyword} keyword={keyword} />
         ))}
-      </Box>
+      </FlexBox>
     </Box>
   );
 }
