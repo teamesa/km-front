@@ -1,9 +1,7 @@
-import { css } from '@emotion/react';
 import Image from 'next/image';
 
 import { Pointer, Profile } from 'assets/mypage';
 import { Box, FlexBox, Span } from 'components/Atoms';
-import Paragraph from 'components/Atoms/Paragraph';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
 import theme from 'styles/theme';
 
@@ -25,7 +23,6 @@ export default function NowArchiveItemCard() {
         />
         <FlexBox
           position="absolute"
-          g
           bottom="0"
           width="100%"
           height="60px"
