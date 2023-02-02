@@ -80,7 +80,6 @@ export default function NowArchiveItemCard() {
           bottom="0"
           width="100%"
           height="60px"
-          justifyContent="space-between"
           alignItems="center"
         >
           <Box
@@ -91,10 +90,11 @@ export default function NowArchiveItemCard() {
             backgroundColor={theme.colors.white}
             opacity={0.8}
           />
-          <FlexBox alignItems="center" zIndex={10} paddingLeft="15px">
+          <FlexBox alignItems="flex-start" zIndex={10}>
             <Box
               width="45px"
               height="45px"
+              marginLeft="15px"
               borderRadius="50%"
               overflow="hidden"
             >
@@ -104,7 +104,7 @@ export default function NowArchiveItemCard() {
                 <Profile width="45px" height="45px" />
               )}
             </Box>
-            <FlexBox padding="0 12px">
+            <FlexBox marginTop="8px" marginLeft="12px" maxWidth="200px">
               <Box>
                 <Span
                   fontSize="13px"
@@ -119,19 +119,21 @@ export default function NowArchiveItemCard() {
                 >
                   족발막국수닭갈비볶음밥감자탕떡볶이치킨피자탕수육
                 </Span>
-                <FlexBox fontSize="11px" alignItems="center">
+                <FlexBox fontSize="11px" alignItems="flex-end">
                   <StartRatingImage />
                   <Box
-                    marginRight="6px"
-                    height="8px"
+                    margin="0 8px"
+                    height="11px"
                     borderLeft={`1px solid ${theme.colors.gray99}`}
                   />
-                  <Box>2022.04.02</Box>
+                  <Box lineHeight="1.45" fontSize="11px">
+                    2022.04.02
+                  </Box>
                 </FlexBox>
               </Box>
             </FlexBox>
           </FlexBox>
-          <Box zIndex={10} paddingRight="15px">
+          <Box zIndex={10} marginRight="15px">
             <ArchiveHeart heart={heart} heartCount={25} />
           </Box>
         </FlexBox>
@@ -139,7 +141,7 @@ export default function NowArchiveItemCard() {
       <Box>
         <Box
           marginTop="20px"
-          marginBottom="6px"
+          marginBottom="2px"
           fontSize="15px"
           lineHeight="22px"
           fontWeight="Bold"
@@ -170,7 +172,7 @@ export default function NowArchiveItemCard() {
           샤바 두비두비두비두밥~ 사바두비두비두비두비바랍#$^@Q#$두밥 샵빱
           뚜비두밥 샤바 두비두비두비두밥~ 사바두비두비두비두비바랍#$^@Q#$두밥
         </Box>
-        <FlexBox marginTop="10px" alignItems="center">
+        <FlexBox marginTop="8px">
           <Pointer width="11px" height="15px" />
           <Span
             marginLeft="10px"
