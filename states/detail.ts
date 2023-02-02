@@ -1,8 +1,8 @@
 import { AxiosResponse } from 'axios';
 import { atom, selector, useRecoilCallback } from 'recoil';
 
+import { customKmAxios } from 'api/customKmAxios';
 import customAxios from 'utils/hooks/customAxios';
-import { customKmAxios } from 'utils/hooks/customKmAxios';
 
 export type TGetSummary = {
   detailImageUrl: string;
