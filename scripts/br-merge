@@ -1,0 +1,47 @@
+#!/bin/bash
+
+read -p "Branch from(ex. dev): " from
+read -p "Version tag(ex. v1.33.0): " tag
+echo "----------------------------------------------
+Start merge '$from' into 'main' with '$tag' tag...
+----------------------------------------------"
+
+echo "⚙️ [1/5] Checking working git tree"
+if [[ $(git diff --stat) != "" ]]; then
+  read -p "You have some changes not to commit. SURE TO CONTINUE?(Y/n): " forceYn
+  if [[ $forceYn != "Y" ]]; then
+    echo "🚫 Aborted"
+    exit 0
+  fi
+else
+  echo "✅ Checked"
+fi
+
+echo "⚙️ [2/5] Fetching source"
+git fetch -p origin
+
+echo "⚙️ [3/5] Reset --hard both $from, main working trees"
+git checkout $from -q
+git reset --hard origin/$from -q
+echo "  ✅ Reset $from branch done"
+git checkout main -q
+git reset --hard origin/main -q
+echo "  ✅ Reset main branch done"
+
+echo "⚙️ [4/5] Merging and Push ($from -> main)"
+git merge --no-ff origin/$from -m "$tag (merged by script)" -q
+git push origin main -q
+echo "  ✅ Merge & Push done"
+
+echo "⚙️ [5/5] Tagging and Push ($tag)"
+git tag -a $tag -m "$tag"
+git push origin $tag -q
+echo "  ✅ Tagging & Push done"
+
+echo "----------------------------------------------"
+read -p "📋 Compare commits from tag: " prevtag
+echo "Printing commits from $prevtag up to $tag..."
+echo -e "\033[35m$(git log --pretty=format:'* %h %s' $prevtag...$tag)\033[0m" 
+
+
+echo -e "🍺 'main' SHA: \033[32m$(git log --pretty=format:'%H' -n 1)"
