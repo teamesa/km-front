@@ -66,11 +66,11 @@ export default function NowArchiveItemCard() {
   };
   const imageUrl = null;
   return (
-    <Box width="345px" height="fit-contents" marginBottom="10px">
+    <Box width="345px" height="fit-contents" padding="20px 0">
       <Box width="345px" height="345px" position="relative">
         <Image
           src={
-            'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/1.jpeg'
+            'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/131254-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%284%29.jpg'
           }
           alt="image"
           layout="fill"

@@ -14,7 +14,10 @@ export default function NowArchiveItem({
         topTitle={topTitle ?? '실시간 아카이브'}
         bottomTitle={bottomTitle ?? ''}
       />
-      <Box marginTop="20px">
+      <Box>
+        <NowArchiveItemCard />
+        <NowArchiveItemCard />
+        <NowArchiveItemCard />
         <NowArchiveItemCard />
       </Box>
     </Box>
