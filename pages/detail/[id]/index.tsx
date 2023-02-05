@@ -37,8 +37,8 @@ const Detail: NextPage<UserProps> = ({ user }) => {
     <Box backgroundColor={theme.colors.grayEE}>
       <Box height="5px" />
       <ExhibitionImagesSection />
-      {/* <Description /> */}
-      {/* <Navigator /> */}
+      <Description />
+      <Navigator />
     </Box>
   );
 };
