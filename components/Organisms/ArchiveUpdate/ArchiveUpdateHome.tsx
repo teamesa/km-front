@@ -75,7 +75,6 @@ export default function ArchiveUpdateHome() {
 
     if (CheckForbiddenWords(postData.comment)) {
       setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
-      // TODO
       setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
       return null;
     }
