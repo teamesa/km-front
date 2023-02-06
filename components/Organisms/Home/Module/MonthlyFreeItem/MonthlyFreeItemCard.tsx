@@ -2,12 +2,12 @@ import { css } from '@emotion/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import noImage from 'assets/common/no_image_375x500.png';
 import { Box, FlexBox, Tag } from 'components/Atoms';
 import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditionalInfo';
 import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
 import { useTurnPickStateFunction } from 'states/home';
 import theme from 'styles/theme';
-
 export default function MonthlyFreeItemCard({
   moduleIndex,
   content: {
@@ -53,16 +53,12 @@ export default function MonthlyFreeItemCard({
           router.push(presentationImageLink);
         }}
       >
-        {presentationImageUrl ? (
-          <Image
-            width={90}
-            height={120}
-            alt="image"
-            src={presentationImageUrl}
-          />
-        ) : (
-          <></>
-        )}
+        <Image
+          width={90}
+          height={120}
+          alt="image"
+          src={!presentationImageUrl ? noImage : presentationImageUrl}
+        />
       </Box>
       <Box
         css={css`
