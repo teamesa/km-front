@@ -53,7 +53,16 @@ export default function MonthlyFreeItemCard({
           router.push(presentationImageLink);
         }}
       >
-        <Image width={90} height={120} alt="image" src={presentationImageUrl} />
+        {presentationImageUrl ? (
+          <Image
+            width={90}
+            height={120}
+            alt="image"
+            src={presentationImageUrl}
+          />
+        ) : (
+          <></>
+        )}
       </Box>
       <Box
         css={css`
