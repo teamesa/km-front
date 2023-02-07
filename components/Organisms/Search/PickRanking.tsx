@@ -21,7 +21,7 @@ export default function PickRanking() {
         lineHeight="22px"
         fontWeight="500"
       >
-        많이 PICK한 문화생활
+        Monthly Best Pick
       </Box>
       <SwipeItem contents={pickMost.contents.contents} />
     </>
