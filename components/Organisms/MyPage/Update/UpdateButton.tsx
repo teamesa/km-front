@@ -63,7 +63,7 @@ export default function UpdateButton() {
     if (validate(userModifyValue, setUserModifyError)) {
       try {
         await axiosState({
-          url: `/api/user`,
+          url: `/api/users`,
           method: 'POST',
           data: userModifyValue,
         });
