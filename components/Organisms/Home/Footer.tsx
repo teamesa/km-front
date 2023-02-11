@@ -19,9 +19,18 @@ export default function Footer() {
       paddingX="15px"
       borderTop={`1px solid ${theme.colors.grayCC}`}
     >
-      <Box marginBottom="20px">
-        <Image src={Logo} alt="image" width="136px" height="20px" />
-      </Box>
+      <FlexBox>
+        <Box marginBottom="20px">
+          <Image src={Logo} alt="image" width="136px" height="20px" />
+        </Box>
+        <Input
+          disabled
+          value={`v${pkg.version}`}
+          background={theme.colors.white}
+          color={theme.colors.white}
+          height="16px"
+        />
+      </FlexBox>
       <Box
         color={theme.colors.gray33}
         fontSize="12px"
@@ -81,9 +90,6 @@ export default function Footer() {
         borderRadius="50%"
       >
         <Image src={Instagram} alt="image" width="20px" height="20px" />
-      </Box>
-      <Box marginTop="12px" color={theme.colors.white}>
-        {pkg.version}
       </Box>
     </Box>
   );
