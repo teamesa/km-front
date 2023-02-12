@@ -1,7 +1,7 @@
-import { AxiosResponse } from 'axios';
-import { atom, selector, useRecoilCallback } from 'recoil';
+import { AxiosResponse } from "axios";
+import { atom, selector, useRecoilCallback } from "recoil";
 
-import customAxios from 'utils/hooks/customAxios';
+import customAxios from "utils/hooks/customAxios";
 
 export type TGetSummary = {
   detailImageUrl: string;
@@ -36,6 +36,7 @@ type TGetIntroduction = {
   photo: string[] | [];
   summary: string | null;
 };
+
 export interface Archives {
   id: number;
   userProfileUrl: string;
@@ -52,6 +53,7 @@ export interface Archives {
   cafe: string;
   photoUrls: string[];
 }
+
 export interface ArchiveContents {
   responsePagingStatus: {
     nextPage: number;
@@ -74,23 +76,23 @@ const axios = customAxios();
 
 const query = () => {
   const pathname = window?.location?.pathname;
-  const queryData = pathname.slice(1).split('/');
+  const queryData = pathname.slice(1).split("/");
   return queryData;
 };
 
 export async function getSummary({ itemId }: { itemId?: number } = {}) {
   const queryData = query();
   const { data } = (await axios({
-    url: `/api/item/info/${itemId || Number(queryData[1])}`,
-    method: 'GET',
+    url: `/api/items/${itemId || Number(queryData[1])}`,
+    method: "GET"
   })) as AxiosResponse<TGetSummary>;
 
   return data;
 }
 
 export const summaryState = atom({
-  key: 'SummaryState',
-  default: selector({ key: 'SummaryState/default', get: () => getSummary() }),
+  key: "SummaryState",
+  default: selector({ key: "SummaryState/default", get: () => getSummary() })
 });
 
 export const useResetSummaryFunction = () =>
@@ -102,7 +104,7 @@ export const useResetSummaryFunction = () =>
 export async function getArchive(itemId?: number) {
   const queryData = query();
   const { data } = (await axios({
-    url: `/api/archive/${itemId || Number(queryData[1])}`,
+    url: `/api/items/${itemId || Number(queryData[1])}/archives`,
     method: 'GET',
   })) as AxiosResponse<TGetArchive>;
 
@@ -112,8 +114,8 @@ export async function getArchive(itemId?: number) {
 export async function getIntroduction(itemId?: number) {
   const queryData = query();
   const { data } = (await axios({
-    url: `/api/item/detail/${itemId || Number(queryData[1])}`,
-    method: 'GET',
+    url: `/api/items/${itemId || Number(queryData[1])}/detail`,
+    method: "GET"
   })) as AxiosResponse<TGetIntroduction>;
 
   return data;
@@ -126,29 +128,29 @@ export const useResetDetailArchiveFunction = () =>
     const tabViewData =
       introduction.summary === null && introduction.photo.length === 0
         ? [{ ...archive }]
-        : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
+        : [{ contents: { ...introduction }, title: "소개" }, { ...archive }];
 
     const newStateData = {
-      tabViewData,
+      tabViewData
     };
     set(detailState, newStateData);
   });
 
 export const detailState = atom({
-  key: 'DetailState',
+  key: "DetailState",
   default: selector({
-    key: 'DetailState/default',
+    key: "DetailState/default",
     get: async () => {
       const introduction = await getIntroduction();
       const archive = await getArchive();
       const tabViewData =
         introduction.summary === null && introduction.photo.length === 0
           ? [{ ...archive }]
-          : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
+          : [{ contents: { ...introduction }, title: "소개" }, { ...archive }];
 
       return {
-        tabViewData,
+        tabViewData
       };
-    },
-  }),
+    }
+  })
 });

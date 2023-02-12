@@ -34,7 +34,7 @@ export type PresentationBadge = {
 export const getList = async () => {
   const axios = customAxios();
   const { data } = (await axios({
-    url: `/api/archive/my`,
+    url: `/api/archives/my`,
     method: 'POST',
     data: {
       requestPagingStatus: {
