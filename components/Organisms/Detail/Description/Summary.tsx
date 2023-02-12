@@ -31,16 +31,18 @@ export default function Summary() {
                       <InnerHTML data={summary?.price} />
                     ) : null}
                   </Box>
-                  <Button marginTop="8px">
-                    <Link href={summary?.ticketUrl}>
-                      <a target="_blank" rel="noreferrer">
-                        <Span color={theme.colors.gray99}>
-                          티켓 구매하기
-                          <Span paddingLeft="8px">{'>'}</Span>
-                        </Span>
-                      </a>
-                    </Link>
-                  </Button>
+                  {summary?.ticketUrl ?? (
+                    <Button marginTop="8px">
+                      <Link href={summary?.ticketUrl}>
+                        <a target="_blank" rel="noreferrer">
+                          <Span color={theme.colors.gray99}>
+                            티켓 구매하기
+                            <Span paddingLeft="8px">{'>'}</Span>
+                          </Span>
+                        </a>
+                      </Link>
+                    </Button>
+                  )}
                 </Box>
               }
             />

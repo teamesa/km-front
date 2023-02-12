@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import * as pkg from '../../../package.json';
+
 import Logo from 'assets/common/header/logo.png';
 import Instagram from 'assets/home/instagram.png';
 import { Box, Button, FlexBox, Input, Span } from 'components/Atoms';
@@ -17,9 +19,18 @@ export default function Footer() {
       paddingX="15px"
       borderTop={`1px solid ${theme.colors.grayCC}`}
     >
-      <Box marginBottom="20px">
-        <Image src={Logo} alt="image" width="136px" height="20px" />
-      </Box>
+      <FlexBox>
+        <Box marginBottom="20px">
+          <Image src={Logo} alt="image" width="136px" height="20px" />
+        </Box>
+        <Input
+          disabled
+          value={`v${pkg.version}`}
+          background={theme.colors.white}
+          color={theme.colors.white}
+          height="16px"
+        />
+      </FlexBox>
       <Box
         color={theme.colors.gray33}
         fontSize="12px"

@@ -45,11 +45,14 @@ export default function SwipeItemImage({ presentationImage }: ImagePorps) {
             <Box
               position="absolute"
               top="calc(50% - 16px)"
-              left="calc(50% - 30px)"
+              left="50%"
               color={theme.colors.white}
               fontSize="22px"
               lineHeight="32px"
               zIndex="2"
+              css={css`
+                transform: translateX(-50%);
+              `}
             >
               {presentationImage.backgroundText}
             </Box>

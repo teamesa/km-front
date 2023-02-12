@@ -1,12 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  useSetRecoilState,
-  useRecoilValue,
-  useResetRecoilState,
-  useRecoilState,
-} from 'recoil';
+import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
@@ -79,7 +74,7 @@ export default function ArchiveUpdateHome() {
     try {
       await axios({
         method: 'PUT',
-        url: `/api/archive`,
+        url: `/api/archives`,
         data: postData,
       });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
