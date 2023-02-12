@@ -195,7 +195,7 @@ app.prepare().then(() => {
 
   server.all('/hello-example', proxyLogic);
   server.post('/api/image', upload.single('file'), fileProxy);
-  server.put('/api/user/profile', upload.single('file'), fileProxy);
+  server.put('/api/users/profile', upload.single('file'), fileProxy);
   server.all('/api/*', proxyLogic);
 
   server.all('*', (req, res) => {
