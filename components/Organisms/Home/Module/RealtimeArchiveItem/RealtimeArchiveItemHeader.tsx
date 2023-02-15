@@ -1,6 +1,6 @@
 import { Box } from 'components/Atoms';
 
-export default function NowArchiveItemHeader({
+export default function RealtimeArchiveItemHeader({
   topTitle,
   bottomTitle,
 }: {

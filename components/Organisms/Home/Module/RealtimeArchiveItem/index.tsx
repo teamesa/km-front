@@ -1,9 +1,9 @@
 import { Box } from 'components/Atoms';
 import MonthlyFreeItemHeader from 'components/Organisms/Home/Module/MonthlyFreeItem/MonthlyFreeItemHeader';
-import NowArchiveItemCard from 'components/Organisms/Home/Module/NowArchiveItem/NowArchiveItemCard';
+import RealtimeArchiveItemCard from 'components/Organisms/Home/Module/RealtimeArchiveItem/RealtimeArchiveItemCard';
 import { MonthlyFreeItemProps } from 'components/Organisms/Home/ModuleTypes';
 
-export default function NowArchiveItem({
+export default function RealTimeArchiveItem({
   topTitle = '실시간 아카이브',
   bottomTitle = '',
   index,
@@ -15,10 +15,10 @@ export default function NowArchiveItem({
         bottomTitle={bottomTitle ?? ''}
       />
       <Box>
-        <NowArchiveItemCard />
-        <NowArchiveItemCard />
-        <NowArchiveItemCard />
-        <NowArchiveItemCard />
+        <RealtimeArchiveItemCard />
+        <RealtimeArchiveItemCard />
+        <RealtimeArchiveItemCard />
+        <RealtimeArchiveItemCard />
       </Box>
     </Box>
   );

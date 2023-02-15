@@ -6,7 +6,7 @@ import { Box, FlexBox, Span } from 'components/Atoms';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
 import theme from 'styles/theme';
 
-export default function NowArchiveItemCard() {
+export default function RealtimeArchiveItemCard() {
   const heart = {
     heartClicked: false,
     link: '',
