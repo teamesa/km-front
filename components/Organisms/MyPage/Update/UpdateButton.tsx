@@ -14,15 +14,28 @@ import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
 const validate = (
-  { email, phoneNumber, name }: UserModifyInfoInterface,
+  { email, phoneNumber, birthDay, name }: UserModifyInfoInterface,
   setError: (a: UserModifyInfoInterface) => void,
 ): boolean => {
   let hasError: boolean = false;
   const errorSet: UserModifyAlertInterface = {};
 
-  if (!(name && name.length >= 1)) {
+  if (!(name && name.length >= 1 && name.length <= 20)) {
     hasError = true;
     errorSet.nameMessage = '닉네임을 올바르게 입력해주세요.';
+  }
+
+  if (
+    !(
+      birthDay &&
+      new Date(birthDay) < new Date() &&
+      new Date(birthDay) > new Date('1900-01-01')
+    )
+  ) {
+    if (birthDay) {
+      hasError = true;
+      errorSet.birthDayMessage = '생일을 올바르게 입력해주세요.';
+    }
   }
 
   if (!email || (email && !validateEmail(email))) {
@@ -30,14 +43,7 @@ const validate = (
     errorSet.emailMessage = '이메일을 올바르게 입력해주세요.';
   }
 
-  if (
-    !phoneNumber ||
-    !(
-      typeof phoneNumber === 'string' &&
-      10 <= phoneNumber.length &&
-      phoneNumber.length <= 11
-    )
-  ) {
+  if (!phoneNumber || !(10 <= phoneNumber.length && phoneNumber.length <= 11)) {
     hasError = true;
     errorSet.phoneNumberMessage = '휴대폰 번호를 올바르게 입력해주세요.';
   }
