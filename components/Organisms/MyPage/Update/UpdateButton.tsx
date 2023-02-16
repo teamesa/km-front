@@ -20,9 +20,14 @@ const validate = (
   let hasError: boolean = false;
   const errorSet: UserModifyAlertInterface = {};
 
-  if (!(name && name.length >= 1 && name.length <= 20)) {
+  if (!(name && name.length >= 1)) {
     hasError = true;
     errorSet.nameMessage = '닉네임을 올바르게 입력해주세요.';
+  }
+
+  if (name && name.length > 20) {
+    hasError = true;
+    errorSet.nameMessage = '닉네임은 최대 20자를 넘을 수 없습니다.';
   }
 
   if (
