@@ -30,7 +30,7 @@ export default function PickItemInfo({
       <Box
         fontSize="13px"
         fontWeight="500"
-        lineHeight="18px"
+        lineHeight="20px"
         overflow="hidden"
         css={css`
           display: -webkit-box;

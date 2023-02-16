@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { css } from '@emotion/react';
+import { useState } from 'react';
+import { useRecoilValueLoadable } from 'recoil';
 
-import { Box } from 'components/Atoms';
+import { Box, FlexBox } from 'components/Atoms';
 import FloatingButton from 'components/Molecules/FloatingButton';
+import BlankArchiveListSection from 'components/Organisms/MyPage/Archive/BlankArchiveListSection';
 import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
-import { useResetMyArchiveListStateFunction } from 'states/myArchiveList';
 import { myArchiveListState } from 'states/myArchiveList';
 import theme from 'styles/theme';
 
@@ -15,14 +16,14 @@ export default function MyPageInfoFragment() {
     { title: `${contents?.title ?? ''}` },
     { title: '설정' },
   ];
-  const [isMyArchiveShowed, setMyArhiveShowedFlag] = useState<boolean>(true);
+  const [isMyArchiveShowed, setMyArchiveShowedFlag] = useState<boolean>(true);
   const clicked = isMyArchiveShowed ? 0 : 1;
 
   const renderFragment = (index: number) => {
     if (index === 0) {
-      setMyArhiveShowedFlag(true);
+      setMyArchiveShowedFlag(true);
     } else {
-      setMyArhiveShowedFlag(false);
+      setMyArchiveShowedFlag(false);
     }
   };
 
@@ -36,12 +37,18 @@ export default function MyPageInfoFragment() {
             background={theme.colors.white}
             zIndex={2}
           >
-            <Box height="45px" overflow="auto" display="flex" zIndex={2}>
+            <FlexBox
+              height="45px"
+              overflow="auto"
+              zIndex={2}
+              css={css`
+                cursor: pointer;
+              `}
+            >
               {MyPageNavigatorMetaInfo.map(({ title }, index) => (
-                <Box
+                <FlexBox
                   key={title}
                   flex="1"
-                  display="flex"
                   alignItems="center"
                   justifyContent="center"
                   fontSize="17px"
@@ -57,14 +64,23 @@ export default function MyPageInfoFragment() {
                   onClick={() => renderFragment(index)}
                 >
                   {title}
-                </Box>
+                </FlexBox>
               ))}
-            </Box>
+            </FlexBox>
           </Box>
           {isMyArchiveShowed ? (
             <>
-              <ListSection contents={contents} />
-              <FloatingButton />
+              {contents?.contents?.length === 0 ? (
+                <>
+                  <BlankArchiveListSection />
+                  <FloatingButton />
+                </>
+              ) : (
+                <>
+                  <ListSection contents={contents} />
+                  <FloatingButton />
+                </>
+              )}
             </>
           ) : (
             <ConfigurationFragment />

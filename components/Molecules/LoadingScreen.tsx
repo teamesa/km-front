@@ -1,6 +1,6 @@
 import { useRecoilValue } from 'recoil';
 
-import { Box } from 'components/Atoms';
+import { Box, FlexBox } from 'components/Atoms';
 import { Loader } from 'components/Atoms/Loader';
 import { Z_INDEX } from 'constants/common';
 import { loadingState } from 'states/loading';
@@ -12,7 +12,7 @@ export default function LoadingScreen() {
     return <></>;
   } else {
     return (
-      <Box
+      <FlexBox
         zIndex={Z_INDEX.LOADING}
         position="fixed"
         top="0"
@@ -21,14 +21,13 @@ export default function LoadingScreen() {
         opacity="0.7"
         width="100vw"
         height="100vh"
-        display="flex"
         justifyContent="center"
         alignItems="center"
       >
         <Box width="80px" height="80px">
           <Loader />
         </Box>
-      </Box>
+      </FlexBox>
     );
   }
 }

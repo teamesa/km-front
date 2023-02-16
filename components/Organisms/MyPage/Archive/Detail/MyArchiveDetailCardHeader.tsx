@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
@@ -15,13 +14,14 @@ import {
 import theme from 'styles/theme';
 
 export default function MyArchiveDetailHeaderInfo(
-  props: MyArchiveDetailHeaderInfoProps,
+  contents: MyArchiveDetailHeaderInfoProps,
 ) {
   const router = useRouter();
   const archiveId = useRecoilValue(ClickedArchiveId);
   const itemId = useRecoilValue(ClickedItemId);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
+
   const handleClosePopup = () => {
     setPopupName(POPUP_NAME.NULL);
   };
@@ -47,26 +47,26 @@ export default function MyArchiveDetailHeaderInfo(
   };
 
   return (
-    <Box height="99px" padding="20px 15px">
+    <Box height="94px" padding="20px 17px">
       <FlexBox justifyContent="space-between">
-        <Box fontSize="11px" display="flex" alignItems="center">
+        <FlexBox fontSize="11px" alignItems="center">
           <Tag
             backgroundColor={theme.colors.white}
             color={theme.colors.black}
             border="1px solid"
           >
-            {props.typeBadge.text}
+            {contents?.typeBadge?.text}
           </Tag>
           <Span marginLeft="5px" color={theme.colors.gray99}>
-            {props.updatedAt}
+            {contents?.updatedAt}
           </Span>
-        </Box>
+        </FlexBox>
         <Box>
           <Button
             fontSize="12px"
             lineHeight="16px"
             color={theme.colors.gray77}
-            marginRight="16px"
+            marginRight="20px"
             borderBottom="1px solid"
             borderBottomColor={theme.colors.gray77}
             onClick={() => {
@@ -91,8 +91,8 @@ export default function MyArchiveDetailHeaderInfo(
       </FlexBox>
       <Box
         fontSize="15px"
-        marginTop="20px"
-        lineHeight="22px"
+        marginTop="15px"
+        lineHeight="17px"
         fontWeight="Bold"
         overflow="hidden"
         display="-webkit-box"
@@ -102,7 +102,7 @@ export default function MyArchiveDetailHeaderInfo(
           -webkit-box-orient: vertical;
         `}
       >
-        {props.title}
+        {contents?.title}
       </Box>
     </Box>
   );

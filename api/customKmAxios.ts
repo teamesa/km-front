@@ -11,9 +11,11 @@ const customKmAxios: AxiosInstance = axios.create(axiosConfig);
 
 customKmAxios.interceptors.response.use(
   (res) => {
-    if (res.data.code !== 200) {
-      return Promise.reject(res.data);
+    if (res.status !== 200) {
+      console.log('err', res);
+      return Promise.reject(res);
     }
+    console.log('200', res);
     return res;
   },
   (err) => {

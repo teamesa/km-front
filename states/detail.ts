@@ -1,7 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { atom, selector, useRecoilCallback } from 'recoil';
 
-import { customKmAxios } from 'api/customKmAxios';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TGetSummary = {
@@ -37,6 +36,7 @@ type TGetIntroduction = {
   photo: string[] | [];
   summary: string | null;
 };
+
 export interface Archives {
   id: number;
   userProfileUrl: string;
@@ -53,6 +53,7 @@ export interface Archives {
   cafe: string;
   photoUrls: string[];
 }
+
 export interface ArchiveContents {
   responsePagingStatus: {
     nextPage: number;
@@ -81,7 +82,7 @@ const query = () => {
 
 export async function getSummary({ itemId }: { itemId?: number } = {}) {
   const queryData = query();
-  const { data } = (await customKmAxios({
+  const { data } = (await axios({
     url: `/api/item/info/${itemId || Number(queryData[1])}`,
     method: 'GET',
   })) as AxiosResponse<TGetSummary>;
@@ -103,7 +104,7 @@ export const useResetSummaryFunction = () =>
 export async function getArchive(itemId?: number) {
   const queryData = query();
   const { data } = (await axios({
-    url: `/api/archive/${itemId || Number(queryData[1])}`,
+    url: `/api/items/${itemId || Number(queryData[1])}/archives`,
     method: 'GET',
   })) as AxiosResponse<TGetArchive>;
 
@@ -113,7 +114,7 @@ export async function getArchive(itemId?: number) {
 export async function getIntroduction(itemId?: number) {
   const queryData = query();
   const { data } = (await axios({
-    url: `/api/item/detail/${itemId || Number(queryData[1])}`,
+    url: `/api/items/${itemId || Number(queryData[1])}/detail`,
     method: 'GET',
   })) as AxiosResponse<TGetIntroduction>;
 

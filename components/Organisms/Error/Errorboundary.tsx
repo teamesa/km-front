@@ -17,6 +17,7 @@ export class ErrorBoundary extends Component<Prop, State> {
   }
 
   static getDerivedStateFromError(error: Error) {
+    // 다음 렌더링에서 폴백 UI가 보이도록 상태를 업데이트 합니다.
     return { hasError: true, error };
   }
 
