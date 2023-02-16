@@ -10,6 +10,19 @@ export type ModuleData = {
   data: KeyVisualProps | SwipeItemProps | MonthlyFreeItemProps;
 };
 
+export type HomeListProps = {
+  data: {
+    keyVisualDatas: {
+      keyVisualPhotoUrl: string;
+      upperTitle: string;
+      lowerTitle: string;
+      link?: string;
+    }[];
+  };
+  index: number;
+  moduleName: 'KEY_VISUAL';
+};
+
 export type KeyVisualProps = {
   index: number;
   keyVisualDatas: {

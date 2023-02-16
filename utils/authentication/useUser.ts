@@ -43,7 +43,7 @@ export const useUserProps: GetServerSideProps<UserProps> = async (context) => {
     try {
       const axios = customAxios();
       const { data } = (await axios({
-        url: '/api/user/me',
+        url: '/api/users/me',
         method: 'GET',
         headers: {
           Authorization: kilometer_session,

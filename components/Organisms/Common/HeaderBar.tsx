@@ -31,11 +31,12 @@ const headerLeftIcon = {
       이용약관
     </Box>
   ),
-  전체보기: (
+  allShow: (
     <Box fontSize="16px" fontWeight={500} lineHeight={1.5}>
       전체보기
     </Box>
   ),
+  introduce: <></>,
 };
 
 const headerRightIcon = {
