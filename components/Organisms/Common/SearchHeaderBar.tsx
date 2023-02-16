@@ -81,7 +81,6 @@ export default function SearchHeaderBar() {
         inputRef.current === document.activeElement
       ) {
         inputRef.current.blur();
-        console.log('scroll');
       }
     }, 200);
     return () => {
