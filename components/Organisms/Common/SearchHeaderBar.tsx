@@ -74,6 +74,21 @@ export default function SearchHeaderBar() {
     };
   };
 
+  const debounceonScroll = () => {
+    const debounce = setTimeout(() => {
+      if (
+        inputRef?.current?.value &&
+        inputRef.current === document.activeElement
+      ) {
+        inputRef.current.blur();
+        console.log('scroll');
+      }
+    }, 200);
+    return () => {
+      clearTimeout(debounce);
+    };
+  };
+
   useEffect(() => {
     if (router?.query?.keyword) {
       if (typeof router.query.keyword === 'string') {
@@ -84,6 +99,14 @@ export default function SearchHeaderBar() {
       setKeyword('');
     }
   }, [router.pathname, router.query.keyword]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', function () {
+        debounceonScroll();
+      });
+    }
+  }, []);
 
   return (
     <>
