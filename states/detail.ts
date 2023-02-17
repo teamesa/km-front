@@ -1,7 +1,7 @@
-import { AxiosResponse } from "axios";
-import { atom, selector, useRecoilCallback } from "recoil";
+import { AxiosResponse } from 'axios';
+import { atom, selector, useRecoilCallback } from 'recoil';
 
-import customAxios from "utils/hooks/customAxios";
+import customAxios from 'utils/hooks/customAxios';
 
 export type TGetSummary = {
   detailImageUrl: string;
@@ -76,7 +76,7 @@ const axios = customAxios();
 
 const query = () => {
   const pathname = window?.location?.pathname;
-  const queryData = pathname.slice(1).split("/");
+  const queryData = pathname.slice(1).split('/');
   return queryData;
 };
 
@@ -84,15 +84,15 @@ export async function getSummary({ itemId }: { itemId?: number } = {}) {
   const queryData = query();
   const { data } = (await axios({
     url: `/api/items/${itemId || Number(queryData[1])}`,
-    method: "GET"
+    method: 'GET',
   })) as AxiosResponse<TGetSummary>;
 
   return data;
 }
 
 export const summaryState = atom({
-  key: "SummaryState",
-  default: selector({ key: "SummaryState/default", get: () => getSummary() })
+  key: 'SummaryState',
+  default: selector({ key: 'SummaryState/default', get: () => getSummary() }),
 });
 
 export const useResetSummaryFunction = () =>
@@ -128,29 +128,29 @@ export const useResetDetailArchiveFunction = () =>
     const tabViewData =
       introduction.summary === null && introduction.photo.length === 0
         ? [{ ...archive }]
-        : [{ contents: { ...introduction }, title: "소개" }, { ...archive }];
+        : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
 
     const newStateData = {
-      tabViewData
+      tabViewData,
     };
     set(detailState, newStateData);
   });
 
 export const detailState = atom({
-  key: "DetailState",
+  key: 'DetailState',
   default: selector({
-    key: "DetailState/default",
+    key: 'DetailState/default',
     get: async () => {
       const introduction = await getIntroduction();
       const archive = await getArchive();
       const tabViewData =
         introduction.summary === null && introduction.photo.length === 0
           ? [{ ...archive }]
-          : [{ contents: { ...introduction }, title: "소개" }, { ...archive }];
+          : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
 
       return {
-        tabViewData
+        tabViewData,
       };
-    }
-  })
+    },
+  }),
 });
