@@ -1,10 +1,12 @@
 import KeyVisual from 'components/Organisms/Home/Module/KeyVisual';
 import MonthlyFreeItem from 'components/Organisms/Home/Module/MonthlyFreeItem';
+import RealtimeArchiveItem from 'components/Organisms/Home/Module/RealtimeArchiveItem';
 import SwipeItem from 'components/Organisms/Home/Module/SwipeItem';
 import {
   KeyVisualProps,
   ModuleData,
   MonthlyFreeItemProps,
+  RealTimeArchiveItemProps,
   SwipeItemProps,
 } from 'components/Organisms/Home/ModuleTypes';
 
@@ -38,6 +40,17 @@ export default function ModuleResolver({
           topTitle={topTitle}
           bottomTitle={bottomTitle}
           contents={contents}
+        />
+      );
+    case 'REAL_TIME_ARCHIVE':
+      const { realtimeArchiveTopTitle, realtimeArchiveBottomTitle, archives } =
+        data as RealTimeArchiveItemProps;
+      return (
+        <RealtimeArchiveItem
+          index={index}
+          realtimeArchiveTopTitle={realtimeArchiveTopTitle}
+          realtimeArchiveBottomTitle={realtimeArchiveBottomTitle}
+          archives={archives}
         />
       );
     default:

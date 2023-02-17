@@ -1,11 +1,11 @@
 import { Box } from 'components/Atoms';
 
-export default function RealtimeArchiveItemHeader({
+export default function RealTimeArchiveItemHeader({
   topTitle,
   bottomTitle,
 }: {
-  topTitle: string;
-  bottomTitle: string;
+  topTitle?: string;
+  bottomTitle?: string;
 }) {
   return (
     <Box textAlign="left" fontSize="22px" fontWeight={500} lineHeight={1.27}>

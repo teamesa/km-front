@@ -1,17 +1,18 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
+import { useState, useEffect } from 'react';
 
 import { Pointer, Profile } from 'assets/mypage';
 import { Box, FlexBox, Span } from 'components/Atoms';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
+import { RealTimeArchiveItemCardProps } from 'components/Organisms/Home/ModuleTypes';
 import theme from 'styles/theme';
 
-export default function RealtimeArchiveItemCard() {
-  const heart = {
-    heartClicked: false,
-    link: '',
-  };
-
+export default function RealtimeArchiveItemCard({
+  archive,
+}: {
+  archive: RealTimeArchiveItemCardProps;
+}) {
   const makeAvgStarRating = () => {
     const rating = 5 * 20;
     return `${rating + 1.5}%`;
@@ -64,31 +65,28 @@ export default function RealtimeArchiveItemCard() {
       </Box>
     );
   };
-  const imageUrl = null;
+
   return (
-    <Box width="345px" height="fit-contents" padding="20px 0">
-      <Box width="345px" height="345px" position="relative">
-        <Image
-          src={
-            'https://kilometer-image.s3.ap-northeast-2.amazonaws.com/static/bo/2022-07-24/131254-%EB%8B%A4%EC%9A%B4%EB%A1%9C%EB%93%9C%20%284%29.jpg'
-          }
-          alt="image"
-          layout="fill"
-        />
+    <Box position="relative" padding="20px 0">
+      <Box position="relative">
+        <Box position="relative" paddingTop="100%">
+          <Image src={archive?.photo?.photoUrl} alt="image" layout="fill" />
+        </Box>
         <FlexBox
           position="absolute"
           bottom="0"
           width="100%"
           height="60px"
           alignItems="center"
+          justifyContent="space-between"
         >
           <Box
             position="absolute"
             bottom="0"
             width="100%"
             height="60px"
-            backgroundColor={theme.colors.white}
-            opacity={0.8}
+            backgroundColor={archive?.metaData?.dimColor}
+            opacity={archive?.metaData?.opacity}
           />
           <FlexBox alignItems="flex-start" zIndex={10}>
             <Box
@@ -98,8 +96,13 @@ export default function RealtimeArchiveItemCard() {
               borderRadius="50%"
               overflow="hidden"
             >
-              {imageUrl ? (
-                <Image src={imageUrl} width="45px" height="45px" alt="" />
+              {archive?.metaData?.user?.photoUrl ? (
+                <Image
+                  src={archive?.metaData?.user?.photoUrl}
+                  width="45px"
+                  height="45px"
+                  alt=""
+                />
               ) : (
                 <Profile width="45px" height="45px" />
               )}
@@ -117,9 +120,9 @@ export default function RealtimeArchiveItemCard() {
                   `}
                   overflow="hidden"
                 >
-                  족발막국수닭갈비볶음밥감자탕떡볶이치킨피자탕수육
+                  {archive?.metaData?.user?.name}
                 </Span>
-                <FlexBox fontSize="11px" alignItems="flex-end">
+                <FlexBox fontSize="11px" alignItems="center">
                   <StartRatingImage />
                   <Box
                     margin="0 8px"
@@ -127,14 +130,17 @@ export default function RealtimeArchiveItemCard() {
                     borderLeft={`1px solid ${theme.colors.gray99}`}
                   />
                   <Box lineHeight="1.45" fontSize="11px">
-                    2022.04.02
+                    {archive?.metaData?.updatedAt}
                   </Box>
                 </FlexBox>
               </Box>
             </FlexBox>
           </FlexBox>
           <Box zIndex={10} marginRight="15px">
-            <ArchiveHeart heart={heart} heartCount={25} />
+            <ArchiveHeart
+              heart={archive?.metaData?.heart}
+              heartCount={archive?.metaData?.likeCount}
+            />
           </Box>
         </FlexBox>
       </Box>
@@ -145,6 +151,7 @@ export default function RealtimeArchiveItemCard() {
           fontSize="15px"
           lineHeight="22px"
           fontWeight="Bold"
+          display="-webkit-box"
           css={css`
             text-overflow: ellipsis;
             -webkit-line-clamp: 1;
@@ -152,37 +159,41 @@ export default function RealtimeArchiveItemCard() {
           `}
           overflow="hidden"
         >
-          2021 서울재즈페스티벌
+          {archive?.introduction?.title?.value}
         </Box>
-        <Box
-          fontSize="13px"
-          lineHeight="1.54"
-          color={theme.colors.gray77}
-          display="-webkit-box"
-          css={css`
-            text-overflow: ellipsis;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-          `}
-          overflow="hidden"
-        >
-          샵빱 뚜비두밥 샤바 두비두비두비두밥~
-          사바두비두비두비두비바랍#$^@Q#$두밥샵빱 뚜비두밥 샤바
-          두비두비두비두밥~ 사바두비두비두비두비바랍#$^@Q#$두밥샵빱 뚜비두밥
-          샤바 두비두비두비두밥~ 사바두비두비두비두비바랍#$^@Q#$두밥 샵빱
-          뚜비두밥 샤바 두비두비두비두밥~ 사바두비두비두비두비바랍#$^@Q#$두밥
-        </Box>
-        <FlexBox marginTop="8px">
-          <Pointer width="11px" height="15px" />
-          <Span
-            marginLeft="10px"
-            fontSize="12px"
-            lineHeight="18px"
+        {archive.introduction.comment !== '' ? (
+          <Box
+            fontSize="13px"
+            lineHeight="1.54"
             color={theme.colors.gray77}
+            display="-webkit-box"
+            css={css`
+              text-overflow: ellipsis;
+              -webkit-line-clamp: 3;
+              -webkit-box-orient: vertical;
+            `}
+            overflow="hidden"
           >
-            성수다락, 대림창고
-          </Span>
-        </FlexBox>
+            {archive.introduction.comment}
+          </Box>
+        ) : (
+          <></>
+        )}
+        {archive.introduction.places !== '' ? (
+          <FlexBox marginTop="8px">
+            <Pointer width="11px" height="15px" />
+            <Span
+              marginLeft="10px"
+              fontSize="12px"
+              lineHeight="18px"
+              color={theme.colors.gray77}
+            >
+              {archive?.introduction?.places}
+            </Span>
+          </FlexBox>
+        ) : (
+          <></>
+        )}
       </Box>
     </Box>
   );

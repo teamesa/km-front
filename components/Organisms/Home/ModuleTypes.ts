@@ -1,4 +1,8 @@
-export type moduleNames = 'KEY_VISUAL' | 'SWIPE_ITEM' | 'MONTHLY_FREE_ITEM';
+export type moduleNames =
+  | 'KEY_VISUAL'
+  | 'SWIPE_ITEM'
+  | 'MONTHLY_FREE_ITEM'
+  | 'REAL_TIME_ARCHIVE';
 
 export type ModuleResponse = {
   modules: ModuleData[];
@@ -7,7 +11,11 @@ export type ModuleResponse = {
 export type ModuleData = {
   moduleName: moduleNames;
   index: number;
-  data: KeyVisualProps | SwipeItemProps | MonthlyFreeItemProps;
+  data:
+    | KeyVisualProps
+    | SwipeItemProps
+    | MonthlyFreeItemProps
+    | RealTimeArchiveItemProps;
 };
 
 export type HomeListProps = {
@@ -72,4 +80,30 @@ export type MonthlyFreeItemCardProps = {
   };
   heart: { heartClicked: boolean; id: number; link: string };
   typeBadge: { text: string; typeBadge: boolean };
+};
+
+export type RealTimeArchiveItemProps = {
+  index: number;
+  realtimeArchiveTopTitle?: string;
+  realtimeArchiveBottomTitle?: string;
+  archives?: RealTimeArchiveItemCardProps[];
+};
+
+export type RealTimeArchiveItemCardProps = {
+  archiveId: number;
+  photo: { link: string; photoUrl: string };
+  metaData: {
+    user: { name: string; photoUrl?: string };
+    heart: { heartClicked: boolean; link: string };
+    likeCount: number;
+    starRating: number;
+    updatedAt: string;
+    dimColor?: string;
+    opacity?: string;
+  };
+  introduction: {
+    title: { link: string; value: string };
+    places?: string;
+    comment?: string;
+  };
 };
