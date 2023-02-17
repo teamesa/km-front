@@ -1,6 +1,6 @@
 import KeyVisual from 'components/Organisms/Home/Module/KeyVisual';
 import MonthlyFreeItem from 'components/Organisms/Home/Module/MonthlyFreeItem';
-import RealtimeArchiveItem from 'components/Organisms/Home/Module/RealtimeArchiveItem';
+import RealtimeArchiveItem from 'components/Organisms/Home/Module/RealTimeArchiveItem';
 import SwipeItem from 'components/Organisms/Home/Module/SwipeItem';
 import {
   KeyVisualProps,

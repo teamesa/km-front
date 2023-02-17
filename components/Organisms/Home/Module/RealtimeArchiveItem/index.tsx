@@ -1,6 +1,6 @@
 import { Box } from 'components/Atoms';
-import RealTimeArchiveItemCard from 'components/Organisms/Home/Module/RealtimeArchiveItem/RealtimeArchiveItemCard';
-import RealTimeArchiveItemHeader from 'components/Organisms/Home/Module/RealtimeArchiveItem/RealtimeArchiveItemHeader';
+import RealTimeArchiveItemCard from 'components/Organisms/Home/Module/RealTimeArchiveItem/RealTimeArchiveItemCard';
+import RealTimeArchiveItemHeader from 'components/Organisms/Home/Module/RealTimeArchiveItem/RealTimeArchiveItemHeader';
 import { RealTimeArchiveItemProps } from 'components/Organisms/Home/ModuleTypes';
 
 export default function RealTimeArchiveItem({

@@ -8,7 +8,7 @@ import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
 import { RealTimeArchiveItemCardProps } from 'components/Organisms/Home/ModuleTypes';
 import theme from 'styles/theme';
 
-export default function RealtimeArchiveItemCard({
+export default function RealTimeArchiveItemCard({
   archive,
 }: {
   archive: RealTimeArchiveItemCardProps;
