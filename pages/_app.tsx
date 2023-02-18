@@ -1,9 +1,10 @@
 import { ThemeProvider } from '@emotion/react';
 import type { AppProps } from 'next/app';
 import Script from 'next/script';
-import { Suspense } from 'react';
 import { RecoilRoot } from 'recoil';
 
+import { Box } from 'components/Atoms';
+import { Loader } from 'components/Atoms/Loader';
 import LoadingScreen from 'components/Molecules/LoadingScreen';
 import Portal from 'components/Molecules/Portal';
 import Container from 'components/Organisms/Common/Container';
@@ -21,7 +22,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <RecoilRoot>
         <GlobalStyles />
         <AsyncBoundary
-          suspenseFallback={<>loading</>}
+          suspenseFallback={
+            <Box position="absolute" top="40%" left="46%">
+              <Loader />
+            </Box>
+          }
           errorFallback={<ErrorFallback />}
         >
           <Script

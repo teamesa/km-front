@@ -44,6 +44,7 @@ module.exports = {
         'newlines-between': 'always',
       },
     ],
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
   },
   ignorePatterns: ['*.config.js', 'server.js'],
   settings: {
