@@ -5,20 +5,22 @@ import { useSetRecoilState } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
+import { DetailResponse } from 'constants/type/api';
 import { DetailNavigationState } from 'states/detail-navigation';
 import theme from 'styles/theme';
 import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
 
-interface IntroduceProps {
+export default function Introduce({
+  data,
+  scrollRef,
+}: {
+  data: DetailResponse;
   scrollRef: RefObject<HTMLDivElement>;
-  data: { summary: string; photo: string[] };
-}
-export default function Introduce({ data, scrollRef }: IntroduceProps) {
+}) {
   const setDetailNavigation = useSetRecoilState(DetailNavigationState);
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
     setDetailNavigation(isIntersecting);
   };
-
   const setTarget = useIntersectionObserver({
     onIntersect,
     // Header Bar Height + Navigation Height = 90px

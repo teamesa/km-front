@@ -1,13 +1,13 @@
 import Image from 'next/image';
-import { useRecoilValue, useRecoilValueLoadable } from 'recoil';
+import { useRecoilValue } from 'recoil';
 
 import noImage from 'assets/common/no_image_375x500.png';
 import { Box } from 'components/Atoms';
-import { summaryState } from 'states/detail';
+import { useGetItemsById } from 'states/detail';
 import theme from 'styles/theme';
 
-export default function ExhibitionImagesSection() {
-  const data = useRecoilValue(summaryState);
+export default function ExhibitionImage() {
+  const data = useRecoilValue(useGetItemsById);
   const detailImageUrl = data?.detailImageUrl;
 
   return (

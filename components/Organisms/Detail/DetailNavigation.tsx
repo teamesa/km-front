@@ -5,7 +5,7 @@ import { Box, FlexBox } from 'components/Atoms';
 import { DetailNavigationState } from 'states/detail-navigation';
 import theme from 'styles/theme';
 
-export function DetailNavigation({
+export function DescriptionNavigation({
   deatailMetaInfo,
   archiveRef,
   introduceRef,
@@ -17,7 +17,7 @@ export function DetailNavigation({
   introduceRef: RefObject<HTMLDivElement>;
 }) {
   const isIntroduce = useRecoilValue(DetailNavigationState);
-  const clicked = deatailMetaInfo.length > 1 ? (isIntroduce ? 0 : 1) : 0;
+  const clicked = deatailMetaInfo?.length > 1 ? (isIntroduce ? 0 : 1) : 0;
 
   const scrollToTarget = (title: string) => {
     if (title === '소개') {
@@ -35,7 +35,7 @@ export function DetailNavigation({
       zIndex={2}
     >
       <FlexBox height="45px" overflow="auto" zIndex={2}>
-        {deatailMetaInfo.map(({ title }, index) => (
+        {deatailMetaInfo?.map(({ title }, index) => (
           <FlexBox
             key={index}
             flex="1"
