@@ -1,6 +1,8 @@
 import { AxiosResponse } from 'axios';
 import { atom, selector, useRecoilCallback } from 'recoil';
 
+import { getArchivesById } from 'api/v1/archive';
+import { getItmesDetailById, getItemsById } from 'api/v1/items';
 import customAxios from 'utils/hooks/customAxios';
 
 export type TGetSummary = {
@@ -121,36 +123,40 @@ export async function getIntroduction(itemId?: number) {
   return data;
 }
 
-export const useResetDetailArchiveFunction = () =>
-  useRecoilCallback(({ set }) => async () => {
-    const introduction = await getIntroduction();
-    const archive = await getArchive();
-    const tabViewData =
-      introduction.summary === null && introduction.photo.length === 0
-        ? [{ ...archive }]
-        : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
+export const useGetItemsById = selector({
+  key: 'UseGetItemsById',
+  get: async () => {
+    const queryData = query();
+    try {
+      const { data } = await getItemsById({ id: Number(queryData[1]) });
+      return data;
+    } catch (error: any) {
+      const { data, alert } = error.response;
+      console.error(alert ?? data);
+    }
+  },
+});
 
-    const newStateData = {
-      tabViewData,
-    };
-    set(detailState, newStateData);
-  });
-
-export const detailState = atom({
+export const detailState = selector({
   key: 'DetailState',
-  default: selector({
-    key: 'DetailState/default',
-    get: async () => {
-      const introduction = await getIntroduction();
-      const archive = await getArchive();
-      const tabViewData =
-        introduction.summary === null && introduction.photo.length === 0
-          ? [{ ...archive }]
-          : [{ contents: { ...introduction }, title: '소개' }, { ...archive }];
+  get: async () => {
+    const queryData = query();
+    const introduction = await getItmesDetailById({
+      id: Number(queryData[1]),
+    });
+    const archive = await getArchivesById({
+      id: Number(queryData[1]),
+      sortType: 'MODIFY_DESC',
+    });
 
-      return {
-        tabViewData,
-      };
-    },
-  }),
+    const tabViewData =
+      introduction.data.summary === null && introduction.data.photo.length === 0
+        ? [{ ...archive.data }]
+        : [
+            { contents: { ...introduction.data }, title: '소개' },
+            { ...archive.data },
+          ];
+
+    return { tabViewData };
+  },
 });
