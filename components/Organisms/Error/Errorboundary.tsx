@@ -23,8 +23,8 @@ export class ErrorBoundary extends Component<Prop, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     // 에러 리포팅 서비스에 에러를 기록할 수도 있습니다.
-    console.log('error: ', error);
-    console.log('errorInfo: ', errorInfo);
+    console.error('error: ', error);
+    console.error('errorInfo: ', errorInfo);
   }
 
   render() {
