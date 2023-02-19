@@ -25,7 +25,7 @@ export default function MyPageUserInfo() {
     formData.append('file', file, file.name);
     const axios = customAxios();
     try {
-      await axios.put('/api/user/profile', formData, {
+      await axios.put('/api/users/profile', formData, {
         headers: {
           'content-type': 'multipart/form-data',
         },

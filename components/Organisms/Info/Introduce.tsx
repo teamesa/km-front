@@ -37,7 +37,10 @@ export default function Introdeuce() {
         {userIntroduction({ role: 'Service Planning', name: '김세영' })}
         {userIntroduction({ role: 'Design', name: '이유정' })}
         {userIntroduction({ role: 'Tech Lead', name: '이정훈' })}
-        {userIntroduction({ role: 'Backend Engineer', name: '이찬희 이동호' })}
+        {userIntroduction({
+          role: 'Backend Engineer',
+          name: '이찬희 이동호 구동희 김윤기',
+        })}
         {userIntroduction({
           role: 'Frontend Engineer',
           name: '김한솔 김민혜 한정아',
