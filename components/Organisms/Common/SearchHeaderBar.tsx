@@ -74,15 +74,15 @@ export default function SearchHeaderBar() {
     };
   };
 
-  const debounceonScroll = () => {
+  const debounceOnScroll = () => {
     const debounce = setTimeout(() => {
       if (
-        inputRef?.current?.value &&
+        inputRef?.current?.value ||
         inputRef.current === document.activeElement
       ) {
         inputRef.current.blur();
       }
-    }, 200);
+    }, 100);
     return () => {
       clearTimeout(debounce);
     };
@@ -101,8 +101,8 @@ export default function SearchHeaderBar() {
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.addEventListener('scroll', function () {
-        debounceonScroll();
+      window.addEventListener('touchmove', function () {
+        debounceOnScroll();
       });
     }
   }, []);
