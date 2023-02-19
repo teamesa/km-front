@@ -8,6 +8,7 @@ import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
 import { RealTimeArchiveItemCardProps } from 'components/Organisms/Home/ModuleTypes';
 import theme from 'styles/theme';
 import { useTurnPickStateInRealTimeFunction } from 'states/home';
+import router from 'next/router';
 
 export default function RealTimeArchiveItemCard({
   archive,
@@ -74,8 +75,15 @@ export default function RealTimeArchiveItemCard({
     );
   };
 
-  return (
-    <Box position="relative" padding="20px 0">
+  return (  
+    <Box position="relative" padding="20px 0"
+      onClick={() => {
+        router.push(`${archive.introduction.title.link}`);
+      }}
+      css={css`
+        cursor: pointer;
+      `}
+    >
       <Box position="relative">
         <Box position="relative" paddingTop="100%">
           <Image src={archive?.photo?.photoUrl} alt="image" layout="fill" />
