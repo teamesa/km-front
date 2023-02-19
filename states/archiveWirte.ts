@@ -1,8 +1,10 @@
 import { AxiosResponse } from 'axios';
-import { atom, selector, useRecoilCallback } from 'recoil';
+import { selectorFamily, useRecoilCallback } from 'recoil';
 
-import { ArchiveSquareState } from 'states/archive-square';
+import { getArchivesById } from 'api/v1/archive';
 import customAxios from 'utils/hooks/customAxios';
+
+// TODO 삭제
 export interface ArchiveWirteProps {
   itemId: number;
   starRating: number;
@@ -52,6 +54,8 @@ export async function getArchiveSearch({ query }: { query: string }) {
   return data;
 }
 
+//v1
+
 export async function postArchiveWirte({ body }: { body: ArchiveWirteProps }) {
   const { data } = (await axios({
     method: 'POST',
@@ -62,46 +66,10 @@ export async function postArchiveWirte({ body }: { body: ArchiveWirteProps }) {
   return data;
 }
 
-export async function getArchiveById({ itemId }: { itemId?: any } = {}) {
-  const search = window?.location?.search;
-  const queryParmas: any = {};
-
-  const queryData = search.slice(1).split('&');
-  queryData.forEach((data) => {
-    const [key, value] = data.split('=');
-    queryParmas[key] = decodeURIComponent(value);
-  });
-
-  const { data } = (await axios({
-    method: 'GET',
-    url: `/api/archive/detail/${itemId || queryParmas.id}`,
-  })) as AxiosResponse<ArchiveWirteProps>;
-
-  return data;
-}
-
-export const archiveWriteState = atom({
-  key: 'ArchiveWriteState',
-  default: selector({
-    key: 'ArchiveWriteState/default',
-    get: () => {
-      const pathname = window?.location?.pathname;
-
-      if (pathname === '/archive/update') {
-        return getArchiveById();
-      }
-
-      return undefined;
-    },
-  }),
+export const useGetArchivesById = selectorFamily({
+  key: 'UseGetArchivesById',
+  get: (id: number) => async () => {
+    const { data } = await getArchivesById({ id: id });
+    return data;
+  },
 });
-
-export const useResetArchiveByIdStateFunction = () =>
-  useRecoilCallback(
-    ({ set }) =>
-      async () => {
-        const archiveByIdData = await getArchiveById();
-        set(archiveWriteState, archiveByIdData);
-      },
-    [],
-  );

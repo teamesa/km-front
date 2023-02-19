@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { Controller } from 'react-hook-form';
+import { useRecoilValue } from 'recoil';
 
 import noImage from 'assets/common/no_image_375x500.png';
-import { Box, Button, Input } from 'components/Atoms';
+import { Box } from 'components/Atoms';
 import FlexBox from 'components/Atoms/FlexBox';
+import { useGetArchivesById } from 'states/archiveWirte';
 
 export default function ArchiveTitle({
   name,
@@ -16,11 +17,9 @@ export default function ArchiveTitle({
 }) {
   const router = useRouter();
   const { id } = router.query;
-  const listImage = noImage;
-
-  useEffect(() => {
-    // TODO api 수정 _ async,await
-  }, []);
+  const { item } = useRecoilValue(useGetArchivesById(Number(id)));
+  const listImage = item?.imageUrl;
+  const exhibitionTitle = item?.title;
 
   return (
     <Controller
@@ -41,7 +40,7 @@ export default function ArchiveTitle({
               objectFit="cover"
             />
             <Box fontSize="13px" margin="10px 30px 17px 15px">
-              TODO / 아카이브 id: {id}
+              {exhibitionTitle}
             </Box>
           </FlexBox>
         </FlexBox>

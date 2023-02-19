@@ -47,7 +47,7 @@ export interface ArchiveLike {
   link: string;
 }
 
-interface ArchiveInfo {
+export interface ArchiveInfo {
   cafe: string;
   comment: string;
   food: string;
@@ -59,6 +59,7 @@ interface ArchiveInfo {
   updatedAt: string;
   userName: string;
   userProfileUrl: string;
+  visibleAtItem: boolean; //TODO
 }
 
 interface ResponsePagingStatus {
@@ -84,4 +85,40 @@ export interface GeneralResponseArchiveResponse {
 
 export interface LikeResponse {
   content: boolean;
+}
+
+interface ItemBadge {
+  text: string;
+  typeBadge: boolean;
+}
+interface ItemSummary {
+  id: number;
+  imageUrl: string;
+  title: string;
+  typeBadge: ItemBadge;
+}
+export interface ArchiveDetailResponse {
+  archiveActionButton: LinkInfo;
+  cafe: string;
+  comment: string;
+  food: string;
+  item: ItemSummary;
+  photoUrls: string[];
+  starRating: number;
+  updatedAt: string;
+  visibleAtItem: boolean;
+}
+
+interface PlaceInfo {
+  address: string;
+  name: string;
+  placeType: string;
+  roadAddress: string;
+}
+export interface ArchiveRequest {
+  comment: string;
+  photoUrls: string[];
+  placeInfos: PlaceInfo[];
+  starRating: number;
+  visibleAtItem: boolean;
 }
