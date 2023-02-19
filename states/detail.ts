@@ -121,10 +121,10 @@ export async function getIntroduction(itemId?: number) {
   return data;
 }
 
-export const useResetDetailArchiveFunction = () =>
+export const useResetDetailArchiveFunction = (archiveId?: number) =>
   useRecoilCallback(({ set }) => async () => {
     const introduction = await getIntroduction();
-    const archive = await getArchive();
+    const archive = await getArchive(archiveId);
     const tabViewData =
       introduction.summary === null && introduction.photo.length === 0
         ? [{ ...archive }]

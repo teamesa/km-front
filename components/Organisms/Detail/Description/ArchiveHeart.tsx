@@ -11,6 +11,7 @@ import { useResetDetailArchiveFunction } from 'states/detail';
 import { User } from 'states/user';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
+import { homeModuleIndividualStateFamily, homeModuleState } from 'states/home';
 
 type PickStatus = {
   content: boolean;
@@ -19,14 +20,18 @@ type PickStatus = {
 export default function ArchiveHeart({
   heart,
   heartCount,
+  optionalFunction,
+  archiveId
 }: {
   heart: { heartClicked: boolean; link: string };
   heartCount: number;
+  optionalFunction?: () => {};
+  archiveId?: number;
 }) {
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const loginState = useRecoilValue(User);
-  const resetPickState = useResetDetailArchiveFunction();
+  const resetPickState = useResetDetailArchiveFunction(archiveId);
 
   const setToPick = async () => {
     if (!loginState.isLogin) {
@@ -35,7 +40,9 @@ export default function ArchiveHeart({
       return null;
     }
     const axios = customAxios();
-    const url = `${heart.link}${!heart.heartClicked}`;
+    //FIXME: 윤기님에게 아카이브 heart url 수정 요청
+    //FIXME: 윤기님에게 아카이브 heartClicked도 수정 요청 - 지금 {전시글heart정보}를 내려주고 있는듯. {아카이브heart정보}가 필요함.
+    const url = `/api/archives/${archiveId}/like?status=${!heart.heartClicked}`;
 
     try {
       const axiosData = (await axios({
@@ -43,12 +50,15 @@ export default function ArchiveHeart({
         method: 'PUT',
       })) as AxiosResponse<PickStatus>;
       if (axiosData.data.content !== undefined) {
+        if(optionalFunction !== undefined){
+          optionalFunction();
+        }
       }
     } catch (error) {
       setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
       setPopupName(POPUP_NAME.ALERT_CONFIRM);
     }
-    resetPickState();
+    resetPickState;
   };
 
   return (

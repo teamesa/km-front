@@ -7,12 +7,20 @@ import { Box, FlexBox, Span } from 'components/Atoms';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
 import { RealTimeArchiveItemCardProps } from 'components/Organisms/Home/ModuleTypes';
 import theme from 'styles/theme';
+import { useTurnPickStateInRealTimeFunction } from 'states/home';
 
 export default function RealTimeArchiveItemCard({
   archive,
+  moduleIndex,
 }: {
   archive: RealTimeArchiveItemCardProps;
+  moduleIndex: number;
 }) {
+  const turnPickStateInRealTimeFunction = useTurnPickStateInRealTimeFunction(
+    moduleIndex,
+    archive.id,
+  );
+
   const makeAvgStarRating = () => {
     const rating = 5 * 20;
     return `${rating + 1.5}%`;
@@ -140,6 +148,8 @@ export default function RealTimeArchiveItemCard({
             <ArchiveHeart
               heart={archive?.metaData?.heart}
               heartCount={archive?.metaData?.likeCount}
+              optionalFunction={turnPickStateInRealTimeFunction}
+              archiveId={archive?.id}
             />
           </Box>
         </FlexBox>

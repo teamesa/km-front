@@ -90,8 +90,12 @@ export type RealTimeArchiveItemProps = {
 };
 
 export type RealTimeArchiveItemCardProps = {
-  archiveId: number;
-  photo: { link: string; photoUrl: string };
+  id: number;
+  introduction: {
+    title: { link: string; value: string };
+    places?: string;
+    comment?: string;
+  };
   metaData: {
     user: { name: string; photoUrl?: string };
     heart: { heartClicked: boolean; link: string };
@@ -101,9 +105,5 @@ export type RealTimeArchiveItemCardProps = {
     dimColor?: string;
     opacity?: string;
   };
-  introduction: {
-    title: { link: string; value: string };
-    places?: string;
-    comment?: string;
-  };
+  photo: { link: string; photoUrl: string };
 };

@@ -3,7 +3,7 @@ import { useRecoilValue } from 'recoil';
 import { Box } from 'components/Atoms';
 import MonthlyFreeItemCard from 'components/Organisms/Home/Module/MonthlyFreeItem/MonthlyFreeItemCard';
 import MonthlyFreeItemHeader from 'components/Organisms/Home/Module/MonthlyFreeItem/MonthlyFreeItemHeader';
-import { MonthlyFreeItemProps } from 'components/Organisms/Home/ModuleTypes';
+import { MonthlyFreeItemCardProps, MonthlyFreeItemProps } from 'components/Organisms/Home/ModuleTypes';
 import { homeModuleIndividualStateFamily } from 'states/home';
 
 export default function MonthlyFreeItem({
@@ -11,7 +11,7 @@ export default function MonthlyFreeItem({
   bottomTitle,
   index,
 }: MonthlyFreeItemProps) {
-  const contents = useRecoilValue(homeModuleIndividualStateFamily(index));
+  const contents = useRecoilValue(homeModuleIndividualStateFamily(index)) as unknown as MonthlyFreeItemCardProps[];
   return (
     <Box width="100%" paddingX="15px" marginTop="60px" marginBottom="60px">
       <MonthlyFreeItemHeader
@@ -22,9 +22,9 @@ export default function MonthlyFreeItem({
         {contents?.map((content) => (
           <MonthlyFreeItemCard
             key={content.id}
-            content={content}
             moduleIndex={index}
-          />
+            content={content}
+            />
         ))}
       </Box>
     </Box>
