@@ -40,6 +40,6 @@ export function putArchivesById({
   return customKmAxios({
     url: `/api/archives/${archiveId}`,
     method: 'PUT',
-    params: { request },
+    data: request,
   }) as AxiosPromise<ArchiveInfo>;
 }

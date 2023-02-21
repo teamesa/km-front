@@ -4,7 +4,7 @@ import { customKmAxios } from 'api/customKmAxios';
 import {
   DetailResponse,
   ItemInfoResponse,
-  SummaryResponse,
+  ItemSummaryResponse,
 } from 'constants/type/api';
 
 export function getItemsById({ id }: { id: number }) {
@@ -25,5 +25,5 @@ export function getItemsSummaryById({ id }: { id: number }) {
   return customKmAxios({
     url: `/api/items/${id}/summary`,
     method: 'GET',
-  }) as AxiosPromise<SummaryResponse>;
+  }) as AxiosPromise<ItemSummaryResponse>;
 }

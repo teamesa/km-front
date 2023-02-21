@@ -1,8 +1,13 @@
-import { selector } from 'recoil';
+import { selector, selectorFamily } from 'recoil';
 
-import { getArchivesById } from 'api/v1/archive';
-import { getItmesDetailById, getItemsById } from 'api/v1/items';
+import { getItemsArchivesById } from 'api/v1/archive';
+import {
+  getItmesDetailById,
+  getItemsById,
+  getItemsSummaryById,
+} from 'api/v1/items';
 
+// v1
 const query = () => {
   const pathname = window?.location?.pathname;
   const queryData = pathname.slice(1).split('/');
@@ -12,13 +17,12 @@ const query = () => {
 export const useGetItemsById = selector({
   key: 'UseGetItemsById',
   get: async () => {
-    const queryData = query();
     try {
+      const queryData = query();
       const { data } = await getItemsById({ id: Number(queryData[1]) });
       return data;
     } catch (error: any) {
-      const { data, alert } = error.response;
-      console.error(alert ?? data);
+      console.error(error);
     }
   },
 });
@@ -26,11 +30,12 @@ export const useGetItemsById = selector({
 export const detailState = selector({
   key: 'DetailState',
   get: async () => {
-    const queryData = query();
+    const pathname = window?.location?.pathname;
+    const queryData = pathname.slice(1).split('/');
     const introduction = await getItmesDetailById({
       id: Number(queryData[1]),
     });
-    const archive = await getArchivesById({
+    const archive = await getItemsArchivesById({
       id: Number(queryData[1]),
       sortType: 'MODIFY_DESC',
     });
@@ -44,5 +49,30 @@ export const detailState = selector({
           ];
 
     return { tabViewData };
+  },
+});
+
+export const useGetItemsSummaryById = selectorFamily({
+  key: 'UseGetItemsSummaryById',
+  get: (id: number) => async () => {
+    const { data } = await getItemsSummaryById({ id: id });
+    return data;
+  },
+});
+
+export const getItemsInfo = selector({
+  key: 'getItemsInfo',
+  get: async () => {
+    const search = window?.location?.search;
+    const queryParmas: any = {};
+
+    const queryData = search.slice(1).split('&');
+    queryData.forEach((data) => {
+      const [key, value] = data.split('=');
+      queryParmas[key] = decodeURIComponent(value);
+    });
+
+    const { data } = await getItemsById({ id: queryParmas.exhibitionId });
+    return data;
   },
 });
