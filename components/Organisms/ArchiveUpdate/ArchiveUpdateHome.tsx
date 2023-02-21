@@ -1,6 +1,10 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+import {
+  useSetRecoilState,
+  useRecoilValue,
+  useRecoilRefresher_UNSTABLE,
+} from 'recoil';
 
 import { putArchivesById } from 'api/v1/archive';
 import { MapPoint } from 'assets/archive/MapPoint';
@@ -12,6 +16,7 @@ import ArchiveFileUploadForm from 'components/Organisms/ArchiveFileUploadForm';
 import ArchiveTitle from 'components/Organisms/ArchiveUpdate/ArchiveTitle';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
+import { ArchiveRequest } from 'constants/type/api';
 import { AlertState, PopupNameState } from 'states';
 import { useGetArchivesById } from 'states/archiveWirte';
 import theme from 'styles/theme';
@@ -22,12 +27,15 @@ export default function ArchiveUpdateHome() {
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const getArchive = useRecoilValue(useGetArchivesById(Number(id)));
+  const refreshGetArchive = useRecoilRefresher_UNSTABLE(
+    useGetArchivesById(Number(id)),
+  );
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<any>({
+  } = useForm<ArchiveRequest>({
     mode: 'onChange',
     defaultValues: {
       starRating: getArchive?.starRating ?? 5,
@@ -40,22 +48,24 @@ export default function ArchiveUpdateHome() {
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
   };
 
-  // TODO api + type
-  const onUpdateSubmit = async (data: any) => {
+  const onUpdateSubmit = async (data: ArchiveRequest) => {
     if (!id) {
       throw Error('아카이브 아이디가 없습니다.');
     }
     const customData = {
-      ...data,
-      comment: data.comment,
-      photoUrls: data.photoUrls,
+      comment: data.comment === undefined ? '' : data.comment,
+      photoUrls: data.photoUrls === undefined ? [] : data.photoUrls,
       starRating: data.starRating,
       visibleAtItem: data.visibleAtItem,
+      placeInfos: data.placeInfos.filter((item: any) =>
+        item === undefined ? null : item,
+      ),
     };
     try {
       await putArchivesById({ archiveId: Number(id), request: customData });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
       setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
+      refreshGetArchive();
     } catch (error: any) {
       setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
       setPopupName(POPUP_NAME.ALERT_CONFIRM);
@@ -165,7 +175,6 @@ export default function ArchiveUpdateHome() {
             </Box>
             <Box flex={1} paddingLeft="5px">
               <Button
-                // type="submit"
                 backgroundColor={theme.colors.black}
                 color={theme.colors.white}
                 width="100%"
