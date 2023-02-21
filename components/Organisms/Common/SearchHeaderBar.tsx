@@ -44,6 +44,7 @@ export default function SearchHeaderBar() {
     if (keyword) {
       makeLocalStorageKeywords(keyword);
       setCheckDebounce(false);
+      inputRef.current.blur();
       router.push({
         pathname: '/search/result',
         query: { keyword },
