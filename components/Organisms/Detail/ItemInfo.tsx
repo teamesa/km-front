@@ -1,14 +1,16 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 
 import { Box, Button, Span, Tag } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import ItemInfoDescription from 'components/Organisms/Detail/ItemInfoDescription';
-import { summaryState, useGetItemsById } from 'states/detail';
+import { useGetItemsById } from 'states/detail';
 import theme from 'styles/theme';
 
 export default function ItemInfo() {
-  const data = useRecoilValue(useGetItemsById);
+  const router = useRouter();
+  const data = useRecoilValue(useGetItemsById(Number(router.query.id)));
 
   return (
     <>

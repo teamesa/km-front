@@ -17,7 +17,7 @@ export default function Navigator() {
   const router = useRouter();
   const { id } = router.query;
   const loginState = useRecoilValue(User);
-  const data = useRecoilValue(useGetItemsById);
+  const data = useRecoilValue(useGetItemsById(Number(id)));
   const [currentUrl, setCurrentUrl] = useState('');
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
@@ -26,7 +26,7 @@ export default function Navigator() {
     if (typeof window !== 'undefined') {
       setCurrentUrl(window.location.href);
     }
-  }, []);
+  }, [router]);
 
   const clipboard = () => {
     navigator.clipboard

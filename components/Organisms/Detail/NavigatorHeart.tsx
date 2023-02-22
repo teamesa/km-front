@@ -1,15 +1,14 @@
 import { AxiosResponse } from 'axios';
+import { useRouter } from 'next/router';
 import {
   useRecoilRefresher_UNSTABLE,
   useRecoilValue,
-  useRecoilValueLoadable,
   useSetRecoilState,
 } from 'recoil';
 
 import { customKmAxios } from 'api/customKmAxios';
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import { Button, FlexBox, Span } from 'components/Atoms';
-import { Loader } from 'components/Atoms/Loader';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
 import { LikeResponse } from 'constants/type/api';
@@ -19,13 +18,16 @@ import { User } from 'states/user';
 import theme from 'styles/theme';
 
 export default function NavigatorHeart() {
+  const router = useRouter();
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const loginState = useRecoilValue(User);
-  const data = useRecoilValue(useGetItemsById);
+  const data = useRecoilValue(useGetItemsById(Number(router.query.id)));
   const heart = data?.itemInfoAdditionalInfo.heart;
   const heartCount = data?.itemInfoAdditionalInfo.heartCount;
-  const refreshGetItems = useRecoilRefresher_UNSTABLE(useGetItemsById);
+  const refreshGetItems = useRecoilRefresher_UNSTABLE(
+    useGetItemsById(Number(router.query.id)),
+  );
 
   const setToPick = async () => {
     if (!loginState.isLogin) {

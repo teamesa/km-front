@@ -1,37 +1,28 @@
-import { selector } from 'recoil';
+import { selector, selectorFamily } from 'recoil';
 
 import { getArchivesById } from 'api/v1/archive';
 import { getItmesDetailById, getItemsById } from 'api/v1/items';
 
-const query = () => {
-  const pathname = window?.location?.pathname;
-  const queryData = pathname.slice(1).split('/');
-  return queryData;
-};
-
-export const useGetItemsById = selector({
+export const useGetItemsById = selectorFamily({
   key: 'UseGetItemsById',
-  get: async () => {
-    const queryData = query();
+  get: (id: number) => async () => {
     try {
-      const { data } = await getItemsById({ id: Number(queryData[1]) });
+      const { data } = await getItemsById({ id: id });
       return data;
     } catch (error: any) {
-      const { data, alert } = error.response;
-      console.error(alert ?? data);
+      console.error(error);
     }
   },
 });
 
-export const detailState = selector({
+export const detailState = selectorFamily({
   key: 'DetailState',
-  get: async () => {
-    const queryData = query();
+  get: (id: number) => async () => {
     const introduction = await getItmesDetailById({
-      id: Number(queryData[1]),
+      id: id,
     });
     const archive = await getArchivesById({
-      id: Number(queryData[1]),
+      id: id,
       sortType: 'MODIFY_DESC',
     });
 

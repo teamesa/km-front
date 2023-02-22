@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useRecoilValue } from 'recoil';
 
 import noImage from 'assets/common/no_image_375x500.png';
@@ -7,7 +8,8 @@ import { useGetItemsById } from 'states/detail';
 import theme from 'styles/theme';
 
 export default function ExhibitionImage() {
-  const data = useRecoilValue(useGetItemsById);
+  const router = useRouter();
+  const data = useRecoilValue(useGetItemsById(Number(router.query.id)));
   const detailImageUrl = data?.detailImageUrl;
 
   return (

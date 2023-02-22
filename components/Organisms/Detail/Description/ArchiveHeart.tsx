@@ -1,6 +1,5 @@
 import { AxiosResponse } from 'axios';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import {
   useSetRecoilState,
   useRecoilValue,
@@ -25,10 +24,13 @@ export default function ArchiveHeart({
   heart: ArchiveLike;
   likeCount: number;
 }) {
+  const router = useRouter();
   const loginState = useRecoilValue(User);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const refreshDetailState = useRecoilRefresher_UNSTABLE(detailState);
+  const refreshDetailState = useRecoilRefresher_UNSTABLE(
+    detailState(Number(router.query.id)),
+  );
 
   const onClickArhciveLike = async () => {
     if (!loginState.isLogin) {

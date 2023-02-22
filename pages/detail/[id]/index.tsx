@@ -17,8 +17,12 @@ import { useInitHeader } from 'utils/hooks/useInitHeader';
 const Detail: NextPage<UserProps> = ({ user }) => {
   const router = useRouter();
   const setUserFirst = useSetRecoilState(User);
-  const refreshGetItems = useRecoilRefresher_UNSTABLE(useGetItemsById);
-  const refreshDetailState = useRecoilRefresher_UNSTABLE(detailState);
+  const refreshGetItems = useRecoilRefresher_UNSTABLE(
+    useGetItemsById(Number(router.query.id)),
+  );
+  const refreshDetailState = useRecoilRefresher_UNSTABLE(
+    detailState(Number(router.query.id)),
+  );
 
   useInitHeader({
     headerLeft: 'default',
