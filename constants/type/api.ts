@@ -85,3 +85,26 @@ export interface GeneralResponseArchiveResponse {
 export interface LikeResponse {
   content: boolean;
 }
+
+export interface AutoCompleteItem {
+  id: number;
+  link: string;
+  searchedTextLocationEnd: number;
+  searchedTextLocationStart: number;
+  title: string;
+}
+
+interface ResponsePagingStatus {
+  currentContentsCount: number;
+  currentPage: number;
+  hasNext: boolean;
+  nextPage: number;
+  pageSize: number;
+  query: string;
+  totalContentsCount: number;
+}
+
+export interface AutoCompleteResult {
+  contents: AutoCompleteItem[];
+  responsePagingStatus: ResponsePagingStatus;
+}

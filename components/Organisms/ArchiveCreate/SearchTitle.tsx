@@ -2,35 +2,25 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import { getSearchAutoComplete } from 'api/v1/search';
 import { Search } from 'assets/archive/Search';
 import { Box, Button, FlexBox, Input, Span } from 'components/Atoms';
-import { getArchiveSearch } from 'states/archiveWirte';
+import { AutoCompleteItem } from 'constants/type/api';
 import theme from 'styles/theme';
-
-interface AutoContents {
-  id: number;
-  link: string;
-  searchedTextLocationEnd: number;
-  searchedTextLocationStart: number;
-  title: string;
-}
 
 export default function SearchTitle() {
   const [keyword, setKeyword] = useState<string>('');
-  const [keyItems, setKeyItems] = useState<AutoContents[]>([]);
+  const [keyItems, setKeyItems] = useState<AutoCompleteItem[]>([]);
   const router = useRouter();
   const onChangeData = (e: any) => {
     setKeyword(e.target.value);
   };
 
   useEffect(() => {
-    const debounce = setTimeout(() => {
+    const debounce = setTimeout(async () => {
       if (keyword) {
-        const updateData = async () => {
-          const searchData = await getArchiveSearch({ query: keyword });
-          setKeyItems(searchData.contents);
-        };
-        updateData();
+        const { data } = await getSearchAutoComplete({ query: keyword });
+        setKeyItems(data.contents);
       }
     }, 200);
     return () => {
