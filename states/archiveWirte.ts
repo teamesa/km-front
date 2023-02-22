@@ -56,16 +56,6 @@ export async function getArchiveSearch({ query }: { query: string }) {
 
 //v1
 
-export async function postArchiveWirte({ body }: { body: ArchiveWirteProps }) {
-  const { data } = (await axios({
-    method: 'POST',
-    url: `/api/archive`,
-    data: body,
-  })) as AxiosResponse<ArchiveWirteProps>;
-
-  return data;
-}
-
 export const useGetArchivesById = selectorFamily({
   key: 'UseGetArchivesById',
   get: (id: number) => async () => {
