@@ -6,28 +6,24 @@ import Popup from 'components/Molecules/Popup';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
-import { ClickedArchiveId } from 'states/myArchiveDetail';
+import { ClickedArchiveDeleteUrl } from 'states/myArchiveDetail';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
 const AlertArchiveDeletePopup = () => {
   const setPopupName = useSetRecoilState(PopupNameState);
   const setAlertState = useSetRecoilState(AlertState);
-  const clickedArchiveIdState = useRecoilValue(ClickedArchiveId);
+  const clickedArchiveDeleteUrl = useRecoilValue(ClickedArchiveDeleteUrl);
 
-  const handleDeleteRequest = async () => {
+  const handleDeleteRequest = async (api: string) => {
     const axios = customAxios();
 
     try {
       let response = await axios({
-        url: `/api/archive/${clickedArchiveIdState.toString()}`,
+        url: api,
         method: 'DELETE',
       });
 
-      if (response.data.archiveId !== clickedArchiveIdState) {
-        setPopupName(POPUP_NAME.ALERT_CONFIRM);
-        setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-      }
       setPopupName(POPUP_NAME.NULL);
     } catch (err) {
       setPopupName(POPUP_NAME.ALERT_CONFIRM);
@@ -75,7 +71,9 @@ const AlertArchiveDeletePopup = () => {
           fontSize="16px"
           borderRadius="0 0 12px 0"
           backgroundColor={theme.colors.black}
-          onClick={handleDeleteRequest}
+          onClick={() => {
+            handleDeleteRequest(clickedArchiveDeleteUrl);
+          }}
         >
           <Box color={theme.colors.white}>확인</Box>
         </Button>

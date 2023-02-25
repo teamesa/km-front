@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import router from 'next/router';
 import { useSetRecoilState } from 'recoil';
 
 import ItemInfo from './ItemInfo';
@@ -11,7 +10,7 @@ import { Box, Button, FlexBox, Span } from 'components/Atoms';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
-import { ClickedArchiveId } from 'states/myArchiveDetail';
+import { ClickedArchiveDetailUrl } from 'states/myArchiveDetail';
 import { MyArchivePageContents } from 'states/myArchiveList';
 
 type ItemProps = {
@@ -21,11 +20,8 @@ type ItemProps = {
 export default function ListCard(props: ItemProps) {
   const content = props.content;
   const setPopupName = useSetRecoilState(PopupNameState);
-  const setArchiveId = useSetRecoilState(ClickedArchiveId);
+  const setClickedArchiveDetailApi = useSetRecoilState(ClickedArchiveDetailUrl);
   const setAlertState = useSetRecoilState(AlertState);
-  //TODO: API 업데이트 되면 itemId  연결하기.
-  // const itemId = content.item.id; (예상)
-  const apiArr = content?.api.split('/');
 
   return (
     <FlexBox
@@ -48,7 +44,6 @@ export default function ListCard(props: ItemProps) {
     >
       <Box>
         <Button
-          // onClick={() => router.push(`/detail/${apiArr[4]}`)}
           onClick={() => {
             //TODO: 미전시 응답값 추가되면 클릭시, 요청 보내고 응답값에 따라 페이지 이동 || 알림창 띄우기;
             setAlertState(ALERT_MESSAGE.ALERT.ITEM_NOT_EXHIBITED);
@@ -71,7 +66,7 @@ export default function ListCard(props: ItemProps) {
         width="100%"
         textAlign="left"
         onClick={() => {
-          setArchiveId(apiArr[4]);
+          setClickedArchiveDetailApi(content?.api);
           setPopupName(POPUP_NAME.POPUP_ARCHIVE_DETAIL);
         }}
       >
