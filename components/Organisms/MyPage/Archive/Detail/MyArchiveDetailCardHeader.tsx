@@ -33,7 +33,7 @@ export default function MyArchiveDetailHeaderInfo(
   };
 
   const handleDeleteArchive = () => {
-    setClickedArchiveDeleteUrl(contents?.archiveActionButton[1].link);
+    setClickedArchiveDeleteUrl(contents?.archiveActionButton[1]?.link);
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM);
     setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_DELETE_CONFIRM);
   };
@@ -62,10 +62,10 @@ export default function MyArchiveDetailHeaderInfo(
             borderBottom="1px solid"
             borderBottomColor={theme.colors.gray77}
             onClick={() => {
-              handleUpdateArchive(contents?.archiveActionButton[0].link);
+              handleUpdateArchive(contents?.archiveActionButton[0]?.link);
             }}
           >
-            {contents?.archiveActionButton[0].title}
+            {contents?.archiveActionButton[0]?.title}
           </Button>
           <Button
             fontSize="12px"
@@ -77,7 +77,7 @@ export default function MyArchiveDetailHeaderInfo(
               handleDeleteArchive();
             }}
           >
-            {contents?.archiveActionButton[1].title}
+            {contents?.archiveActionButton[1]?.title}
           </Button>
         </Box>
       </FlexBox>
