@@ -83,15 +83,6 @@ export default function Footer() {
           개인정보처리방침
         </Button>
       </FlexBox>
-      <Box
-        padding="12px"
-        border={`1px solid ${theme.colors.grayDD}`}
-        width="44px"
-        height="44px"
-        borderRadius="50%"
-      >
-        <Image src={Instagram} alt="image" width="20px" height="20px" />
-      </Box>
     </Box>
   );
 }
