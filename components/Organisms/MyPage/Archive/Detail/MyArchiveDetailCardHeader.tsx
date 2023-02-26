@@ -8,8 +8,7 @@ import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import {
   MyArchiveDetailHeaderInfoProps,
-  ClickedItemId,
-  ClickedArchiveId,
+  ClickedArchiveDeleteUrl,
 } from 'states/myArchiveDetail';
 import theme from 'styles/theme';
 
@@ -17,31 +16,24 @@ export default function MyArchiveDetailHeaderInfo(
   contents: MyArchiveDetailHeaderInfoProps,
 ) {
   const router = useRouter();
-  const archiveId = useRecoilValue(ClickedArchiveId);
-  const itemId = useRecoilValue(ClickedItemId);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-
+  const setClickedArchiveDeleteUrl = useSetRecoilState(ClickedArchiveDeleteUrl);
   const handleClosePopup = () => {
     setPopupName(POPUP_NAME.NULL);
   };
 
-  const handleUpdateArchive = () => {
+  const handleUpdateArchive = (api: string) => {
     handleClosePopup();
-    archiveLink();
+    updateArchiveLink(api);
   };
 
-  const archiveLink = () => {
-    return router.push({
-      pathname: `/archive/update`,
-      query: {
-        id: archiveId,
-        exhibitionId: itemId,
-      },
-    });
+  const updateArchiveLink = (api: string) => {
+    return router.push(api);
   };
 
   const handleDeleteArchive = () => {
+    setClickedArchiveDeleteUrl(contents?.archiveActionButton[1].link);
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM);
     setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_DELETE_CONFIRM);
   };
@@ -70,10 +62,10 @@ export default function MyArchiveDetailHeaderInfo(
             borderBottom="1px solid"
             borderBottomColor={theme.colors.gray77}
             onClick={() => {
-              handleUpdateArchive();
+              handleUpdateArchive(contents?.archiveActionButton[0].link);
             }}
           >
-            수정
+            {contents?.archiveActionButton[0].title}
           </Button>
           <Button
             fontSize="12px"
@@ -85,7 +77,7 @@ export default function MyArchiveDetailHeaderInfo(
               handleDeleteArchive();
             }}
           >
-            삭제
+            {contents?.archiveActionButton[1].title}
           </Button>
         </Box>
       </FlexBox>
