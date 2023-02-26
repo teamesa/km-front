@@ -69,6 +69,9 @@ export default function Introduce({
           />
         </Box>
       ))}
+      <Box>[출처]</Box>
+      {/* TODO */}
+      {/* <InnerHTML data={} /> */}
     </Box>
   );
 }
