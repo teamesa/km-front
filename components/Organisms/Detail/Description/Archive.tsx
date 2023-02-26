@@ -11,6 +11,7 @@ import InnerHTML from 'components/Molecules/InnerHTML';
 import StarScope from 'components/Molecules/StarScope';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
 import theme from 'styles/theme';
+import Carousel from 'components/Molecules/Carousel';
 
 interface ArchiveProps {
   data: any;
@@ -254,20 +255,12 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
                 </Box>
               </FlexBox>
               {item.photoUrls ? (
-                <Box marginBottom="15px">
-                  {item.photoUrls.map(
-                    (photo: string, index: Key | null | undefined) => (
-                      <Box key={index}>
-                        <Image
-                          src={photo}
-                          width="345px"
-                          height="345px"
-                          alt=""
-                          layout="intrinsic"
-                        />
-                      </Box>
-                    ),
-                  )}
+                <Box marginBottom="15px" marginLeft="42px">
+                  <Carousel
+                    imgUrlArr={item.photoUrls}
+                    width="345px"
+                    height="345px"
+                  />
                 </Box>
               ) : null}
               {item.comment ? (
