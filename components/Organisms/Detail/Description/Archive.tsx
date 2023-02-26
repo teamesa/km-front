@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { RefObject, useEffect, useState } from 'react';
+import { Key, RefObject, useEffect, useState } from 'react';
 
 import DetailNoData from 'assets/detail/noData';
 import Alert from 'assets/error/Alert';
@@ -10,21 +10,23 @@ import { CheckBox } from 'components/Atoms/CheckBox';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import StarScope from 'components/Molecules/StarScope';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
-import { ArchiveContents, Archives } from 'states/detail';
 import theme from 'styles/theme';
+
 interface ArchiveProps {
-  data: ArchiveContents;
+  data: any;
   scrollRef: RefObject<HTMLDivElement>;
   introYn: number;
 }
 export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
   const [checked, setChecked] = useState(false);
-  const [archiveData, setArchiveData] = useState<Archives[]>();
+  const [archiveData, setArchiveData] = useState<any[]>();
 
   useEffect(() => {
     setArchiveData(
       checked
-        ? data.archives.filter((item) => item.photoUrls.length > 0)
+        ? data.archives.filter(
+            (item: { photoUrls: string | any[] }) => item.photoUrls.length > 0,
+          )
         : data.archives,
     );
   }, [checked, data]);
@@ -253,17 +255,19 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
               </FlexBox>
               {item.photoUrls ? (
                 <Box marginBottom="15px">
-                  {item.photoUrls.map((photo, index) => (
-                    <Box key={index}>
-                      <Image
-                        src={photo}
-                        width="345px"
-                        height="345px"
-                        alt=""
-                        layout="intrinsic"
-                      />
-                    </Box>
-                  ))}
+                  {item.photoUrls.map(
+                    (photo: string, index: Key | null | undefined) => (
+                      <Box key={index}>
+                        <Image
+                          src={photo}
+                          width="345px"
+                          height="345px"
+                          alt=""
+                          layout="intrinsic"
+                        />
+                      </Box>
+                    ),
+                  )}
                 </Box>
               ) : null}
               {item.comment ? (

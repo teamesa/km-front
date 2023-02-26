@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { RefObject } from 'react';
+import { Key, RefObject } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import { Box } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
-import { DetailResponse } from 'constants/type/api';
 import { DetailNavigationState } from 'states/detail-navigation';
 import theme from 'styles/theme';
 import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
@@ -14,7 +13,7 @@ export default function Introduce({
   data,
   scrollRef,
 }: {
-  data: DetailResponse;
+  data: any;
   scrollRef: RefObject<HTMLDivElement>;
 }) {
   const setDetailNavigation = useSetRecoilState(DetailNavigationState);
@@ -26,6 +25,7 @@ export default function Introduce({
     // Header Bar Height + Navigation Height = 90px
     rootMargin: '-90px',
   });
+
   return (
     <Box
       color={theme.colors.black}
@@ -37,10 +37,8 @@ export default function Introduce({
       ref={setTarget}
     >
       <Box id="introduce" top="-80px" position="absolute" ref={scrollRef}></Box>
-      <Box>
-        <InnerHTML data={data.summary} />
-      </Box>
-      {data.photo?.map((item, index) => (
+      <Box>{data?.summary && <InnerHTML data={data?.summary} />}</Box>
+      {data.photo?.map((item: any, index: Key) => (
         <Box
           marginTop="20px"
           key={index}

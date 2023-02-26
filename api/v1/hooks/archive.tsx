@@ -11,7 +11,7 @@ export function useArchive() {
     sortType: 'MODIFY_DESC' | 'LIKE_DESC';
   }) {
     return useQuery(
-      ['get', 'detail', id],
+      ['get', 'archive', id],
       async () =>
         await getArchivesById({ id: id, sortType: sortType ?? 'MODIFY_DESC' }),
       {

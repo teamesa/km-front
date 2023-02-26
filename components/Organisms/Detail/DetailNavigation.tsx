@@ -10,9 +10,7 @@ export function DescriptionNavigation({
   archiveRef,
   introduceRef,
 }: {
-  deatailMetaInfo: {
-    title: string;
-  }[];
+  deatailMetaInfo: any[];
   archiveRef: RefObject<HTMLDivElement>;
   introduceRef: RefObject<HTMLDivElement>;
 }) {
