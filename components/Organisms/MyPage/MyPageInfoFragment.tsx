@@ -1,8 +1,10 @@
+import { css } from '@emotion/react';
 import { useState } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 
 import { Box, FlexBox } from 'components/Atoms';
 import FloatingButton from 'components/Molecules/FloatingButton';
+import BlankArchiveListSection from 'components/Organisms/MyPage/Archive/BlankArchiveListSection';
 import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
 import ConfigurationFragment from 'components/Organisms/MyPage/ConfigurationFragment';
 import { myArchiveListState } from 'states/myArchiveList';
@@ -14,14 +16,14 @@ export default function MyPageInfoFragment() {
     { title: `${contents?.title ?? ''}` },
     { title: '설정' },
   ];
-  const [isMyArchiveShowed, setMyArhiveShowedFlag] = useState<boolean>(true);
+  const [isMyArchiveShowed, setMyArchiveShowedFlag] = useState<boolean>(true);
   const clicked = isMyArchiveShowed ? 0 : 1;
 
   const renderFragment = (index: number) => {
     if (index === 0) {
-      setMyArhiveShowedFlag(true);
+      setMyArchiveShowedFlag(true);
     } else {
-      setMyArhiveShowedFlag(false);
+      setMyArchiveShowedFlag(false);
     }
   };
 
@@ -35,7 +37,14 @@ export default function MyPageInfoFragment() {
             background={theme.colors.white}
             zIndex={2}
           >
-            <FlexBox height="45px" overflow="auto" zIndex={2}>
+            <FlexBox
+              height="45px"
+              overflow="auto"
+              zIndex={2}
+              css={css`
+                cursor: pointer;
+              `}
+            >
               {MyPageNavigatorMetaInfo.map(({ title }, index) => (
                 <FlexBox
                   key={title}
@@ -61,8 +70,17 @@ export default function MyPageInfoFragment() {
           </Box>
           {isMyArchiveShowed ? (
             <>
-              <ListSection contents={contents} />
-              <FloatingButton />
+              {contents?.contents?.length === 0 ? (
+                <>
+                  <BlankArchiveListSection />
+                  <FloatingButton />
+                </>
+              ) : (
+                <>
+                  <ListSection contents={contents} />
+                  <FloatingButton />
+                </>
+              )}
             </>
           ) : (
             <ConfigurationFragment />

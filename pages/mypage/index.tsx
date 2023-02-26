@@ -4,7 +4,6 @@ import { useSetRecoilState } from 'recoil';
 
 import LoginPage from 'components/Organisms/MyPage/LoginPage';
 import MyPageHome from 'components/Organisms/MyPage/MyPageHome';
-import { useResetMyArchiveListStateFunction } from 'states/myArchiveList';
 import { User } from 'states/user';
 import { useUserProps, UserProps } from 'utils/authentication/useUser';
 

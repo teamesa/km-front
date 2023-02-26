@@ -15,7 +15,7 @@ export interface User {
   email: string;
   gender: string;
   imageUrl: string;
-  birthdate: string;
+  birthdate?: string;
   isLogin: boolean;
   phoneNumber: string;
 }
@@ -43,7 +43,7 @@ export const useUserProps: GetServerSideProps<UserProps> = async (context) => {
     try {
       const axios = customAxios();
       const { data } = (await axios({
-        url: '/api/user/me',
+        url: '/api/users/me',
         method: 'GET',
         headers: {
           Authorization: kilometer_session,
@@ -55,7 +55,12 @@ export const useUserProps: GetServerSideProps<UserProps> = async (context) => {
       user.email = data.email;
       user.imageUrl = data.imageUrl;
       user.gender = data.gender;
-      user.birthdate = moment(data.birthdate).format('YYYY-MM-DD');
+      if (data.birthdate) {
+        user.birthdate = moment(data.birthdate).format('YYYY-MM-DD');
+      } else {
+        user.birthdate = '';
+      }
+
       user.phoneNumber = data.phoneNumber;
       user.isLogin = true;
     } catch (err) {

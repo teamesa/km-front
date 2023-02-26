@@ -40,7 +40,7 @@ export default function ArchiveCreateHome() {
     mode: 'onChange',
     defaultValues: {
       starRating: 5,
-      visibleAtItem: checked ? true : false,
+      visibleAtItem: !!checked,
     },
   });
 
@@ -78,7 +78,7 @@ export default function ArchiveCreateHome() {
     try {
       await axios({
         method: 'POST',
-        url: `/api/archive`,
+        url: `/api/archives`,
         data: postData,
       });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);

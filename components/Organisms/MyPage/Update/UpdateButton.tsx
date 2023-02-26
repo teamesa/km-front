@@ -14,7 +14,7 @@ import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
 const validate = (
-  { email, phoneNumber, name }: UserModifyInfoInterface,
+  { email, phoneNumber, birthDay, name }: UserModifyInfoInterface,
   setError: (a: UserModifyInfoInterface) => void,
 ): boolean => {
   let hasError: boolean = false;
@@ -25,19 +25,30 @@ const validate = (
     errorSet.nameMessage = '닉네임을 올바르게 입력해주세요.';
   }
 
+  if (name && name.length > 20) {
+    hasError = true;
+    errorSet.nameMessage = '닉네임은 최대 20자를 넘을 수 없습니다.';
+  }
+
+  if (
+    !(
+      birthDay &&
+      new Date(birthDay) < new Date() &&
+      new Date(birthDay) > new Date('1900-01-01')
+    )
+  ) {
+    if (birthDay) {
+      hasError = true;
+      errorSet.birthDayMessage = '생일을 올바르게 입력해주세요.';
+    }
+  }
+
   if (!email || (email && !validateEmail(email))) {
     hasError = true;
     errorSet.emailMessage = '이메일을 올바르게 입력해주세요.';
   }
 
-  if (
-    !phoneNumber ||
-    !(
-      typeof phoneNumber === 'string' &&
-      10 <= phoneNumber.length &&
-      phoneNumber.length <= 11
-    )
-  ) {
+  if (!phoneNumber || !(10 <= phoneNumber.length && phoneNumber.length <= 11)) {
     hasError = true;
     errorSet.phoneNumberMessage = '휴대폰 번호를 올바르게 입력해주세요.';
   }
@@ -63,7 +74,7 @@ export default function UpdateButton() {
     if (validate(userModifyValue, setUserModifyError)) {
       try {
         await axiosState({
-          url: `/api/user`,
+          url: `/api/users`,
           method: 'POST',
           data: userModifyValue,
         });

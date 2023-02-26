@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { ChangeEvent } from 'react';
@@ -24,7 +25,7 @@ export default function MyPageUserInfo() {
     formData.append('file', file, file.name);
     const axios = customAxios();
     try {
-      await axios.put('/api/user/profile', formData, {
+      await axios.put('/api/users/profile', formData, {
         headers: {
           'content-type': 'multipart/form-data',
         },
@@ -60,8 +61,6 @@ export default function MyPageUserInfo() {
             borderRadius="50%"
           >
             +
-          </Box>
-          <Box width="70px" height="70px" top="0px" position="absolute">
             <Input
               width="100%"
               height="100%"
@@ -71,8 +70,19 @@ export default function MyPageUserInfo() {
               id="profile"
               backgroundColor="transparent"
               onChange={(e) => uploadProfile(e)}
+              fontSize="0"
+              css={css`
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 100;
+                ::-webkit-file-upload-button {
+                  cursor: pointer;
+                }
+              `}
             />
           </Box>
+          <Box width="70px" height="70px" top="0px" position="absolute"></Box>
         </Box>
         <Box
           paddingLeft="30px"

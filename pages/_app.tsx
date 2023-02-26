@@ -7,6 +7,8 @@ import { RecoilRoot } from 'recoil';
 import LoadingScreen from 'components/Molecules/LoadingScreen';
 import Portal from 'components/Molecules/Portal';
 import Container from 'components/Organisms/Common/Container';
+import AsyncBoundary from 'components/Organisms/Error/AsyncBoundary';
+import ErrorFallback from 'components/Organisms/Error/ErrorFallback';
 import ModalContainer from 'components/Organisms/Modal/ModalContainer';
 import PopupRouter from 'components/Organisms/Popup/PopupRouter';
 import GlobalStyles from 'styles/GlobalStyles';
@@ -18,7 +20,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ThemeProvider theme={theme}>
       <RecoilRoot>
         <GlobalStyles />
-        <Suspense fallback="Loading...">
+        <AsyncBoundary
+          suspenseFallback={<>loading</>}
+          errorFallback={<ErrorFallback />}
+        >
           <Script
             strategy="lazyOnload"
             src={`https://dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_KEY}&libraries=services,clusterer`}
@@ -26,12 +31,13 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Container>
             <Component {...pageProps} />
           </Container>
+
           <Portal query="#modal">
             <ModalContainer />
           </Portal>
           <LoadingScreen />
           <PopupRouter />
-        </Suspense>
+        </AsyncBoundary>
       </RecoilRoot>
     </ThemeProvider>
   );

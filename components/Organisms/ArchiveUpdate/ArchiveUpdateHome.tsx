@@ -82,7 +82,7 @@ export default function ArchiveUpdateHome() {
     try {
       await axios({
         method: 'PUT',
-        url: `/api/archive`,
+        url: `/api/archives`,
         data: postData,
       });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
