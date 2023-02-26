@@ -57,23 +57,24 @@ export default function Footer() {
         lineHeight={1.5}
         textAlign="left"
         marginBottom="30px"
+        alignItems="center"
       >
         <Button
           color={theme.colors.gray77}
           paddingRight="20px"
-          borderRight={`1px solid ${theme.colors.grayCC}`}
           onClick={() => router.push('/info?type=introduce')}
         >
           킬로미터소개
         </Button>
+        <Box width="2px" height="12px" backgroundColor={theme.colors.grayDD} />
         <Button
           color={theme.colors.gray77}
           paddingX="20px"
-          borderRight={`1px solid ${theme.colors.grayCC}`}
           onClick={() => router.push('/info?type=service')}
         >
           이용약관
         </Button>
+        <Box width="2px" height="12px" backgroundColor={theme.colors.grayDD} />
         <Button
           color={theme.colors.gray77}
           paddingLeft="20px"
@@ -82,15 +83,6 @@ export default function Footer() {
           개인정보처리방침
         </Button>
       </FlexBox>
-      <Box
-        padding="12px"
-        border={`1px solid ${theme.colors.grayCC}`}
-        width="44px"
-        height="44px"
-        borderRadius="50%"
-      >
-        <Image src={Instagram} alt="image" width="20px" height="20px" />
-      </Box>
     </Box>
   );
 }
