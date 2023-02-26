@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
 
@@ -7,17 +7,18 @@ import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
+import CheckForbiddenWords from 'components/Molecules/CheckForbiddenWords';
 import Rating from 'components/Molecules/Rating';
 import ArchiveFileUploadForm from 'components/Organisms/ArchiveFileUploadForm';
 import ArchiveTitle from 'components/Organisms/ArchiveUpdate/ArchiveTitle';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { AlertState, archiveWriteState, PopupNameState } from 'states';
+import { AlertState, PopupNameState } from 'states';
 import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
 } from 'states/archive-square';
-import { ArchiveWirteProps } from 'states/archiveWirte';
+import { ArchiveWirteProps, getArchiveById } from 'states/archiveWirte';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
 
@@ -27,9 +28,16 @@ export default function ArchiveUpdateHome() {
   const { id } = router.query;
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const [archiveWrite, setArchiveWrite] = useRecoilState(archiveWriteState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
+  const [archiveWrite, setArchiveWrite] = useState<ArchiveWirteProps>();
 
+  useEffect(() => {
+    async function getApi() {
+      const data = await getArchiveById({ itemId: Number(id) });
+      return setArchiveWrite(data);
+    }
+    getApi();
+  });
   const {
     register,
     handleSubmit,
@@ -54,27 +62,35 @@ export default function ArchiveUpdateHome() {
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
   };
 
-  // TODO api 되는지 확인필요
-  const onUpdateSubmit = async (data: ArchiveWirteProps) => {
+  const onUpdateSubmit = async (data: any) => {
+    if (!id) {
+      throw Error('아카이브 아이디가 없습니다.');
+    }
     const postData = {
-      ...data,
-      itemId: Number(id),
-      placeInfos: data.placeInfos.filter((item) =>
-        item === undefined ? null : item,
-      ),
-      visibleAtItem: data.visibleAtItem,
+      comment: data.comment === undefined ? '' : data.comment,
       photoUrls: archivePhotos
         .filter(
           (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
         )
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
+      starRating: data.starRating,
+      visibleAtItem: archiveWrite?.visibleAtItem,
+      placeInfos: data.placeInfos.filter((item: any) =>
+        item === undefined ? null : item,
+      ),
     };
-    setArchiveWrite(postData);
+
+    if (CheckForbiddenWords(postData.comment)) {
+      setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
+      setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
+      return null;
+    }
+
     try {
       await axios({
         method: 'PUT',
-        url: `/api/archives`,
+        url: `/api/archives/${Number(id)}`,
         data: postData,
       });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);

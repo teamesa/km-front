@@ -41,9 +41,9 @@ export default function FloatingButton() {
         backgroundColor="#000"
         zIndex="-1"
         css={css`
-          filter: blur(4px);
-          -webkit-filter: blur(4px);
-          opacity: 0.8;
+          filter: blur(16px);
+          -webkit-filter: blur(16px);
+          opacity: 0.3;
         `}
       ></Box>
     </Box>

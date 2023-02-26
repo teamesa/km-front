@@ -6,6 +6,7 @@ import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
+import CheckForbiddenWords from 'components/Molecules/CheckForbiddenWords';
 import Rating from 'components/Molecules/Rating';
 import ArchiveTitle from 'components/Organisms/ArchiveCreate/ArchiveTitle';
 import SearchTitle from 'components/Organisms/ArchiveCreate/SearchTitle';
@@ -67,6 +68,13 @@ export default function ArchiveCreateHome() {
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
     };
+
+    if (CheckForbiddenWords(postData.comment)) {
+      setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
+      setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
+      return null;
+    }
+
     try {
       await axios({
         method: 'POST',

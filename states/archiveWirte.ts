@@ -8,6 +8,15 @@ export interface ArchiveWirteProps {
   starRating: number;
   comment: string;
   photoUrls: string[];
+  item: {
+    id: number;
+    imageUrl: string;
+    title: string;
+    typeBadge: {
+      text: string;
+      typeBadge: boolean;
+    };
+  };
   placeInfos: {
     address: string;
     name: string;
@@ -74,7 +83,7 @@ export async function getArchiveById({ itemId }: { itemId?: any } = {}) {
 
   const { data } = (await axios({
     method: 'GET',
-    url: `/api/archive/detail/${itemId || queryParmas.id}`,
+    url: `/api/archives/${itemId || queryParmas.id}`,
   })) as AxiosResponse<ArchiveWirteProps>;
 
   return data;
