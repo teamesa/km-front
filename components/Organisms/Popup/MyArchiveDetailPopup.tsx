@@ -1,7 +1,8 @@
 import { css } from '@emotion/react';
-import { AxiosResponse } from 'axios';
 import { useEffect, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
+
+import { myArchiveDetailInfoState } from './../../../states/myArchiveDetail';
 
 import { CloseBtn } from 'assets/mypage';
 import { Box, Button, FlexBox } from 'components/Atoms';
@@ -14,17 +15,12 @@ import MyArchiveDetailHeaderInfo from 'components/Organisms/MyPage/Archive/Detai
 import MyArchiveDetailCardInfo from 'components/Organisms/MyPage/Archive/Detail/MyArchiveDetailCardInfo';
 import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
-import {
-  ClickedItemId,
-  ClickedArchiveId,
-  MyArchiveDetailProps,
-} from 'states/myArchiveDetail';
+import { MyArchiveDetailProps } from 'states/myArchiveDetail';
 import theme from 'styles/theme';
-import customAxios from 'utils/hooks/customAxios';
 
 const MyArchiveDetailPopup = () => {
   const setPopupName = useSetRecoilState(PopupNameState);
-  const archiveId = useRecoilValue(ClickedArchiveId);
+  const data = useRecoilValue(myArchiveDetailInfoState);
   const [archiveData, setArchiveData] = useState<MyArchiveDetailProps>();
 
   const handleClosePopup = () => {
@@ -32,20 +28,8 @@ const MyArchiveDetailPopup = () => {
   };
 
   useEffect(() => {
-    //TODO: api 분리
-    async function getArchiveDetailData() {
-      const axios = customAxios();
-      const url = `/api/archive/detail/${archiveId}`;
-      const axiosData = (await axios({
-        url,
-        method: 'GET',
-      })) as AxiosResponse<MyArchiveDetailProps>;
-
-      setArchiveData(axiosData.data);
-    }
-
-    getArchiveDetailData();
-  }, [archiveId]);
+    setArchiveData(data);
+  }, [data]);
 
   if (archiveData) {
     return (
