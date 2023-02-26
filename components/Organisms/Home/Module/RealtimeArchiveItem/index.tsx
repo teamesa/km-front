@@ -1,7 +1,10 @@
 import { Box } from 'components/Atoms';
-import RealTimeArchiveItemCard from 'components/Organisms/Home/Module/RealTimeArchiveItem/RealTimeArchiveItemCard';
-import RealTimeArchiveItemHeader from 'components/Organisms/Home/Module/RealTimeArchiveItem/RealTimeArchiveItemHeader';
-import { RealTimeArchiveItemProps, RealTimeArchiveItemCardProps } from 'components/Organisms/Home/ModuleTypes';
+import RealTimeArchiveItemCard from 'components/Organisms/Home/Module/RealtimeArchiveItem/RealtimeArchiveItemCard';
+import RealTimeArchiveItemHeader from 'components/Organisms/Home/Module/RealtimeArchiveItem/RealtimeArchiveItemHeader';
+import {
+  RealTimeArchiveItemProps,
+  RealTimeArchiveItemCardProps,
+} from 'components/Organisms/Home/ModuleTypes';
 import { useRecoilValue } from 'recoil';
 import { homeModuleIndividualStateFamily } from 'states/home';
 
@@ -10,7 +13,9 @@ export default function RealTimeArchiveItem({
   realtimeArchiveBottomTitle,
   index,
 }: RealTimeArchiveItemProps) {
-  const archives = useRecoilValue(homeModuleIndividualStateFamily(index)) as unknown as RealTimeArchiveItemCardProps[];
+  const archives = useRecoilValue(
+    homeModuleIndividualStateFamily(index),
+  ) as unknown as RealTimeArchiveItemCardProps[];
   return (
     <Box width="100%" paddingX="15px" marginTop="60px" marginBottom="60px">
       <RealTimeArchiveItemHeader
