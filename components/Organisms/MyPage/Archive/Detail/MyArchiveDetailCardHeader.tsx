@@ -23,7 +23,6 @@ export default function MyArchiveDetailHeaderInfo(
     setPopupName(POPUP_NAME.NULL);
   };
 
-  //TODO: 아카이브 수정하기 엔드포인트 안고쳐진듯?
   const handleUpdateArchive = (api: string) => {
     handleClosePopup();
     updateArchiveLink(api);
