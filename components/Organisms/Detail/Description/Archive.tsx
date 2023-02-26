@@ -205,6 +205,7 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
                       height="50px"
                       borderRadius="50%"
                       overflow="hidden"
+                      flex="none"
                     >
                       <Image
                         src={item.userProfileUrl}
@@ -217,7 +218,18 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
                     <Profile width="50px" height="50px" />
                   )}
                   <Box padding="8px 10px" fontSize="13px">
-                    <Box color={theme.colors.black}>{item.userName}</Box>
+                    <Box
+                      color={theme.colors.black}
+                      display="-webkit-box"
+                      css={css`
+                        text-overflow: ellipsis;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                      `}
+                      overflow="hidden"
+                    >
+                      {item.userName}
+                    </Box>
 
                     <FlexBox alignItems="center">
                       <StarScope
