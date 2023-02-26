@@ -1,11 +1,12 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 
 import noImage from 'assets/common/no_image_375x500.png';
-import { Box, Button, Input } from 'components/Atoms';
+import { Box } from 'components/Atoms';
 import FlexBox from 'components/Atoms/FlexBox';
+import { ArchiveWirteProps, getArchiveById } from 'states/archiveWirte';
 
 export default function ArchiveTitle({
   name,
@@ -15,12 +16,16 @@ export default function ArchiveTitle({
   control: any;
 }) {
   const router = useRouter();
-  const { id } = router.query;
-  const listImage = noImage;
-
+  const [archiveWrite, setArchiveWrite] = useState<ArchiveWirteProps>();
   useEffect(() => {
-    // TODO api 수정 _ async,await
-  }, []);
+    async function getApi() {
+      const data = await getArchiveById({ itemId: Number(router.query.id) });
+      return setArchiveWrite(data);
+    }
+    getApi();
+  });
+  const listImage = archiveWrite?.item.imageUrl;
+  const title = archiveWrite?.item.title;
 
   return (
     <Controller
@@ -41,7 +46,7 @@ export default function ArchiveTitle({
               objectFit="cover"
             />
             <Box fontSize="13px" margin="10px 30px 17px 15px">
-              TODO / 아카이브 id: {id}
+              {title}
             </Box>
           </FlexBox>
         </FlexBox>
