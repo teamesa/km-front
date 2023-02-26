@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 
 import { Box, FlexBox } from 'components/Atoms';
+import { Loader } from 'components/Atoms/Loader';
 import FloatingButton from 'components/Molecules/FloatingButton';
 import BlankArchiveListSection from 'components/Organisms/MyPage/Archive/BlankArchiveListSection';
 import ListSection from 'components/Organisms/MyPage/Archive/ListSection';
@@ -89,7 +90,16 @@ export default function MyPageInfoFragment() {
       );
 
     case 'loading':
-      return <div>loading</div>;
+      return (
+        <FlexBox
+          width="100%"
+          height="90vh"
+          justifyContent="center"
+          paddingTop="50%"
+        >
+          <Loader />
+        </FlexBox>
+      );
     case 'hasError':
       throw contents;
   }
