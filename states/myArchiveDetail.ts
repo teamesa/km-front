@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { atom, selector } from 'recoil';
+import { atom, selector, useRecoilCallback, useRecoilState } from 'recoil';
 
 import customAxios from 'utils/hooks/customAxios';
 export interface MyArchiveDetailProps {
@@ -41,11 +41,13 @@ interface ArchiveDetailLinkInfos {
   link: string;
 }
 
+//디테일. 클릭된 아카이브 디테일 정보 '조회' url
 export const ClickedArchiveDetailUrl = atom<string>({
   key: 'ClickedArchiveDetailUrl',
   default: '',
 });
 
+// 클릭된 아카이브 '삭제' url.
 export const ClickedArchiveDeleteUrl = atom<string>({
   key: 'ClickedArchiveDeleteUrl',
   default: '',
@@ -61,9 +63,14 @@ export const getMyArchiveDetail = async (url: string) => {
   return data;
 };
 
-export const myArchiveDetailInfoState = selector({
-  key: 'myArchiveDetailInfoState',
-  get: ({ get }) => {
-    return getMyArchiveDetail(get(ClickedArchiveDetailUrl));
-  },
-});
+export const useResetMyArchiveDetailState = (url: string) =>
+  useRecoilCallback(({ set }) => async () => {
+    const archiveDetailData = await getMyArchiveDetail(url);
+    return archiveDetailData;
+  });
+// export const myArchiveDetailInfoState = selector({
+//   key: 'myArchiveDetailInfoState',
+//   get: ({ get }) => {
+//     return getMyArchiveDetail(get(ClickedArchiveDetailUrl));
+//   },
+// });
