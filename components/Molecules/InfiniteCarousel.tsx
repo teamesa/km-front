@@ -145,6 +145,7 @@ export default function InfiniteCarousel({
         padding={'5px 10px'}
         zIndex={300}
         color={theme.colors.white}
+        onClick={plusFunction}
       >
         <Box display="inline-block" color={theme.colors.white}>
           {getPage()}
@@ -165,13 +166,7 @@ export default function InfiniteCarousel({
         >
           {imgUrlList.length}
         </Box>
-        <Box
-          display="inline-block"
-          opacity={1}
-          position="relative"
-          top="0.5px"
-          onClick={plusFunction}
-        >
+        <Box display="inline-block" opacity={1} position="relative" top="0.5px">
           <Plus width="9px" height="9px" />
         </Box>
       </Button>
