@@ -68,9 +68,3 @@ export const useResetMyArchiveDetailState = (url: string) =>
     const archiveDetailData = await getMyArchiveDetail(url);
     return archiveDetailData;
   });
-// export const myArchiveDetailInfoState = selector({
-//   key: 'myArchiveDetailInfoState',
-//   get: ({ get }) => {
-//     return getMyArchiveDetail(get(ClickedArchiveDetailUrl));
-//   },
-// });
