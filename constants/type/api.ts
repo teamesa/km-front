@@ -85,3 +85,7 @@ export interface GeneralResponseArchiveResponse {
 export interface LikeResponse {
   content: boolean;
 }
+
+export interface PickResponse {
+  content: boolean;
+}

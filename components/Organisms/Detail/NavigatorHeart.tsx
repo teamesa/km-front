@@ -1,53 +1,44 @@
-import { AxiosResponse } from 'axios';
 import { useRouter } from 'next/router';
-import {
-  useRecoilRefresher_UNSTABLE,
-  useRecoilValue,
-  useSetRecoilState,
-} from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { customKmAxios } from 'api/customKmAxios';
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import { Button, FlexBox, Span } from 'components/Atoms';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { LikeResponse } from 'constants/type/api';
 import { AlertState, PopupNameState } from 'states';
-import { useGetItemsById } from 'states/detail';
 import { User } from 'states/user';
 import theme from 'styles/theme';
+import { useItems } from 'api/v1/hooks/items';
+import usePick from 'api/v1/hooks/pick';
 
 export default function NavigatorHeart() {
   const router = useRouter();
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const loginState = useRecoilValue(User);
-  const data = useRecoilValue(useGetItemsById(Number(router.query.id)));
-  const heart = data?.itemInfoAdditionalInfo.heart;
-  const heartCount = data?.itemInfoAdditionalInfo.heartCount;
-  const refreshGetItems = useRecoilRefresher_UNSTABLE(
-    useGetItemsById(Number(router.query.id)),
-  );
+
+  const { useGetItemsById } = useItems();
+  const { data: getItems, refetch } = useGetItemsById(Number(router.query.id));
+  const heart = getItems?.data.itemInfoAdditionalInfo.heart;
+  const heartCount = getItems?.data.itemInfoAdditionalInfo.heartCount;
+
+  const { usePutPick } = usePick();
+  const { mutate: putPick } = usePutPick();
 
   const setToPick = async () => {
     if (!loginState.isLogin) {
       setAlertState(ALERT_MESSAGE.ALERT.LOGIN_CONFIRMATION);
       setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
       return null;
+    } else {
+      putPick({
+        id: Number(router.query.id),
+        body: true,
+      });
     }
-    try {
-      const axiosData = (await customKmAxios({
-        url: decodeURIComponent(`${heart?.link}${!heart?.heartClicked}`),
-        method: 'PUT',
-      })) as AxiosResponse<LikeResponse>;
-      if (axiosData.data.content !== undefined) {
-      }
-    } catch (error) {
-      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM);
-    }
-    refreshGetItems();
+    refetch();
   };
+
   return (
     <FlexBox>
       <Button onClick={setToPick} marginTop="5px">
