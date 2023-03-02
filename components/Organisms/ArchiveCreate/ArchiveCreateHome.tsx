@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
+import { postArchivesById } from 'api/v1/archive';
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
@@ -13,18 +14,16 @@ import SearchTitle from 'components/Organisms/ArchiveCreate/SearchTitle';
 import ArchiveFileUploadForm from 'components/Organisms/ArchiveFileUploadForm';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
+import { ArchiveRequest } from 'constants/type/api';
 import { AlertState, PopupNameState } from 'states';
 import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
 } from 'states/archive-square';
-import { ArchiveWirteProps } from 'states/archiveWirte';
 import theme from 'styles/theme';
-import customAxios from 'utils/hooks/customAxios';
 
 export default function ArchiveCreateHome() {
   const router = useRouter();
-  const axios = customAxios();
   const { exhibitionId, checked } = router.query;
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
@@ -36,7 +35,7 @@ export default function ArchiveCreateHome() {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<ArchiveWirteProps>({
+  } = useForm<ArchiveRequest>({
     mode: 'onChange',
     defaultValues: {
       starRating: 5,
@@ -49,38 +48,29 @@ export default function ArchiveCreateHome() {
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
   };
 
-  const onCreateSubmit = async (data: ArchiveWirteProps) => {
+  const onCreateSubmit = async (data: ArchiveRequest) => {
     if (!exhibitionId) {
       setAlertState(ALERT_MESSAGE.ALERT.SEARCH_ARCHIVE_TITLE);
       setPopupName(POPUP_NAME.ALERT_CONFIRM);
       return null;
     }
-    const postData = {
-      ...data,
-      itemId: Number(exhibitionId),
-      placeInfos: data.placeInfos.filter((item) =>
-        item === undefined ? null : item,
-      ),
+    const customData = {
+      id: Number(exhibitionId),
+      comment: data.comment === undefined ? '' : data.comment,
       photoUrls: archivePhotos
         .filter(
           (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
         )
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
+      starRating: data.starRating,
+      visibleAtItem: data.visibleAtItem,
+      placeInfos: data.placeInfos.filter((item: any) =>
+        item === undefined ? null : item,
+      ),
     };
-
-    if (CheckForbiddenWords(postData.comment)) {
-      setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
-      setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
-      return null;
-    }
-
     try {
-      await axios({
-        method: 'POST',
-        url: `/api/archives`,
-        data: postData,
-      });
+      await postArchivesById({ request: customData });
       setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
       setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
       resetArchivePhotos();

@@ -47,7 +47,7 @@ export interface ArchiveLike {
   link: string;
 }
 
-interface ArchiveInfo {
+export interface ArchiveInfo {
   cafe: string;
   comment: string;
   food: string;
@@ -88,4 +88,20 @@ export interface LikeResponse {
 
 export interface PickResponse {
   content: boolean;
+}
+
+interface PlaceInfo {
+  address: string;
+  name: string;
+  placeType: string;
+  roadAddress: string;
+}
+
+export interface ArchiveRequest {
+  comment: string;
+  itemId?: number;
+  photoUrls: string[];
+  placeInfos: PlaceInfo[];
+  starRating: number;
+  visibleAtItem: boolean;
 }
