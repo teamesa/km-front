@@ -8,20 +8,27 @@ import {
 } from 'api/v1/items';
 
 export function useItems() {
-  const router = useRouter();
-
   function useGetItemsById(id: number) {
     return useQuery(['items', id], async () => await getItemsById({ id }), {
       enabled: !!id,
-      onError: (err: any) => {
-        const { alert } = err?.response ?? {};
-        if (alert) {
-          router.push('/detail/none');
-        } else {
-          console.log(err?.response);
-        }
-      },
     });
+  }
+
+  function useItemState(id: number) {
+    let status: 'exhibit' | 'none' | 'loading' = 'loading';
+    const { data, isLoading, error } = useGetItemsById(id);
+
+    if (isLoading) {
+      status = 'loading';
+    } else if (error) {
+      status = 'none';
+    } else if (data) {
+      status = 'exhibit';
+    }
+
+    return {
+      status,
+    };
   }
 
   function useGetItmesDetailById(id: number) {
@@ -44,5 +51,10 @@ export function useItems() {
     );
   }
 
-  return { useGetItemsById, useGetItmesDetailById, useGetItemsSummaryById };
+  return {
+    useGetItemsById,
+    useItemState,
+    useGetItmesDetailById,
+    useGetItemsSummaryById,
+  };
 }

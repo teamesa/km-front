@@ -3,7 +3,9 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
+import { useItems } from 'api/v1/hooks/items';
 import { Box } from 'components/Atoms';
+import { Loader } from 'components/Atoms/Loader';
 import DescriptionContents from 'components/Organisms/Detail/DescriptionContents';
 import ExhibitionImage from 'components/Organisms/Detail/ExhibitionImage';
 import ItemInfo from 'components/Organisms/Detail/ItemInfo';
@@ -16,6 +18,8 @@ import { useInitHeader } from 'utils/hooks/useInitHeader';
 const Detail: NextPage<UserProps> = ({ user }) => {
   const router = useRouter();
   const setUserFirst = useSetRecoilState(User);
+  const { useItemState } = useItems();
+  const { status } = useItemState(Number(router.query.id));
 
   useInitHeader({
     headerLeft: 'default',
@@ -25,8 +29,18 @@ const Detail: NextPage<UserProps> = ({ user }) => {
 
   useEffect(() => {
     setUserFirst(user);
-  }, [setUserFirst, user]);
+    if (status === 'none') {
+      router.push('/detail/none');
+    }
+  }, [router, setUserFirst, status, user]);
 
+  if (status === 'loading') {
+    return (
+      <Box position="absolute" top="40%" left="46%">
+        <Loader />
+      </Box>
+    );
+  }
   return (
     <Box backgroundColor={theme.colors.grayEE}>
       <Box height="5px" />
