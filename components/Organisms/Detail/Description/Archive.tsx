@@ -7,11 +7,11 @@ import Alert from 'assets/error/Alert';
 import { Profile } from 'assets/mypage';
 import { Box, FlexBox, Span } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
+import Carousel from 'components/Molecules/Carousel';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import StarScope from 'components/Molecules/StarScope';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
 import theme from 'styles/theme';
-import Carousel from 'components/Molecules/Carousel';
 
 interface ArchiveProps {
   data: any;
