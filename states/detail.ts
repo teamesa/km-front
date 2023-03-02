@@ -1,4 +1,4 @@
-import { selector, selectorFamily } from 'recoil';
+import { selectorFamily } from 'recoil';
 
 import { getArchivesById } from 'api/v1/archive';
 import { getItmesDetailById, getItemsById } from 'api/v1/items';
