@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-import { useItems } from 'api/v1/hooks/items';
+import { useItemsQuery } from 'api/v1/queryHooks/items';
 import { Box } from 'components/Atoms';
 import { Loader } from 'components/Atoms/Loader';
 import DescriptionContents from 'components/Organisms/Detail/DescriptionContents';
@@ -18,7 +18,7 @@ import { useInitHeader } from 'utils/hooks/useInitHeader';
 const Detail: NextPage<UserProps> = ({ user }) => {
   const router = useRouter();
   const setUserFirst = useSetRecoilState(User);
-  const { useItemState } = useItems();
+  const { useItemState } = useItemsQuery();
   const { status } = useItemState(Number(router.query.id));
 
   useInitHeader({

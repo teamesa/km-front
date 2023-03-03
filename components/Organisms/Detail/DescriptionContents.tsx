@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { createRef } from 'react';
 
-import { useArchive } from 'api/v1/hooks/archive';
-import { useItems } from 'api/v1/hooks/items';
+import { useArchiveQuery } from 'api/v1/queryHooks/archive';
+import { useItemsQuery } from 'api/v1/queryHooks/items';
 import Archive from 'components/Organisms/Detail/Description/Archive';
 import Introduce from 'components/Organisms/Detail/Description/Introduce';
 import { DescriptionNavigation } from 'components/Organisms/Detail/DetailNavigation';
@@ -15,13 +15,13 @@ export default function Description() {
   const archiveRef = createRef<HTMLDivElement>();
   const introduceRef = createRef<HTMLDivElement>();
 
-  const { useGetItmesDetailById, useGetItemsById } = useItems();
+  const { useGetItmesDetailById, useGetItemsById } = useItemsQuery();
   const { data: getItmesDetail } = useGetItmesDetailById(
     Number(router.query.id),
   );
   const { data: getItems } = useGetItemsById(Number(router.query.id));
 
-  const { useGetArchivesById } = useArchive();
+  const { useGetArchivesById } = useArchiveQuery();
   const { data: getArchives } = useGetArchivesById({
     id: Number(router.query.id),
     sortType: 'MODIFY_DESC',

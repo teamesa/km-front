@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { getArchivesById, postArchivesById } from 'api/v1/archive';
 
-export function useArchive() {
+export function useArchiveQuery() {
   function useGetArchivesById({
     id,
     sortType,

@@ -6,7 +6,7 @@ import {
   getItmesDetailById,
 } from 'api/v1/items';
 
-export function useItems() {
+export function useItemsQuery() {
   function useGetItemsById(id: number) {
     return useQuery(['items', id], async () => await getItemsById({ id }), {
       enabled: !!id,

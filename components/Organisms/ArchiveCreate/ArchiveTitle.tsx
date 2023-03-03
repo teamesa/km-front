@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Controller } from 'react-hook-form';
 
-import { useItems } from 'api/v1/hooks/items';
+import { useItemsQuery } from 'api/v1/queryHooks/items';
 import { SearchClose } from 'assets/archive/SearchClose';
 import noImage from 'assets/common/no_image_375x500.png';
 import { Box, Button } from 'components/Atoms';
@@ -17,7 +17,7 @@ export default function ArchiveTitle({
 }) {
   const router = useRouter();
   const { exhibitionId } = router.query;
-  const { useGetItemsSummaryById } = useItems();
+  const { useGetItemsSummaryById } = useItemsQuery();
   const { data: summaryData } = useGetItemsSummaryById(Number(exhibitionId));
   const listImage = summaryData?.data.listImageUrl;
   const exhibitionTitle = summaryData?.data.title;

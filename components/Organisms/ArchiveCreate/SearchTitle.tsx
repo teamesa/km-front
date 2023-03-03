@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { useSearch } from 'api/v1/hooks/search';
+import { useSearchQuery } from 'api/v1/queryHooks/search';
 import { getItemsSummaryById } from 'api/v1/items';
 import { Search } from 'assets/archive/Search';
 import { Box, Button, FlexBox, Input, Span } from 'components/Atoms';
@@ -13,7 +13,7 @@ export default function SearchTitle() {
   const [keyword, setKeyword] = useState<string>('');
   const [keyItems, setKeyItems] = useState<AutoCompleteItem[] | undefined>([]);
   const router = useRouter();
-  const { useGetSearch } = useSearch();
+  const { useGetSearch } = useSearchQuery();
   const { data } = useGetSearch(keyword);
 
   const onChangeData = (e: any) => {

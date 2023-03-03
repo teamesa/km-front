@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
-import { useArchive } from 'api/v1/hooks/archive';
+import { useArchiveQuery } from 'api/v1/queryHooks/archive';
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
@@ -26,7 +26,7 @@ export default function ArchiveCreateHome() {
   const router = useRouter();
   const { exhibitionId, checked } = router.query;
 
-  const { usePostArchivesById } = useArchive();
+  const { usePostArchivesById } = useArchiveQuery();
   const { mutate: postArchive } = usePostArchivesById();
 
   const setAlertState = useSetRecoilState(AlertState);

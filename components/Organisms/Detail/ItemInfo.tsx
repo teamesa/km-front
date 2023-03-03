@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import { useItems } from 'api/v1/hooks/items';
+import { useItemsQuery } from 'api/v1/queryHooks/items';
 import { Box, Button, Span, Tag } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import ItemInfoDescription from 'components/Organisms/Detail/ItemInfoDescription';
@@ -9,7 +9,7 @@ import theme from 'styles/theme';
 
 export default function ItemInfo() {
   const router = useRouter();
-  const { useGetItemsById } = useItems();
+  const { useGetItemsById } = useItemsQuery();
   const { data: getItems } = useGetItemsById(Number(router.query.id));
   const data = getItems?.data;
 

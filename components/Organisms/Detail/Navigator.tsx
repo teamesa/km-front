@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { useItems } from 'api/v1/hooks/items';
+import { useItemsQuery } from 'api/v1/queryHooks/items';
 import Share from 'assets/detail/Share';
 import { Box, Button, FlexBox } from 'components/Atoms';
 import NavigatorHeart from 'components/Organisms/Detail/NavigatorHeart';
@@ -17,7 +17,7 @@ export default function Navigator() {
   const router = useRouter();
   const { id } = router.query;
   const loginState = useRecoilValue(User);
-  const { useGetItemsById } = useItems();
+  const { useGetItemsById } = useItemsQuery();
   const { data: getItems } = useGetItemsById(Number(router.query.id));
   const data = getItems?.data;
   const [currentUrl, setCurrentUrl] = useState('');

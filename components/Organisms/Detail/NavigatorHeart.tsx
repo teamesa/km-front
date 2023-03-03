@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-import { useItems } from 'api/v1/hooks/items';
-import usePick from 'api/v1/hooks/pick';
+import { useItemsQuery } from 'api/v1/queryHooks/items';
+import usePickQuery from 'api/v1/queryHooks/pick';
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import { Button, FlexBox, Span } from 'components/Atoms';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
@@ -17,12 +17,12 @@ export default function NavigatorHeart() {
   const setPopupName = useSetRecoilState(PopupNameState);
   const loginState = useRecoilValue(User);
 
-  const { useGetItemsById } = useItems();
+  const { useGetItemsById } = useItemsQuery();
   const { data: getItems, refetch } = useGetItemsById(Number(router.query.id));
   const heart = getItems?.data.itemInfoAdditionalInfo.heart;
   const heartCount = getItems?.data.itemInfoAdditionalInfo.heartCount;
 
-  const { usePutPick } = usePick();
+  const { usePutPick } = usePickQuery();
   const { mutate: putPick } = usePutPick();
 
   const setToPick = async () => {
