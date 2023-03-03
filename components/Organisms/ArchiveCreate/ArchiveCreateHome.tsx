@@ -2,7 +2,8 @@ import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
 import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
-import { postArchivesById } from 'api/v1/archive';
+import { useArchive } from 'api/v1/hooks/archive';
+import { useItems } from 'api/v1/hooks/items';
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
@@ -25,6 +26,12 @@ import theme from 'styles/theme';
 export default function ArchiveCreateHome() {
   const router = useRouter();
   const { exhibitionId, checked } = router.query;
+
+  const { usePostArchivesById } = useArchive();
+  const { mutate: postArchive } = usePostArchivesById();
+  const { useGetItemsById } = useItems();
+  const { refetch } = useGetItemsById(Number(router.query.id));
+
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
@@ -55,7 +62,7 @@ export default function ArchiveCreateHome() {
       return null;
     }
     const customData = {
-      id: Number(exhibitionId),
+      itemId: Number(exhibitionId),
       comment: data.comment === undefined ? '' : data.comment,
       photoUrls: archivePhotos
         .filter(
@@ -69,14 +76,29 @@ export default function ArchiveCreateHome() {
         item === undefined ? null : item,
       ),
     };
-    try {
-      await postArchivesById({ request: customData });
-      setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
-      resetArchivePhotos();
-    } catch (error: any) {
-      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+
+    if (CheckForbiddenWords(customData.comment)) {
+      setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
+      setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
+      return null;
+    } else {
+      postArchive(
+        {
+          request: customData,
+        },
+        {
+          onSuccess: () => {
+            refetch();
+            resetArchivePhotos();
+            setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
+            setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
+          },
+          onError: () => {
+            setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
+            setPopupName(POPUP_NAME.ALERT_CONFIRM);
+          },
+        },
+      );
     }
   };
 
