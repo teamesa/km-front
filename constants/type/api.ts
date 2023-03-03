@@ -37,9 +37,11 @@ export interface ItemInfoResponse {
   type: string;
 }
 
-// TODO 논의중
 export interface SummaryResponse {
-  archiveId: string;
+  archiveId: number;
+  archiveWritten: boolean;
+  listImageUrl: string;
+  title: string;
 }
 
 export interface ArchiveLike {
@@ -47,7 +49,7 @@ export interface ArchiveLike {
   link: string;
 }
 
-interface ArchiveInfo {
+export interface ArchiveInfo {
   cafe: string;
   comment: string;
   food: string;
@@ -88,4 +90,42 @@ export interface LikeResponse {
 
 export interface PickResponse {
   content: boolean;
+}
+
+interface PlaceInfo {
+  address: string;
+  name: string;
+  placeType: string;
+  roadAddress: string;
+}
+
+export interface ArchiveRequest {
+  comment: string;
+  itemId?: number;
+  photoUrls: string[];
+  placeInfos: PlaceInfo[];
+  starRating: number;
+  visibleAtItem: boolean;
+}
+
+export interface AutoCompleteItem {
+  id: number;
+  link: string;
+  searchedTextLocationEnd: number;
+  searchedTextLocationStart: number;
+  title: string;
+}
+
+interface ResponsePagingStatus {
+  currentContentsCount: number;
+  currentPage: number;
+  hasNext: boolean;
+  nextPage: number;
+  pageSize: number;
+  query: string;
+  totalContentsCount: number;
+}
+export interface AutoCompleteResult {
+  contents: AutoCompleteItem[];
+  responsePagingStatus: ResponsePagingStatus;
 }

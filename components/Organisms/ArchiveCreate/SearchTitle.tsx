@@ -2,41 +2,57 @@ import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import { useSearch } from 'api/v1/hooks/search';
+import { getItemsSummaryById } from 'api/v1/items';
 import { Search } from 'assets/archive/Search';
 import { Box, Button, FlexBox, Input, Span } from 'components/Atoms';
-import { getArchiveSearch } from 'states/archiveWirte';
+import { AutoCompleteItem } from 'constants/type/api';
 import theme from 'styles/theme';
-
-interface AutoContents {
-  id: number;
-  link: string;
-  searchedTextLocationEnd: number;
-  searchedTextLocationStart: number;
-  title: string;
-}
 
 export default function SearchTitle() {
   const [keyword, setKeyword] = useState<string>('');
-  const [keyItems, setKeyItems] = useState<AutoContents[]>([]);
+  const [keyItems, setKeyItems] = useState<AutoCompleteItem[] | undefined>([]);
   const router = useRouter();
+  const { useGetSearch } = useSearch();
+  const { data } = useGetSearch(keyword);
+
   const onChangeData = (e: any) => {
     setKeyword(e.target.value);
   };
 
   useEffect(() => {
     const debounce = setTimeout(() => {
-      if (keyword) {
-        const updateData = async () => {
-          const searchData = await getArchiveSearch({ query: keyword });
-          setKeyItems(searchData.contents);
-        };
-        updateData();
-      }
+      setKeyItems(data?.data.contents);
     }, 200);
     return () => {
       clearTimeout(debounce);
     };
-  }, [keyword]);
+  }, [data?.data.contents]);
+
+  async function onSearch(
+    search: AutoCompleteItem,
+    event: React.MouseEvent<HTMLButtonElement>,
+  ) {
+    event.preventDefault();
+    setKeyword(search.title);
+    const { data } = await getItemsSummaryById({ id: search.id });
+
+    if (data.archiveWritten === true) {
+      return router.push({
+        pathname: '/archive/update',
+        query: {
+          id: data.archiveId,
+        },
+      });
+    } else {
+      return router.push({
+        pathname: '/archive',
+        query: {
+          exhibitionId: search.id,
+        },
+      });
+    }
+  }
 
   return (
     <Box
@@ -62,7 +78,7 @@ export default function SearchTitle() {
           <Search />
         </Button>
       </FlexBox>
-      {keyItems?.length > 0 && keyword && (
+      {keyItems && keyItems?.length > 0 && keyword && (
         <Box
           zIndex="3"
           height="120px"
@@ -80,14 +96,8 @@ export default function SearchTitle() {
                 <Box padding="12px 0">
                   <Button
                     type="button"
-                    onClick={() => {
-                      setKeyword(search.title);
-                      router.push({
-                        pathname: '/archive',
-                        query: {
-                          exhibitionId: search.id,
-                        },
-                      });
+                    onClick={(e) => {
+                      onSearch(search, e);
                     }}
                     textAlign="inherit"
                     display="inline-block"
