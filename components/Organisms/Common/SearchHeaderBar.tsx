@@ -44,6 +44,7 @@ export default function SearchHeaderBar() {
     if (keyword) {
       makeLocalStorageKeywords(keyword);
       setCheckDebounce(false);
+      inputRef?.current.blur();
       router.push({
         pathname: '/search/result',
         query: { keyword },
@@ -74,6 +75,20 @@ export default function SearchHeaderBar() {
     };
   };
 
+  const debounceOnScroll = () => {
+    const debounce = setTimeout(() => {
+      if (
+        inputRef?.current?.value ||
+        inputRef.current === document.activeElement
+      ) {
+        inputRef.current.blur();
+      }
+    }, 100);
+    return () => {
+      clearTimeout(debounce);
+    };
+  };
+
   useEffect(() => {
     if (router?.query?.keyword) {
       if (typeof router.query.keyword === 'string') {
@@ -84,6 +99,14 @@ export default function SearchHeaderBar() {
       setKeyword('');
     }
   }, [router.pathname, router.query.keyword]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('touchmove', function () {
+        debounceOnScroll();
+      });
+    }
+  }, []);
 
   return (
     <>
