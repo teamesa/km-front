@@ -32,6 +32,14 @@ export const ALERT_MESSAGE = {
       code: 'ALT-012',
       message: '검색을 통해 문화생활을 선택해주세요',
     },
+    ITEM_NOT_EXHIBITED: {
+      code: 'ALT-017',
+      message: '해당 컨텐츠는 관리자에 의해 삭제되었습니다.',
+    },
+    FORBIDDEN_WORD: {
+      code: 'ALT-018',
+      message: '입력하신 내용에 금지 단어가 포함되어 저장할 수 없습니다.',
+    },
   },
   ERROR: {
     ARCHIVE_REGISTRATION_QUESTION: {

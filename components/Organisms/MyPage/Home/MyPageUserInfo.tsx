@@ -85,14 +85,21 @@ export default function MyPageUserInfo() {
           <Box width="70px" height="70px" top="0px" position="absolute"></Box>
         </Box>
         <Box
-          paddingLeft="30px"
-          paddingTop="24px"
-          paddingBottom="23px"
+          marginLeft="30px"
+          marginTop="24px"
+          marginBottom="23px"
           fontSize="19px"
           fontWeight={500}
           lineHeight={1.37}
           textAlign="left"
           color={theme.colors.black}
+          display="-webkit-box"
+          css={css`
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+          `}
+          overflow="hidden"
         >
           {name}
         </Box>
