@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { useSetRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 
 import { useArchive } from 'api/v1/hooks/archive';
-import { useItems } from 'api/v1/hooks/items';
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
@@ -29,8 +28,6 @@ export default function ArchiveCreateHome() {
 
   const { usePostArchivesById } = useArchive();
   const { mutate: postArchive } = usePostArchivesById();
-  const { useGetItemsById } = useItems();
-  const { refetch } = useGetItemsById(Number(router.query.id));
 
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
@@ -88,7 +85,6 @@ export default function ArchiveCreateHome() {
         },
         {
           onSuccess: () => {
-            refetch();
             resetArchivePhotos();
             setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
             setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
@@ -134,8 +130,9 @@ export default function ArchiveCreateHome() {
             fontSize="13px"
             lineHeight="18px"
             backgroundColor={theme.colors.grayF8}
+            maxLength={1000}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
-            {...(register('comment'), { maxLength: 1000 })}
+            {...register('comment')}
           />
           <ArchiveFileUploadForm />
           <Box marginTop="30px" />

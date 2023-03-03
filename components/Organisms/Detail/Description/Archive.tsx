@@ -254,15 +254,16 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
                   <ArchiveHeart heart={item.heart} likeCount={item.likeCount} />
                 </Box>
               </FlexBox>
-              {item.photoUrls ? (
-                <Box marginBottom="15px" marginLeft="42px">
-                  <Carousel
-                    imgUrlArr={item.photoUrls}
-                    width="345px"
-                    height="345px"
-                  />
-                </Box>
-              ) : null}
+              {item?.photoUrls &&
+                (item.photoUrls.length === 0 ? null : (
+                  <Box marginBottom="15px" marginLeft="42px">
+                    <Carousel
+                      imgUrlArr={item.photoUrls}
+                      width="345px"
+                      height="345px"
+                    />
+                  </Box>
+                ))}
               {item.comment ? (
                 <Box
                   fontSize="13px"

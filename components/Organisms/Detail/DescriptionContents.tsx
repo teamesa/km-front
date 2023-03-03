@@ -26,8 +26,7 @@ export default function Description() {
     id: Number(router.query.id),
     sortType: 'MODIFY_DESC',
   });
-  // const source = getItems?.data.source;
-  const source = 'sdfsd';
+  const source = getItems?.data.source;
 
   const tabViewData =
     (getItmesDetail?.data.summary === '' ||
