@@ -135,7 +135,7 @@ export default function ArchiveCreateHome() {
             lineHeight="18px"
             backgroundColor={theme.colors.grayF8}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
-            {...register('comment')}
+            {...(register('comment'), { maxLength: 1000 })}
           />
           <ArchiveFileUploadForm />
           <Box marginTop="30px" />
