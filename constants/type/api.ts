@@ -35,6 +35,7 @@ export interface ItemInfoResponse {
   time: string;
   title: string;
   type: string;
+  source: string;
 }
 
 export interface SummaryResponse {
