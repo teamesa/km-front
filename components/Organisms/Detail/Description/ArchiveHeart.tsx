@@ -1,26 +1,22 @@
-import { AxiosResponse } from 'axios';
 import { useRouter } from 'next/router';
-import {
-  useSetRecoilState,
-  useRecoilValue,
-  useRecoilRefresher_UNSTABLE,
-} from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 
-import { customKmAxios } from 'api/customKmAxios';
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import { Tag, Span, Button } from 'components/Atoms';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
-import { ArchiveLike, LikeResponse } from 'constants/type/api';
+import { ArchiveLike } from 'constants/type/api';
 import { AlertState, PopupNameState } from 'states';
-import { detailState } from 'states/detail';
 import { User } from 'states/user';
 import theme from 'styles/theme';
+import { useArchiveQuery } from 'api/v1/queryHooks/archive';
 
 export default function ArchiveHeart({
+  id,
   heart,
   likeCount,
 }: {
+  id: number;
   heart: ArchiveLike;
   likeCount: number;
 }) {
@@ -28,28 +24,32 @@ export default function ArchiveHeart({
   const loginState = useRecoilValue(User);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const refreshDetailState = useRecoilRefresher_UNSTABLE(
-    detailState(Number(router.query.id)),
-  );
+
+  const { useGetArchivesById, usePutArchivesLike } = useArchiveQuery();
+  const { refetch } = useGetArchivesById({
+    id: Number(router.query.id),
+    sortType: 'MODIFY_DESC',
+  });
+  const { mutate: putLike } = usePutArchivesLike();
 
   const onClickArhciveLike = async () => {
     if (!loginState.isLogin) {
       setAlertState(ALERT_MESSAGE.ALERT.LOGIN_CONFIRMATION);
       setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
       return null;
+    } else {
+      putLike(
+        {
+          id,
+          body: !heart?.heartClicked,
+        },
+        {
+          onSuccess: () => {
+            refetch();
+          },
+        },
+      );
     }
-    try {
-      const axiosData = (await customKmAxios({
-        url: decodeURIComponent(`${heart.link}${!heart.heartClicked}`),
-        method: 'PUT',
-      })) as AxiosResponse<LikeResponse>;
-      if (axiosData.data.content !== undefined) {
-      }
-    } catch (error) {
-      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM);
-    }
-    refreshDetailState();
   };
 
   return (
@@ -79,4 +79,9 @@ export default function ArchiveHeart({
       </Tag>
     </Button>
   );
+}
+function useGetArchivesById(arg0: { id: number; sortType: string }): {
+  data: any;
+} {
+  throw new Error('Function not implemented.');
 }

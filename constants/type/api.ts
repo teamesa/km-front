@@ -75,7 +75,7 @@ interface ResponsePagingStatus {
 }
 
 interface ArchiveResponse {
-  archives: ArchiveInfo;
+  archives: ArchiveInfo[];
   avgStarRating: number;
   responsePagingStatus: ResponsePagingStatus;
 }

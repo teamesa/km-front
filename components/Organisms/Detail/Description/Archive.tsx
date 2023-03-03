@@ -251,7 +251,11 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
                   </Box>
                 </FlexBox>
                 <Box height="20px">
-                  <ArchiveHeart heart={item.heart} likeCount={item.likeCount} />
+                  <ArchiveHeart
+                    id={item.id}
+                    heart={item.heart}
+                    likeCount={item.likeCount}
+                  />
                 </Box>
               </FlexBox>
               {item?.photoUrls &&

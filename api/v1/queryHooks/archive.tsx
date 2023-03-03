@@ -1,6 +1,10 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { getArchivesById, postArchivesById } from 'api/v1/archive';
+import {
+  getArchivesById,
+  postArchivesById,
+  putArchivesLike,
+} from 'api/v1/archive';
 
 export function useArchiveQuery() {
   function useGetArchivesById({
@@ -24,5 +28,9 @@ export function useArchiveQuery() {
     return useMutation(postArchivesById, {});
   }
 
-  return { useGetArchivesById, usePostArchivesById };
+  function usePutArchivesLike() {
+    return useMutation(putArchivesLike, {});
+  }
+
+  return { useGetArchivesById, usePostArchivesById, usePutArchivesLike };
 }

@@ -10,7 +10,6 @@ import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import { User } from 'states/user';
 import theme from 'styles/theme';
-import { customKmAxios } from 'api/customKmAxios';
 
 export default function NavigatorHeart() {
   const router = useRouter();
