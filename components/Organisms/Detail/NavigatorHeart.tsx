@@ -10,6 +10,7 @@ import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import { User } from 'states/user';
 import theme from 'styles/theme';
+import { customKmAxios } from 'api/customKmAxios';
 
 export default function NavigatorHeart() {
   const router = useRouter();
@@ -31,12 +32,18 @@ export default function NavigatorHeart() {
       setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
       return null;
     } else {
-      putPick({
-        id: Number(router.query.id),
-        body: true,
-      });
+      putPick(
+        {
+          id: Number(router.query.id),
+          body: !heart?.heartClicked,
+        },
+        {
+          onSuccess: () => {
+            refetch();
+          },
+        },
+      );
     }
-    refetch();
   };
 
   return (
