@@ -7,7 +7,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'next/core-web-vitals',
-    ["next", "prettier"]
+    ['next', 'prettier'],
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {

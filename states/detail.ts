@@ -115,7 +115,7 @@ export async function getIntroduction(itemId?: number) {
   const queryData = query();
   const { data } = (await axios({
     url: `/api/items/${itemId || Number(queryData[1])}/detail`,
-    method: "GET"
+    method: 'GET',
   })) as AxiosResponse<TGetIntroduction>;
 
   return data;

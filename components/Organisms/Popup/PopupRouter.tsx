@@ -4,6 +4,7 @@ import AlertArchiveCancelConfirmPopup from 'components/Organisms/Popup/AlertArch
 import AlertArchiveDeletePopup from 'components/Organisms/Popup/AlertArchiveDeletePopup';
 import AlertConfirmBackPopup from 'components/Organisms/Popup/AlertConfirmBackPopup';
 import AlertSuccessPopup from 'components/Organisms/Popup/AlertConfirmPopup';
+import AlertForbiddenConfirm from 'components/Organisms/Popup/AlertForbiddenConfirm';
 import AlertLoginConfirmationPopup from 'components/Organisms/Popup/AlertLoginConfirmationPopup';
 import ArchivePictureOverflowPopup from 'components/Organisms/Popup/ArchivePictureOverflowPopup';
 import ArchiveWirteConfirmPopup from 'components/Organisms/Popup/ArchiveWirteConfirmPopup';
@@ -39,6 +40,8 @@ const PopupRouter = () => {
       return <ArchivePictureOverflowPopup />;
     case POPUP_NAME.ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM:
       return <AlertArchiveDeletePopup />;
+    case POPUP_NAME.FORBIDDEN_CONFIRM:
+      return <AlertForbiddenConfirm />;
     default:
       return null;
   }
