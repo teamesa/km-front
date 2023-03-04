@@ -41,20 +41,20 @@ interface ArchiveDetailLinkInfos {
   link: string;
 }
 
-export const ClickedArchiveId = atom<string>({
-  key: 'ClickedArchiveId',
+export const ClickedArchiveDetailUrl = atom<string>({
+  key: 'ClickedArchiveDetailUrl',
   default: '',
 });
 
-export const ClickedItemId = atom<string>({
-  key: 'ClickedItemId',
+export const ClickedArchiveDeleteUrl = atom<string>({
+  key: 'ClickedArchiveDeleteUrl',
   default: '',
 });
 
-export const getMyArchiveDetail = async (archiveId: string) => {
+export const getMyArchiveDetail = async (url: string) => {
   const axios = customAxios();
   const { data } = (await axios({
-    url: `/api/archive/detail/${archiveId.toString()}`,
+    url: url,
     method: 'GET',
   })) as AxiosResponse<MyArchiveDetailProps>;
 
@@ -64,6 +64,6 @@ export const getMyArchiveDetail = async (archiveId: string) => {
 export const myArchiveDetailInfoState = selector({
   key: 'myArchiveDetailInfoState',
   get: ({ get }) => {
-    return getMyArchiveDetail(get(ClickedArchiveId));
+    return getMyArchiveDetail(get(ClickedArchiveDetailUrl));
   },
 });

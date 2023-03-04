@@ -1,14 +1,17 @@
 import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
+import { useRouter } from 'next/router';
 
+import { useItemsQuery } from 'api/v1/queryHooks/items';
 import { Box, Button, Span, Tag } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
 import ItemInfoDescription from 'components/Organisms/Detail/ItemInfoDescription';
-import { summaryState, useGetItemsById } from 'states/detail';
 import theme from 'styles/theme';
 
 export default function ItemInfo() {
-  const data = useRecoilValue(useGetItemsById);
+  const router = useRouter();
+  const { useGetItemsById } = useItemsQuery();
+  const { data: getItems } = useGetItemsById(Number(router.query.id));
+  const data = getItems?.data;
 
   return (
     <>

@@ -1,14 +1,16 @@
 import Image from 'next/image';
-import { useRecoilValue } from 'recoil';
+import { useRouter } from 'next/router';
 
+import { useItemsQuery } from 'api/v1/queryHooks/items';
 import noImage from 'assets/common/no_image_375x500.png';
 import { Box } from 'components/Atoms';
-import { useGetItemsById } from 'states/detail';
 import theme from 'styles/theme';
 
 export default function ExhibitionImage() {
-  const data = useRecoilValue(useGetItemsById);
-  const detailImageUrl = data?.detailImageUrl;
+  const router = useRouter();
+  const { useGetItemsById } = useItemsQuery();
+  const { data: getItems } = useGetItemsById(Number(router.query.id));
+  const detailImageUrl = getItems?.data?.detailImageUrl;
 
   return (
     <Box

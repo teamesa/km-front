@@ -35,6 +35,7 @@ export interface ItemInfoResponse {
   time: string;
   title: string;
   type: string;
+  source: string;
 }
 
 export interface ItemSummaryResponse {
@@ -75,7 +76,7 @@ interface ResponsePagingStatus {
 }
 
 interface ArchiveResponse {
-  archives: ArchiveInfo;
+  archives: ArchiveInfo[];
   avgStarRating: number;
   responsePagingStatus: ResponsePagingStatus;
 }
@@ -86,6 +87,10 @@ export interface GeneralResponseArchiveResponse {
 }
 
 export interface LikeResponse {
+  content: boolean;
+}
+
+export interface PickResponse {
   content: boolean;
 }
 
@@ -117,8 +122,10 @@ interface PlaceInfo {
   placeType: string;
   roadAddress: string;
 }
+
 export interface ArchiveRequest {
   comment: string;
+  itemId?: number;
   photoUrls: string[];
   placeInfos: PlaceInfo[];
   starRating: number;
@@ -142,7 +149,6 @@ interface ResponsePagingStatus {
   query: string;
   totalContentsCount: number;
 }
-
 export interface AutoCompleteResult {
   contents: AutoCompleteItem[];
   responsePagingStatus: ResponsePagingStatus;

@@ -8,4 +8,5 @@ export const POPUP_NAME = {
   ARCHIVE_WRITE_CONFIRM: 'ArchiveWirteConfirm',
   OVERFLOW_PICTURE: 'ArchivePictureOverflowPopup',
   ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM: 'AlertArchiveDeletePopup',
+  FORBIDDEN_CONFIRM: 'ForbiddenConfirm',
 };

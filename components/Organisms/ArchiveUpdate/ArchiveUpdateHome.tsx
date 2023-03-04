@@ -11,6 +11,7 @@ import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import AddressInput from 'components/Molecules/AddressInput';
+import CheckForbiddenWords from 'components/Molecules/CheckForbiddenWords';
 import Rating from 'components/Molecules/Rating';
 import ArchiveFileUploadForm from 'components/Organisms/ArchiveFileUploadForm';
 import ArchiveTitle from 'components/Organisms/ArchiveUpdate/ArchiveTitle';

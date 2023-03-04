@@ -1,14 +1,15 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useRecoilRefresher_UNSTABLE, useSetRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 
+import { useItemsQuery } from 'api/v1/queryHooks/items';
 import { Box } from 'components/Atoms';
+import { Loader } from 'components/Atoms/Loader';
 import DescriptionContents from 'components/Organisms/Detail/DescriptionContents';
 import ExhibitionImage from 'components/Organisms/Detail/ExhibitionImage';
 import ItemInfo from 'components/Organisms/Detail/ItemInfo';
 import Navigator from 'components/Organisms/Detail/Navigator';
-import { detailState, useGetItemsById } from 'states/detail';
 import { User } from 'states/user';
 import theme from 'styles/theme';
 import { UserProps, useUserProps } from 'utils/authentication/useUser';
@@ -17,8 +18,8 @@ import { useInitHeader } from 'utils/hooks/useInitHeader';
 const Detail: NextPage<UserProps> = ({ user }) => {
   const router = useRouter();
   const setUserFirst = useSetRecoilState(User);
-  const refreshGetItems = useRecoilRefresher_UNSTABLE(useGetItemsById);
-  const refreshDetailState = useRecoilRefresher_UNSTABLE(detailState);
+  const { useItemState } = useItemsQuery();
+  const { status } = useItemState(Number(router.query.id));
 
   useInitHeader({
     headerLeft: 'default',
@@ -28,10 +29,18 @@ const Detail: NextPage<UserProps> = ({ user }) => {
 
   useEffect(() => {
     setUserFirst(user);
-    refreshGetItems();
-    refreshDetailState();
-  }, [refreshDetailState, refreshGetItems, setUserFirst, user]);
+    if (status === 'none') {
+      router.push('/detail/none');
+    }
+  }, [router, setUserFirst, status, user]);
 
+  if (status === 'loading') {
+    return (
+      <Box position="absolute" top="40%" left="46%">
+        <Loader />
+      </Box>
+    );
+  }
   return (
     <Box backgroundColor={theme.colors.grayEE}>
       <Box height="5px" />

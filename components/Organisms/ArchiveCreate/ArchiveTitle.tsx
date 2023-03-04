@@ -1,13 +1,12 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Controller } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
 
+import { useItemsQuery } from 'api/v1/queryHooks/items';
 import { SearchClose } from 'assets/archive/SearchClose';
 import noImage from 'assets/common/no_image_375x500.png';
 import { Box, Button } from 'components/Atoms';
 import FlexBox from 'components/Atoms/FlexBox';
-import { getItemsInfo } from 'states/detail';
 
 export default function ArchiveTitle({
   name,
@@ -17,10 +16,11 @@ export default function ArchiveTitle({
   control: any;
 }) {
   const router = useRouter();
-  const { checked } = router.query;
-  const data = useRecoilValue(getItemsInfo);
-  const listImage = data?.listImageUrl;
-  const exhibitionTitle = data?.title;
+  const { exhibitionId } = router.query;
+  const { useGetItemsSummaryById } = useItemsQuery();
+  const { data: summaryData } = useGetItemsSummaryById(Number(exhibitionId));
+  const listImage = summaryData?.data.listImageUrl;
+  const exhibitionTitle = summaryData?.data.title;
 
   return (
     <Controller
@@ -44,7 +44,7 @@ export default function ArchiveTitle({
               {exhibitionTitle}
             </Box>
           </FlexBox>
-          {!checked && (
+          {!exhibitionId && (
             <Button
               type="button"
               onClick={() => {

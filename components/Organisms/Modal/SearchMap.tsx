@@ -75,13 +75,14 @@ export default function SearchMap({
         borderBottom={`1px solid ${theme.colors.grayEE}`}
       >
         <Box fontWeight={500}>{payload.title}</Box>
-        <Box
+        <Button
+          type="button"
           onClick={() => {
             offModal();
           }}
         >
           <Close />
-        </Box>
+        </Button>
       </FlexBox>
       <Layout>
         <Box margin="4px 0 8px" position="relative">
@@ -96,6 +97,7 @@ export default function SearchMap({
                 placeholder="예) 스타벅스, 빠레트한남, 맘스터치"
                 {...register('search', { required: true })}
                 type="search"
+                // value={}
               />
               <Button
                 position="absolute"
