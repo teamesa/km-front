@@ -1,14 +1,14 @@
 import { FlexBox, Box } from 'components/Atoms';
 
-interface DescriptionInfoProps {
+interface ItemInfoDescriptionProps {
   title: string;
-  description?: string | React.ReactNode;
+  description?: any;
 }
 
-export default function DescriptionInfo({
+export default function ItemInfoDescription({
   title,
   description,
-}: DescriptionInfoProps) {
+}: ItemInfoDescriptionProps) {
   return (
     <FlexBox marginBottom="20px" fontSize="13px">
       <Box flex="0 0 75px" fontWeight="500" lineHeight="20px">

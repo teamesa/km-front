@@ -134,7 +134,7 @@ export default function NowArchiveItemCard() {
             </FlexBox>
           </FlexBox>
           <Box zIndex={10} marginRight="15px">
-            <ArchiveHeart heart={heart} heartCount={25} />
+            <ArchiveHeart id={1} heart={heart} likeCount={25} />
           </Box>
         </FlexBox>
       </Box>

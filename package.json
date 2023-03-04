@@ -1,6 +1,6 @@
 {
   "name": "km-front",
-  "version": "1.37.1",
+  "version": "1.37.2",
   "private": true,
   "scripts": {
     "dev": "node server/server.js",
@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@tanstack/react-query": "^4.24.10",
     "@types/jsonwebtoken": "^8.5.8",
     "axios": "^0.26.0",
     "cookie-parser": "^1.4.6",
