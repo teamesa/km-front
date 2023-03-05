@@ -1,12 +1,7 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import {
-  useSetRecoilState,
-  useRecoilValue,
-  useRecoilRefresher_UNSTABLE,
-} from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
-import { putArchivesById } from 'api/v1/archive';
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
@@ -19,18 +14,28 @@ import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
 import { ArchiveRequest } from 'constants/type/api';
 import { AlertState, PopupNameState } from 'states';
-import { useGetArchivesById } from 'states/archiveWirte';
 import theme from 'styles/theme';
+import { useArchiveQuery } from 'api/v1/queryHooks/archive';
+import {
+  ArchiveSquareState,
+  ArchiveSqureStateEnum,
+} from 'states/archive-square';
 
 export default function ArchiveUpdateHome() {
   const router = useRouter();
   const { id } = router.query;
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const getArchive = useRecoilValue(useGetArchivesById(Number(id)));
-  const refreshGetArchive = useRecoilRefresher_UNSTABLE(
-    useGetArchivesById(Number(id)),
+  const { useGetArchivesById, usePutArchivesById } = useArchiveQuery();
+  const { data: getArchives, refetch } = useGetArchivesById(
+    Number(router.query.id),
   );
+  const getArchive = getArchives?.data;
+  const { mutate: putArchive } = usePutArchivesById();
+
+  const archivePhotos = useRecoilValue(ArchiveSquareState);
+  const resetArchivePhotos = useResetRecoilState(ArchiveSquareState);
+
   const {
     register,
     handleSubmit,
@@ -40,7 +45,6 @@ export default function ArchiveUpdateHome() {
     mode: 'onChange',
     defaultValues: {
       starRating: getArchive?.starRating ?? 5,
-      visibleAtItem: getArchive.visibleAtItem,
     },
   });
 
@@ -48,28 +52,46 @@ export default function ArchiveUpdateHome() {
     setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
   };
-
   const onUpdateSubmit = async (data: ArchiveRequest) => {
     if (!id) {
       throw Error('아카이브 아이디가 없습니다.');
     }
     const customData = {
       comment: data.comment === undefined ? '' : data.comment,
-      photoUrls: data.photoUrls === undefined ? [] : data.photoUrls,
+      photoUrls: archivePhotos
+        .filter(
+          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
+        )
+        .map((archivePhoto) => archivePhoto.pictureSrc)
+        .filter(isDefined),
       starRating: data.starRating,
       visibleAtItem: data.visibleAtItem,
       placeInfos: data.placeInfos.filter((item: any) =>
         item === undefined ? null : item,
       ),
     };
-    try {
-      await putArchivesById({ archiveId: Number(id), request: customData });
-      setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
-      refreshGetArchive();
-    } catch (error: any) {
-      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+    if (CheckForbiddenWords(customData.comment)) {
+      setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
+      setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
+    } else {
+      putArchive(
+        {
+          archiveId: Number(id),
+          request: customData,
+        },
+        {
+          onSuccess: () => {
+            resetArchivePhotos();
+            refetch();
+            setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
+            setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
+          },
+          onError: () => {
+            setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
+            setPopupName(POPUP_NAME.ALERT_CONFIRM);
+          },
+        },
+      );
     }
   };
 
@@ -105,6 +127,7 @@ export default function ArchiveUpdateHome() {
             fontSize="13px"
             lineHeight="18px"
             backgroundColor={theme.colors.grayF8}
+            maxLength={1000}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
             defaultValue={getArchive?.comment}
             {...register('comment')}
