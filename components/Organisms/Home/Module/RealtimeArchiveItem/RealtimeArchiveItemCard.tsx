@@ -13,16 +13,9 @@ import RealtimeArchiveItemHeart from 'components/Organisms/Home/Module/RealtimeA
 
 export default function RealTimeArchiveItemCard({
   archive,
-  moduleIndex,
 }: {
   archive: RealTimeArchiveItemCardProps;
-  moduleIndex: number;
 }) {
-  const turnPickStateInRealTimeFunction = useTurnPickStateInRealTimeFunction(
-    moduleIndex,
-    archive.id,
-  );
-
   const makeAvgStarRating = () => {
     const rating = 5 * 20;
     return `${rating + 1.5}%`;
