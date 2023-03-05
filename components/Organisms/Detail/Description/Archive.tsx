@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { Key, RefObject, useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 
 import DetailNoData from 'assets/detail/noData';
 import Alert from 'assets/error/Alert';
@@ -18,6 +18,7 @@ interface ArchiveProps {
   scrollRef: RefObject<HTMLDivElement>;
   introYn: number;
 }
+
 export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
   const [checked, setChecked] = useState(false);
   const [archiveData, setArchiveData] = useState<any[]>();

@@ -52,6 +52,7 @@ export default function ArchiveUpdateHome() {
     setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
   };
+
   const onUpdateSubmit = async (data: ArchiveRequest) => {
     if (!id) {
       throw Error('아카이브 아이디가 없습니다.');
