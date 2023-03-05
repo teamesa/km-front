@@ -24,6 +24,7 @@ export function getItemsArchivesById({
     },
   }) as AxiosPromise<GeneralResponseArchiveResponse>;
 }
+
 export function getArchivesById({ id }: { id: number }) {
   return customKmAxios({
     url: `/api/archives/${id}`,

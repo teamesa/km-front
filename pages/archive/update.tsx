@@ -1,6 +1,5 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 import { Box } from 'components/Atoms';
 import NoLoginPage from 'components/Molecules/LoginPage';

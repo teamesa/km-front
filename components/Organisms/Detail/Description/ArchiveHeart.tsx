@@ -25,8 +25,8 @@ export default function ArchiveHeart({
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
 
-  const { useGetArchivesById, usePutArchivesLike } = useArchiveQuery();
-  const { refetch } = useGetArchivesById({
+  const { useGetItemsArchivesById, usePutArchivesLike } = useArchiveQuery();
+  const { refetch } = useGetItemsArchivesById({
     id: Number(router.query.id),
     sortType: 'MODIFY_DESC',
   });
@@ -79,9 +79,4 @@ export default function ArchiveHeart({
       </Tag>
     </Button>
   );
-}
-function useGetArchivesById(arg0: { id: number; sortType: string }): {
-  data: any;
-} {
-  throw new Error('Function not implemented.');
 }
