@@ -66,7 +66,6 @@ export default function AddressInput({
                     border={`1px solid ${theme.colors.grayBB}`}
                     backgroundColor={theme.colors.grayEE}
                     color={theme.colors.gray77}
-                    placeholder="인수 장소 검색"
                     value={placeAddress}
                     onChange={_onChange}
                   />
