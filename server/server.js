@@ -46,7 +46,7 @@ const proxyLogic = async (req, res) => {
       res.json({});
     }
   } catch (err) {
-    if (err.response.status === 400) {
+    if (err.response.status === 400 || err.response.status === 404) {
       res.status(err.response.status).send(err.response.data);
     } else {
       console.log(err);

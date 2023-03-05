@@ -1,30 +1,17 @@
 import Link from 'next/link';
-import { useRecoilValue } from 'recoil';
+import { useRouter } from 'next/router';
 
-import { Box, Button, FlexBox, Span, Tag } from 'components/Atoms';
-import DescriptionInfo from 'components/Molecules/DescriptionInfo';
+import { useItemsQuery } from 'api/v1/queryHooks/items';
+import { Box, Button, Span, Tag } from 'components/Atoms';
 import InnerHTML from 'components/Molecules/InnerHTML';
-import { summaryState } from 'states/detail';
+import ItemInfoDescription from 'components/Organisms/Detail/ItemInfoDescription';
 import theme from 'styles/theme';
 
-interface ItemInfoDescriptionProps {
-  title: string;
-  description?: any;
-}
-
-function ItemInfoDescription({ title, description }: ItemInfoDescriptionProps) {
-  return (
-    <FlexBox marginBottom="20px" fontSize="13px">
-      <Box flex="0 0 75px" fontWeight="500" lineHeight="20px">
-        {title}
-      </Box>
-      <Box lineHeight="20px">{description}</Box>
-    </FlexBox>
-  );
-}
-
-export default function Summary() {
-  const data = useRecoilValue(summaryState);
+export default function ItemInfo() {
+  const router = useRouter();
+  const { useGetItemsById } = useItemsQuery();
+  const { data: getItems } = useGetItemsById(Number(router.query.id));
+  const data = getItems?.data;
 
   return (
     <>

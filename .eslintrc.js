@@ -7,6 +7,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'next/core-web-vitals',
+    ['next', 'prettier'],
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -44,6 +45,7 @@ module.exports = {
         'newlines-between': 'always',
       },
     ],
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
   },
   ignorePatterns: ['*.config.js', 'server.js'],
   settings: {

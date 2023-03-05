@@ -40,7 +40,6 @@ export default function StarScope({
                 setRating(index);
                 onChange && onChange(index);
               }}
-              onMouseEnter={() => setHover(index)}
               onMouseLeave={() => setHover(rating)}
             >
               {currentStep ? (
