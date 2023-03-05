@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { RefObject } from 'react';
+import { Key, RefObject } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import { Box } from 'components/Atoms';
@@ -9,21 +9,23 @@ import { DetailNavigationState } from 'states/detail-navigation';
 import theme from 'styles/theme';
 import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
 
-interface IntroduceProps {
+export default function Introduce({
+  data,
+  scrollRef,
+}: {
+  data: any;
   scrollRef: RefObject<HTMLDivElement>;
-  data: { summary: string; photo: string[] };
-}
-export default function Introduce({ data, scrollRef }: IntroduceProps) {
+}) {
   const setDetailNavigation = useSetRecoilState(DetailNavigationState);
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
     setDetailNavigation(isIntersecting);
   };
-
   const setTarget = useIntersectionObserver({
     onIntersect,
     // Header Bar Height + Navigation Height = 90px
     rootMargin: '-90px',
   });
+
   return (
     <Box
       color={theme.colors.black}
@@ -35,10 +37,8 @@ export default function Introduce({ data, scrollRef }: IntroduceProps) {
       ref={setTarget}
     >
       <Box id="introduce" top="-80px" position="absolute" ref={scrollRef}></Box>
-      <Box>
-        <InnerHTML data={data.summary} />
-      </Box>
-      {data.photo?.map((item, index) => (
+      <Box>{data?.summary && <InnerHTML data={data?.summary} />}</Box>
+      {data.photo?.map((item: any, index: Key) => (
         <Box
           marginTop="20px"
           key={index}

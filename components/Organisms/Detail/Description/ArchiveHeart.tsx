@@ -1,58 +1,59 @@
-import { AxiosResponse } from 'axios';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 
 import NavWish from 'assets/common/bottomTabNavigator/NavWish';
 import { Tag, Span, Button } from 'components/Atoms';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
+import { ArchiveLike } from 'constants/type/api';
 import { AlertState, PopupNameState } from 'states';
-import { useResetDetailArchiveFunction } from 'states/detail';
 import { User } from 'states/user';
 import theme from 'styles/theme';
-import customAxios from 'utils/hooks/customAxios';
-
-type PickStatus = {
-  content: boolean;
-};
+import { useArchiveQuery } from 'api/v1/queryHooks/archive';
 
 export default function ArchiveHeart({
+  id,
   heart,
-  heartCount,
+  likeCount,
 }: {
-  heart: { heartClicked: boolean; link: string };
-  heartCount: number;
+  id: number;
+  heart: ArchiveLike;
+  likeCount: number;
 }) {
+  const router = useRouter();
+  const loginState = useRecoilValue(User);
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const loginState = useRecoilValue(User);
-  const resetPickState = useResetDetailArchiveFunction();
 
-  const setToPick = async () => {
+  const { useGetArchivesById, usePutArchivesLike } = useArchiveQuery();
+  const { refetch } = useGetArchivesById({
+    id: Number(router.query.id),
+    sortType: 'MODIFY_DESC',
+  });
+  const { mutate: putLike } = usePutArchivesLike();
+
+  const onClickArhciveLike = async () => {
     if (!loginState.isLogin) {
       setAlertState(ALERT_MESSAGE.ALERT.LOGIN_CONFIRMATION);
       setPopupName(POPUP_NAME.ALERT_LOGIN_CONFIRMATION);
       return null;
+    } else {
+      putLike(
+        {
+          id,
+          body: !heart?.heartClicked,
+        },
+        {
+          onSuccess: () => {
+            refetch();
+          },
+        },
+      );
     }
-    const axios = customAxios();
-    const url = `${heart.link}${!heart.heartClicked}`;
-
-    try {
-      const axiosData = (await axios({
-        url,
-        method: 'PUT',
-      })) as AxiosResponse<PickStatus>;
-      if (axiosData.data.content !== undefined) {
-      }
-    } catch (error) {
-      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM);
-    }
-    resetPickState();
   };
 
   return (
-    <Button onClick={setToPick}>
+    <Button onClick={onClickArhciveLike}>
       <Tag
         display="flex !important"
         alignItems="center"
@@ -74,7 +75,7 @@ export default function ArchiveHeart({
           height="12px"
           viewBox="3 4 23 22"
         />
-        <Span marginLeft="4px">{heartCount}</Span>
+        <Span marginLeft="4px">{likeCount}</Span>
       </Tag>
     </Button>
   );
