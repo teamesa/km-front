@@ -58,7 +58,7 @@ export const useResetSwipeItemListFunction = () =>
       },
     [],
   );
-  
+
 export const useResetHomeModulesFunction = () =>
   useRecoilCallback(
     ({ set }) =>
@@ -95,8 +95,12 @@ export const useTurnPickStateFunction = (moduleId: number, itemId: number) =>
         set(
           homeModuleIndividualStateFamily(moduleId),
           (exHomeindivisualState) => {
-            const monthlyData = exHomeindivisualState as MonthlyFreeItemCardProps[];
+            const monthlyData =
+              exHomeindivisualState as MonthlyFreeItemCardProps[];
             return monthlyData.map((it: MonthlyFreeItemCardProps) => {
+              console.log(
+                `useTurnPickStateFunction 실행 : ${it.heart.heartClicked}`,
+              );
               if (it.heart.id === itemId) {
                 return {
                   ...it,
@@ -112,31 +116,38 @@ export const useTurnPickStateFunction = (moduleId: number, itemId: number) =>
     [],
   );
 
-export const useTurnPickStateInRealTimeFunction = ( moduleId: number, archiveId: number, ) =>
+export const useTurnPickStateInRealTimeFunction = (
+  moduleId: number,
+  archiveId: number,
+) =>
   useRecoilCallback(
-      ({ set }) =>
-        async () => {
-          set(
-            homeModuleIndividualStateFamily(moduleId),
-            (exHomeindivisualState) => {
-              
-              console.log(`use턴픽실시간아카이브~ archiveId:${archiveId}`)  
-              const realTimeArchiveData = exHomeindivisualState as RealTimeArchiveItemCardProps[];
-              return realTimeArchiveData.map((it: RealTimeArchiveItemCardProps) => {
-                  if (it.id === archiveId) {
-                    return {
-                      ...it,
-                      heart: {...it.metaData.heart, heartClicked: !it.metaData.heart.heartClicked },
-                    };
-                  } else {
-                    return it;
-                  }
-                },
-              );
-            },
-          );
-        },
-      [],
+    ({ set }) =>
+      async () => {
+        set(
+          homeModuleIndividualStateFamily(moduleId),
+          (exHomeindivisualState) => {
+            const realTimeArchiveData =
+              exHomeindivisualState as RealTimeArchiveItemCardProps[];
+            return realTimeArchiveData.map(
+              (it: RealTimeArchiveItemCardProps) => {
+                console.log(it);
+                if (it.id === archiveId) {
+                  return {
+                    ...it,
+                    heart: {
+                      ...it.metaData.heart,
+                      heartClicked: !it.metaData.heart.heartClicked,
+                    },
+                  };
+                } else {
+                  return it;
+                }
+              },
+            );
+          },
+        );
+      },
+    [],
   );
 
 export const homeModuleIndividualStateFamily = atomFamily({

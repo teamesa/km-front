@@ -9,6 +9,7 @@ import { RealTimeArchiveItemCardProps } from 'components/Organisms/Home/ModuleTy
 import theme from 'styles/theme';
 import { useTurnPickStateInRealTimeFunction } from 'states/home';
 import router from 'next/router';
+import RealtimeArchiveItemHeart from 'components/Organisms/Home/Module/RealtimeArchiveItem/RealtimeArchiveItemHeart';
 
 export default function RealTimeArchiveItemCard({
   archive,
@@ -75,17 +76,22 @@ export default function RealTimeArchiveItemCard({
     );
   };
 
-  return (  
-    <Box position="relative" padding="20px 0"
-      onClick={() => {
-        router.push(`${archive.introduction.title.link}`);
-      }}
+  return (
+    <Box
+      position="relative"
+      padding="20px 0"
       css={css`
         cursor: pointer;
       `}
     >
       <Box position="relative">
-        <Box position="relative" paddingTop="100%">
+        <Box
+          position="relative"
+          paddingTop="100%"
+          onClick={() => {
+            router.push(`${archive.introduction.title.link}`);
+          }}
+        >
           <Image src={archive?.photo?.photoUrl} alt="image" layout="fill" />
         </Box>
         <FlexBox
@@ -153,7 +159,7 @@ export default function RealTimeArchiveItemCard({
             </FlexBox>
           </FlexBox>
           <Box zIndex={10} marginRight="15px">
-            <ArchiveHeart
+            <RealtimeArchiveItemHeart
               heart={archive?.metaData?.heart}
               heartCount={archive?.metaData?.likeCount}
               optionalFunction={turnPickStateInRealTimeFunction}
