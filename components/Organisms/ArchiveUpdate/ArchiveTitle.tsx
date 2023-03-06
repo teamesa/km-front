@@ -1,12 +1,11 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { Controller } from 'react-hook-form';
 
 import noImage from 'assets/common/no_image_375x500.png';
 import { Box } from 'components/Atoms';
 import FlexBox from 'components/Atoms/FlexBox';
-import { ArchiveWirteProps, getArchiveById } from 'states/archiveWirte';
+import { useArchiveQuery } from 'api/v1/queryHooks/archive';
 
 export default function ArchiveTitle({
   name,
@@ -16,16 +15,11 @@ export default function ArchiveTitle({
   control: any;
 }) {
   const router = useRouter();
-  const [archiveWrite, setArchiveWrite] = useState<ArchiveWirteProps>();
-  useEffect(() => {
-    async function getApi() {
-      const data = await getArchiveById({ itemId: Number(router.query.id) });
-      return setArchiveWrite(data);
-    }
-    getApi();
-  });
-  const listImage = archiveWrite?.item.imageUrl;
-  const title = archiveWrite?.item.title;
+  const { id } = router.query;
+  const { useGetArchivesById } = useArchiveQuery();
+  const { data: getArchive } = useGetArchivesById(Number(id));
+  const listImage = getArchive?.data.item.imageUrl;
+  const exhibitionTitle = getArchive?.data.item.title;
 
   return (
     <Controller
@@ -46,7 +40,7 @@ export default function ArchiveTitle({
               objectFit="cover"
             />
             <Box fontSize="13px" margin="10px 30px 17px 15px">
-              {title}
+              {exhibitionTitle}
             </Box>
           </FlexBox>
         </FlexBox>

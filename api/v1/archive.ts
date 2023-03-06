@@ -2,13 +2,14 @@ import { AxiosPromise } from 'axios';
 
 import { customKmAxios } from 'api/customKmAxios';
 import {
+  ArchiveDetailResponse,
   ArchiveInfo,
   ArchiveRequest,
   GeneralResponseArchiveResponse,
   PickResponse,
 } from 'constants/type/api';
 
-export function getArchivesById({
+export function getItemsArchivesById({
   id,
   sortType,
 }: {
@@ -22,6 +23,27 @@ export function getArchivesById({
       sortType,
     },
   }) as AxiosPromise<GeneralResponseArchiveResponse>;
+}
+
+export function getArchivesById({ id }: { id: number }) {
+  return customKmAxios({
+    url: `/api/archives/${id}`,
+    method: 'GET',
+  }) as AxiosPromise<ArchiveDetailResponse>;
+}
+
+export function putArchivesById({
+  archiveId,
+  request,
+}: {
+  archiveId: number;
+  request: ArchiveRequest;
+}) {
+  return customKmAxios({
+    url: `/api/archives/${archiveId}`,
+    method: 'PUT',
+    data: request,
+  }) as AxiosPromise<ArchiveInfo>;
 }
 
 export function postArchivesById({ request }: { request: ArchiveRequest }) {

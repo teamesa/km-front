@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useSetRecoilState, useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
@@ -13,60 +12,53 @@ import ArchiveFileUploadForm from 'components/Organisms/ArchiveFileUploadForm';
 import ArchiveTitle from 'components/Organisms/ArchiveUpdate/ArchiveTitle';
 import { ALERT_MESSAGE } from 'constants/alertMessage';
 import { POPUP_NAME } from 'constants/popupName';
+import { ArchiveRequest } from 'constants/type/api';
 import { AlertState, PopupNameState } from 'states';
+import theme from 'styles/theme';
+import { useArchiveQuery } from 'api/v1/queryHooks/archive';
 import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
 } from 'states/archive-square';
-import { ArchiveWirteProps, getArchiveById } from 'states/archiveWirte';
-import theme from 'styles/theme';
-import customAxios from 'utils/hooks/customAxios';
 
 export default function ArchiveUpdateHome() {
   const router = useRouter();
-  const axios = customAxios();
   const { id } = router.query;
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
-  const archivePhotos = useRecoilValue(ArchiveSquareState);
-  const [archiveWrite, setArchiveWrite] = useState<ArchiveWirteProps>();
+  const { useGetArchivesById, usePutArchivesById } = useArchiveQuery();
+  const { data: getArchives, refetch } = useGetArchivesById(
+    Number(router.query.id),
+  );
+  const getArchive = getArchives?.data;
+  const { mutate: putArchive } = usePutArchivesById();
 
-  useEffect(() => {
-    async function getApi() {
-      const data = await getArchiveById({ itemId: Number(id) });
-      return setArchiveWrite(data);
-    }
-    getApi();
-  });
+  const archivePhotos = useRecoilValue(ArchiveSquareState);
+  const resetArchivePhotos = useResetRecoilState(ArchiveSquareState);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<ArchiveWirteProps>({
+  } = useForm<ArchiveRequest>({
     mode: 'onChange',
     defaultValues: {
-      starRating: archiveWrite?.starRating ?? 5,
-      visibleAtItem: archiveWrite?.visibleAtItem,
+      starRating: getArchive?.starRating ?? 5,
+      visibleAtItem: getArchive?.visibleAtItem,
     },
   });
-
-  useEffect(() => {
-    return () => {
-      setArchiveWrite(undefined);
-    };
-  }, [setArchiveWrite]);
 
   const onCancel = () => {
     setAlertState(ALERT_MESSAGE.ALERT.CANCEL_RECONFIRM);
     setPopupName(POPUP_NAME.ALERT_ARCHIVE_CANCEL_CONFIRM);
   };
 
-  const onUpdateSubmit = async (data: any) => {
+  const onUpdateSubmit = async (data: ArchiveRequest) => {
     if (!id) {
       throw Error('아카이브 아이디가 없습니다.');
     }
-    const postData = {
+    const customData = {
       comment: data.comment === undefined ? '' : data.comment,
       photoUrls: archivePhotos
         .filter(
@@ -75,29 +67,33 @@ export default function ArchiveUpdateHome() {
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
       starRating: data.starRating,
-      visibleAtItem: archiveWrite?.visibleAtItem,
+      visibleAtItem: data.visibleAtItem,
       placeInfos: data.placeInfos.filter((item: any) =>
         item === undefined ? null : item,
       ),
     };
-
-    if (CheckForbiddenWords(postData.comment)) {
+    if (CheckForbiddenWords(customData.comment)) {
       setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
       setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
-      return null;
-    }
-
-    try {
-      await axios({
-        method: 'PUT',
-        url: `/api/archives/${Number(id)}`,
-        data: postData,
-      });
-      setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
-    } catch (error: any) {
-      setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
-      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+    } else {
+      putArchive(
+        {
+          archiveId: Number(id),
+          request: customData,
+        },
+        {
+          onSuccess: () => {
+            resetArchivePhotos();
+            refetch();
+            setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
+            setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
+          },
+          onError: () => {
+            setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
+            setPopupName(POPUP_NAME.ALERT_CONFIRM);
+          },
+        },
+      );
     }
   };
 
@@ -112,7 +108,7 @@ export default function ArchiveUpdateHome() {
               <Rating
                 name="starRating"
                 control={control}
-                userRating={archiveWrite?.starRating ?? 5}
+                userRating={getArchive?.starRating ?? 5}
               />
             </Box>
           </Box>
@@ -133,8 +129,9 @@ export default function ArchiveUpdateHome() {
             fontSize="13px"
             lineHeight="18px"
             backgroundColor={theme.colors.grayF8}
+            maxLength={1000}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
-            defaultValue={archiveWrite?.comment}
+            defaultValue={getArchive?.comment}
             {...register('comment')}
           />
           <ArchiveFileUploadForm />
@@ -151,7 +148,7 @@ export default function ArchiveUpdateHome() {
               name="placeInfos[0]"
               type="FOOD"
               control={control}
-              defaultValue={archiveWrite?.food}
+              defaultValue={getArchive?.food}
             />
           </Button>
           <FlexBox marginTop="20px">
@@ -165,7 +162,7 @@ export default function ArchiveUpdateHome() {
               name="placeInfos[1]"
               type="CAFE"
               control={control}
-              defaultValue={archiveWrite?.cafe}
+              defaultValue={getArchive?.cafe}
             />
           </Button>
           <Box marginTop="30px" />
@@ -176,8 +173,8 @@ export default function ArchiveUpdateHome() {
               <FlexBox>
                 <CheckBox
                   type="checkbox"
+                  defaultChecked={getArchive?.visibleAtItem}
                   {...register('visibleAtItem')}
-                  defaultChecked={archiveWrite?.visibleAtItem}
                 />
                 <Box margin="3px 10px" fontSize="12px">
                   다른 사람도 보여주기
@@ -208,8 +205,8 @@ export default function ArchiveUpdateHome() {
                 color={theme.colors.white}
                 width="100%"
                 height="50px"
-                onClick={handleSubmit(onUpdateSubmit)}
                 disabled={!errors}
+                onClick={handleSubmit(onUpdateSubmit)}
               >
                 수정
               </Button>

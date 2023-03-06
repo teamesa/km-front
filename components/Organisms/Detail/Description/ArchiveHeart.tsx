@@ -26,8 +26,8 @@ export default function ArchiveHeart({
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
 
-  const { useGetArchivesById, usePutArchivesLike } = useArchiveQuery();
-  const { refetch: archivesByIdRefetch } = useGetArchivesById({
+  const { useGetItemsArchivesById, usePutArchivesLike } = useArchiveQuery();
+  const { refetch: archivesByIdRefetch } = useGetItemsArchivesById({
     id: Number(router.query.id),
     sortType: 'MODIFY_DESC',
   });
