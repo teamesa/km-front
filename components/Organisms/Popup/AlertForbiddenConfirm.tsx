@@ -1,3 +1,4 @@
+import { css } from '@emotion/react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 import { Box, Button } from 'components/Atoms';
@@ -28,6 +29,9 @@ const AlertForbiddenConfirm = () => {
             lineHeight="1.54"
             textAlign="center"
             color={theme.colors.black}
+            css={css`
+              white-space: pre-wrap;
+            `}
           >
             {alertState.message}
           </Box>

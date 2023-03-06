@@ -6,7 +6,7 @@ export const ALERT_MESSAGE = {
     },
     CANCEL_RECONFIRM: {
       code: 'ALT-002',
-      message: '취소 시 작성했던 기록은 저장되지 않습니다.취소하시겠습니까?',
+      message: '취소 시 작성했던 기록은 저장되지 않습니다.\n취소하시겠습니까?',
     },
     LOGIN_CONFIRMATION: {
       code: 'ALT-006',
@@ -34,11 +34,11 @@ export const ALERT_MESSAGE = {
     },
     ITEM_NOT_EXHIBITED: {
       code: 'ALT-017',
-      message: '해당 컨텐츠는 관리자에 의해 삭제되었습니다.',
+      message: '해당 컨텐츠는 관리자에 의해\n삭제되었습니다.',
     },
     FORBIDDEN_WORD: {
       code: 'ALT-018',
-      message: '입력하신 내용에 금지 단어가 포함되어 저장할 수 없습니다.',
+      message: '입력하신 내용에 금지 단어가 포함되어\n저장할 수 없습니다.',
     },
   },
   ERROR: {

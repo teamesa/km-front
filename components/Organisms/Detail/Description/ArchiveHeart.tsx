@@ -10,6 +10,7 @@ import { AlertState, PopupNameState } from 'states';
 import { User } from 'states/user';
 import theme from 'styles/theme';
 import { useArchiveQuery } from 'api/v1/queryHooks/archive';
+import { useHomeQuery } from 'api/v1/queryHooks/home';
 
 export default function ArchiveHeart({
   id,
@@ -26,11 +27,14 @@ export default function ArchiveHeart({
   const setPopupName = useSetRecoilState(PopupNameState);
 
   const { useGetItemsArchivesById, usePutArchivesLike } = useArchiveQuery();
-  const { refetch } = useGetItemsArchivesById({
+  const { refetch: archivesByIdRefetch } = useGetItemsArchivesById({
     id: Number(router.query.id),
     sortType: 'MODIFY_DESC',
   });
   const { mutate: putLike } = usePutArchivesLike();
+
+  const { useGetHome } = useHomeQuery();
+  const { refetch: homeRefetch } = useGetHome();
 
   const onClickArhciveLike = async () => {
     if (!loginState.isLogin) {
@@ -45,7 +49,10 @@ export default function ArchiveHeart({
         },
         {
           onSuccess: () => {
-            refetch();
+            if (router.query.id) {
+              archivesByIdRefetch();
+            }
+            homeRefetch();
           },
         },
       );
@@ -53,7 +60,12 @@ export default function ArchiveHeart({
   };
 
   return (
-    <Button onClick={onClickArhciveLike}>
+    <Button
+      onClick={(e) => {
+        onClickArhciveLike();
+        e.stopPropagation();
+      }}
+    >
       <Tag
         display="flex !important"
         alignItems="center"
