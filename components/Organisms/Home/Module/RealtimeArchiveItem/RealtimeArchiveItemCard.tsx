@@ -13,16 +13,9 @@ import RealtimeArchiveItemHeart from 'components/Organisms/Home/Module/RealtimeA
 
 export default function RealTimeArchiveItemCard({
   archive,
-  moduleIndex,
 }: {
   archive: RealTimeArchiveItemCardProps;
-  moduleIndex: number;
 }) {
-  const turnPickStateInRealTimeFunction = useTurnPickStateInRealTimeFunction(
-    moduleIndex,
-    archive.id,
-  );
-
   const makeAvgStarRating = () => {
     const rating = 5 * 20;
     return `${rating + 1.5}%`;
@@ -159,11 +152,10 @@ export default function RealTimeArchiveItemCard({
             </FlexBox>
           </FlexBox>
           <Box zIndex={10} marginRight="15px">
-            <RealtimeArchiveItemHeart
+            <ArchiveHeart
               heart={archive?.metaData?.heart}
-              heartCount={archive?.metaData?.likeCount}
-              optionalFunction={turnPickStateInRealTimeFunction}
-              archiveId={archive?.id}
+              likeCount={archive?.metaData?.likeCount}
+              id={archive?.id}
             />
           </Box>
         </FlexBox>
