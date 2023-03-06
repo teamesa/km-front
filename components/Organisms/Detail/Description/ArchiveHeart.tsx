@@ -10,6 +10,7 @@ import { AlertState, PopupNameState } from 'states';
 import { User } from 'states/user';
 import theme from 'styles/theme';
 import { useArchiveQuery } from 'api/v1/queryHooks/archive';
+import { useHomeQuery } from 'api/v1/queryHooks/home';
 
 export default function ArchiveHeart({
   id,
@@ -26,11 +27,14 @@ export default function ArchiveHeart({
   const setPopupName = useSetRecoilState(PopupNameState);
 
   const { useGetArchivesById, usePutArchivesLike } = useArchiveQuery();
-  const { refetch } = useGetArchivesById({
+  const { refetch: archivesByIdRefetch } = useGetArchivesById({
     id: Number(router.query.id),
     sortType: 'MODIFY_DESC',
   });
   const { mutate: putLike } = usePutArchivesLike();
+
+  const { useGetHome } = useHomeQuery();
+  const { refetch: homeRefetch } = useGetHome();
 
   const onClickArhciveLike = async () => {
     if (!loginState.isLogin) {
@@ -45,7 +49,10 @@ export default function ArchiveHeart({
         },
         {
           onSuccess: () => {
-            refetch();
+            if (router.query.id) {
+              archivesByIdRefetch();
+            }
+            homeRefetch();
           },
         },
       );
@@ -53,7 +60,12 @@ export default function ArchiveHeart({
   };
 
   return (
-    <Button onClick={onClickArhciveLike}>
+    <Button
+      onClick={(e) => {
+        onClickArhciveLike();
+        e.stopPropagation();
+      }}
+    >
       <Tag
         display="flex !important"
         alignItems="center"
@@ -79,9 +91,4 @@ export default function ArchiveHeart({
       </Tag>
     </Button>
   );
-}
-function useGetArchivesById(arg0: { id: number; sortType: string }): {
-  data: any;
-} {
-  throw new Error('Function not implemented.');
 }

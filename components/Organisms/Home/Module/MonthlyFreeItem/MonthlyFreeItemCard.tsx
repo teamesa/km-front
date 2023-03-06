@@ -8,56 +8,30 @@ import ItemAdditionalInfo from 'components/Organisms/List/ListItem/ItemAdditiona
 import ItemHeart from 'components/Organisms/List/ListItem/ItemHeart';
 import { useTurnPickStateFunction } from 'states/home';
 import theme from 'styles/theme';
+import { MonthlyFreeItemCardProps } from 'components/Organisms/Home/ModuleTypes';
 export default function MonthlyFreeItemCard({
   moduleIndex,
-  content: {
-    id: itemId,
-    presentationImage: {
-      url: presentationImageUrl,
-      link: presentationImageLink,
-    },
-    title: { text: titleText, link: titleLink },
-    listItemAdditionalInfo,
-    heart,
-    typeBadge: { text: typeBadgeString },
-  },
+  content,
 }: {
   moduleIndex: number;
-  content: {
-    id: number;
-    presentationImage: {
-      url: string;
-      link: string;
-    };
-    title: {
-      text: string;
-      link: string;
-    };
-    listItemAdditionalInfo: {
-      archiveCount: number;
-      grade: number;
-      heartCount: number;
-    };
-    heart: { heartClicked: boolean; id: number; link: string };
-    typeBadge: { text: string; typeBadge: boolean };
-  };
+  content: MonthlyFreeItemCardProps;
 }) {
   const router = useRouter();
-  const turnPickState = useTurnPickStateFunction(moduleIndex, itemId);
+  const turnPickState = useTurnPickStateFunction(moduleIndex, content.id);
 
   return (
     <FlexBox width="100%" height="120px" marginBottom="10px">
       <Box
         width="90px"
         onClick={() => {
-          router.push(presentationImageLink);
+          router.push(content.presentationImage.link);
         }}
       >
         <Image
           width={90}
           height={120}
           alt="image"
-          src={!presentationImageUrl ? noImage : presentationImageUrl}
+          src={!content.presentationImage.url ? noImage : content.presentationImage.url}
         />
       </Box>
       <Box
@@ -69,7 +43,7 @@ export default function MonthlyFreeItemCard({
         paddingTop="10px"
       >
         <Tag backgroundColor={theme.colors.black} color={theme.colors.lime}>
-          {typeBadgeString}
+          {content.typeBadge.text}
         </Tag>
         <Box
           marginTop="10px"
@@ -86,18 +60,18 @@ export default function MonthlyFreeItemCard({
             -webkit-box-orient: vertical;
           `}
           onClick={() => {
-            router.push(titleLink);
+            router.push(content.title.link);
           }}
         >
-          {titleText}
+          {content.title.text}
         </Box>
         <ItemAdditionalInfo
-          listItemAdditionalInfo={listItemAdditionalInfo}
+          listItemAdditionalInfo={content.listItemAdditionalInfo}
           marginTop={10}
         />
       </Box>
       <Box width="20px" marginTop="9px" position="relative">
-        <ItemHeart heart={heart} optionalFunction={turnPickState} />
+        <ItemHeart heart={content.heart} optionalFunction={turnPickState} />
       </Box>
     </FlexBox>
   );

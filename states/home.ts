@@ -11,6 +11,8 @@ import {
   HomeListProps,
   ModuleResponse,
   MonthlyFreeItemCardProps,
+  RealTimeArchiveItemCardProps,
+  RealTimeArchiveItemProps,
 } from 'components/Organisms/Home/ModuleTypes';
 import {
   ModuleData,
@@ -56,6 +58,7 @@ export const useResetSwipeItemListFunction = () =>
       },
     [],
   );
+
 export const useResetHomeModulesFunction = () =>
   useRecoilCallback(
     ({ set }) =>
@@ -77,6 +80,9 @@ const getFromModuleData = ({ moduleName, data }: ModuleData) => {
     case 'MONTHLY_FREE_ITEM':
       const { contents } = data as MonthlyFreeItemProps;
       return contents;
+    case 'REAL_TIME_ARCHIVE':
+      const { archives } = data as RealTimeArchiveItemProps;
+      return archives;
     default:
       return null;
   }
@@ -92,6 +98,9 @@ export const useTurnPickStateFunction = (moduleId: number, itemId: number) =>
             const monthlyData =
               exHomeindivisualState as MonthlyFreeItemCardProps[];
             return monthlyData.map((it: MonthlyFreeItemCardProps) => {
+              console.log(
+                `useTurnPickStateFunction 실행 : ${it.heart.heartClicked}`,
+              );
               if (it.heart.id === itemId) {
                 return {
                   ...it,
@@ -101,6 +110,40 @@ export const useTurnPickStateFunction = (moduleId: number, itemId: number) =>
                 return it;
               }
             });
+          },
+        );
+      },
+    [],
+  );
+
+export const useTurnPickStateInRealTimeFunction = (
+  moduleId: number,
+  archiveId: number,
+) =>
+  useRecoilCallback(
+    ({ set }) =>
+      async () => {
+        set(
+          homeModuleIndividualStateFamily(moduleId),
+          (exHomeindivisualState) => {
+            const realTimeArchiveData =
+              exHomeindivisualState as RealTimeArchiveItemCardProps[];
+            return realTimeArchiveData.map(
+              (it: RealTimeArchiveItemCardProps) => {
+                console.log(it);
+                if (it.id === archiveId) {
+                  return {
+                    ...it,
+                    heart: {
+                      ...it.metaData.heart,
+                      heartClicked: !it.metaData.heart.heartClicked,
+                    },
+                  };
+                } else {
+                  return it;
+                }
+              },
+            );
           },
         );
       },
