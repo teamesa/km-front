@@ -45,6 +45,7 @@ export default function ArchiveUpdateHome() {
     mode: 'onChange',
     defaultValues: {
       starRating: getArchive?.starRating ?? 5,
+      visibleAtItem: getArchive?.visibleAtItem,
     },
   });
 
@@ -170,11 +171,7 @@ export default function ArchiveUpdateHome() {
           <FlexBox>
             <RadioLabel>
               <FlexBox>
-                <CheckBox
-                  type="checkbox"
-                  {...register('visibleAtItem')}
-                  defaultChecked={getArchive?.visibleAtItem}
-                />
+                <CheckBox type="checkbox" {...register('visibleAtItem')} />
                 <Box margin="3px 10px" fontSize="12px">
                   다른 사람도 보여주기
                 </Box>
