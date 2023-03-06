@@ -261,7 +261,7 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
               </FlexBox>
               {item?.photoUrls &&
                 (item.photoUrls.length === 0 ? null : (
-                  <Box marginBottom="15px" marginLeft="42px">
+                  <Box marginBottom="15px">
                     <Carousel
                       imgUrlArr={item.photoUrls}
                       width="345px"

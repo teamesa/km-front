@@ -63,6 +63,7 @@ export default function Carousel({
         width={width}
         height={height}
         overflowY="hidden"
+        margin="0 auto"
         overflowX={imgUrlArr.length < 2 ? 'hidden' : 'scroll'}
         css={css`
           scroll-snap-type: x mandatory;
