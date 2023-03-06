@@ -70,18 +70,18 @@ export default function RealTimeArchiveItemCard({
   };
 
   return (
-    <Box
-      position="relative"
-      padding="20px 0"
-      css={css`
-        cursor: pointer;
-      `}
-      onClick={() => {
-        router.push(`${archive.introduction.title.link}`);
-      }}
-    >
+    <Box position="relative" padding="20px 0">
       <Box position="relative">
-        <Box position="relative" paddingTop="100%">
+        <Box
+          position="relative"
+          paddingTop="100%"
+          css={css`
+            cursor: pointer;
+          `}
+          onClick={() => {
+            router.push(`${archive.introduction.title.link}`);
+          }}
+        >
           <Image src={archive?.photo?.photoUrl} alt="image" layout="fill" />
         </Box>
         <FlexBox
@@ -169,8 +169,12 @@ export default function RealTimeArchiveItemCard({
             text-overflow: ellipsis;
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
+            cursor: pointer;
           `}
           overflow="hidden"
+          onClick={() => {
+            router.push(`${archive.introduction.title.link}`);
+          }}
         >
           {archive?.introduction?.title?.value}
         </Box>
