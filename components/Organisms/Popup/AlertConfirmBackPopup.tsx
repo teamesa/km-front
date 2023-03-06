@@ -1,19 +1,22 @@
 import { useRouter } from 'next/router';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { Box, Button } from 'components/Atoms';
 import Popup from 'components/Molecules/Popup';
 import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import theme from 'styles/theme';
+import { ArchiveSquareState } from 'states/archive-square';
 
 const AlertConfirmBackPopup = () => {
   const alertState = useRecoilValue(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const router = useRouter();
+  const resetArchivePhotos = useResetRecoilState(ArchiveSquareState);
 
   const handleClosePopup = () => {
     router.back();
+    resetArchivePhotos();
     setPopupName(POPUP_NAME.NULL);
   };
 
