@@ -34,11 +34,11 @@ export default function ItemAdditionalInfo(props: AdditionalInfoProps) {
           ''
         )}
         {listItemAdditionalInfo.grade ? (
-          <FlexBox marginRight="10px" height="12px">
+          <FlexBox alignItems="center" marginRight="10px" height="12px">
             <StarRating
               width="10px"
-              height="10px"
-              viewBox="0 0 10 10"
+              height="12px"
+              viewBox="0 0.5 10 10"
               fill={theme.colors.gray99}
             />
             <Box

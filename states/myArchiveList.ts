@@ -17,13 +17,15 @@ export type TPostList = {
 
 export type MyArchivePageContents = {
   api: string;
-  title: string;
   comment: string;
-  places: string;
-  typeBadge: PresentationBadge;
-  listImageUrl: string;
-  updatedAt: string;
   existArchiveImages: boolean;
+  itemApiUrl: string;
+  itemPageUrl: string;
+  listImageUrl: string;
+  title: string;
+  typeBadge: PresentationBadge;
+  places: string;
+  updatedAt: string;
 };
 
 export type PresentationBadge = {

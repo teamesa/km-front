@@ -19,7 +19,7 @@ export default function HomeList() {
 
   useEffect(() => {
     resetHomeList();
-  }, []);
+  }, [resetHomeList]);
 
   switch (homeListInfo.state) {
     case 'hasValue':

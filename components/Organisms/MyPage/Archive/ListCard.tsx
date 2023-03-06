@@ -1,5 +1,7 @@
 import { css } from '@emotion/react';
+import axios from 'axios';
 import Image from 'next/image';
+import router from 'next/router';
 import { useSetRecoilState } from 'recoil';
 
 import ItemInfo from './ItemInfo';
@@ -12,6 +14,7 @@ import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import { ClickedArchiveDetailUrl } from 'states/myArchiveDetail';
 import { MyArchivePageContents } from 'states/myArchiveList';
+import customAxios from 'utils/hooks/customAxios';
 
 type ItemProps = {
   content: MyArchivePageContents;
@@ -22,6 +25,17 @@ export default function ListCard(props: ItemProps) {
   const setPopupName = useSetRecoilState(PopupNameState);
   const setClickedArchiveDetailApi = useSetRecoilState(ClickedArchiveDetailUrl);
   const setAlertState = useSetRecoilState(AlertState);
+
+  const getItemDisplayInfo = async () => {
+    const axios = customAxios();
+    try {
+      await axios.get(content?.itemApiUrl);
+      router.push(content?.itemPageUrl);
+    } catch (error) {
+      setAlertState(ALERT_MESSAGE.ALERT.ITEM_NOT_EXHIBITED);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+    }
+  };
 
   return (
     <FlexBox
@@ -45,9 +59,7 @@ export default function ListCard(props: ItemProps) {
       <Box>
         <Button
           onClick={() => {
-            //TODO: 미전시 응답값 추가되면 클릭시, 요청 보내고 응답값에 따라 페이지 이동 || 알림창 띄우기;
-            setAlertState(ALERT_MESSAGE.ALERT.ITEM_NOT_EXHIBITED);
-            setPopupName(POPUP_NAME.ALERT_CONFIRM);
+            getItemDisplayInfo();
           }}
         >
           <Box width="75px" height="75px" position="relative">
