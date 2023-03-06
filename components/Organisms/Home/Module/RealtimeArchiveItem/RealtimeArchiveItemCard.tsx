@@ -76,15 +76,12 @@ export default function RealTimeArchiveItemCard({
       css={css`
         cursor: pointer;
       `}
+      onClick={() => {
+        router.push(`${archive.introduction.title.link}`);
+      }}
     >
       <Box position="relative">
-        <Box
-          position="relative"
-          paddingTop="100%"
-          onClick={() => {
-            router.push(`${archive.introduction.title.link}`);
-          }}
-        >
+        <Box position="relative" paddingTop="100%">
           <Image src={archive?.photo?.photoUrl} alt="image" layout="fill" />
         </Box>
         <FlexBox

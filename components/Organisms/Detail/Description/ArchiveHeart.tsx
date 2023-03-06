@@ -60,7 +60,12 @@ export default function ArchiveHeart({
   };
 
   return (
-    <Button onClick={onClickArhciveLike}>
+    <Button
+      onClick={(e) => {
+        onClickArhciveLike();
+        e.stopPropagation();
+      }}
+    >
       <Tag
         display="flex !important"
         alignItems="center"
