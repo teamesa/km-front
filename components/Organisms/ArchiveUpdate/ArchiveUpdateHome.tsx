@@ -39,7 +39,7 @@ export default function ArchiveUpdateHome() {
 
   useEffect(() => {
     setArchivePhotos(getSquareByUrls(getArchive?.photoUrls));
-  }, [setArchivePhotos]);
+  }, [getArchive]);
 
   const {
     register,
