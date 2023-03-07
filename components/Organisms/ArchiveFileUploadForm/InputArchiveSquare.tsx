@@ -9,7 +9,7 @@ import { POPUP_NAME } from 'constants/popupName';
 import { AlertState, PopupNameState } from 'states';
 import {
   ArchiveSquareState,
-  ArchiveSqureStateEnum,
+  ArchiveSquareStateEnum,
 } from 'states/archive-square';
 import theme from 'styles/theme';
 import customAxios from 'utils/hooks/customAxios';
@@ -24,7 +24,7 @@ export default function InputArchiveSquare() {
     target,
   }: ChangeEvent<HTMLInputElement>) => {
     const alreadyPhotos = archiveSquares.filter(
-      ({ state }) => state === ArchiveSqureStateEnum.photo,
+      ({ state }) => state === ArchiveSquareStateEnum.photo,
     );
     const alreadyPhotosCount = alreadyPhotos.length;
     if (
@@ -41,7 +41,7 @@ export default function InputArchiveSquare() {
       .fill(1)
       .map((_, index) => ({
         key: alreadyPhotosCount + index,
-        state: ArchiveSqureStateEnum.loading,
+        state: ArchiveSquareStateEnum.loading,
       }));
     const newLoadingCount = newLoading.length;
     if (newLoadingCount === 3) {
@@ -51,7 +51,7 @@ export default function InputArchiveSquare() {
     } else if (newLoadingCount === 2 && alreadyPhotosCount == 0) {
       const input: ArchiveSquareState = {
         key: 2,
-        state: ArchiveSqureStateEnum.input,
+        state: ArchiveSquareStateEnum.input,
       };
       setArchiveSquareState([...newLoading, input]);
     } else if (newLoadingCount == 1 && alreadyPhotosCount == 2) {
@@ -59,17 +59,17 @@ export default function InputArchiveSquare() {
     } else if (newLoadingCount == 1 && alreadyPhotosCount == 1) {
       const input: ArchiveSquareState = {
         key: 2,
-        state: ArchiveSqureStateEnum.input,
+        state: ArchiveSquareStateEnum.input,
       };
       setArchiveSquareState([...alreadyPhotos, ...newLoading, input]);
     } else if (newLoadingCount == 1 && alreadyPhotosCount == 0) {
       const input: ArchiveSquareState = {
         key: 1,
-        state: ArchiveSqureStateEnum.input,
+        state: ArchiveSquareStateEnum.input,
       };
       const blank: ArchiveSquareState = {
         key: 2,
-        state: ArchiveSqureStateEnum.empty,
+        state: ArchiveSquareStateEnum.empty,
       };
       setArchiveSquareState([...newLoading, input, blank]);
     }
@@ -89,13 +89,13 @@ export default function InputArchiveSquare() {
             });
             return {
               key: alreadyPhotosCount + index,
-              state: ArchiveSqureStateEnum.photo,
+              state: ArchiveSquareStateEnum.photo,
               pictureSrc: data,
             };
           } catch (_) {}
           return {
             key: alreadyPhotosCount + index,
-            state: ArchiveSqureStateEnum.photo,
+            state: ArchiveSquareStateEnum.photo,
             pictureSrc: undefined,
           };
         },
@@ -119,7 +119,7 @@ export default function InputArchiveSquare() {
     ) {
       const input: ArchiveSquareState = {
         key: 2,
-        state: ArchiveSqureStateEnum.input,
+        state: ArchiveSquareStateEnum.input,
       };
       setArchiveSquareState([...newFilteredArchivePhotos, input]);
     } else if (
@@ -133,7 +133,7 @@ export default function InputArchiveSquare() {
     ) {
       const input: ArchiveSquareState = {
         key: 2,
-        state: ArchiveSqureStateEnum.input,
+        state: ArchiveSquareStateEnum.input,
       };
       setArchiveSquareState([
         ...alreadyPhotos,
@@ -146,11 +146,11 @@ export default function InputArchiveSquare() {
     ) {
       const input: ArchiveSquareState = {
         key: 1,
-        state: ArchiveSqureStateEnum.input,
+        state: ArchiveSquareStateEnum.input,
       };
       const blank: ArchiveSquareState = {
         key: 2,
-        state: ArchiveSqureStateEnum.empty,
+        state: ArchiveSquareStateEnum.empty,
       };
       setArchiveSquareState([...newFilteredArchivePhotos, input, blank]);
     } else if (newFilteredArchivePhotosCount === 0) {
