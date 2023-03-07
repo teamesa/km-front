@@ -1,9 +1,10 @@
 import { css } from '@emotion/react';
 import { useRef, useState } from 'react';
 
-import { FlexBox, Box, Span } from 'components/Atoms';
+import { FlexBox, Box } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
 import theme from 'styles/theme';
+import { Loader } from 'components/Atoms/Loader';
 
 export default function Carousel({
   imgUrlArr,
@@ -53,11 +54,16 @@ export default function Carousel({
             </Box>
           </FlexBox>
         </FlexBox>
-      ) : null}
+      ) : (
+        <Box position="absolute" top="40%" left="40%">
+          <Loader />
+        </Box>
+      )}
       <Box
         width={width}
         height={height}
         overflowY="hidden"
+        margin="0 auto"
         overflowX={imgUrlArr.length < 2 ? 'hidden' : 'scroll'}
         css={css`
           scroll-snap-type: x mandatory;

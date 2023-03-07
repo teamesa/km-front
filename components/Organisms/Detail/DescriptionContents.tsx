@@ -21,8 +21,8 @@ export default function Description() {
   );
   const { data: getItems } = useGetItemsById(Number(router.query.id));
 
-  const { useGetArchivesById } = useArchiveQuery();
-  const { data: getArchives } = useGetArchivesById({
+  const { useGetItemsArchivesById } = useArchiveQuery();
+  const { data: getItemsArchives } = useGetItemsArchivesById({
     id: Number(router.query.id),
     sortType: 'MODIFY_DESC',
   });
@@ -33,10 +33,10 @@ export default function Description() {
       getItmesDetail?.data.summary === null) &&
     getItmesDetail?.data.photo.length === 0 &&
     source === undefined
-      ? [{ ...getArchives?.data }]
+      ? [{ ...getItemsArchives?.data }]
       : [
           { contents: { ...getItmesDetail?.data, source }, title: '소개' },
-          { ...getArchives?.data },
+          { ...getItemsArchives?.data },
         ];
 
   return (

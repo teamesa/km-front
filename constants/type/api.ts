@@ -38,7 +38,7 @@ export interface ItemInfoResponse {
   source: string;
 }
 
-export interface SummaryResponse {
+export interface ItemSummaryResponse {
   archiveId: number;
   archiveWritten: boolean;
   listImageUrl: string;
@@ -62,6 +62,7 @@ export interface ArchiveInfo {
   updatedAt: string;
   userName: string;
   userProfileUrl: string;
+  visibleAtItem: boolean; //TODO
 }
 
 interface ResponsePagingStatus {
@@ -91,6 +92,28 @@ export interface LikeResponse {
 
 export interface PickResponse {
   content: boolean;
+}
+
+interface ItemBadge {
+  text: string;
+  typeBadge: boolean;
+}
+interface ItemSummary {
+  id: number;
+  imageUrl: string;
+  title: string;
+  typeBadge: ItemBadge;
+}
+export interface ArchiveDetailResponse {
+  archiveActionButton: LinkInfo;
+  cafe: string;
+  comment: string;
+  food: string;
+  item: ItemSummary;
+  photoUrls: string[];
+  starRating: number;
+  updatedAt: string;
+  visibleAtItem: boolean;
 }
 
 interface PlaceInfo {
