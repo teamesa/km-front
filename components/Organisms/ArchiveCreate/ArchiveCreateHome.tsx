@@ -18,9 +18,10 @@ import { ArchiveRequest } from 'constants/type/api';
 import { AlertState, PopupNameState } from 'states';
 import {
   ArchiveSquareState,
-  ArchiveSqureStateEnum,
+  ArchiveSquareStateEnum,
 } from 'states/archive-square';
 import theme from 'styles/theme';
+import { useEffect } from 'react';
 
 export default function ArchiveCreateHome() {
   const router = useRouter();
@@ -33,6 +34,10 @@ export default function ArchiveCreateHome() {
   const setPopupName = useSetRecoilState(PopupNameState);
   const archivePhotos = useRecoilValue(ArchiveSquareState);
   const resetArchivePhotos = useResetRecoilState(ArchiveSquareState);
+
+  useEffect(() => {
+    resetArchivePhotos();
+  }, [resetArchivePhotos]);
 
   const {
     register,
@@ -63,7 +68,7 @@ export default function ArchiveCreateHome() {
       comment: data.comment === undefined ? '' : data.comment,
       photoUrls: archivePhotos
         .filter(
-          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
+          (archivePhoto) => archivePhoto.state === ArchiveSquareStateEnum.photo,
         )
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
