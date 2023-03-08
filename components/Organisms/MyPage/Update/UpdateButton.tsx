@@ -20,7 +20,7 @@ const validate = (
   let hasError: boolean = false;
   const errorSet: UserModifyAlertInterface = {};
 
-  if (!(name && name.length >= 1)) {
+  if (!(name && name.length >= 1 && validateString(name.replaceAll(' ', '')))) {
     hasError = true;
     errorSet.nameMessage = '닉네임을 올바르게 입력해주세요.';
   }
@@ -48,7 +48,14 @@ const validate = (
     errorSet.emailMessage = '이메일을 올바르게 입력해주세요.';
   }
 
-  if (!phoneNumber || !(10 <= phoneNumber.length && phoneNumber.length <= 11)) {
+  if (
+    !phoneNumber ||
+    !(
+      10 <= phoneNumber.length &&
+      phoneNumber.length <= 11 &&
+      validateString(phoneNumber)
+    )
+  ) {
     hasError = true;
     errorSet.phoneNumberMessage = '휴대폰 번호를 올바르게 입력해주세요.';
   }
@@ -63,6 +70,10 @@ const validateEmail = (email: string) => {
     .match(
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
     );
+};
+
+const validateString = (str: string) => {
+  return String(str).match(/^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/);
 };
 
 export default function UpdateButton() {

@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
@@ -18,8 +18,10 @@ import theme from 'styles/theme';
 import { useArchiveQuery } from 'api/v1/queryHooks/archive';
 import {
   ArchiveSquareState,
-  ArchiveSqureStateEnum,
+  ArchiveSquareStateEnum,
+  getSquareByUrls,
 } from 'states/archive-square';
+import { useEffect } from 'react';
 
 export default function ArchiveUpdateHome() {
   const router = useRouter();
@@ -33,8 +35,11 @@ export default function ArchiveUpdateHome() {
   const getArchive = getArchives?.data;
   const { mutate: putArchive } = usePutArchivesById();
 
-  const archivePhotos = useRecoilValue(ArchiveSquareState);
-  const resetArchivePhotos = useResetRecoilState(ArchiveSquareState);
+  const [archivePhotos, setArchivePhotos] = useRecoilState(ArchiveSquareState);
+
+  useEffect(() => {
+    setArchivePhotos(getSquareByUrls(getArchive?.photoUrls));
+  }, [getArchive]);
 
   const {
     register,
@@ -62,7 +67,7 @@ export default function ArchiveUpdateHome() {
       comment: data.comment === undefined ? '' : data.comment,
       photoUrls: archivePhotos
         .filter(
-          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
+          (archivePhoto) => archivePhoto.state === ArchiveSquareStateEnum.photo,
         )
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
@@ -83,7 +88,6 @@ export default function ArchiveUpdateHome() {
         },
         {
           onSuccess: () => {
-            resetArchivePhotos();
             refetch();
             setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
             setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
