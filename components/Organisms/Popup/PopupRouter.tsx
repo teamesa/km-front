@@ -1,4 +1,4 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import AlertArchiveCancelConfirmPopup from 'components/Organisms/Popup/AlertArchiveCancelConfirmPopup';
 import AlertArchiveDeletePopup from 'components/Organisms/Popup/AlertArchiveDeletePopup';
