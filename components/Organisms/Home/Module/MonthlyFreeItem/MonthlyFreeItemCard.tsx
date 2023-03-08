@@ -22,16 +22,25 @@ export default function MonthlyFreeItemCard({
   return (
     <FlexBox width="100%" height="120px" marginBottom="10px">
       <Box
+        aria-label="해당 아이템 링크"
+        role="link"
         width="90px"
         onClick={() => {
           router.push(content.presentationImage.link);
         }}
+        css={css`
+          cursor: pointer;
+        `}
       >
         <Image
           width={90}
           height={120}
           alt="image"
-          src={!content.presentationImage.url ? noImage : content.presentationImage.url}
+          src={
+            !content.presentationImage.url
+              ? noImage
+              : content.presentationImage.url
+          }
         />
       </Box>
       <Box
@@ -46,6 +55,8 @@ export default function MonthlyFreeItemCard({
           {content.typeBadge.text}
         </Tag>
         <Box
+          aria-label="해당 아이템 링크"
+          role="link"
           marginTop="10px"
           width="220px"
           fontSize="13px"
@@ -58,6 +69,7 @@ export default function MonthlyFreeItemCard({
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
+            cursor: pointer;
           `}
           onClick={() => {
             router.push(content.title.link);
