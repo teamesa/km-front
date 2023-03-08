@@ -31,6 +31,12 @@ const PopupRouter = () => {
     router.events.on('routeChangeStart', () => {
       setPopupName(POPUP_NAME.NULL);
     });
+
+    return () => {
+      router.events.off('routeChangeStart', () => {
+        setPopupName(POPUP_NAME.NULL);
+      });
+    };
   }, []);
 
   switch (popupName) {

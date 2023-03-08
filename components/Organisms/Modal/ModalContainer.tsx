@@ -24,6 +24,12 @@ export default function ModalContainer() {
     router.events.on('routeChangeStart', () => {
       offModal();
     });
+
+    return () => {
+      router.events.off('routeChangeStart', () => {
+        offModal();
+      });
+    };
   }, []);
 
   return (
