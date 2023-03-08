@@ -69,15 +69,7 @@ export default function MyArchiveDetailCardInfo(
     <FlexBox borderTop="solid 1px" borderTopColor={theme.colors.gray99}>
       {/* 다녀온곳 */}
       <Box width="172.5px" height="80px">
-        {contents?.cafe === '' && contents?.food === '' ? (
-          <NoItemBox
-            width="inherit"
-            height="inherit"
-            text="다녀온 곳"
-            textColor={theme.colors.gray77}
-            backgroundColor={theme.colors.white}
-          />
-        ) : (
+        {contents?.cafe || contents?.food ? (
           <FlexBox
             width="inherit"
             height="inherit"
@@ -131,6 +123,14 @@ export default function MyArchiveDetailCardInfo(
               </Box>
             ) : null}
           </FlexBox>
+        ) : (
+          <NoItemBox
+            width="inherit"
+            height="inherit"
+            text="다녀온 곳"
+            textColor={theme.colors.gray77}
+            backgroundColor={theme.colors.white}
+          />
         )}
       </Box>
       <FlexBox
