@@ -15,9 +15,10 @@ export default function UpdateHome({
   const router = useRouter();
   useInitHeader({
     headerLeft: 'default',
-    headerRight: 'search',
+    headerRight: 'disabled',
     title: '회원정보 수정',
     headerLeftAction: () => router.back(),
+    headerRightAction: () => {},
   });
   const setModifiedUserInfo = useSetRecoilState(UserModifyInfo);
 
