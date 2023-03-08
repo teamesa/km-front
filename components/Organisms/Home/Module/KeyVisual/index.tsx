@@ -13,6 +13,9 @@ export default function KeyVisual({ keyVisualDatas, index }: KeyVisualProps) {
   const onIntersect: IntersectionObserverCallback = ([{ isIntersecting }]) => {
     setHeaderState({
       headerLeft: 'logo',
+      headerLeftAction() {
+        router.reload();
+      },
       frontTopTransparent: true,
       transparent: isIntersecting,
     });
