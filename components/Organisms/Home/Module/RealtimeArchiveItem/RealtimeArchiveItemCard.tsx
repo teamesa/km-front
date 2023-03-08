@@ -1,15 +1,12 @@
 import { css } from '@emotion/react';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
 
 import { Pointer, Profile } from 'assets/mypage';
 import { Box, FlexBox, Span } from 'components/Atoms';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
 import { RealTimeArchiveItemCardProps } from 'components/Organisms/Home/ModuleTypes';
-import theme from 'styles/theme';
-import { useTurnPickStateInRealTimeFunction } from 'states/home';
 import router from 'next/router';
-import RealtimeArchiveItemHeart from 'components/Organisms/Home/Module/RealtimeArchiveItem/RealtimeArchiveItemHeart';
+import theme from 'styles/theme';
 
 export default function RealTimeArchiveItemCard({
   archive,
