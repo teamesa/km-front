@@ -23,7 +23,12 @@ export default function Carousel({
   };
   return (
     <Box position="relative">
-      {imgUrlArr.length > 1 ? (
+      {imgUrlArr.length === 0 && (
+        <Box position="absolute" top="40%" left="40%">
+          <Loader />
+        </Box>
+      )}
+      {imgUrlArr.length > 1 && (
         <FlexBox
           width="38px"
           height="22px"
@@ -54,11 +59,8 @@ export default function Carousel({
             </Box>
           </FlexBox>
         </FlexBox>
-      ) : (
-        <Box position="absolute" top="40%" left="40%">
-          <Loader />
-        </Box>
       )}
+
       <Box
         width={width}
         height={height}
