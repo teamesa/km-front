@@ -20,6 +20,7 @@ import {
   ArchiveSquareState,
   ArchiveSqureStateEnum,
 } from 'states/archive-square';
+import { Loader } from 'components/Atoms/Loader';
 
 export default function ArchiveUpdateHome() {
   const router = useRouter();
@@ -27,12 +28,20 @@ export default function ArchiveUpdateHome() {
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const { useGetArchivesById, usePutArchivesById } = useArchiveQuery();
-  const { data: getArchives, refetch } = useGetArchivesById(
-    Number(router.query.id),
-  );
+  const {
+    data: getArchives,
+    refetch,
+    isLoading,
+  } = useGetArchivesById(Number(router.query.id));
   const getArchive = getArchives?.data;
-  const { mutate: putArchive } = usePutArchivesById();
+  const cafeInfo = getArchive?.placeInfos.find(
+    (place) => place.placeType === 'CAFE',
+  );
+  const foodInfo = getArchive?.placeInfos.find(
+    (place) => place.placeType === 'FOOD',
+  );
 
+  const { mutate: putArchive } = usePutArchivesById();
   const archivePhotos = useRecoilValue(ArchiveSquareState);
   const resetArchivePhotos = useResetRecoilState(ArchiveSquareState);
 
@@ -41,11 +50,13 @@ export default function ArchiveUpdateHome() {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<ArchiveRequest>({
+  } = useForm<any>({
     mode: 'onChange',
     defaultValues: {
       starRating: getArchive?.starRating ?? 5,
       visibleAtItem: getArchive?.visibleAtItem,
+      photoUrls: getArchive?.photoUrls,
+      placeInfos: getArchive?.placeInfos,
     },
   });
 
@@ -72,6 +83,7 @@ export default function ArchiveUpdateHome() {
         item === undefined ? null : item,
       ),
     };
+    console.log('customData', customData);
     if (CheckForbiddenWords(customData.comment)) {
       setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
       setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
@@ -96,7 +108,13 @@ export default function ArchiveUpdateHome() {
       );
     }
   };
-
+  if (isLoading) {
+    return (
+      <Box position="absolute" top="40%" left="46%">
+        <Loader />
+      </Box>
+    );
+  }
   return (
     <>
       <form onSubmit={handleSubmit(onUpdateSubmit)}>
@@ -148,7 +166,7 @@ export default function ArchiveUpdateHome() {
               name="placeInfos[0]"
               type="FOOD"
               control={control}
-              defaultValue={getArchive?.food}
+              defaultValue={foodInfo?.name}
             />
           </Button>
           <FlexBox marginTop="20px">
@@ -162,7 +180,7 @@ export default function ArchiveUpdateHome() {
               name="placeInfos[1]"
               type="CAFE"
               control={control}
-              defaultValue={getArchive?.cafe}
+              defaultValue={cafeInfo?.name}
             />
           </Button>
           <Box marginTop="30px" />
