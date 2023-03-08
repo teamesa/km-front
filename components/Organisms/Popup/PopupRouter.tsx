@@ -16,7 +16,6 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 const PopupRouter = () => {
-  // const popupName = useRecoilValue(PopupNameState);
   const setPopupState = useSetRecoilState(setPopup);
   const [popupName, setPopupName] = useRecoilState(PopupNameState);
   const router = useRouter();
