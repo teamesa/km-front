@@ -183,7 +183,7 @@ function HeaderBar() {
         >
           <Box position="relative">
             <Box
-              aria-label="왼쪽 버튼"
+              aria-label="헤더 왼쪽 버튼"
               role="button"
               position="absolute"
               top="13px"
@@ -211,7 +211,7 @@ function HeaderBar() {
             </Box>
             <FlexBox position="absolute" top="15px" right="13px">
               <Box
-                aria-label="오른쪽 버튼"
+                aria-label="헤더 오른쪽 버튼"
                 role="button"
                 width="20px"
                 height="20px"
@@ -219,6 +219,9 @@ function HeaderBar() {
                 onClick={() => {
                   router.push('/search');
                 }}
+                css={css`
+                  cursor: pointer;
+                `}
               >
                 <Image
                   src={WhiteSearch}
