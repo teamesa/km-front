@@ -3,16 +3,9 @@ import { useRouter } from 'next/router';
 import Alert from 'assets/error/Alert';
 import { Box, Button } from 'components/Atoms';
 import theme from 'styles/theme';
-import { useInitHeader } from 'utils/hooks/useInitHeader';
 
 export default function DetailNone() {
   const router = useRouter();
-
-  useInitHeader({
-    headerLeft: 'default',
-    headerEnd: 'home',
-    headerLeftAction: () => router.back(),
-  });
 
   return (
     <Box

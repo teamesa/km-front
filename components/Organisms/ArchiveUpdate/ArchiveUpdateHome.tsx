@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
@@ -19,38 +19,45 @@ import { useArchiveQuery } from 'api/v1/queryHooks/archive';
 import {
   ArchiveSquareState,
   ArchiveSquareStateEnum,
-  getSquareByUrls,
 } from 'states/archive-square';
-import { useEffect } from 'react';
+import { Loader } from 'components/Atoms/Loader';
 
 export default function ArchiveUpdateHome() {
   const router = useRouter();
   const { id } = router.query;
+
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const { useGetArchivesById, usePutArchivesById } = useArchiveQuery();
-  const { data: getArchives, refetch } = useGetArchivesById(
-    Number(router.query.id),
-  );
+  const {
+    data: getArchives,
+    refetch,
+    isLoading,
+  } = useGetArchivesById(Number(router.query.id));
   const getArchive = getArchives?.data;
+  const cafeInfo = getArchive?.placeInfos.find(
+    (place) => place.placeType === 'CAFE',
+  );
+  const foodInfo = getArchive?.placeInfos.find(
+    (place) => place.placeType === 'FOOD',
+  );
+
   const { mutate: putArchive } = usePutArchivesById();
-
-  const [archivePhotos, setArchivePhotos] = useRecoilState(ArchiveSquareState);
-
-  useEffect(() => {
-    setArchivePhotos(getSquareByUrls(getArchive?.photoUrls));
-  }, [getArchive]);
+  const archivePhotos = useRecoilValue(ArchiveSquareState);
+  const resetArchivePhotos = useResetRecoilState(ArchiveSquareState);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<ArchiveRequest>({
+  } = useForm<any>({
     mode: 'onChange',
     defaultValues: {
       starRating: getArchive?.starRating ?? 5,
       visibleAtItem: getArchive?.visibleAtItem,
+      photoUrls: getArchive?.photoUrls,
+      placeInfos: getArchive?.placeInfos,
     },
   });
 
@@ -63,8 +70,10 @@ export default function ArchiveUpdateHome() {
     if (!id) {
       throw Error('아카이브 아이디가 없습니다.');
     }
+
     const customData = {
-      comment: data.comment === undefined ? '' : data.comment,
+      comment:
+        data.comment === undefined ? '' : encodeURIComponent(data.comment),
       photoUrls: archivePhotos
         .filter(
           (archivePhoto) => archivePhoto.state === ArchiveSquareStateEnum.photo,
@@ -89,8 +98,9 @@ export default function ArchiveUpdateHome() {
         {
           onSuccess: () => {
             refetch();
+            resetArchivePhotos();
             setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-            setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
+            setPopupName(POPUP_NAME.ARCHIVE_UPDATE_CONFIRM);
           },
           onError: () => {
             setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
@@ -100,7 +110,13 @@ export default function ArchiveUpdateHome() {
       );
     }
   };
-
+  if (isLoading) {
+    return (
+      <Box position="absolute" top="40%" left="46%">
+        <Loader />
+      </Box>
+    );
+  }
   return (
     <>
       <form onSubmit={handleSubmit(onUpdateSubmit)}>
@@ -135,7 +151,9 @@ export default function ArchiveUpdateHome() {
             backgroundColor={theme.colors.grayF8}
             maxLength={1000}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
-            defaultValue={getArchive?.comment}
+            defaultValue={
+              getArchive?.comment && decodeURIComponent(getArchive?.comment)
+            }
             {...register('comment')}
           />
           <ArchiveFileUploadForm />
@@ -147,14 +165,14 @@ export default function ArchiveUpdateHome() {
               근처 다녀온 맛집
             </Box>
           </FlexBox>
-          <Button type="button" marginTop="10px" width="100%">
+          <Box marginTop="10px" width="100%">
             <AddressInput
               name="placeInfos[0]"
               type="FOOD"
               control={control}
-              defaultValue={getArchive?.food}
+              defaultValue={foodInfo?.name}
             />
-          </Button>
+          </Box>
           <FlexBox marginTop="20px">
             <MapPoint />
             <Box marginLeft="10px" fontSize="13px">
@@ -166,7 +184,7 @@ export default function ArchiveUpdateHome() {
               name="placeInfos[1]"
               type="CAFE"
               control={control}
-              defaultValue={getArchive?.cafe}
+              defaultValue={cafeInfo?.name}
             />
           </Button>
           <Box marginTop="30px" />
