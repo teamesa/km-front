@@ -16,7 +16,7 @@ export default function ArchiveTitle({
   control: any;
 }) {
   const router = useRouter();
-  const { exhibitionId } = router.query;
+  const { exhibitionId, checked } = router.query;
   const { useGetItemsSummaryById } = useItemsQuery();
   const { data: summaryData } = useGetItemsSummaryById(Number(exhibitionId));
   const listImage = summaryData?.data.listImageUrl;
@@ -44,7 +44,7 @@ export default function ArchiveTitle({
               {exhibitionTitle}
             </Box>
           </FlexBox>
-          {!exhibitionId && (
+          {!checked && (
             <Button
               type="button"
               onClick={() => {
