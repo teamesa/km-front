@@ -124,33 +124,31 @@ function HeaderBar() {
                 top={header.headerRight === 'close' ? '10px' : '6px'}
                 right="10px"
               >
-                {header.headerRightAction && (
-                  <Box
-                    aria-label="오른쪽 버튼"
-                    role="button"
-                    width="30px"
-                    height="30px"
-                    alignItems="center"
-                    onClick={() => {
-                      if (header.headerRightAction) {
-                        header.headerRightAction();
-                      } else {
-                        router.push('/search');
-                      }
-                    }}
-                    css={
-                      header.headerRight === 'disabled'
-                        ? css`
-                            cursor: default;
-                          `
-                        : css`
-                            cursor: pointer;
-                          `
+                <Box
+                  aria-label="오른쪽 버튼"
+                  role="button"
+                  width="30px"
+                  height="30px"
+                  alignItems="center"
+                  onClick={() => {
+                    if (header.headerRightAction) {
+                      header.headerRightAction();
+                    } else {
+                      router.push('/search');
                     }
-                  >
-                    {headerRightIcon[header.headerRight ?? 'search']}
-                  </Box>
-                )}
+                  }}
+                  css={
+                    header.headerRight === 'disabled'
+                      ? css`
+                          cursor: default;
+                        `
+                      : css`
+                          cursor: pointer;
+                        `
+                  }
+                >
+                  {headerRightIcon[header.headerRight ?? 'search']}
+                </Box>
                 {header.headerEnd ? (
                   <Box
                     aria-label="끝 버튼"

@@ -16,6 +16,7 @@ const ArchiveUpdate: NextPage<UserProps> = ({ user }) => {
     title: '아카이브 수정하기',
     headerRight: 'disabled',
     headerLeftAction: () => router.back(),
+    headerRightAction: () => {},
   });
 
   if (!user.isLogin) {
