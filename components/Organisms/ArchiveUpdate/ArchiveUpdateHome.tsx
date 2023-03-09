@@ -25,6 +25,7 @@ import { Loader } from 'components/Atoms/Loader';
 export default function ArchiveUpdateHome() {
   const router = useRouter();
   const { id } = router.query;
+
   const setAlertState = useSetRecoilState(AlertState);
   const setPopupName = useSetRecoilState(PopupNameState);
   const { useGetArchivesById, usePutArchivesById } = useArchiveQuery();
@@ -69,8 +70,10 @@ export default function ArchiveUpdateHome() {
     if (!id) {
       throw Error('아카이브 아이디가 없습니다.');
     }
+
     const customData = {
-      comment: data.comment === undefined ? '' : data.comment,
+      comment:
+        data.comment === undefined ? '' : encodeURIComponent(data.comment),
       photoUrls: archivePhotos
         .filter(
           (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
@@ -83,7 +86,6 @@ export default function ArchiveUpdateHome() {
         item === undefined ? null : item,
       ),
     };
-    console.log('customData', customData);
     if (CheckForbiddenWords(customData.comment)) {
       setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
       setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
@@ -98,7 +100,7 @@ export default function ArchiveUpdateHome() {
             resetArchivePhotos();
             refetch();
             setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-            setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
+            setPopupName(POPUP_NAME.ARCHIVE_UPDATE_CONFIRM);
           },
           onError: () => {
             setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
@@ -149,7 +151,9 @@ export default function ArchiveUpdateHome() {
             backgroundColor={theme.colors.grayF8}
             maxLength={1000}
             placeholder={`그날의 기분, 분위기, 만족도를 담은 코멘트를 \n 기록해주세요. (1,000자 이내)`}
-            defaultValue={getArchive?.comment}
+            defaultValue={
+              getArchive?.comment && decodeURIComponent(getArchive?.comment)
+            }
             {...register('comment')}
           />
           <ArchiveFileUploadForm />
@@ -161,14 +165,14 @@ export default function ArchiveUpdateHome() {
               근처 다녀온 맛집
             </Box>
           </FlexBox>
-          <Button type="button" marginTop="10px" width="100%">
+          <Box marginTop="10px" width="100%">
             <AddressInput
               name="placeInfos[0]"
               type="FOOD"
               control={control}
               defaultValue={foodInfo?.name}
             />
-          </Button>
+          </Box>
           <FlexBox marginTop="20px">
             <MapPoint />
             <Box marginLeft="10px" fontSize="13px">

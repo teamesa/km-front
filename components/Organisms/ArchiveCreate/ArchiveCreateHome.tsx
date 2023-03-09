@@ -60,7 +60,8 @@ export default function ArchiveCreateHome() {
     }
     const customData = {
       itemId: Number(exhibitionId),
-      comment: data.comment === undefined ? '' : data.comment,
+      comment:
+        data.comment === undefined ? '' : encodeURIComponent(data.comment),
       photoUrls: archivePhotos
         .filter(
           (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,

@@ -8,7 +8,6 @@ import { Profile } from 'assets/mypage';
 import { Box, FlexBox, Span } from 'components/Atoms';
 import { CheckBox } from 'components/Atoms/CheckBox';
 import Carousel from 'components/Molecules/Carousel';
-import InnerHTML from 'components/Molecules/InnerHTML';
 import StarScope from 'components/Molecules/StarScope';
 import ArchiveHeart from 'components/Organisms/Detail/Description/ArchiveHeart';
 import theme from 'styles/theme';
@@ -269,16 +268,16 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
                     />
                   </Box>
                 ))}
-              {item.comment ? (
+              {item.comment && (
                 <Box
                   fontSize="13px"
                   lineHeight="1.54"
                   textAlign="left"
                   marginBottom="12px"
                 >
-                  <InnerHTML data={item.comment} />
+                  {decodeURIComponent(item.comment)}
                 </Box>
-              ) : null}
+              )}
               {item.cafe || item.food ? (
                 <Box
                   backgroundColor={theme.colors.grayF8}

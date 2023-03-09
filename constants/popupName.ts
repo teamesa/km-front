@@ -9,4 +9,5 @@ export const POPUP_NAME = {
   OVERFLOW_PICTURE: 'ArchivePictureOverflowPopup',
   ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM: 'AlertArchiveDeletePopup',
   FORBIDDEN_CONFIRM: 'ForbiddenConfirm',
+  ARCHIVE_UPDATE_CONFIRM: 'ArchiveUpdateConfirm',
 };

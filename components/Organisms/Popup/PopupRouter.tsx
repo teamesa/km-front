@@ -12,6 +12,7 @@ import MyArchiveDetailPopup from 'components/Organisms/Popup/MyArchiveDetailPopu
 import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
 import { setPopup } from 'states/popupName';
+import ArchiveUpdateConfirm from 'components/Organisms/Popup/ArchiveUpdateConfirm';
 
 const PopupRouter = () => {
   const popupName = useRecoilValue(PopupNameState);
@@ -42,6 +43,8 @@ const PopupRouter = () => {
       return <AlertArchiveDeletePopup />;
     case POPUP_NAME.FORBIDDEN_CONFIRM:
       return <AlertForbiddenConfirm />;
+    case POPUP_NAME.ARCHIVE_UPDATE_CONFIRM:
+      return <ArchiveUpdateConfirm />;
     default:
       return null;
   }
