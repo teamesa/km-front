@@ -22,6 +22,7 @@ const Archive: NextPage<UserProps> = ({ user }) => {
       }
       return router.push('/mypage');
     },
+    headerRightAction: () => {},
   });
 
   if (!user.isLogin) {
