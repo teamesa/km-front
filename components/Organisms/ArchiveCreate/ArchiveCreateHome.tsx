@@ -21,7 +21,7 @@ import {
   ArchiveSquareStateEnum,
 } from 'states/archive-square';
 import theme from 'styles/theme';
-import { useEffect } from 'react';
+import { KeyboardEvent, useEffect } from 'react';
 
 export default function ArchiveCreateHome() {
   const router = useRouter();
@@ -103,9 +103,16 @@ export default function ArchiveCreateHome() {
     }
   };
 
+  const checkKeyDown = (e: KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Enter') e.preventDefault();
+  };
+
   return (
     <>
-      <form onSubmit={handleSubmit(onCreateSubmit)}>
+      <form
+        onSubmit={handleSubmit(onCreateSubmit)}
+        onKeyDown={(e) => checkKeyDown(e)}
+      >
         <Box>
           {exhibitionId ? (
             <ArchiveTitle name="itemId" control={control} />
@@ -113,7 +120,7 @@ export default function ArchiveCreateHome() {
             <SearchTitle />
           )}
           <Box textAlign="center" fontSize="18px">
-            <Box>이 문화생활, 어땠나요?</Box>
+            <Box>이 문화생활, 어땠나요를레히</Box>
             <Box marginTop="16px">
               <Rating name="starRating" control={control} userRating={5} />
             </Box>
