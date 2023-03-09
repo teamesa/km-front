@@ -138,9 +138,15 @@ function HeaderBar() {
                         router.push('/search');
                       }
                     }}
-                    css={css`
-                      cursor: pointer;
-                    `}
+                    css={
+                      header.headerRight === 'disabled'
+                        ? css`
+                            cursor: default;
+                          `
+                        : css`
+                            cursor: pointer;
+                          `
+                    }
                   >
                     {headerRightIcon[header.headerRight ?? 'search']}
                   </Box>
@@ -155,9 +161,15 @@ function HeaderBar() {
                     onClick={() => {
                       router.push('/');
                     }}
-                    css={css`
-                      cursor: pointer;
-                    `}
+                    css={
+                      header.headerEnd === 'disabled'
+                        ? css`
+                            cursor: default;
+                          `
+                        : css`
+                            cursor: pointer;
+                          `
+                    }
                   >
                     {headerEndIcon[header.headerEnd]}
                   </Box>
