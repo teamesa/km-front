@@ -97,7 +97,6 @@ export default function SearchMap({
                 placeholder="예) 스타벅스, 빠레트한남, 맘스터치"
                 {...register('search', { required: true })}
                 type="search"
-                // value={}
               />
               <Button
                 position="absolute"

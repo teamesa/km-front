@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import StarBlack from 'assets/archive/StarBlack';
 import StarWhite from 'assets/archive/StarWhite';
-import { Box, Button, FlexBox, Layout } from 'components/Atoms';
+import { Box, Button, FlexBox } from 'components/Atoms';
 
 export default function StarScope({
   onChange,
@@ -37,10 +37,10 @@ export default function StarScope({
               type="button"
               key={index}
               onClick={() => {
+                setHover(index);
                 setRating(index);
                 onChange && onChange(index);
               }}
-              onMouseLeave={() => setHover(rating)}
             >
               {currentStep ? (
                 index <= currentStep ? (

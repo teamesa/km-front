@@ -124,25 +124,27 @@ function HeaderBar() {
                 top={header.headerRight === 'close' ? '10px' : '6px'}
                 right="10px"
               >
-                <Box
-                  aria-label="오른쪽 버튼"
-                  role="button"
-                  width="30px"
-                  height="30px"
-                  alignItems="center"
-                  onClick={() => {
-                    if (header.headerRightAction) {
-                      header.headerRightAction();
-                    } else {
-                      router.push('/search');
-                    }
-                  }}
-                  css={css`
-                    cursor: pointer;
-                  `}
-                >
-                  {headerRightIcon[header.headerRight ?? 'search']}
-                </Box>
+                {header.headerRightAction && (
+                  <Box
+                    aria-label="오른쪽 버튼"
+                    role="button"
+                    width="30px"
+                    height="30px"
+                    alignItems="center"
+                    onClick={() => {
+                      if (header.headerRightAction) {
+                        header.headerRightAction();
+                      } else {
+                        router.push('/search');
+                      }
+                    }}
+                    css={css`
+                      cursor: pointer;
+                    `}
+                  >
+                    {headerRightIcon[header.headerRight ?? 'search']}
+                  </Box>
+                )}
                 {header.headerEnd ? (
                   <Box
                     aria-label="끝 버튼"
@@ -153,6 +155,9 @@ function HeaderBar() {
                     onClick={() => {
                       router.push('/');
                     }}
+                    css={css`
+                      cursor: pointer;
+                    `}
                   >
                     {headerEndIcon[header.headerEnd]}
                   </Box>

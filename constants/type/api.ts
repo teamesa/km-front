@@ -106,9 +106,8 @@ interface ItemSummary {
 }
 export interface ArchiveDetailResponse {
   archiveActionButton: LinkInfo;
-  cafe: string;
+  placeInfos: PlaceInfo[];
   comment: string;
-  food: string;
   item: ItemSummary;
   photoUrls: string[];
   starRating: number;
