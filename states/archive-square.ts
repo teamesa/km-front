@@ -61,7 +61,6 @@ export const getSquareByUrls = (
       key: 2,
       state: ArchiveSquareStateEnum.empty,
     };
-    console.log([...square, input, blank]);
     return [...square, input, blank];
   } else if (square.length == 2) {
     const input: ArchiveSquareState = {

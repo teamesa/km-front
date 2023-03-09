@@ -48,7 +48,10 @@ export default function ArchiveUpdateHome() {
   const [archivePhotos, setArchivePhotos] = useRecoilState(ArchiveSquareState);
 
   useEffect(() => {
-    setArchivePhotos(getSquareByUrls(getArchive?.photoUrls));
+    if (getArchives) {
+      setArchivePhotos(getSquareByUrls(getArchive?.photoUrls));
+      setValue('placeInfos', getArchive?.placeInfos ?? []);
+    }
   }, [getArchive]);
 
   const {
@@ -56,13 +59,13 @@ export default function ArchiveUpdateHome() {
     handleSubmit,
     formState: { errors },
     control,
-  } = useForm<any>({
+    setValue,
+  } = useForm<ArchiveRequest>({
     mode: 'onChange',
     defaultValues: {
       starRating: getArchive?.starRating ?? 5,
       visibleAtItem: getArchive?.visibleAtItem,
       photoUrls: getArchive?.photoUrls,
-      placeInfos: getArchive?.placeInfos,
     },
   });
 
