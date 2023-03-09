@@ -188,7 +188,7 @@ export default function RealTimeArchiveItemCard({
             `}
             overflow="hidden"
           >
-            {archive.introduction.comment}
+            {decodeURIComponent(archive.introduction.comment)}
           </Box>
         ) : (
           <></>
