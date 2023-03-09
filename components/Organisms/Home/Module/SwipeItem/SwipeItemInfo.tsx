@@ -25,6 +25,8 @@ export default function SwipeItemInfo({
   return (
     <Box paddingTop="20px" width="300px" paddingX="15px">
       <Box
+        aria-label="아이템 타이틀 링크"
+        role="link"
         fontSize="19px"
         fontWeight={500}
         lineHeight={1.37}
@@ -35,6 +37,7 @@ export default function SwipeItemInfo({
           display: -webkit-box;
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
+          cursor: pointer;
         `}
         color={theme.colors.black}
         onClick={() => {
