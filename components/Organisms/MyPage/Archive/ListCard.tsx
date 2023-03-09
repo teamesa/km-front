@@ -120,7 +120,7 @@ export default function ListCard(props: ItemProps) {
               -webkit-box-orient: vertical;
             `}
           >
-            {content.comment}
+            {decodeURIComponent(content.comment)}
           </Box>
           <Box marginTop="11px" display={content?.places ? 'block' : 'none'}>
             <FlexBox alignItems="center">

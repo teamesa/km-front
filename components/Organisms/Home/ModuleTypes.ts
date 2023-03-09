@@ -94,7 +94,7 @@ export type RealTimeArchiveItemCardProps = {
   introduction: {
     title: { link: string; value: string };
     places?: string;
-    comment?: string;
+    comment: string;
   };
   metaData: {
     user: { name: string; photoUrl?: string };
