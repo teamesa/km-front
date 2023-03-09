@@ -1,21 +1,27 @@
 import type { NextPage } from 'next';
 import { useEffect } from 'react';
-import { useRecoilValueLoadable } from 'recoil';
-
+import { useRecoilValueLoadable, useSetRecoilState } from 'recoil';
+import { User } from 'states/user';
 import { Box } from 'components/Atoms';
 import Footer from 'components/Organisms/Home/Footer';
 import ModuleResolver from 'components/Organisms/Home/ModuleResolver';
 import { useResetHomeModulesFunction, homeModuleState } from 'states/home';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
+import { UserProps, useUserProps } from 'utils/authentication/useUser';
 
-const Home: NextPage = () => {
+const Home: NextPage<UserProps> = ({ user }) => {
   useInitHeader({ headerLeft: 'logo', frontTopTransparent: true });
   const data = useRecoilValueLoadable(homeModuleState);
   const resetHomeModules = useResetHomeModulesFunction();
+  const setUserFirst = useSetRecoilState(User);
 
   useEffect(() => {
     resetHomeModules();
   }, [resetHomeModules]);
+
+  useEffect(() => {
+    setUserFirst(user);
+  }, [user, setUserFirst]);
 
   switch (data.state) {
     case 'hasValue':
@@ -39,3 +45,4 @@ const Home: NextPage = () => {
   }
 };
 export default Home;
+export const getServerSideProps = useUserProps;

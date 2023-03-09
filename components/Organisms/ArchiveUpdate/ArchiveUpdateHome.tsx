@@ -18,7 +18,7 @@ import theme from 'styles/theme';
 import { useArchiveQuery } from 'api/v1/queryHooks/archive';
 import {
   ArchiveSquareState,
-  ArchiveSqureStateEnum,
+  ArchiveSquareStateEnum,
 } from 'states/archive-square';
 import { Loader } from 'components/Atoms/Loader';
 
@@ -76,7 +76,7 @@ export default function ArchiveUpdateHome() {
         data.comment === undefined ? '' : encodeURIComponent(data.comment),
       photoUrls: archivePhotos
         .filter(
-          (archivePhoto) => archivePhoto.state === ArchiveSqureStateEnum.photo,
+          (archivePhoto) => archivePhoto.state === ArchiveSquareStateEnum.photo,
         )
         .map((archivePhoto) => archivePhoto.pictureSrc)
         .filter(isDefined),
@@ -97,8 +97,8 @@ export default function ArchiveUpdateHome() {
         },
         {
           onSuccess: () => {
-            resetArchivePhotos();
             refetch();
+            resetArchivePhotos();
             setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
             setPopupName(POPUP_NAME.ARCHIVE_UPDATE_CONFIRM);
           },

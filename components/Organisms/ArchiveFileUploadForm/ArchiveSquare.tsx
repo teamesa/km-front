@@ -4,7 +4,7 @@ import LoadingArchiveSquare from 'components/Organisms/ArchiveFileUploadForm/Loa
 import PhotoArchiveSquare from 'components/Organisms/ArchiveFileUploadForm/PhotoArchiveSquare';
 import {
   ArchiveSquareState,
-  ArchiveSqureStateEnum,
+  ArchiveSquareStateEnum,
 } from 'states/archive-square';
 
 export default function ArchiveSquare({
@@ -13,15 +13,17 @@ export default function ArchiveSquare({
   square: ArchiveSquareState;
 }) {
   switch (state) {
-    case ArchiveSqureStateEnum.input:
+    case ArchiveSquareStateEnum.input:
       return <InputArchiveSquare />;
-    case ArchiveSqureStateEnum.loading:
+    case ArchiveSquareStateEnum.loading:
       return <LoadingArchiveSquare />;
-    case ArchiveSqureStateEnum.photo:
+    case ArchiveSquareStateEnum.photo:
       if (pictureSrc != undefined) {
         return <PhotoArchiveSquare src={pictureSrc} squareId={key} />;
       }
-    case ArchiveSqureStateEnum.empty:
+      return <EmptyArchiveSquare />;
+    case ArchiveSquareStateEnum.empty:
+      return <EmptyArchiveSquare />;
     default:
       return <EmptyArchiveSquare />;
   }

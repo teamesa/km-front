@@ -20,7 +20,13 @@ import theme from 'styles/theme';
 const headerLeftIcon = {
   default: <ArrowLeft width="30" height="30" viewBox="-10 -6 30 30" />,
   logo: <Image src={Logo} alt="image" width="136px" height="20px" />,
-  disabled: <></>,
+  disabled: (
+    <div
+      css={css`
+        cursor: default;
+      `}
+    ></div>
+  ),
   privacy: (
     <Box fontSize="16px" fontWeight={500} lineHeight={1.5}>
       개인정보처리방침

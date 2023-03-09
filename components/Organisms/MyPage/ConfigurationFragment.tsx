@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import { useRouter } from 'next/router';
 
-import { Box, Span } from 'components/Atoms';
+import { Box, Span, Button, FlexBox } from 'components/Atoms';
 import ListItems from 'components/Atoms/ListItems';
 import theme from 'styles/theme';
 
@@ -9,8 +9,8 @@ export default function ConfigurationFragment() {
   const router = useRouter();
 
   return (
-    <Box padding="40px 0px">
-      <Box
+    <FlexBox padding="40px 0px" flexDirection="column" alignItems="flex-start">
+      <Button
         marginBottom="30px"
         fontSize="15px"
         fontWeight={500}
@@ -19,8 +19,8 @@ export default function ConfigurationFragment() {
         onClick={() => router.push('/mypage/update')}
       >
         회원정보 수정
-      </Box>
-      <Box
+      </Button>
+      <Button
         marginBottom="30px"
         fontSize="15px"
         fontWeight={500}
@@ -29,7 +29,7 @@ export default function ConfigurationFragment() {
         onClick={() => router.push('/api/logout')}
       >
         로그아웃
-      </Box>
+      </Button>
       <Box marginTop="60px">
         <ul>
           <ListItems
@@ -62,6 +62,6 @@ export default function ConfigurationFragment() {
           </ListItems>
         </ul>
       </Box>
-    </Box>
+    </FlexBox>
   );
 }

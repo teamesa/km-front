@@ -1,4 +1,4 @@
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import AlertArchiveCancelConfirmPopup from 'components/Organisms/Popup/AlertArchiveCancelConfirmPopup';
 import AlertArchiveDeletePopup from 'components/Organisms/Popup/AlertArchiveDeletePopup';
@@ -13,16 +13,31 @@ import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
 import { setPopup } from 'states/popupName';
 import ArchiveUpdateConfirm from 'components/Organisms/Popup/ArchiveUpdateConfirm';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const PopupRouter = () => {
-  const popupName = useRecoilValue(PopupNameState);
   const setPopupState = useSetRecoilState(setPopup);
+  const [popupName, setPopupName] = useRecoilState(PopupNameState);
+  const router = useRouter();
 
   if (popupName?.length) {
     setPopupState(true);
   } else {
     setPopupState(false);
   }
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', () => {
+      setPopupName(POPUP_NAME.NULL);
+    });
+
+    return () => {
+      router.events.off('routeChangeStart', () => {
+        setPopupName(POPUP_NAME.NULL);
+      });
+    };
+  }, []);
 
   switch (popupName) {
     case POPUP_NAME.ALERT_CONFIRM:

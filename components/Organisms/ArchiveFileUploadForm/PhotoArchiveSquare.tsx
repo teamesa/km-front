@@ -5,7 +5,7 @@ import { WhiteClose } from 'assets/archive/WhiteClose';
 import { Box, Button } from 'components/Atoms';
 import {
   ArchiveSquareState,
-  ArchiveSqureStateEnum,
+  ArchiveSquareStateEnum,
 } from 'states/archive-square';
 import theme from 'styles/theme';
 export default function PhotoArchiveSquare({
@@ -23,7 +23,7 @@ export default function PhotoArchiveSquare({
         .filter(({ key }) => key !== squareId)
         .filter(
           ({ pictureSrc, state }) =>
-            pictureSrc !== undefined && state === ArchiveSqureStateEnum.photo,
+            pictureSrc !== undefined && state === ArchiveSquareStateEnum.photo,
         )
         .map((square, index) => ({
           ...square,
@@ -32,14 +32,14 @@ export default function PhotoArchiveSquare({
 
       const blankSquares =
         filteredSquares.length === 1
-          ? [{ key: 2, state: ArchiveSqureStateEnum.empty }]
+          ? [{ key: 2, state: ArchiveSquareStateEnum.empty }]
           : [];
 
       return [
         ...filteredSquares,
         {
           key: filteredSquares.length,
-          state: ArchiveSqureStateEnum.input,
+          state: ArchiveSquareStateEnum.input,
         },
         ...blankSquares,
       ];
