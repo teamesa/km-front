@@ -20,13 +20,7 @@ import theme from 'styles/theme';
 const headerLeftIcon = {
   default: <ArrowLeft width="30" height="30" viewBox="-10 -6 30 30" />,
   logo: <Image src={Logo} alt="image" width="136px" height="20px" />,
-  disabled: (
-    <div
-      css={css`
-        cursor: default;
-      `}
-    ></div>
-  ),
+  disabled: <></>,
   privacy: (
     <Box fontSize="16px" fontWeight={500} lineHeight={1.5}>
       개인정보처리방침
@@ -105,9 +99,15 @@ function HeaderBar() {
                     header.headerLeftAction();
                   }
                 }}
-                css={css`
-                  cursor: pointer;
-                `}
+                css={
+                  header.headerLeft === 'disabled'
+                    ? css`
+                        cursor: default;
+                      `
+                    : css`
+                        cursor: pointer;
+                      `
+                }
               >
                 {headerLeftIcon[header.headerLeft ?? 'disabled']}
               </Box>
@@ -137,9 +137,15 @@ function HeaderBar() {
                       router.push('/search');
                     }
                   }}
-                  css={css`
-                    cursor: pointer;
-                  `}
+                  css={
+                    header.headerRight === 'disabled'
+                      ? css`
+                          cursor: default;
+                        `
+                      : css`
+                          cursor: pointer;
+                        `
+                  }
                 >
                   {headerRightIcon[header.headerRight ?? 'search']}
                 </Box>
@@ -153,6 +159,15 @@ function HeaderBar() {
                     onClick={() => {
                       router.push('/');
                     }}
+                    css={
+                      header.headerEnd === 'disabled'
+                        ? css`
+                            cursor: default;
+                          `
+                        : css`
+                            cursor: pointer;
+                          `
+                    }
                   >
                     {headerEndIcon[header.headerEnd]}
                   </Box>
@@ -195,9 +210,15 @@ function HeaderBar() {
                   header.headerLeftAction();
                 }
               }}
-              css={css`
-                cursor: pointer;
-              `}
+              css={
+                header.headerLeft === 'disabled'
+                  ? css`
+                      cursor: default;
+                    `
+                  : css`
+                      cursor: pointer;
+                    `
+              }
             >
               <Image src={WhiteLogo} alt="image" width="136px" height="20px" />
             </Box>
@@ -212,16 +233,21 @@ function HeaderBar() {
             <FlexBox position="absolute" top="15px" right="13px">
               <Box
                 aria-label="헤더 오른쪽 버튼"
-                role="button"
                 width="20px"
                 height="20px"
                 alignItems="center"
                 onClick={() => {
                   router.push('/search');
                 }}
-                css={css`
-                  cursor: pointer;
-                `}
+                css={
+                  header.headerRight === 'disabled'
+                    ? css`
+                        cursor: default;
+                      `
+                    : css`
+                        cursor: pointer;
+                      `
+                }
               >
                 <Image
                   src={WhiteSearch}
