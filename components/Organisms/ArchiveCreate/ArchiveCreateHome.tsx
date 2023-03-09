@@ -91,7 +91,6 @@ export default function ArchiveCreateHome() {
         },
         {
           onSuccess: () => {
-            resetArchivePhotos();
             setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
             setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
           },

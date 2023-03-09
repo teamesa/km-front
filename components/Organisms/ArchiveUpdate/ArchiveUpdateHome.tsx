@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useForm } from 'react-hook-form';
-import { useRecoilValue, useResetRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 
 import { MapPoint } from 'assets/archive/MapPoint';
 import { Box, Button, FlexBox, RadioLabel, TextArea } from 'components/Atoms';
@@ -19,8 +19,10 @@ import { useArchiveQuery } from 'api/v1/queryHooks/archive';
 import {
   ArchiveSquareState,
   ArchiveSquareStateEnum,
+  getSquareByUrls,
 } from 'states/archive-square';
 import { Loader } from 'components/Atoms/Loader';
+import { useEffect } from 'react';
 
 export default function ArchiveUpdateHome() {
   const router = useRouter();
@@ -43,8 +45,11 @@ export default function ArchiveUpdateHome() {
   );
 
   const { mutate: putArchive } = usePutArchivesById();
-  const archivePhotos = useRecoilValue(ArchiveSquareState);
-  const resetArchivePhotos = useResetRecoilState(ArchiveSquareState);
+  const [archivePhotos, setArchivePhotos] = useRecoilState(ArchiveSquareState);
+
+  useEffect(() => {
+    setArchivePhotos(getSquareByUrls(getArchive?.photoUrls));
+  }, [getArchive]);
 
   const {
     register,
@@ -98,7 +103,6 @@ export default function ArchiveUpdateHome() {
         {
           onSuccess: () => {
             refetch();
-            resetArchivePhotos();
             setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
             setPopupName(POPUP_NAME.ARCHIVE_UPDATE_CONFIRM);
           },

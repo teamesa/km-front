@@ -105,5 +105,5 @@ export type RealTimeArchiveItemCardProps = {
     dimColor?: string;
     opacity?: string;
   };
-  photo: { link: string; photoUrl: string };
+  photo: { link: string; photoUrl?: string };
 };

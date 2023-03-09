@@ -66,6 +66,9 @@ export default function RealTimeArchiveItemCard({
     );
   };
 
+  if (!archive?.photo?.photoUrl) {
+    return <></>;
+  }
   return (
     <Box position="relative" padding="20px 0">
       <Box position="relative">
