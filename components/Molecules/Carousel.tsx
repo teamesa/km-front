@@ -37,7 +37,7 @@ export default function Carousel({
           justifyContent="space-around"
           top="0px"
           right="0px"
-          zIndex="100"
+          zIndex="1"
           backgroundColor={theme.colors.black}
           opacity="0.4"
         >

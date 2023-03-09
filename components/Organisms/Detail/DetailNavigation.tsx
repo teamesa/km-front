@@ -28,7 +28,7 @@ export function DescriptionNavigation({
   return (
     <Box
       position="sticky"
-      top="calc(45px + env(safe-area-inset-top))"
+      top="calc(44px + env(safe-area-inset-top))"
       background={theme.colors.white}
       zIndex={2}
     >
