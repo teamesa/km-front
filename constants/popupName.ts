@@ -5,7 +5,7 @@ export const POPUP_NAME = {
   ALERT_LOGIN_CONFIRMATION: 'AlertLoginConfirmationPopup',
   POPUP_ARCHIVE_DETAIL: 'MyArchiveDetailPopup',
   ALERT_CONFIRM_BACK: 'AlertConfirmBack',
-  ARCHIVE_WRITE_CONFIRM: 'ArchiveWirteConfirm',
+  ARCHIVE_WRITE_CONFIRM: 'ArchiveWriteConfirm',
   OVERFLOW_PICTURE: 'ArchivePictureOverflowPopup',
   ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM: 'AlertArchiveDeletePopup',
   FORBIDDEN_CONFIRM: 'ForbiddenConfirm',

@@ -92,7 +92,7 @@ export default function ArchiveCreateHome() {
         {
           onSuccess: () => {
             setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-            setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
+            setPopupName(POPUP_NAME.ARCHIVE_WRITE_CONFIRM);
           },
           onError: () => {
             setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);
@@ -103,16 +103,9 @@ export default function ArchiveCreateHome() {
     }
   };
 
-  const checkKeyDown = (e: KeyboardEvent<HTMLFormElement>) => {
-    if (e.key === 'Enter') e.preventDefault();
-  };
-
   return (
     <>
-      <form
-        onSubmit={handleSubmit(onCreateSubmit)}
-        onKeyDown={(e) => checkKeyDown(e)}
-      >
+      <form onSubmit={handleSubmit(onCreateSubmit)}>
         <Box>
           {exhibitionId ? (
             <ArchiveTitle name="itemId" control={control} />
@@ -120,7 +113,7 @@ export default function ArchiveCreateHome() {
             <SearchTitle />
           )}
           <Box textAlign="center" fontSize="18px">
-            <Box>이 문화생활, 어땠나요를레히</Box>
+            <Box>이 문화생활, 어땠나요</Box>
             <Box marginTop="16px">
               <Rating name="starRating" control={control} userRating={5} />
             </Box>
@@ -199,6 +192,7 @@ export default function ArchiveCreateHome() {
             </Box>
             <Box flex={1} paddingLeft="5px">
               <Button
+                type="button"
                 backgroundColor={theme.colors.black}
                 color={theme.colors.white}
                 width="100%"

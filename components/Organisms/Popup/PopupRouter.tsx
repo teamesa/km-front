@@ -7,7 +7,6 @@ import AlertSuccessPopup from 'components/Organisms/Popup/AlertConfirmPopup';
 import AlertForbiddenConfirm from 'components/Organisms/Popup/AlertForbiddenConfirm';
 import AlertLoginConfirmationPopup from 'components/Organisms/Popup/AlertLoginConfirmationPopup';
 import ArchivePictureOverflowPopup from 'components/Organisms/Popup/ArchivePictureOverflowPopup';
-import ArchiveWirteConfirmPopup from 'components/Organisms/Popup/ArchiveWirteConfirmPopup';
 import MyArchiveDetailPopup from 'components/Organisms/Popup/MyArchiveDetailPopup';
 import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
@@ -15,6 +14,7 @@ import { setPopup } from 'states/popupName';
 import ArchiveUpdateConfirm from 'components/Organisms/Popup/ArchiveUpdateConfirm';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import ArchiveWriteConfirmPopup from 'components/Organisms/Popup/ArchiveWirteConfirmPopup';
 
 const PopupRouter = () => {
   const setPopupState = useSetRecoilState(setPopup);
@@ -51,7 +51,7 @@ const PopupRouter = () => {
     case POPUP_NAME.ALERT_CONFIRM_BACK:
       return <AlertConfirmBackPopup />;
     case POPUP_NAME.ARCHIVE_WRITE_CONFIRM:
-      return <ArchiveWirteConfirmPopup />;
+      return <ArchiveWriteConfirmPopup />;
     case POPUP_NAME.OVERFLOW_PICTURE:
       return <ArchivePictureOverflowPopup />;
     case POPUP_NAME.ALERT_ARCHIVE_DELETE_CANCEL_CONFIRM:

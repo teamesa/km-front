@@ -6,12 +6,18 @@ export interface MyArchiveDetailProps {
   updatedAt: string;
   comment: string;
   starRating: number;
-  food: string;
-  cafe: string;
+  placeInfos: PlaceInfo[];
   photoUrls: string[];
   archiveActionButton: ArchiveDetailLinkInfos[];
   item: ProductionItemInfo;
   visibleAtItem: boolean;
+}
+
+interface PlaceInfo {
+  address: string;
+  name: string;
+  placeType: string;
+  roadAddress: string;
 }
 
 export interface ProductionItemInfo {
