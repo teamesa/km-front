@@ -21,6 +21,39 @@ export default function Carousel({
   const handleIndicator = (index: number) => {
     setNowIndex(index);
   };
+
+  //레퍼런스 코드
+  // const slider = document.querySelector('.items');
+  // let isDown = false;
+  // let startX;
+  // let scrollLeft;
+
+  // slider.addEventListener('mousedown', (e) => {
+  //   isDown = true;
+  //   slider.classList.add('active');
+  //   startX = e.pageX - slider.offsetLeft;
+  //   scrollLeft = slider.scrollLeft;
+  // });
+  // slider.addEventListener('mouseleave', () => {
+  //   isDown = false;
+  //   slider.classList.remove('active');
+  // });
+  // slider.addEventListener('mouseup', () => {
+  //   isDown = false;
+  //   slider.classList.remove('active');
+  // });
+  // slider.addEventListener('mousemove', (e) => {
+  //   if(!isDown) return;
+  //   e.preventDefault();
+  //   const x = e.pageX - slider.offsetLeft;
+  //   const walk = (x - startX) * 3; //scroll-fast
+  //   slider.scrollLeft = scrollLeft - walk;
+  //   console.log(`처음 scrollLeft: ${scrollLeft}`)
+  //   console.log(`현재 scrollLeft: ${slider.scrollLeft}`)
+  //   console.log(walk);
+
+  // });
+
   return (
     <Box position="relative">
       {imgUrlArr.length === 0 && (
