@@ -141,8 +141,8 @@ const MyArchiveDetailPopup = () => {
             </Box>
             <MyArchiveDetailCardInfo
               starRating={archiveData?.starRating}
-              food={archiveData?.food}
-              cafe={archiveData?.cafe}
+              food={archiveData?.placeInfos[0]?.name}
+              cafe={archiveData?.placeInfos[1]?.name}
             />
           </Box>
         </Box>
