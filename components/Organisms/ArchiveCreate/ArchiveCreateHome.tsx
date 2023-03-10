@@ -92,7 +92,7 @@ export default function ArchiveCreateHome() {
         {
           onSuccess: () => {
             setAlertState(ALERT_MESSAGE.ALERT.SAVED_SUCCESS);
-            setPopupName(POPUP_NAME.ALERT_CONFIRM_BACK);
+            setPopupName(POPUP_NAME.ARCHIVE_WRITE_CONFIRM);
           },
           onError: () => {
             setAlertState(ALERT_MESSAGE.ERROR.ARCHIVE_REGISTRATION_QUESTION);

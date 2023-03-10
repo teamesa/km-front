@@ -8,12 +8,13 @@ import { POPUP_NAME } from 'constants/popupName';
 import { PopupNameState } from 'states';
 import theme from 'styles/theme';
 
-const ArchiveWirteConfirmPopup = () => {
+const ArchiveWriteConfirmPopup = () => {
   const router = useRouter();
+  const { exhibitionId } = router.query;
   const setPopupName = useSetRecoilState(PopupNameState);
 
   const handleClosePopup = () => {
-    setPopupName(POPUP_NAME.NULL);
+    router.push(`/detail/${exhibitionId}`);
     router.push('/list');
   };
 
@@ -50,4 +51,4 @@ const ArchiveWirteConfirmPopup = () => {
   );
 };
 
-export default ArchiveWirteConfirmPopup;
+export default ArchiveWriteConfirmPopup;
