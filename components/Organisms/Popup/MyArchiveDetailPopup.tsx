@@ -58,11 +58,7 @@ const MyArchiveDetailPopup = () => {
               archiveActionButton={archiveData?.archiveActionButton}
             />
             <Box position="relative">
-              <Box
-                width="345px"
-                height="345px"
-                borderTop={`1px solid ${theme.colors.gray99}`}
-              >
+              <Box width="345px" height="345px">
                 {archiveData?.photoUrls?.length === 0 ? (
                   <NoItemBox
                     width="inherit"
