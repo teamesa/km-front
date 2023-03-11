@@ -15,12 +15,49 @@ export default function Carousel({
   width: string;
   height: string;
 }) {
-  const rootRef = useRef<any>();
   const [nowIndex, setNowIndex] = useState<number>(1);
 
   const handleIndicator = (index: number) => {
     setNowIndex(index);
   };
+
+  //마우스 클릭하여 드래그 horizontal 스크롤
+  const sliderRef = useRef<any>();
+  const [isGrabbing, setIsGrabbing] = useState(false);
+  const [walk, setWalk] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [startX, setStartX] = useState(0);
+
+  const handleMouseUp = () => {
+    sliderRef.current.style.cursor = '-webkit-grab';
+    sliderRef.current.style.scrollSnapType = 'x mandatory';
+    setIsGrabbing(false);
+  };
+
+  const handleMouseLeave = () => {
+    sliderRef.current.style.cursor = '-webkit-grab';
+    sliderRef.current.style.scrollSnapType = 'none';
+    setIsGrabbing(false);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    sliderRef.current.style.cursor = 'grabb-webkit-grabbing';
+    sliderRef.current.style.scrollSnapType = 'none';
+    setIsGrabbing(true);
+    setStartX(e.pageX - sliderRef.current.offsetLeft); // 움직이기 전 offSetLeft 지점
+    setScrollLeft(sliderRef.current.scrollLeft); // 움직이기전 스크롤왼쪽위치
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isGrabbing) return null; //잡으면서 움직이는 상태인지 판단위해
+    e.preventDefault(); // 드래그 고스트 효과 없애기
+    setWalk(e.pageX - startX - sliderRef.current.offsetLeft); // 움직인 후 offSetLeft 지점
+    //스크롤왼쪽위치 업데이트
+    sliderRef.current.scrollLeft = scrollLeft - walk * 2;
+    sliderRef.current.style.cursor = '-webkit-grabbing';
+    sliderRef.current.style.scrollSnapType = 'none';
+  };
+
   return (
     <Box position="relative">
       {imgUrlArr.length === 0 && (
@@ -68,9 +105,13 @@ export default function Carousel({
         margin="0 auto"
         overflowX={imgUrlArr.length < 2 ? 'hidden' : 'scroll'}
         css={css`
-          scroll-snap-type: x mandatory;
+          scroll-snap-type: none;
         `}
-        ref={rootRef}
+        ref={sliderRef}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
       >
         <FlexBox height="inherit" width="fit-content" flexDirection="row">
           {imgUrlArr.map((imgUrl, _index) => (
@@ -78,7 +119,7 @@ export default function Carousel({
               itemOrder={_index}
               key={_index}
               imgUrl={imgUrl}
-              rootRef={rootRef}
+              rootRef={sliderRef}
               handleIndicator={handleIndicator}
               width={width}
               height={height}
