@@ -39,7 +39,12 @@ export default function MyArchiveDetailHeaderInfo(
   };
 
   return (
-    <Box height="94px" padding="20px 17px">
+    <Box
+      height="94px"
+      padding="20px 17px"
+      borderBottom="1px solid"
+      borderBottomColor={theme.colors.gray99}
+    >
       <FlexBox justifyContent="space-between">
         <FlexBox fontSize="11px" alignItems="center">
           <Tag
