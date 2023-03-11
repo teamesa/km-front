@@ -33,20 +33,20 @@ export default function CarouselItem({
 
   const setTarget = useIntersectionObserver({
     root: rootRef.current,
-    threshold: 0.9,
+    threshold: 0.2,
     onIntersect,
   });
 
   return (
     <Box
-      css={css`
-        scroll-snap-align: start;
-      `}
       width={width}
       maxWidth={theme.view.webView}
       height={height}
       position="relative"
       ref={setTarget}
+      css={css`
+        scroll-snap-align: end;
+      `}
     >
       <Image src={imgUrl} alt="image" layout="fill" />
       {dimOption ? <CarouselDim height={height} /> : <></>}

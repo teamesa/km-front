@@ -1,11 +1,10 @@
 import { css } from '@emotion/react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { FlexBox, Box } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
 import theme from 'styles/theme';
 import { Loader } from 'components/Atoms/Loader';
-import { start } from 'repl';
 
 export default function Carousel({
   imgUrlArr,
@@ -16,72 +15,48 @@ export default function Carousel({
   width: string;
   height: string;
 }) {
-  const rootRef = useRef<any>();
   const [nowIndex, setNowIndex] = useState<number>(1);
 
   const handleIndicator = (index: number) => {
     setNowIndex(index);
   };
 
-  //TODO: 마우스 클릭하여 드래그 horizontal 스크롤
+  //마우스 클릭하여 드래그 horizontal 스크롤
+  const sliderRef = useRef<any>();
+  const [isGrabbing, setIsGrabbing] = useState(false);
+  const [walk, setWalk] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const [startX, setStartX] = useState(0);
 
-  // 아이템 감싸는 부모 ele
-  // const slider = document.querySelector('.items');
-
-  const test = () => {
-    console.log(sliderRef?.current.scrollLeft);
+  const handleMouseUp = () => {
+    sliderRef.current.style.cursor = '-webkit-grab';
+    sliderRef.current.style.scrollSnapType = 'x mandatory';
+    setIsGrabbing(false);
   };
 
-  // let isDown = false;
-  // let startX: number;
-  // let scrollLeft: number;
-  // const [walk, setWalk] = useState(0);
-  // const [updatedScrollLeft, setUpdatedScrollLeft] = useState(0);
-  // const [startX, setStartX] = useState(0);
-  // const [isDown, setIsDown] = useState(false);
-  const sliderRef = useRef<any>(null);
-
-  let isDown = false;
-  let startX = 0;
-  let updatedScrollLeft = 0;
-  let walk = 0;
-
-  const mouseDragScroll = () => {
-    sliderRef.current.addEventListener('mousedown', (e: React.MouseEvent) => {
-      isDown = true;
-      startX = e.pageX - sliderRef.current.offsetLeft;
-      updatedScrollLeft = sliderRef.current.scrollLeft;
-    });
-
-    sliderRef.current.addEventListener('mouseup', () => {
-      isDown = false;
-      console.log('mouseUp');
-    });
-
-    sliderRef.current.addEventListener('mouseleave', () => {
-      isDown = false;
-      console.log('mouseleave');
-    });
-
-    sliderRef.current.addEventListener('mousemove', (e: React.MouseEvent) => {
-      if (!isDown) return null;
-      e.preventDefault();
-      console.log(`walk: ${walk}`);
-      // setWalk(e.pageX - sliderRef.current.offsetLeft - startX);
-      // setUpdatedScrollLeft(updatedScrollLeft + walk);
-
-      walk = e.pageX - sliderRef.current.offsetLeft - startX;
-      sliderRef.current.scrollLeft += updatedScrollLeft + walk;
-      console.log(sliderRef.current.scrollLeft);
-    });
+  const handleMouseLeave = () => {
+    sliderRef.current.style.cursor = '-webkit-grab';
+    sliderRef.current.style.scrollSnapType = 'none';
+    setIsGrabbing(false);
   };
 
-  useEffect(() => {
-    if (sliderRef) {
-      console.log('sliderRef 있음');
-      mouseDragScroll();
-    }
-  });
+  const handleMouseDown = (e: React.MouseEvent) => {
+    sliderRef.current.style.cursor = 'grabb-webkit-grabbing';
+    sliderRef.current.style.scrollSnapType = 'none';
+    setIsGrabbing(true);
+    setStartX(e.pageX - sliderRef.current.offsetLeft); // 움직이기 전 offSetLeft 지점
+    setScrollLeft(sliderRef.current.scrollLeft); // 움직이기전 스크롤왼쪽위치
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isGrabbing) return null; //잡으면서 움직이는 상태인지 판단위해
+    e.preventDefault(); // 드래그 고스트 효과 없애기
+    setWalk(e.pageX - startX - sliderRef.current.offsetLeft); // 움직인 후 offSetLeft 지점
+    //스크롤왼쪽위치 업데이트
+    sliderRef.current.scrollLeft = scrollLeft - walk * 2;
+    sliderRef.current.style.cursor = '-webkit-grabbing';
+    sliderRef.current.style.scrollSnapType = 'none';
+  };
 
   return (
     <Box position="relative">
@@ -130,10 +105,13 @@ export default function Carousel({
         margin="0 auto"
         overflowX={imgUrlArr.length < 2 ? 'hidden' : 'scroll'}
         css={css`
-          scroll-snap-type: x mandatory;
+          scroll-snap-type: none;
         `}
         ref={sliderRef}
-        onClick={mouseDragScroll}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
       >
         <FlexBox height="inherit" width="fit-content" flexDirection="row">
           {imgUrlArr.map((imgUrl, _index) => (
