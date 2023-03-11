@@ -23,94 +23,65 @@ export default function Carousel({
     setNowIndex(index);
   };
 
-  // useRef 훅 예제
-  // const [offsetLeft, setHeight] = useState(0);
-  // const ref = useRef<any>(null);
-
-  // useEffect(() => {
-  //   if (ref?.current?.offsetHeight) {
-  //     setHeight(ref.current.offsetHeight);
-  //   }
-  // }, []);
-
   //TODO: 마우스 클릭하여 드래그 horizontal 스크롤
 
   // 아이템 감싸는 부모 ele
   // const slider = document.querySelector('.items');
-  const sliderRef = useRef<any>(null);
-
-  const [nowOffsetLeft, setNowOffsetLeft] = useState(0);
-
-  useEffect(() => {
-    if (sliderRef?.current?.offsetLeft) {
-      setNowOffsetLeft(sliderRef.current.offsetLeft);
-    }
-  }, []);
 
   const test = () => {
-    console.log(sliderRef?.current.offsetLeft);
+    console.log(sliderRef?.current.scrollLeft);
   };
+
+  // let isDown = false;
+  // let startX: number;
+  // let scrollLeft: number;
+  // const [walk, setWalk] = useState(0);
+  // const [updatedScrollLeft, setUpdatedScrollLeft] = useState(0);
+  // const [startX, setStartX] = useState(0);
+  // const [isDown, setIsDown] = useState(false);
+  const sliderRef = useRef<any>(null);
+
+  let isDown = false;
+  let startX = 0;
+  let updatedScrollLeft = 0;
+  let walk = 0;
 
   const mouseDragScroll = () => {
-    let isDown = false;
-    let startX: number;
-    let scrollLeft: number;
-
-    // slider?.addEventListener('mousedown', (e) => {
-    //   isDown = true;
-    //   slider.classList.add('active');
-    //   startX = e.pageX - slider.offsetLeft;
-    //   scrollLeft = slider.scrollLeft;
-    // });
-
-    sliderRef?.current.addEventListener('mousedown', (e: React.MouseEvent) => {
+    sliderRef.current.addEventListener('mousedown', (e: React.MouseEvent) => {
       isDown = true;
-      startX = e.pageX - sliderRef?.current?.offsetLeft; // 브라우저 x 축 마우스 좌표 -
-      scrollLeft = sliderRef.current.scrollLeft;
-      console.log(`마우스클릭위치 scrollLeft : ${scrollLeft}`);
+      startX = e.pageX - sliderRef.current.offsetLeft;
+      updatedScrollLeft = sliderRef.current.scrollLeft;
     });
 
-    // slider?.addEventListener('mouseleave', () => {
-    //   isDown = false;
-    //   slider.classList.remove('active');
-    // });
-
-    sliderRef?.current?.addEventListener('mouseleave', () => {
+    sliderRef.current.addEventListener('mouseup', () => {
       isDown = false;
+      console.log('mouseUp');
     });
 
-    // slider?.addEventListener('mouseup', () => {
-    //   isDown = false;
-    //   slider.classList.remove('active');
-    // });
-
-    sliderRef?.current?.addEventListener('mouseup', () => {
+    sliderRef.current.addEventListener('mouseleave', () => {
       isDown = false;
+      console.log('mouseleave');
     });
 
-    // grap and scroll
-    // slider?.addEventListener('mousemove', (e) => {
-    //   if (!isDown) return;
-    //   e.preventDefault();
-    //   const x = e.pageX - slider.offsetLeft;
-    //   const walk = (x - startX) * 3; // scroll-fast
-    //   slider.scrollLeft -= walk;
-    // });
-
-    sliderRef?.current?.addEventListener('mousemove', (e: React.MouseEvent) => {
-      if (!isDown) return; // 안누르고 마우스 움직일때.
+    sliderRef.current.addEventListener('mousemove', (e: React.MouseEvent) => {
+      if (!isDown) return null;
       e.preventDefault();
-      console.log(`pageX: ${e.pageX}`); // 브라우저 x 축에서의 마우스좌표
-      console.log(
-        `sliderRef?.current?.offsetLeft: ${sliderRef?.current?.offsetLeft}`, // 현재 스크롤 x 위치
-      );
-      const x = e.pageX - sliderRef?.current?.offsetLeft;
-      console.log(`x: ${x}`); // 현재마우스좌표 - 스크롤 위치
-      const walk = x - startX; // 이동한거리. 마이너스값이면 왼쪽으로 이동, 플러스면 오른쪽으로 이동
-      setNowOffsetLeft(scrollLeft - walk);
-      // console.log(`현재 이동하는 스크롤left : ${nowOffsetLeft}`);
+      console.log(`walk: ${walk}`);
+      // setWalk(e.pageX - sliderRef.current.offsetLeft - startX);
+      // setUpdatedScrollLeft(updatedScrollLeft + walk);
+
+      walk = e.pageX - sliderRef.current.offsetLeft - startX;
+      sliderRef.current.scrollLeft += updatedScrollLeft + walk;
+      console.log(sliderRef.current.scrollLeft);
     });
   };
+
+  useEffect(() => {
+    if (sliderRef) {
+      console.log('sliderRef 있음');
+      mouseDragScroll();
+    }
+  });
 
   return (
     <Box position="relative">
