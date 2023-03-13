@@ -41,7 +41,7 @@ export default function PickItemImage({ presentationImage }: ImagePorps) {
               top="calc(50% - 16px)"
               left="50%"
               color={theme.colors.white}
-              fontSize="26px"
+              fontSize="22px"
               lineHeight="32px"
               zIndex="2"
               css={css`
