@@ -126,10 +126,11 @@ const MyArchiveDetailPopup = () => {
                       fontSize="12px"
                       textAlign="left"
                       color={theme.colors.white}
+                      css={css`
+                        white-space: pre-wrap;
+                      `}
                     >
-                      <InnerHTML
-                        data={decodeURIComponent(archiveData?.comment)}
-                      />
+                      {decodeURIComponent(archiveData?.comment)}
                     </Box>
                   )}
                 </Box>
