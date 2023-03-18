@@ -19,6 +19,9 @@ const InfiniteCarouselTitle = ({
       paddingX="15px"
       onClick={link ? () => router.push(link) : () => {}}
       zIndex={300}
+      css={css`
+        cursor: pointer;
+      `}
     >
       <Box
         width="100%"
