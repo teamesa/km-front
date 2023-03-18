@@ -17,11 +17,23 @@ const InfiniteCarouselTitle = ({
   return (
     <Box
       paddingX="15px"
-      onClick={link ? () => router.push(link) : () => {}}
       zIndex={300}
-      css={css`
-        cursor: pointer;
-      `}
+      onClick={
+        link
+          ? () => {
+              router.push(link);
+            }
+          : () => {}
+      }
+      css={
+        link
+          ? css`
+              cursor: pointer;
+            `
+          : css`
+              cursor: default;
+            `
+      }
     >
       <Box
         width="100%"
