@@ -26,12 +26,13 @@ export default function HomeList() {
       return (
         <Box borderTop="1px solid #f3f3f3">
           {homeListInfo?.contents?.data?.keyVisualDatas?.map(
-            ({ keyVisualPhotoUrl, upperTitle, lowerTitle }, index) => (
+            ({ keyVisualPhotoUrl, upperTitle, lowerTitle, link }, index) => (
               <HomeListCard
                 photoUrl={keyVisualPhotoUrl}
                 upperTitle={upperTitle}
                 lowerTitle={lowerTitle}
                 key={`HomeListCard-${index}`}
+                link={link}
               />
             ),
           )}

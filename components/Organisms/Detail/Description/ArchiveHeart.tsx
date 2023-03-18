@@ -85,7 +85,7 @@ export default function ArchiveHeart({
           }
           width="13px"
           height="12px"
-          viewBox="3 4 23 22"
+          viewBox="3 4 24 22"
         />
         <Span marginLeft="4px">{likeCount}</Span>
       </Tag>

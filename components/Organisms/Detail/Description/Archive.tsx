@@ -274,6 +274,9 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
                   lineHeight="1.54"
                   textAlign="left"
                   marginBottom="12px"
+                  css={css`
+                    white-space: pre-wrap;
+                  `}
                 >
                   {decodeURIComponent(item.comment)}
                 </Box>

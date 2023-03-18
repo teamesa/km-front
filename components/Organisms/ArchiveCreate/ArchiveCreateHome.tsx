@@ -166,7 +166,11 @@ export default function ArchiveCreateHome() {
           <FlexBox>
             <RadioLabel>
               <FlexBox>
-                <CheckBox type="checkbox" {...register('visibleAtItem')} />
+                <CheckBox
+                  type="checkbox"
+                  {...register('visibleAtItem')}
+                  checked
+                />
                 <Box margin="3px 10px" fontSize="12px">
                   다른 사람도 보여주기
                 </Box>
