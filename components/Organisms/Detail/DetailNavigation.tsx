@@ -4,6 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { Box, FlexBox } from 'components/Atoms';
 import { DetailNavigationState } from 'states/detail-navigation';
 import theme from 'styles/theme';
+import { css } from '@emotion/react';
 
 export function DescriptionNavigation({
   deatailMetaInfo,
@@ -35,6 +36,7 @@ export function DescriptionNavigation({
       <FlexBox height="45px" overflow="auto" zIndex={2}>
         {deatailMetaInfo?.map(({ title }, index) => (
           <FlexBox
+            aria-label={`${title} 탭 버튼`}
             key={index}
             flex="1"
             alignItems="center"
@@ -48,6 +50,9 @@ export function DescriptionNavigation({
             }
             color={clicked === index ? theme.colors.black : theme.colors.gray99}
             onClick={() => scrollToTarget(title)}
+            css={css`
+              cursor: pointer;
+            `}
           >
             {title}
           </FlexBox>
