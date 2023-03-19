@@ -4,7 +4,6 @@ import { Key, RefObject } from 'react';
 import { useSetRecoilState } from 'recoil';
 
 import { Box } from 'components/Atoms';
-import InnerHTML from 'components/Molecules/InnerHTML';
 import { DetailNavigationState } from 'states/detail-navigation';
 import theme from 'styles/theme';
 import useIntersectionObserver from 'utils/hooks/useIntersectionObserver';
@@ -26,6 +25,10 @@ export default function Introduce({
     rootMargin: '-90px',
   });
 
+  const replaceSummary = data?.summary
+    ? data?.summary.replace(/\r\n/g, '<br>')
+    : '';
+
   return (
     <Box
       color={theme.colors.black}
@@ -37,7 +40,7 @@ export default function Introduce({
       ref={setTarget}
     >
       <Box id="introduce" top="-80px" position="absolute" ref={scrollRef}></Box>
-      <Box>{data?.summary && <InnerHTML data={data?.summary} />}</Box>
+      <Box dangerouslySetInnerHTML={{ __html: replaceSummary }} />
       {data.photo?.map((item: any, index: Key) => (
         <Box
           marginTop="20px"
