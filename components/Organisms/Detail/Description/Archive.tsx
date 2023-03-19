@@ -114,16 +114,18 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
           <Box fontSize="15px" color={theme.colors.black} fontWeight={500}>
             아카이브
           </Box>
-          <FlexBox alignItems="center">
-            <Box
-              fontSize="12px"
-              color={theme.colors.gray77}
-              paddingRight="10px"
-            >
-              사진 아카이브만
-            </Box>
-            <CheckBox type="checkbox" onChange={onClick} />
-          </FlexBox>
+          {archiveData?.length === 0 ? null : (
+            <FlexBox alignItems="center">
+              <Box
+                fontSize="12px"
+                color={theme.colors.gray77}
+                paddingRight="10px"
+              >
+                사진 아카이브만
+              </Box>
+              <CheckBox type="checkbox" onChange={onClick} />
+            </FlexBox>
+          )}
         </FlexBox>
         <Box height="1px" backgroundColor={theme.colors.black} />
       </Box>
@@ -134,16 +136,18 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
       <Box paddingTop="32px" fontSize="22px">
         <FlexBox justifyContent="space-between">
           <StarAvg />
-          <FlexBox alignItems="center">
-            <Box
-              fontSize="12px"
-              color={theme.colors.gray77}
-              paddingRight="10px"
-            >
-              사진 아카이브만
-            </Box>
-            <CheckBox type="checkbox" onChange={onClick} />
-          </FlexBox>
+          {archiveData?.length === 0 ? null : (
+            <FlexBox alignItems="center">
+              <Box
+                fontSize="12px"
+                color={theme.colors.gray77}
+                paddingRight="10px"
+              >
+                사진 아카이브만
+              </Box>
+              <CheckBox type="checkbox" onChange={onClick} />
+            </FlexBox>
+          )}
         </FlexBox>
       </Box>
     );
