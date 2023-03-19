@@ -14,10 +14,10 @@ export default function ItemAdditionalInfo(props: AdditionalInfoProps) {
     <>
       <FlexBox marginTop={`${marginTop ?? 15}px`}>
         {listItemAdditionalInfo.heartCount ? (
-          <FlexBox alignItems="center" marginRight="10px" height="12px">
+          <FlexBox alignItems="center" marginRight="10px">
             <ListWish
-              width="10px"
-              height="9px"
+              width="11px"
+              height="12px"
               viewBox="0 0 10 9"
               fill={theme.colors.gray99}
             />
@@ -34,11 +34,11 @@ export default function ItemAdditionalInfo(props: AdditionalInfoProps) {
           ''
         )}
         {listItemAdditionalInfo.grade ? (
-          <FlexBox alignItems="center" marginRight="10px" height="12px">
+          <FlexBox alignItems="center" marginRight="10px">
             <StarRating
-              width="10px"
+              width="11px"
               height="12px"
-              viewBox="0 0.5 10 10"
+              viewBox="0.5 1 9 9"
               fill={theme.colors.gray99}
             />
             <Box
