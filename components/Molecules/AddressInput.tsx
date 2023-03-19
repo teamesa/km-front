@@ -58,11 +58,11 @@ export default function AddressInput({
             }
           >
             <FlexBox>
-              <Box width="100%" flex={1.5}>
+              <Box width="100%" flex={1}>
                 {placeAddress ? (
                   <Input
                     readOnly
-                    padding="12px 15px"
+                    padding="10px 15px"
                     border={`1px solid ${theme.colors.grayBB}`}
                     backgroundColor={theme.colors.grayEE}
                     color={theme.colors.gray77}
@@ -73,7 +73,7 @@ export default function AddressInput({
                   <Input
                     readOnly
                     name={name}
-                    padding="12px 15px"
+                    padding="10px 15px"
                     border={`1px solid ${theme.colors.grayBB}`}
                     backgroundColor={theme.colors.white}
                     placeholder="장소찾기를 선택해 추가해주세요."
@@ -83,9 +83,9 @@ export default function AddressInput({
                 )}
               </Box>
               <Box
-                width="100%"
-                flex={0.5}
-                padding="13px 23px 12px"
+                width="90px"
+                height="40px"
+                padding="11px 22px"
                 color={theme.colors.white}
                 backgroundColor={theme.colors.black}
                 fontSize="12px"

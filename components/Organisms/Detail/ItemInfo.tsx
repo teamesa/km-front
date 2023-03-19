@@ -64,7 +64,7 @@ export default function ItemInfo() {
               <Button>
                 <Link href={data?.homePageUrl}>
                   <a target="_blank" rel="noreferrer">
-                    <Span>
+                    <Span fontSize="13px">
                       바로가기
                       <Span paddingLeft="8px">{'>'}</Span>
                     </Span>

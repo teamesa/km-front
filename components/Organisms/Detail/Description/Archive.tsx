@@ -195,11 +195,14 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
           )}
           {archiveData?.map((item, index) => (
             <Box key={index}>
-              <Box
-                height="1px"
-                backgroundColor={theme.colors.grayEE}
-                marginBottom="24px"
-              />
+              {index !== 0 && (
+                <Box
+                  height="1px"
+                  backgroundColor={theme.colors.grayEE}
+                  marginBottom="24px"
+                />
+              )}
+
               <FlexBox
                 alignItems="center"
                 justifyContent="space-between"
