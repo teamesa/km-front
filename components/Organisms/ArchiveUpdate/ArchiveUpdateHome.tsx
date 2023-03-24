@@ -94,7 +94,7 @@ export default function ArchiveUpdateHome() {
         item === undefined ? null : item,
       ),
     };
-    if (CheckForbiddenWords(customData.comment)) {
+    if (CheckForbiddenWords(data.comment)) {
       setAlertState(ALERT_MESSAGE.ALERT.FORBIDDEN_WORD);
       setPopupName(POPUP_NAME.FORBIDDEN_CONFIRM);
     } else {
