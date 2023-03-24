@@ -223,6 +223,8 @@ export default function ArchiveUpdateHome() {
                 color={theme.colors.black}
                 width="100%"
                 height="50px"
+                fontSize="16px"
+                fontWeight="500"
                 onClick={onCancel}
               >
                 취소
@@ -234,6 +236,8 @@ export default function ArchiveUpdateHome() {
                 color={theme.colors.white}
                 width="100%"
                 height="50px"
+                fontSize="16px"
+                fontWeight="500"
                 disabled={!errors}
                 onClick={handleSubmit(onUpdateSubmit)}
               >
