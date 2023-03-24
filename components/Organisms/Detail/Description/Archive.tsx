@@ -119,7 +119,7 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
               <Box
                 fontSize="12px"
                 color={theme.colors.gray77}
-                paddingRight="10px"
+                paddingRight="6px"
               >
                 사진 아카이브만
               </Box>
@@ -141,7 +141,7 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
               <Box
                 fontSize="12px"
                 color={theme.colors.gray77}
-                paddingRight="10px"
+                paddingRight="6px"
               >
                 사진 아카이브만
               </Box>
@@ -184,7 +184,7 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
         paddingTop={introYn === 2 ? '30px' : 0}
       >
         {introYn === 2 ? <StarAvg /> : null}
-        <Box paddingTop="20px">
+        <Box paddingTop="30px">
           {archiveData?.length === 0 && (
             <Box padding="80px 0" textAlign="center">
               <Alert width="40px" height="40px" />

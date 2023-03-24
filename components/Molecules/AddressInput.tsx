@@ -74,6 +74,7 @@ export default function AddressInput({
                     readOnly
                     name={name}
                     padding="10px 15px"
+                    height="40px"
                     border={`1px solid ${theme.colors.grayBB}`}
                     backgroundColor={theme.colors.white}
                     placeholder="장소찾기를 선택해 추가해주세요."
@@ -89,6 +90,7 @@ export default function AddressInput({
                 color={theme.colors.white}
                 backgroundColor={theme.colors.black}
                 fontSize="12px"
+                lineHeight="18px"
                 fontWeight={500}
                 marginLeft="5px"
               >
