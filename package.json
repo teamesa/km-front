@@ -1,6 +1,6 @@
 {
   "name": "km-front",
-  "version": "1.38.3",
+  "version": "1.38.4",
   "private": true,
   "scripts": {
     "dev": "node server/server.js",
