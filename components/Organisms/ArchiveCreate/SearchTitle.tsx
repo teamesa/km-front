@@ -45,7 +45,8 @@ export default function SearchTitle() {
 
     if (data.archiveWritten === true) {
       setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_ALREDY);
-      return setPopupName(POPUP_NAME.ALERT_CONFIRM);
+      setPopupName(POPUP_NAME.ALERT_CONFIRM);
+      return setKeyword('');
     } else {
       return router.push({
         pathname: '/archive',
