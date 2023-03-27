@@ -17,10 +17,7 @@ const Archive: NextPage<UserProps> = ({ user }) => {
     title: '아카이브 기록하기',
     headerRight: 'disabled',
     headerLeftAction: () => {
-      if (checked) {
-        return router.back();
-      }
-      return router.push('/mypage');
+      router.back();
     },
     headerRightAction: () => {},
   });

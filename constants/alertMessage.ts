@@ -40,6 +40,10 @@ export const ALERT_MESSAGE = {
       code: 'ALT-018',
       message: '입력하신 내용에 금지 단어가 포함되어\n저장할 수 없습니다.',
     },
+    ARCHIVE_ALREDY: {
+      code: 'ALT-015',
+      message: '이미 등록된 아카이브입니다.',
+    },
   },
   ERROR: {
     ARCHIVE_REGISTRATION_QUESTION: {

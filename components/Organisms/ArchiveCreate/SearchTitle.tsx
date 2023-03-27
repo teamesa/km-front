@@ -8,6 +8,10 @@ import { Search } from 'assets/archive/Search';
 import { Box, Button, FlexBox, Input, Span } from 'components/Atoms';
 import { AutoCompleteItem } from 'constants/type/api';
 import theme from 'styles/theme';
+import { ALERT_MESSAGE } from 'constants/alertMessage';
+import { POPUP_NAME } from 'constants/popupName';
+import { useSetRecoilState } from 'recoil';
+import { AlertState, PopupNameState } from 'states';
 
 export default function SearchTitle() {
   const [keyword, setKeyword] = useState<string>('');
@@ -15,8 +19,10 @@ export default function SearchTitle() {
   const router = useRouter();
   const { useGetSearch } = useSearchQuery();
   const { data } = useGetSearch(keyword);
+  const setAlertState = useSetRecoilState(AlertState);
+  const setPopupName = useSetRecoilState(PopupNameState);
 
-  const onChangeData = (e: any) => {
+  const onChangeData = async (e: any) => {
     setKeyword(e.target.value);
   };
 
@@ -38,12 +44,8 @@ export default function SearchTitle() {
     const { data } = await getItemsSummaryById({ id: search.id });
 
     if (data.archiveWritten === true) {
-      return router.push({
-        pathname: '/archive/update',
-        query: {
-          id: data.archiveId,
-        },
-      });
+      setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_ALREDY);
+      return setPopupName(POPUP_NAME.ALERT_CONFIRM);
     } else {
       return router.push({
         pathname: '/archive',
