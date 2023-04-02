@@ -257,7 +257,7 @@ export default function Archive({ data, scrollRef, introYn }: ArchiveProps) {
                     </FlexBox>
                   </Box>
                 </FlexBox>
-                <Box height="20px">
+                <Box height="20px" lineHeight="0">
                   <ArchiveHeart
                     id={item.id}
                     heart={item.heart}

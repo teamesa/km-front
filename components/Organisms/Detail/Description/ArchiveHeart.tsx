@@ -61,6 +61,8 @@ export default function ArchiveHeart({
 
   return (
     <Button
+      boxShadow="0 0 8px 0 rgba(0, 0, 0, 0.08)"
+      borderRadius="11px"
       onClick={(e) => {
         onClickArhciveLike();
         e.stopPropagation();
@@ -77,7 +79,6 @@ export default function ArchiveHeart({
         background={
           heart.heartClicked === true ? theme.colors.black : theme.colors.white
         }
-        boxShadow="0 0 8px 0 rgba(0, 0, 0, 0.08)"
       >
         <NavWish
           fill={
