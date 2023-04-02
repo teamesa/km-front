@@ -22,6 +22,7 @@ import {
 } from 'states/archive-square';
 import theme from 'styles/theme';
 import { KeyboardEvent, useEffect } from 'react';
+import { getItemsSummaryById } from 'api/v1/items';
 
 export default function ArchiveCreateHome() {
   const router = useRouter();
@@ -62,6 +63,13 @@ export default function ArchiveCreateHome() {
       setAlertState(ALERT_MESSAGE.ALERT.SEARCH_ARCHIVE_TITLE);
       setPopupName(POPUP_NAME.ALERT_CONFIRM);
       return null;
+    }
+    const { data: getItemsSummary } = await getItemsSummaryById({
+      id: Number(exhibitionId),
+    });
+    if (getItemsSummary.archiveWritten === true) {
+      setAlertState(ALERT_MESSAGE.ALERT.ARCHIVE_ALREDY);
+      return setPopupName(POPUP_NAME.ALERT_CONFIRM);
     }
     const customData = {
       itemId: Number(exhibitionId),
