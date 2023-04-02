@@ -66,7 +66,7 @@ export default function Footer() {
         >
           킬로미터소개
         </Button>
-        <Box width="2px" height="12px" backgroundColor={theme.colors.grayDD} />
+        <Box width="1px" height="12px" backgroundColor={theme.colors.grayDD} />
         <Button
           color={theme.colors.gray77}
           paddingX="20px"
@@ -74,7 +74,7 @@ export default function Footer() {
         >
           이용약관
         </Button>
-        <Box width="2px" height="12px" backgroundColor={theme.colors.grayDD} />
+        <Box width="1px" height="12px" backgroundColor={theme.colors.grayDD} />
         <Button
           color={theme.colors.gray77}
           paddingLeft="20px"
