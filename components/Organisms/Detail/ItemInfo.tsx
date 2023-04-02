@@ -52,7 +52,11 @@ export default function ItemInfo() {
             title="시간"
             description={
               <Box>
-                <InnerHTML data={data?.time} />
+                <Box
+                  dangerouslySetInnerHTML={{
+                    __html: data?.time.replace(/\r\n/g, '<br>'),
+                  }}
+                />
               </Box>
             }
           />
