@@ -24,8 +24,8 @@ export default function InfiniteCarousel({
   plusFunction: () => {};
 }) {
   const rootRef = useRef<any>();
-  const framesRef = useRef<number>(0);
-  const [nowIndex, setNowIndex] = useState<number>(-999);
+  const [nowIndex, setNowIndex] = useState<number>(1);
+  const carouselItemsWidthRef = useRef<number | null>(-999);
 
   const handleIndicator = (index: number) => {
     setNowIndex(index);
@@ -42,53 +42,61 @@ export default function InfiniteCarousel({
       return imgUrlList.length;
     }
   };
-  
-  const animateScroll = () => {
-    const width = rootRef.current.scrollWidth / (imgUrlList.length + 2);
-    rootRef.current.style.scrollBehavior = 'smooth';
-    rootRef.current.scrollTo((nowIndex + 1) * width, 0);
-    framesRef.current = requestAnimationFrame(animateScroll);
-  }
 
   useEffect(() => {
     if (rootRef === undefined) {
       console.log('can not find root ref');
       return;
+    }else{
+      carouselItemsWidthRef.current = (rootRef.current.scrollWidth / (imgUrlList.length + 2));
+      
     }
-
-    const width = rootRef.current.scrollWidth / (imgUrlList.length + 2);
-    const timeOutList: any = [];
 
     if (nowIndex === -999) {
-      setTimeout(() => {
-        rootRef.current.style.scrollBehavior = 'unset';
-        rootRef.current.scrollTo(width, 0);
-      }, 50);
+      rootRef.current.style.transition = 'none'
     } else if (nowIndex === imgUrlList.length + 1) {
-      timeOutList.push(
-        setTimeout(() => {
-          rootRef.current.style.scrollBehavior = 'unset';
-          rootRef.current.scrollTo(width, 0);
-        }, 300),
-      );
+      rootRef.current.style.transition = 'none'
     } else if (nowIndex === 0) {
-      timeOutList.push(
-        setTimeout(() => {
-          rootRef.current.style.scrollBehavior = 'unset';
-          rootRef.current.scrollTo(imgUrlList.length * width, 0);
-        }, 300),
-      );
+      rootRef.current.style.transition = 'none'
     } else {
-      framesRef.current = requestAnimationFrame(animateScroll);
+      rootRef.current.style.transition = 'transform 0.5s ease-out'
     }
-    return () => {
-      timeOutList.forEach((timeOutId: NodeJS.Timeout | undefined) =>
-        clearTimeout(timeOutId),
-      );
-      cancelAnimationFrame(framesRef.current);
-    };
-  }, [nowIndex, rootRef, imgUrlList]);
 
+  }, [nowIndex,rootRef, imgUrlList]);
+
+  const startTimeRef = useRef<number | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
+
+  const nextSlide = () => {
+    setNowIndex((prevIndex) => (prevIndex + 1) % imgUrlList.length);
+  };
+
+  const loop = (timestamp: number) => {
+    if (startTimeRef.current === null) {
+      startTimeRef.current = timestamp;
+    }
+
+    const elapsed = timestamp - startTimeRef.current;
+
+    if (elapsed > 2000) {
+      nextSlide();
+      startTimeRef.current = timestamp;
+    }
+
+    animationFrameRef.current = requestAnimationFrame(loop);
+  };
+
+  useEffect(() => {
+    animationFrameRef.current = requestAnimationFrame(loop);
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, []);
+
+  console.log(carouselItemsWidthRef.current)
   return (
     <Box position="relative">
       <Box
@@ -97,14 +105,15 @@ export default function InfiniteCarousel({
         maxWidth={theme.view.webView}
         overflowY="hidden"
         overflowX="scroll"
-        css={css`
-          scroll-behavior: unset;
-          scroll-snap-type: x mandatory;
-        `}
         ref={rootRef}
       >
-        <FlexBox height="inherit" width="fit-content" flexDirection="row">
-          <CarouselItem 
+        <FlexBox height="inherit" width="fit-content" flexDirection="row"
+                css={css`
+                transform: translateX(-${nowIndex * ( carouselItemsWidthRef.current ?? 0)}px);
+                }
+              `}
+        >
+          <CarouselItem
             itemOrder={-1}
             imgUrl={imgUrlList[imgUrlList.length - 1].keyVisualPhotoUrl}
             rootRef={rootRef}
@@ -118,7 +127,6 @@ export default function InfiniteCarousel({
               itemOrder={_index}
               key={_index}
               imgUrl={imgUrl.keyVisualPhotoUrl}
-              rootRef={rootRef}
               handleIndicator={handleIndicator}
               width={width}
               height={height}

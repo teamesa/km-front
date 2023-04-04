@@ -17,7 +17,7 @@ export default function CarouselItem({
 }: {
   itemOrder: number;
   imgUrl: string;
-  rootRef: any;
+  rootRef?: any;
   handleIndicator: Function;
   width: string;
   height: string;
@@ -32,7 +32,7 @@ export default function CarouselItem({
   };
 
   const setTarget = useIntersectionObserver({
-    root: rootRef.current,
+    root: rootRef?.current,
     threshold: 0.2,
     onIntersect,
   });
@@ -48,7 +48,7 @@ export default function CarouselItem({
         scroll-snap-align: end;
       `}
     >
-      <Image src={imgUrl} alt="image" layout="fill" />
+      <Image src={imgUrl} alt="image" layout="fill" loading="eager"/>
       {dimOption ? <CarouselDim height={height} /> : <></>}
     </Box>
   );
