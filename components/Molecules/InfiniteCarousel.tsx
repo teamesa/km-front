@@ -24,8 +24,9 @@ export default function InfiniteCarousel({
   plusFunction: () => {};
 }) {
   const rootRef = useRef<any>();
-  const [nowIndex, setNowIndex] = useState<number>(1);
   const carouselItemsWidthRef = useRef<number | null>(-999);
+  const [nowIndex, setNowIndex] = useState<number>(1);
+  const [inView, setInView] = useState<boolean>(false);
 
   const handleIndicator = (index: number) => {
     setNowIndex(index);
@@ -44,6 +45,43 @@ export default function InfiniteCarousel({
   };
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+      }
+    );
+
+    if (rootRef.current) {
+      observer.observe(rootRef.current);
+    }
+
+    return () => {
+      if (rootRef.current) {
+        observer.unobserve(rootRef.current);
+      }
+    }; }, [rootRef]); 
+    
+    useEffect(() => {
+    if (inView) {
+      animationFrameRef.current = requestAnimationFrame(loop);
+    } else {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    }
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [inView]);
+
+  useEffect(() => {
+    
     if (rootRef === undefined) {
       console.log('can not find root ref');
       return;
@@ -96,7 +134,6 @@ export default function InfiniteCarousel({
     };
   }, []);
 
-  console.log(carouselItemsWidthRef.current)
   return (
     <Box position="relative">
       <Box
@@ -197,3 +234,4 @@ export default function InfiniteCarousel({
     </Box>
   );
 }
+
