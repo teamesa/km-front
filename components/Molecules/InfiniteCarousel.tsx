@@ -87,9 +87,9 @@ export default function InfiniteCarousel({
       return;
     }else{
       carouselItemsWidthRef.current = (rootRef.current.scrollWidth / (imgUrlList.length + 2));
-      
     }
 
+    //TTODO: 슬라이딩 애니메이션 transition 추가하기 
     if (nowIndex === -999) {
       rootRef.current.style.transition = 'none'
     } else if (nowIndex === imgUrlList.length + 1) {
