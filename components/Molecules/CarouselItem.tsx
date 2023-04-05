@@ -18,14 +18,14 @@ export default function CarouselItem({
   itemOrder: number;
   imgUrl: string;
   rootRef?: any;
-  handleIndicator: Function;
+  handleIndicator?: Function;
   width: string;
   height: string;
   dimOption?: boolean;
 }) {
   const onIntersect: IntersectionObserverCallback = (entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && handleIndicator) {
         handleIndicator(itemOrder + 1);
       }
     });

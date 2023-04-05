@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, PropsWithChildren } from 'react';
 
 import { Plus } from 'assets/archive/Plus';
 import { FlexBox, Box, Button } from 'components/Atoms';
@@ -24,13 +24,14 @@ export default function InfiniteCarousel({
   plusFunction: () => {};
 }) {
   const rootRef = useRef<any>();
-  const carouselItemsWidthRef = useRef<number | null>(-999);
-  const [nowIndex, setNowIndex] = useState<number>(1);
+  const carouselItemWidthRef = useRef<number | null>(0);
+  const [nowIndex, setNowIndex] = useState<number>(0);
   const [inView, setInView] = useState<boolean>(false);
 
-  const handleIndicator = (index: number) => {
-    setNowIndex(index);
-  };
+  // const handleIndicator = (index: number) => {
+  //   setNowIndex(index);
+  //   console.log(index)
+  // };
 
   const getPage = () => {
     if (1 <= nowIndex && nowIndex <= imgUrlList.length) {
@@ -39,8 +40,9 @@ export default function InfiniteCarousel({
       return 1;
     } else if (nowIndex > imgUrlList.length) {
       return 1;
-    } else if (nowIndex === 0) {
-      return imgUrlList.length;
+    } 
+    else if (nowIndex === 0) {
+      return 1;
     }
   };
 
@@ -85,22 +87,24 @@ export default function InfiniteCarousel({
     if (rootRef === undefined) {
       console.log('can not find root ref');
       return;
-    }else{
-      carouselItemsWidthRef.current = (rootRef.current.scrollWidth / (imgUrlList.length + 2));
+    }else if(rootRef.current){
+      console.log(rootRef.current.scrollWidth)
+      carouselItemWidthRef.current = (rootRef.current.scrollWidth / (imgUrlList.length));
     }
 
-    //TTODO: 슬라이딩 애니메이션 transition 추가하기 
-    if (nowIndex === -999) {
-      rootRef.current.style.transition = 'none'
-    } else if (nowIndex === imgUrlList.length + 1) {
-      rootRef.current.style.transition = 'none'
-    } else if (nowIndex === 0) {
-      rootRef.current.style.transition = 'none'
-    } else {
-      rootRef.current.style.transition = 'transform 0.5s ease-out'
-    }
+    // //TTODO: 슬라이딩 애니메이션 transition 추가하기 
+    // if (nowIndex === -999) {
+    //   console.log(rootRef.current.firstChild.style)
+    //   rootRef.current.firstChild.style.transition = 'transform: 0.5s;'
+    // } else if (nowIndex === imgUrlList.length + 1) {
+    //   rootRef.current.firstChild.style.transition = 'transform: 0.5s easy-in-out;'
+    // } else if (nowIndex === 0) {
+    //   rootRef.current.firstChild.style.transition = 'transform: 0.5s;'
+    // } else {
+    //   rootRef.current.firstChild.style.transition = 'transform: 0.5s;'
+    // }
 
-  }, [nowIndex,rootRef, imgUrlList]);
+  }, [rootRef, imgUrlList]);
 
   const startTimeRef = useRef<number | null>(null);
   const animationFrameRef = useRef<number | null>(null);
@@ -117,6 +121,7 @@ export default function InfiniteCarousel({
     const elapsed = timestamp - startTimeRef.current;
 
     if (elapsed > 2000) {
+      console.log('elased')
       nextSlide();
       startTimeRef.current = timestamp;
     }
@@ -145,40 +150,41 @@ export default function InfiniteCarousel({
         ref={rootRef}
       >
         <FlexBox height="inherit" width="fit-content" flexDirection="row"
-                css={css`
-                transform: translateX(-${nowIndex * ( carouselItemsWidthRef.current ?? 0)}px);
-                }
-              `}
+            
+            css={css`
+                transform: translateX(-${nowIndex * ( carouselItemWidthRef.current ?? 0)}px);
+                transition: transform 1s 0s;
+            `}
         >
-          <CarouselItem
+          {/* <CarouselItem
             itemOrder={-1}
             imgUrl={imgUrlList[imgUrlList.length - 1].keyVisualPhotoUrl}
             rootRef={rootRef}
-            handleIndicator={handleIndicator}
+            // handleIndicator={handleIndicator}
             width={width}
             height={height}
             dimOption={true}
-          />
+          /> */}
           {imgUrlList.map((imgUrl, _index) => (
             <CarouselItem
               itemOrder={_index}
               key={_index}
               imgUrl={imgUrl.keyVisualPhotoUrl}
-              handleIndicator={handleIndicator}
+              // handleIndicator={handleIndicator}
               width={width}
               height={height}
               dimOption={true}
             />
           ))}
-          <CarouselItem
+          {/* <CarouselItem
             itemOrder={imgUrlList.length}
             imgUrl={imgUrlList[0].keyVisualPhotoUrl}
             rootRef={rootRef}
-            handleIndicator={handleIndicator}
+            // handleIndicator={handleIndicator}
             width={width}
             height={height}
             dimOption={true}
-          />
+          /> */}
         </FlexBox>
       </Box>
       <Button
@@ -229,7 +235,7 @@ export default function InfiniteCarousel({
               link={link}
             />
           ))
-          .filter((_, index) => index + 1 === nowIndex)}
+          .filter((_, index) => index  === nowIndex + 1)}
       </Box>
     </Box>
   );
