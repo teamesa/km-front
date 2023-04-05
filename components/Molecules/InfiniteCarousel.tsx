@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
-import { useEffect, useRef, useState, PropsWithChildren } from 'react';
+import { useEffect, useRef, useState, useTransition } from 'react';
 
 import { Plus } from 'assets/archive/Plus';
 import { FlexBox, Box, Button } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
 import InfiniteCarouselTitle from 'components/Organisms/Home/Module/KeyVisual/InfinitiCarouselTitle';
 import theme from 'styles/theme';
+import React from 'react';
 
 export default function InfiniteCarousel({
   imgUrlList,
@@ -27,12 +28,16 @@ export default function InfiniteCarousel({
   const carouselItemWidthRef = useRef<number | null>(0);
   const [nowIndex, setNowIndex] = useState<number>(0);
   const [inView, setInView] = useState<boolean>(false);
-
+  const [settingCarouselItemsCount, setSettingCarouselItemsCount] = useState<number>(0);
+  const [cssTransition, setCssTransition] = useState<string>('');
+  const [isPending, startTransition] = useTransition();
   // const handleIndicator = (index: number) => {
   //   setNowIndex(index);
   //   console.log(index)
   // };
 
+
+  // 숫자 인디케이터의 현재 인덱스 얻기
   const getPage = () => {
     if (1 <= nowIndex && nowIndex <= imgUrlList.length) {
       return nowIndex;
@@ -46,6 +51,7 @@ export default function InfiniteCarousel({
     }
   };
 
+  // keyVisual 부분 화면 벗어남 슬라이딩 멈추기 & 화면에 나오면 슬라이딩 시작 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -82,14 +88,15 @@ export default function InfiniteCarousel({
     };
   }, [inView]);
 
+  
   useEffect(() => {
-    
     if (rootRef === undefined) {
       console.log('can not find root ref');
       return;
-    }else if(rootRef.current){
-      console.log(rootRef.current.scrollWidth)
-      carouselItemWidthRef.current = (rootRef.current.scrollWidth / (imgUrlList.length));
+    }else {
+      console.log(rootRef.current.firstElementChild)
+      setSettingCarouselItemsCount(imgUrlList.length + 1);
+      carouselItemWidthRef.current = (rootRef.current.scrollWidth / (settingCarouselItemsCount));
     }
 
     // //TTODO: 슬라이딩 애니메이션 transition 추가하기 
@@ -106,22 +113,32 @@ export default function InfiniteCarousel({
 
   }, [rootRef, imgUrlList]);
 
+  //requestAnimationFrame을 이용한 슬라이딩
   const startTimeRef = useRef<number | null>(null);
   const animationFrameRef = useRef<number | null>(null);
 
   const nextSlide = () => {
-    setNowIndex((prevIndex) => (prevIndex + 1) % imgUrlList.length);
+    if (nowIndex === imgUrlList.length){
+      console.log('1')
+      // 동작 위해 추가한 마지막 슬라이드면
+        startTransition(()=>{
+        setCssTransition('none');
+      });
+    }else if(nowIndex !== imgUrlList.length){
+      console.log('2')
+      setCssTransition('transform 1s 0s')
+      setNowIndex((prevIndex) => (prevIndex + 1) % settingCarouselItemsCount);
+    }
   };
 
   const loop = (timestamp: number) => {
     if (startTimeRef.current === null) {
       startTimeRef.current = timestamp;
     }
-
+    // 지연 시간
     const elapsed = timestamp - startTimeRef.current;
 
     if (elapsed > 2000) {
-      console.log('elased')
       nextSlide();
       startTimeRef.current = timestamp;
     }
@@ -153,7 +170,7 @@ export default function InfiniteCarousel({
             
             css={css`
                 transform: translateX(-${nowIndex * ( carouselItemWidthRef.current ?? 0)}px);
-                transition: transform 1s 0s;
+                transition: ${cssTransition};
             `}
         >
           {/* <CarouselItem
@@ -177,6 +194,15 @@ export default function InfiniteCarousel({
             />
           ))}
           {/* <CarouselItem
+            itemOrder={-1}
+            imgUrl={imgUrlList[imgUrlList.length - 1].keyVisualPhotoUrl}
+            rootRef={rootRef}
+            // handleIndicator={handleIndicator}
+            width={width}
+            height={height}
+            dimOption={true}
+          /> */}
+          <CarouselItem
             itemOrder={imgUrlList.length}
             imgUrl={imgUrlList[0].keyVisualPhotoUrl}
             rootRef={rootRef}
@@ -184,7 +210,7 @@ export default function InfiniteCarousel({
             width={width}
             height={height}
             dimOption={true}
-          /> */}
+          />
         </FlexBox>
       </Box>
       <Button
@@ -235,7 +261,7 @@ export default function InfiniteCarousel({
               link={link}
             />
           ))
-          .filter((_, index) => index  === nowIndex + 1)}
+          .filter((_, index) => index  === nowIndex)}
       </Box>
     </Box>
   );
