@@ -47,19 +47,6 @@ export default function InfiniteCarousel({
       setNowIndex((prevIndex) => (prevIndex + 1));
     }
   }
-
-  const getPage = () => {
-    if (1 <= nowIndex && nowIndex <= imgUrlList.length) {
-      return nowIndex;
-    } else if (nowIndex === -999) {
-      return 1;
-    } else if (nowIndex > imgUrlList.length) {
-      return 1;
-    } 
-    else if (nowIndex === 0) {
-      return 1;
-    }
-  }
     
   const handleCssTransition = (slidingCount: number) => {
     if(slidingCount === settingCarouselItemsCount -1) {
@@ -83,38 +70,10 @@ export default function InfiniteCarousel({
       carouselItemWidthRef.current = (rootRef.current.scrollWidth / (settingCarouselItemsCount));
     }
 
-    // //TTODO: 슬라이딩 애니메이션 transition 추가하기 
-    // if (nowIndex === -999) {
-    //   console.log(rootRef.current.firstChild.style)
-    //   rootRef.current.firstChild.style.transition = 'transform: 0.5s;'
-    // } else if (nowIndex === imgUrlList.length + 1) {
-    //   rootRef.current.firstChild.style.transition = 'transform: 0.5s easy-in-out;'
-    // } else if (nowIndex === 0) {
-    //   rootRef.current.firstChild.style.transition = 'transform: 0.5s;'
-    // } else {
-    //   rootRef.current.firstChild.style.transition = 'transform: 0.5s;'
-    // }
-
   }, [rootRef, imgUrlList]);
 
 //슬라이드 업데이트 
   const handleSlide = () => {
-    // if (nowIndex === settingCarouselItemsCount - 1 ){
-    //   console.log('1')
-    //   // 동작 위해 추가한 마지막 슬라이드면
-    //   startTransition(()=>{
-    //     setSlidingCount(1);
-    //     setNowIndex((prevIndex) => (prevIndex + 1) % imgUrlList.length);
-    //     handleIndicator();
-    //   });
-    // }else {
-    //   setSlidingCount((prevCount) => (prevCount + 1)); 
-      
-    //   startTransition(()=>{
-    //     setNowIndex((prevIndex) => (prevIndex + 1) % imgUrlList.length);
-    //     handleIndicator();
-    //   });
-    // }
     setSlidingCount((prevCount) => (prevCount + 1));
     handleCssTransition(slidingCount);
 
@@ -200,47 +159,25 @@ export default function InfiniteCarousel({
         ref={rootRef}
       >
         <FlexBox height="inherit" width="fit-content" flexDirection="row"
-            
-            css={css`
-                // transform: translateX(-${nowIndex * ( carouselItemWidthRef.current ?? 0)}px);
-                transform: translateX(-${cssTranslateX}px);
-                transition: ${cssTransition};
-            `}
+          css={css`
+              transform: translateX(-${cssTranslateX}px);
+              transition: ${cssTransition};
+          `}  
         >
-          {/* <CarouselItem
-            itemOrder={-1}
-            imgUrl={imgUrlList[imgUrlList.length - 1].keyVisualPhotoUrl}
-            rootRef={rootRef}
-            // handleIndicator={handleIndicator}
-            width={width}
-            height={height}
-            dimOption={true}
-          /> */}
           {imgUrlList.map((imgUrl, _index) => (
             <CarouselItem
               itemOrder={_index}
               key={_index}
               imgUrl={imgUrl.keyVisualPhotoUrl}
-              // handleIndicator={handleIndicator}
               width={width}
               height={height}
               dimOption={true}
             />
           ))}
-          {/* <CarouselItem
-            itemOrder={-1}
-            imgUrl={imgUrlList[imgUrlList.length - 1].keyVisualPhotoUrl}
-            rootRef={rootRef}
-            // handleIndicator={handleIndicator}
-            width={width}
-            height={height}
-            dimOption={true}
-          /> */}
           <CarouselItem
             itemOrder={imgUrlList.length}
             imgUrl={imgUrlList[0].keyVisualPhotoUrl}
             rootRef={rootRef}
-            // handleIndicator={handleIndicator}
             width={width}
             height={height}
             dimOption={true}
