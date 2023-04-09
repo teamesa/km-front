@@ -6,7 +6,6 @@ import { FlexBox, Box, Button } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
 import InfiniteCarouselTitle from 'components/Organisms/Home/Module/KeyVisual/InfinitiCarouselTitle';
 import theme from 'styles/theme';
-import React from 'react';
 import { now } from 'moment';
 
 export default function InfiniteCarousel({
@@ -26,127 +25,101 @@ export default function InfiniteCarousel({
   plusFunction: () => {};
 }) {
   const rootRef = useRef<any>();
-  const carouselItemWidthRef = useRef<number | null>(0);
-  const [nowIndex, setNowIndex] = useState<number>(0);
+  const carouselItemWidthRef = useRef<number>(0);
+  const [nowIndex, setNowIndex] = useState<number>(-999);
   const [inView, setInView] = useState<boolean>(false);
   const [settingCarouselItemsCount, setSettingCarouselItemsCount] = useState<number>(0);
-  const [cssTransition, setCssTransition] = useState<string>('');
-  const [cssTranslateX, setCssTranslateX] = useState<number>(0);
-  const [isPending, startTransition] = useTransition();
-  const [slidingCount, setSlidingCount] = useState<number>(1);
+  const [cssTransition, setCssTransition] = useState<string>('transform 1s 0s');
   const startTimeRef = useRef<number | null>(null);
   const animationFrameRef = useRef<number | null>(null);
 
-  // 숫자 인디케이터의 인덱스 핸들링
-  const handleIndicator = (slidingCount: number, nowIndex: number) => {
-    if (slidingCount === 0){ // 화면에 이미지 첫 장 보일때
-      setNowIndex(1);
-    }else if (slidingCount === settingCarouselItemsCount){
-      setNowIndex((prevIndex) => (prevIndex));
-    }else if (1 <= nowIndex && nowIndex <= imgUrlList.length){
-      setNowIndex((prevIndex) => (prevIndex + 1));
+  // 인디케이터 숫자 
+  const getPage = () => {
+   if (nowIndex >= 1 && nowIndex < imgUrlList.length + 1) {
+      return nowIndex;
+    }else if (nowIndex === -999){
+      return imgUrlList.length;
     }
   }
-    
-  const handleCssTransition = (slidingCount: number) => {
-    if(slidingCount === settingCarouselItemsCount -1) {
-      setCssTransition('none');
+
+  const loop = (timestamp: number) => {
+    if (startTimeRef.current === null) {
+      startTimeRef.current = timestamp;
+      animationFrameRef.current = requestAnimationFrame(loop);
     }else {
-      setCssTransition('transform 1s 0s');
+            // 지연 시간
+      const elapsed = timestamp - startTimeRef.current;
+
+      const handleCarousel = (updatedIndex: number, cssTransition: string) =>{
+        setCssTransition(cssTransition);
+        setNowIndex(updatedIndex);
+        startTimeRef.current = timestamp;
+      }
+      
+      if (elapsed > 5000 && nowIndex > 0 && nowIndex < settingCarouselItemsCount - 1) {  
+        handleCarousel(nowIndex + 1, 'transform 1s 0s');
+      } else if (elapsed > 0) {
+        if (nowIndex === 0){
+          handleCarousel(nowIndex + 1, 'transform 1s 0s');
+        } else if (nowIndex === settingCarouselItemsCount -1){
+          handleCarousel(0, 'none');
+        } else if (nowIndex === -999){
+          handleCarousel(1, 'none');
+        }
+      }
+      animationFrameRef.current = requestAnimationFrame(loop);
+    };
+
+  }
+
+// 키비주얼 화면에 노출 감지 Observer 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+      }
+    );
+
+    if (rootRef.current) {
+      observer.observe(rootRef.current);
     }
-  }
 
-  const handleCssTranslateX = (nowIndex: number) =>{
-    if (carouselItemWidthRef.current) setCssTranslateX(nowIndex * carouselItemWidthRef.current); 
-  }
-
-// 첫렌더링 시, 세팅된 아이템 갯수 구하기
+    return () => {
+      if (rootRef.current) {
+        observer.unobserve(rootRef.current);
+      }
+  }; }, [rootRef]); 
+  
+// 첫렌더링 시, 세팅된 아이템 갯수 구하기 & 키비주얼 노출 시 
   useEffect(() => {
     if (rootRef === undefined) {
       console.log('can not find root ref');
       return;
     }else {
-      setSettingCarouselItemsCount(imgUrlList.length + 1);
+      setSettingCarouselItemsCount(imgUrlList.length + 2);
       carouselItemWidthRef.current = (rootRef.current.scrollWidth / (settingCarouselItemsCount));
     }
 
   }, [rootRef, imgUrlList]);
 
-//슬라이드 업데이트 
-  const handleSlide = () => {
-    setSlidingCount((prevCount) => (prevCount + 1));
-    handleCssTransition(slidingCount);
-
-    startTransition(()=>{
-      handleCssTranslateX(nowIndex);
-    });
-    
-    handleIndicator(slidingCount, nowIndex);
-  };
-
-  // 지연시간에 의한 반복 동작
-  const loop = (timestamp: number) => {
-    if (startTimeRef.current === null) {
-      startTimeRef.current = timestamp;
+  useEffect(()=>{
+    if (inView) {
+      animationFrameRef.current = requestAnimationFrame(loop);
+    } else {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     }
-    // 지연 시간
-    const elapsed = timestamp - startTimeRef.current;
-
-    if (elapsed > 2000) {
-      handleSlide();
-      startTimeRef.current = timestamp;
-    }
-
-    animationFrameRef.current = requestAnimationFrame(loop);
-  };
-
-  // 렌더링 시, requestAni- 동작 시작
-  useEffect(() => {
-    animationFrameRef.current = requestAnimationFrame(loop);
 
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, []);
-
-    // keyVisual 부분 화면 벗어남 슬라이딩 멈추기 & 화면에 나오면 슬라이딩 시작 
-    useEffect(() => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          setInView(entry.isIntersecting);
-        },
-        {
-          threshold: 0,
-        }
-      );
-  
-      if (rootRef.current) {
-        observer.observe(rootRef.current);
-      }
-  
-      return () => {
-        if (rootRef.current) {
-          observer.unobserve(rootRef.current);
-        }
-      }; }, [rootRef]); 
-      
-      useEffect(() => {
-      if (inView) {
-        animationFrameRef.current = requestAnimationFrame(loop);
-      } else {
-        if (animationFrameRef.current) {
-          cancelAnimationFrame(animationFrameRef.current);
-        }
-      }
-  
-      return () => {
-        if (animationFrameRef.current) {
-          cancelAnimationFrame(animationFrameRef.current);
-        }
-      };
-    }, [inView]);
+  },[inView,nowIndex])
 
   return (
     <Box position="relative">
@@ -160,10 +133,19 @@ export default function InfiniteCarousel({
       >
         <FlexBox height="inherit" width="fit-content" flexDirection="row"
           css={css`
-              transform: translateX(-${cssTranslateX}px);
+              transform: translateX(-${nowIndex * carouselItemWidthRef.current}px);
               transition: ${cssTransition};
           `}  
         >
+          <CarouselItem
+            itemOrder={-1}
+            imgUrl={imgUrlList[imgUrlList.length - 1].keyVisualPhotoUrl}
+            rootRef={rootRef}
+            width={width}
+            height={height}
+            dimOption={true}
+            priority={inView}
+          />
           {imgUrlList.map((imgUrl, _index) => (
             <CarouselItem
               itemOrder={_index}
@@ -172,6 +154,7 @@ export default function InfiniteCarousel({
               width={width}
               height={height}
               dimOption={true}
+              priority={inView}
             />
           ))}
           <CarouselItem
@@ -181,6 +164,7 @@ export default function InfiniteCarousel({
             width={width}
             height={height}
             dimOption={true}
+            priority={inView}
           />
         </FlexBox>
       </Box>
@@ -200,7 +184,7 @@ export default function InfiniteCarousel({
         onClick={plusFunction}
       >
         <Box display="inline-block" color={theme.colors.white}>
-          {nowIndex}
+          {getPage()}
         </Box>
         <Box
           display="inline-block"
@@ -232,7 +216,7 @@ export default function InfiniteCarousel({
               link={link}
             />
           ))
-          .filter((_, index) => index  === nowIndex + 1)}
+          .filter((_, index) => index === nowIndex - 1)}
       </Box>
     </Box>
   );

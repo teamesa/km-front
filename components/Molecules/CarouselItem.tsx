@@ -14,6 +14,7 @@ export default function CarouselItem({
   width,
   height,
   dimOption,
+  priority
 }: {
   itemOrder: number;
   imgUrl: string;
@@ -22,6 +23,7 @@ export default function CarouselItem({
   width: string;
   height: string;
   dimOption?: boolean;
+  priority?: boolean;
 }) {
   const onIntersect: IntersectionObserverCallback = (entries) => {
     entries.forEach((entry) => {
@@ -48,7 +50,7 @@ export default function CarouselItem({
         scroll-snap-align: end;
       `}
     >
-      <Image src={imgUrl} alt="image" layout="fill" loading="eager"/>
+      <Image src={imgUrl} alt="image" layout="fill" loading="eager" priority={priority}/>
       {dimOption ? <CarouselDim height={height} /> : <></>}
     </Box>
   );
