@@ -33,7 +33,7 @@ export default function UnbalencedSwiper({
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    sliderRef.current.style.cursor = 'grabb-webkit-grabbing';
+    sliderRef.current.style.cursor = '-webkit-grabbing';
     sliderRef.current.style.scrollSnapType = 'none';
     setIsGrabbing(true);
     setStartX(e.pageX - sliderRef.current.offsetLeft); // 움직이기 전 offSetLeft 지점
