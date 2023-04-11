@@ -14,7 +14,7 @@ export default function RealTimeArchiveItemCard({
   archive: RealTimeArchiveItemCardProps;
 }) {
   const makeAvgStarRating = () => {
-    const rating = 5 * 20;
+    const rating = archive.metaData.starRating * 20;
     return `${rating + 1.5}%`;
   };
 
@@ -47,7 +47,7 @@ export default function RealTimeArchiveItemCard({
           css={css`
             -webkit-text-fill-color: black;
           `}
-          width={makeAvgStarRating()}
+          width={makeAvgStarRating()} 
         >
           <Start />
           <Start />

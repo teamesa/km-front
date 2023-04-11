@@ -33,7 +33,7 @@ export default function UnbalencedSwiper({
   };
 
   const handleMouseDown = (e: React.MouseEvent) => {
-    sliderRef.current.style.cursor = 'grabb-webkit-grabbing';
+    sliderRef.current.style.cursor = '-webkit-grabbing';
     sliderRef.current.style.scrollSnapType = 'none';
     setIsGrabbing(true);
     setStartX(e.pageX - sliderRef.current.offsetLeft); // 움직이기 전 offSetLeft 지점
@@ -45,7 +45,7 @@ export default function UnbalencedSwiper({
     e.preventDefault(); // 드래그 고스트 효과 없애기
     setWalk(e.pageX - startX - sliderRef.current.offsetLeft); // 움직인 후 offSetLeft 지점
     //스크롤왼쪽위치 업데이트
-    sliderRef.current.scrollLeft = scrollLeft - walk * 5;
+    sliderRef.current.scrollLeft = scrollLeft - walk * 1;
     sliderRef.current.style.cursor = '-webkit-grabbing';
     sliderRef.current.style.scrollSnapType = 'none';
   };
