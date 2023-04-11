@@ -45,7 +45,7 @@ export default function UnbalencedSwiper({
     e.preventDefault(); // 드래그 고스트 효과 없애기
     setWalk(e.pageX - startX - sliderRef.current.offsetLeft); // 움직인 후 offSetLeft 지점
     //스크롤왼쪽위치 업데이트
-    sliderRef.current.scrollLeft = scrollLeft - walk * 5;
+    sliderRef.current.scrollLeft = scrollLeft - walk * 1;
     sliderRef.current.style.cursor = '-webkit-grabbing';
     sliderRef.current.style.scrollSnapType = 'none';
   };
