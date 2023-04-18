@@ -14,25 +14,27 @@ export default function CarouselItem({
   width,
   height,
   dimOption,
+  priority
 }: {
   itemOrder: number;
   imgUrl: string;
-  rootRef: any;
-  handleIndicator: Function;
+  rootRef?: any;
+  handleIndicator?: Function;
   width: string;
   height: string;
   dimOption?: boolean;
+  priority?: boolean;
 }) {
   const onIntersect: IntersectionObserverCallback = (entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
+      if (entry.isIntersecting && handleIndicator) {
         handleIndicator(itemOrder + 1);
       }
     });
   };
 
   const setTarget = useIntersectionObserver({
-    root: rootRef.current,
+    root: rootRef?.current,
     threshold: 0.2,
     onIntersect,
   });
@@ -48,7 +50,7 @@ export default function CarouselItem({
         scroll-snap-align: end;
       `}
     >
-      <Image src={imgUrl} alt="image" layout="fill" />
+      <Image src={imgUrl} alt="image" layout="fill" loading="eager" priority={priority}/>
       {dimOption ? <CarouselDim height={height} /> : <></>}
     </Box>
   );

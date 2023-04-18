@@ -8,6 +8,7 @@ import ModuleResolver from 'components/Organisms/Home/ModuleResolver';
 import { useResetHomeModulesFunction, homeModuleState } from 'states/home';
 import { useInitHeader } from 'utils/hooks/useInitHeader';
 import { UserProps, useUserProps } from 'utils/authentication/useUser';
+import theme from 'styles/theme';
 
 const Home: NextPage<UserProps> = ({ user }) => {
   useInitHeader({ headerLeft: 'logo', frontTopTransparent: true });
@@ -39,7 +40,7 @@ const Home: NextPage<UserProps> = ({ user }) => {
         </Box>
       );
     case 'loading':
-      return <div>Loading...</div>;
+      return <Box width={theme.view.webView} height="100vh" background={theme.colors.white}/>;
     case 'hasError':
       throw data.contents;
   }

@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useTransition } from 'react';
 
 import { Plus } from 'assets/archive/Plus';
 import { FlexBox, Box, Button } from 'components/Atoms';
 import CarouselItem from 'components/Molecules/CarouselItem';
 import InfiniteCarouselTitle from 'components/Organisms/Home/Module/KeyVisual/InfinitiCarouselTitle';
 import theme from 'styles/theme';
+import { now } from 'moment';
 
 export default function InfiniteCarousel({
   imgUrlList,
@@ -24,66 +25,101 @@ export default function InfiniteCarousel({
   plusFunction: () => {};
 }) {
   const rootRef = useRef<any>();
+  const carouselItemWidthRef = useRef<number>(0);
   const [nowIndex, setNowIndex] = useState<number>(-999);
+  const [inView, setInView] = useState<boolean>(false);
+  const [settingCarouselItemsCount, setSettingCarouselItemsCount] = useState<number>(0);
+  const [cssTransition, setCssTransition] = useState<string>('transform 1s 0s');
+  const startTimeRef = useRef<number | null>(null);
+  const animationFrameRef = useRef<number | null>(null);
 
-  const handleIndicator = (index: number) => {
-    setNowIndex(index);
-  };
-
+  // 인디케이터 숫자 
   const getPage = () => {
-    if (1 <= nowIndex && nowIndex <= imgUrlList.length) {
+   if (nowIndex >= 1 && nowIndex < imgUrlList.length + 1) {
       return nowIndex;
-    } else if (nowIndex === -999) {
-      return 1;
-    } else if (nowIndex > imgUrlList.length) {
-      return 1;
-    } else if (nowIndex === 0) {
+    }else if (nowIndex === -999){
       return imgUrlList.length;
     }
-  };
+  }
 
+  const loop = (timestamp: number) => {
+    if (startTimeRef.current === null) {
+      startTimeRef.current = timestamp;
+      animationFrameRef.current = requestAnimationFrame(loop);
+    }else {
+            // 지연 시간
+      const elapsed = timestamp - startTimeRef.current;
+
+      const handleCarousel = (updatedIndex: number, cssTransition: string) =>{
+        setCssTransition(cssTransition);
+        setNowIndex(updatedIndex);
+        startTimeRef.current = timestamp;
+      }
+      
+      if (elapsed > 5000 && nowIndex > 0 && nowIndex < settingCarouselItemsCount - 1) {  
+        handleCarousel(nowIndex + 1, 'transform 1s 0s');
+      } else if (elapsed > 0) {
+        if (nowIndex === 0){
+          handleCarousel(nowIndex + 1, 'transform 1s 0s');
+        } else if (nowIndex === settingCarouselItemsCount -1){
+          handleCarousel(0, 'none');
+        } else if (nowIndex === -999){
+          handleCarousel(1, 'none');
+        }
+      }
+      animationFrameRef.current = requestAnimationFrame(loop);
+    };
+
+  }
+
+// 키비주얼 화면에 노출 감지 Observer 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0,
+      }
+    );
+
+    if (rootRef.current) {
+      observer.observe(rootRef.current);
+    }
+
+    return () => {
+      if (rootRef.current) {
+        observer.unobserve(rootRef.current);
+      }
+  }; }, [rootRef]); 
+  
+// 첫렌더링 시, 세팅된 아이템 갯수 구하기 & 키비주얼 노출 시 
   useEffect(() => {
     if (rootRef === undefined) {
       console.log('can not find root ref');
       return;
+    }else {
+      setSettingCarouselItemsCount(imgUrlList.length + 2);
+      carouselItemWidthRef.current = (rootRef.current.scrollWidth / (settingCarouselItemsCount));
     }
 
-    const width = rootRef.current.scrollWidth / (imgUrlList.length + 2);
-    const timeOutList: any = [];
+  }, [rootRef, imgUrlList]);
 
-    if (nowIndex === -999) {
-      setTimeout(() => {
-        rootRef.current.style.scrollBehavior = 'unset';
-        rootRef.current.scrollTo(width, 0);
-      }, 50);
-    } else if (nowIndex === imgUrlList.length + 1) {
-      timeOutList.push(
-        setTimeout(() => {
-          rootRef.current.style.scrollBehavior = 'unset';
-          rootRef.current.scrollTo(width, 0);
-        }, 300),
-      );
-    } else if (nowIndex === 0) {
-      timeOutList.push(
-        setTimeout(() => {
-          rootRef.current.style.scrollBehavior = 'unset';
-          rootRef.current.scrollTo(imgUrlList.length * width, 0);
-        }, 300),
-      );
+  useEffect(()=>{
+    if (inView) {
+      animationFrameRef.current = requestAnimationFrame(loop);
     } else {
-      timeOutList.push(
-        setTimeout(() => {
-          rootRef.current.style.scrollBehavior = 'smooth';
-          rootRef.current.scrollTo((nowIndex + 1) * width, 0);
-        }, 5000),
-      );
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     }
+
     return () => {
-      timeOutList.forEach((timeOutId: NodeJS.Timeout | undefined) =>
-        clearTimeout(timeOutId),
-      );
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
     };
-  }, [nowIndex, rootRef, imgUrlList]);
+  },[inView,nowIndex])
 
   return (
     <Box position="relative">
@@ -93,42 +129,42 @@ export default function InfiniteCarousel({
         maxWidth={theme.view.webView}
         overflowY="hidden"
         overflowX="scroll"
-        css={css`
-          scroll-behavior: unset;
-          scroll-snap-type: x mandatory;
-        `}
         ref={rootRef}
       >
-        <FlexBox height="inherit" width="fit-content" flexDirection="row">
+        <FlexBox height="inherit" width="fit-content" flexDirection="row"
+          css={css`
+              transform: translateX(-${nowIndex * carouselItemWidthRef.current}px);
+              transition: ${cssTransition};
+          `}  
+        >
           <CarouselItem
             itemOrder={-1}
             imgUrl={imgUrlList[imgUrlList.length - 1].keyVisualPhotoUrl}
             rootRef={rootRef}
-            handleIndicator={handleIndicator}
             width={width}
             height={height}
             dimOption={true}
+            priority={inView}
           />
           {imgUrlList.map((imgUrl, _index) => (
             <CarouselItem
               itemOrder={_index}
               key={_index}
               imgUrl={imgUrl.keyVisualPhotoUrl}
-              rootRef={rootRef}
-              handleIndicator={handleIndicator}
               width={width}
               height={height}
               dimOption={true}
+              priority={inView}
             />
           ))}
           <CarouselItem
             itemOrder={imgUrlList.length}
             imgUrl={imgUrlList[0].keyVisualPhotoUrl}
             rootRef={rootRef}
-            handleIndicator={handleIndicator}
             width={width}
             height={height}
             dimOption={true}
+            priority={inView}
           />
         </FlexBox>
       </Box>
@@ -180,8 +216,9 @@ export default function InfiniteCarousel({
               link={link}
             />
           ))
-          .filter((_, index) => index + 1 === nowIndex)}
+          .filter((_, index) => index === nowIndex - 1)}
       </Box>
     </Box>
   );
 }
+
